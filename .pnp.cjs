@@ -41,7 +41,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:2c3de6b6e0f02d870bb0ab095ff944cbb7b86ce03a16bf0d8ff5439fe0d2cc062fb7d55fb03190b88d383d33c72f90c6705faae921d0243a6e910edc52eccb93#npm:8.5.0"],\
             ["eslint-plugin-eslint-comments", "virtual:2c3de6b6e0f02d870bb0ab095ff944cbb7b86ce03a16bf0d8ff5439fe0d2cc062fb7d55fb03190b88d383d33c72f90c6705faae921d0243a6e910edc52eccb93#npm:3.2.0"],\
             ["eslint-plugin-tsdoc", "npm:0.2.16"],\
-            ["fp-ts", "npm:2.12.2"],\
+            ["fp-ts", "file:../fp-ts/dist#../fp-ts/dist::hash=08e30a&locator=fp-ts-dom%40workspace%3A."],\
             ["prettier", "npm:2.7.1"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=f456af"]\
           ],\
@@ -970,10 +970,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["fp-ts", [\
-        ["npm:2.12.2", {\
-          "packageLocation": "./.yarn/cache/fp-ts-npm-2.12.2-e3e1055e8e-18c1975b5a.zip/node_modules/fp-ts/",\
+        ["file:../fp-ts/dist#../fp-ts/dist::hash=08e30a&locator=fp-ts-dom%40workspace%3A.", {\
+          "packageLocation": "./.yarn/cache/fp-ts-file-86a23a288b-9145841771.zip/node_modules/fp-ts/",\
           "packageDependencies": [\
-            ["fp-ts", "npm:2.12.2"]\
+            ["fp-ts", "file:../fp-ts/dist#../fp-ts/dist::hash=08e30a&locator=fp-ts-dom%40workspace%3A."]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -991,7 +991,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:2c3de6b6e0f02d870bb0ab095ff944cbb7b86ce03a16bf0d8ff5439fe0d2cc062fb7d55fb03190b88d383d33c72f90c6705faae921d0243a6e910edc52eccb93#npm:8.5.0"],\
             ["eslint-plugin-eslint-comments", "virtual:2c3de6b6e0f02d870bb0ab095ff944cbb7b86ce03a16bf0d8ff5439fe0d2cc062fb7d55fb03190b88d383d33c72f90c6705faae921d0243a6e910edc52eccb93#npm:3.2.0"],\
             ["eslint-plugin-tsdoc", "npm:0.2.16"],\
-            ["fp-ts", "npm:2.12.2"],\
+            ["fp-ts", "file:../fp-ts/dist#../fp-ts/dist::hash=08e30a&locator=fp-ts-dom%40workspace%3A."],\
             ["prettier", "npm:2.7.1"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=f456af"]\
           ],\

@@ -706,16 +706,16 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-eslint-comments: ^3.2.0
     eslint-plugin-tsdoc: ^0.2.16
-    fp-ts: ^2.12.2
+    fp-ts: "file:../fp-ts/dist"
     prettier: ^2.7.1
     typescript: ^4.7.4
   languageName: unknown
   linkType: soft
 
-"fp-ts@npm:^2.12.2":
+"fp-ts@file:../fp-ts/dist::locator=fp-ts-dom%40workspace%3A.":
   version: 2.12.2
-  resolution: "fp-ts@npm:2.12.2"
-  checksum: 18c1975b5a5597d54d1905d322d2bdcf7c5aae3f1b48c2e13f5352cd10a7882a49bfe9681ed1f4392874f9b26dd29a997df6fa341a3731226e5737b0f9a49b38
+  resolution: "fp-ts@file:../fp-ts/dist#../fp-ts/dist::hash=08e30a&locator=fp-ts-dom%40workspace%3A."
+  checksum: 9145841771c2c80679539e13a19785757aed8c3c97443b67a254b7867320577a1fb40239929f47ad0d95db54c4756cfc29872de4665aa294fe57bfc5c9b7d5fc
   languageName: node
   linkType: hard
 

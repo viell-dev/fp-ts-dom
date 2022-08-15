@@ -1,0 +1,1 @@
+export type DomEventInit = EventInit;
