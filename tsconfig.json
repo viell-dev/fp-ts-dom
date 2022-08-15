@@ -1,0 +1,41 @@
+{
+  "include": ["src/**/*.ts"],
+  "compilerOptions": {
+    // Type Checking
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true,
+
+    // Modules
+    "module": "ESNext",
+    "moduleResolution": "NodeNext",
+    "rootDir": "./src",
+
+    // Emit
+    "declarationMap": true,
+    "newLine": "lf",
+    "outDir": "./lib",
+    "removeComments": true,
+    "sourceMap": true,
+    "stripInternal": true,
+
+    // Interop Constraints
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // Language and Environment
+    "lib": ["DOM", "ESNext"],
+    "target": "ESNext",
+
+    // Project
+    "composite": true
+  }
+}

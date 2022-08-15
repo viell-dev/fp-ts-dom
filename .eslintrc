@@ -1,0 +1,31 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:eslint-comments/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "eslint-plugin-tsdoc"],
+  "overrides": [
+    {
+      "files": ["**/*.ts"],
+      "rules": {
+        "multiline-comment-style": ["warn", "bare-block"],
+        "eslint-comments/no-unused-disable": "warn",
+        "eslint-comments/require-description": "warn",
+        "@typescript-eslint/consistent-type-assertions": [
+          "warn",
+          { "assertionStyle": "never" }
+        ],
+        "@typescript-eslint/explicit-function-return-type": "warn",
+        "tsdoc/syntax": "warn"
+      }
+    }
+  ]
+}
