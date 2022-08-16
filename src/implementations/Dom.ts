@@ -1,9 +1,14 @@
-import { IDom } from "../interfaces/IDom.js"
+import { Native } from "../helpers/Native.js";
+import { IDom } from "../interfaces/IDom.js";
 
-export abstract class Dom<T> implements IDom<T> {
-  private native: T;
+export abstract class Dom<N extends Native> implements IDom<N> {
+  protected native: N;
 
-  constructor(native: T) { this.native = native; }
+  constructor(native: N) {
+    this.native = native;
+  }
 
-  getNative(): T { return this.native; }
+  getNative(): N {
+    return this.native;
+  }
 }

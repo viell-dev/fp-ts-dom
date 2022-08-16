@@ -1,14 +1,16 @@
-import { DomEventInit } from "../dictionaries/DomEventInit.js";
 import * as O from "fp-ts/Option";
-import { IDomEventTarget } from "./IDomEventTarget.js";
 import { DomEventPhase } from "../constants/DomEventPhase.js";
+import { DomEventInit } from "../dictionaries/DomEventInit.js";
+import { Optional } from "../helpers/Optional.js";
+import { IDom, IDomConstructor } from "./IDom.js";
+import { IDomEventTarget } from "./IDomEventTarget.js";
 
-export interface IDomEventConstructor {
-  new (event: Event): IDomEvent;
-  new (type: string, eventInitDict?: DomEventInit): IDomEvent;
+export interface IDomEventConstructor<N extends Event>
+  extends IDomConstructor<Event, IDomEvent<N>> {
+  new (type: string, eventInitDict?: Optional<DomEventInit>): IDomEvent<N>;
 }
 
-export interface IDomEvent {
+export interface IDomEvent<N extends Event> extends IDom<N> {
   readonly type: string;
   readonly target: O.Option<IDomEventTarget>;
   readonly currentTarget: O.Option<IDomEventTarget>;

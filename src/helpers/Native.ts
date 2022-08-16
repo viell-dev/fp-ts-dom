@@ -1,0 +1,37 @@
+/** Union of all native DOM API interfaces. */
+export type Native =
+  | Event
+  | CustomEvent
+  | EventTarget
+  | AbortController
+  | AbortSignal
+  | NodeList
+  | HTMLCollection
+  | MutationObserver
+  | MutationRecord
+  | Node
+  | Document
+  | DOMImplementation
+  | DocumentType
+  | DocumentFragment
+  | ShadowRoot
+  | Element
+  | NamedNodeMap
+  | Attr
+  | CharacterData
+  | Text
+  | CDATASection
+  | ProcessingInstruction
+  | Comment
+  | AbstractRange
+  | StaticRange
+  | Range
+  | NodeIterator
+  | TreeWalker
+  | NodeFilter
+  | DOMTokenList
+  | XPathResult
+  | XPathExpression
+  | XPathEvaluatorBase
+  | XPathEvaluator
+  | XSLTProcessor;

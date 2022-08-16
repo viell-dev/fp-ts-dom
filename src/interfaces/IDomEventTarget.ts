@@ -1,28 +1,32 @@
 import * as E from "fp-ts/es6/Either";
-import * as O from "fp-ts/es6/Option";
 import { DomEventListenerOrDomEventListenerObject } from "../callbacks/DomEventListenerOrDomEventListenerObject.js";
+import { DomAddEventListenerOptions } from "../dictionaries/DomAddEventListenerOptions.js";
+import { DomEventListenerOptions } from "../dictionaries/DomEventListenerOptions.js";
 import { InvalidStateErrorDomException } from "../exceptions/DomException.js";
+import { UnknownException } from "../exceptions/UnknownException.js";
+import { Optional } from "../helpers/Optional.js";
+import { IDom, IDomConstructor } from "./IDom.js";
 import { IDomEvent } from "./IDomEvent.js";
 
-export interface IDomEventTargetConstructor {
-  new (): IDomEventTarget;
-  new (eventTarget: EventTarget): IDomEventTarget;
+export interface IDomEventTargetConstructor<N extends EventTarget>
+  extends IDomConstructor<EventTarget, IDomEventTarget<N>> {
+  new (): IDomEventTarget<N>;
 }
 
-export interface IDomEventTarget {
+export interface IDomEventTarget<N extends EventTarget> extends IDom<N> {
   addEventListener(
     type: string,
-    callback: O.Option<DomEventListenerOrDomEventListenerObject>,
-    options: O.Option<boolean | AddEventListenerOptions>
+    callback?: Optional<DomEventListenerOrDomEventListenerObject>,
+    options?: Optional<boolean | DomAddEventListenerOptions>
   ): void;
 
   removeEventListener(
     type: string,
-    callback: O.Option<DomEventListenerOrDomEventListenerObject>,
-    options: O.Option<boolean | EventListenerOptions>
+    callback?: Optional<DomEventListenerOrDomEventListenerObject>,
+    options?: Optional<boolean | DomEventListenerOptions>
   ): void;
 
-  dispatchEvent(
-    event: IDomEvent
-  ): E.Either<InvalidStateErrorDomException, boolean>;
+  dispatchEvent<E extends Event>(
+    event: IDomEvent<E>
+  ): E.Either<InvalidStateErrorDomException | UnknownException, boolean>;
 }
