@@ -31,7 +31,7 @@ const isOption = <T>(value: unknown): value is O.Option<T> =>
   ["Some", "None"].includes((value as Record<"_tag", string>)._tag);
 
 /**
- * Convert an optional argument value to an {@link O.Option}.
+ * Convert an optional value to an {@link O.Option}.
  *
  * @param value - The value to convert.
  *
@@ -39,7 +39,8 @@ const isOption = <T>(value: unknown): value is O.Option<T> =>
  */
 export const optional = <T>(value: Optional<T>): O.Option<NonNullable<T>> =>
   pipe(
-    O.fromNullable(value),
+    value,
+    O.fromNullable,
     O.map((v) => (isOption(v) ? v : O.some(v))),
     O.flatten
   );

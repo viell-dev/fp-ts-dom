@@ -1,4 +1,4 @@
-export function StaticImplements<T extends new (...args: unknown[]) => void>() {
+export function StaticImplements<T>() {
   return <U extends T>(ctor: U): void => {
     ctor;
   };

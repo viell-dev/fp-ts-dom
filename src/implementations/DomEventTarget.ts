@@ -1,20 +1,21 @@
+import * as E from "fp-ts/es6/Either";
 import { pipe } from "fp-ts/es6/function";
 import * as O from "fp-ts/es6/Option";
-import * as E from "fp-ts/es6/Either";
-import { Dom } from "./Dom.js";
-import {
-  IDomEventTarget,
-  IDomEventTargetConstructor,
-} from "../interfaces/IDomEventTarget.js";
 import { DomEventListenerOrDomEventListenerObject } from "../callbacks/DomEventListenerOrDomEventListenerObject.js";
-import { optional, Optional } from "../helpers/Optional.js";
-import { IDomEvent } from "../interfaces/IDomEvent.js";
 import {
   InvalidStateErrorDomException,
   isDomException,
 } from "../exceptions/DomException.js";
 import { UnknownException } from "../exceptions/UnknownException.js";
+import { optional, Optional } from "../helpers/Optional.js";
 import { StaticImplements } from "../helpers/StaticImplements.js";
+import { IDomEvent } from "../interfaces/IDomEvent.js";
+import {
+  IDomEventTarget,
+  IDomEventTargetConstructor,
+} from "../interfaces/IDomEventTarget.js";
+import { Dom } from "./Dom.js";
+import { DomEvent } from "./DomEvent.js";
 
 @StaticImplements<IDomEventTargetConstructor<EventTarget>>()
 export class DomEventTarget
@@ -71,11 +72,14 @@ export class DomEventTarget
     );
   }
 
-  dispatchEvent(
-    event: IDomEvent
+  dispatchEvent<E extends Event>(
+    event: E | IDomEvent<E>
   ): E.Either<InvalidStateErrorDomException | UnknownException, boolean> {
     return E.tryCatch(
-      () => this.native.dispatchEvent(event.getNative()),
+      () =>
+        this.native.dispatchEvent(
+          event instanceof Dom ? event.getNative() : event
+        ),
       (error: unknown) =>
         isDomException(error) && error.name === "InvalidStateError"
           ? error
@@ -83,5 +87,3 @@ export class DomEventTarget
     );
   }
 }
-
-const test = new DomEventTarget<AbortSignal>();

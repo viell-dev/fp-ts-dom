@@ -27,6 +27,6 @@ export interface IDomEventTarget<N extends EventTarget> extends IDom<N> {
   ): void;
 
   dispatchEvent<E extends Event>(
-    event: IDomEvent<E>
+    event: E | IDomEvent<E>
   ): E.Either<InvalidStateErrorDomException | UnknownException, boolean>;
 }
