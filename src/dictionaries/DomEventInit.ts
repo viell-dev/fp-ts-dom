@@ -9,7 +9,31 @@ export interface DomEventInit {
 }
 
 /**
- * Convert optional {@link DomEventInit} to {@link O.Option} of EventInit.
+ * Map {@link DomEventInit} to {@link O.Option} of `EventInit`
+ *
+ * @param domEventInit - {@link DomEventInit} object to map.
+ *
+ * @internal
+ */
+export const mapDomEventInitToEventInit: (
+  domEventInit: DomEventInit
+) => O.Option<EventInit> = (domEventInit) => {
+  const eventInit: EventInit = {};
+
+  const bubbles = optional(domEventInit.bubbles);
+  if (O.isSome(bubbles)) eventInit.bubbles = bubbles.value;
+
+  const cancelable = optional(domEventInit.cancelable);
+  if (O.isSome(cancelable)) eventInit.cancelable = cancelable.value;
+
+  const composed = optional(domEventInit.composed);
+  if (O.isSome(composed)) eventInit.composed = composed.value;
+
+  return Object.keys(eventInit).length > 0 ? O.some(eventInit) : O.none;
+};
+
+/**
+ * Convert optional {@link DomEventInit} to {@link O.Option} of `EventInit`.
  *
  * @param domEventInit - Optional {@link DomEventInit}.
  *
@@ -18,22 +42,4 @@ export interface DomEventInit {
 export const optionalDomEventInit = (
   domEventInit: Optional<DomEventInit>
 ): O.Option<EventInit> =>
-  pipe(
-    domEventInit,
-    optional,
-    O.map((domEventInit) => {
-      const eventInit: EventInit = {};
-
-      const bubbles = optional(domEventInit.bubbles);
-      if (O.isSome(bubbles)) eventInit.bubbles = bubbles.value;
-
-      const cancelable = optional(domEventInit.cancelable);
-      if (O.isSome(cancelable)) eventInit.cancelable = cancelable.value;
-
-      const composed = optional(domEventInit.composed);
-      if (O.isSome(composed)) eventInit.composed = composed.value;
-
-      return Object.keys(eventInit).length > 0 ? O.some(eventInit) : O.none;
-    }),
-    O.flatten
-  );
+  pipe(domEventInit, optional, O.map(mapDomEventInitToEventInit), O.flatten);

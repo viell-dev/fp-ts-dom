@@ -8,9 +8,9 @@ import { Optional } from "../helpers/Optional.js";
 import { IDom, IDomConstructor } from "./IDom.js";
 import { IDomEvent } from "./IDomEvent.js";
 
-export interface IDomEventTargetConstructor<N extends EventTarget>
-  extends IDomConstructor<EventTarget, IDomEventTarget<N>> {
-  new (): IDomEventTarget<N>;
+export interface IDomEventTargetConstructor
+  extends IDomConstructor<EventTarget> {
+  new (): IDomEventTarget<EventTarget>;
 }
 
 export interface IDomEventTarget<N extends EventTarget> extends IDom<N> {
@@ -19,14 +19,12 @@ export interface IDomEventTarget<N extends EventTarget> extends IDom<N> {
     callback?: Optional<DomEventListenerOrDomEventListenerObject>,
     options?: Optional<boolean | DomAddEventListenerOptions>
   ): void;
-
   removeEventListener(
     type: string,
     callback?: Optional<DomEventListenerOrDomEventListenerObject>,
     options?: Optional<boolean | DomEventListenerOptions>
   ): void;
-
-  dispatchEvent<E extends Event>(
-    event: E | IDomEvent<E>
+  dispatchEvent<T extends Event>(
+    event: T | IDomEvent<T>
   ): E.Either<InvalidStateErrorDomException | UnknownException, boolean>;
 }
