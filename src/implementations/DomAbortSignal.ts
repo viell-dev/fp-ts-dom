@@ -50,7 +50,7 @@ export class DomAbortSignal<R = unknown>
       )
     );
   }
-  set onAbort(
+  set onabort(
     value: Optional<
       <T extends Event, U = unknown>(
         this: IDomAbortSignal<AbortSignal, U>,
@@ -62,7 +62,7 @@ export class DomAbortSignal<R = unknown>
       value,
       optional,
       O.map((fn) => (event: Event): unknown => {
-        return fn.bind(this, event);
+        return fn.call(this, event);
       }),
       O.toNullable
     );

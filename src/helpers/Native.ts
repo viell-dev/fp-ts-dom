@@ -1,4 +1,4 @@
-/** Union of all native DOM API interfaces. */
+/** Union of all DOM API interfaces. */
 export type Native =
   | Event
   | CustomEvent

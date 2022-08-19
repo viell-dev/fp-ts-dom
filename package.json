@@ -4,7 +4,7 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./lib/index.mjs"
+      "import": "./lib/index.js"
     }
   },
   "packageManager": "yarn@3.2.2",

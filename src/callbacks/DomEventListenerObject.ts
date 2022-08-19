@@ -1,5 +1,5 @@
 import { IDomEvent } from "../interfaces/IDomEvent.js";
 
 export interface DomEventListenerObject {
-  handleEvent(event: IDomEvent): void;
+  handleEvent<N extends Event>(evt: N | IDomEvent<N>): void;
 }

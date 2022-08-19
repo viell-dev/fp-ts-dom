@@ -11,4 +11,8 @@ export abstract class Dom<N extends Native> implements IDom<N> {
   getNative(): N {
     return this.native;
   }
+
+  toString(): string {
+    return this.native.toString();
+  }
 }

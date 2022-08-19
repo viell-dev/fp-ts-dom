@@ -15,7 +15,7 @@
     "strict": true,
 
     // Modules
-    "module": "ESNext",
+    "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "rootDir": "./src",
 
