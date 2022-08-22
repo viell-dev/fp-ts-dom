@@ -1,6 +1,6 @@
 import { DomCustomEventInit } from "../dictionaries/DomCustomEventInit.js";
 import { Optional } from "../helpers/Optional.js";
-import { IDom, IDomConstructor } from "./IDom.js";
+import { IDomConstructor } from "./IDom.js";
 import { IDomEvent, IDomEventConstants } from "./IDomEvent.js";
 
 export interface IDomCustomEventConstructor<T = unknown>
@@ -14,7 +14,6 @@ export interface IDomCustomEventConstructor<T = unknown>
 export type IDomCustomEventConstants = IDomEventConstants;
 
 export interface IDomCustomEvent<N extends CustomEvent<T>, T = unknown>
-  extends IDom<N>,
-    IDomEvent<N> {
+  extends IDomEvent<N> {
   readonly detail: T;
 }

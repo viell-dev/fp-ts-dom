@@ -1,6 +1,5 @@
 import * as E from "fp-ts/Either";
 import * as O from "fp-ts/Option";
-import { IDom } from "./IDom.js";
 import { IDomEvent } from "./IDomEvent.js";
 import { IDomEventTarget } from "./IDomEventTarget.js";
 
@@ -10,8 +9,7 @@ export interface IDomAbortSignalConstructors {
 }
 
 export interface IDomAbortSignal<N extends AbortSignal, R = unknown>
-  extends IDom<N>,
-    IDomEventTarget<N> {
+  extends IDomEventTarget<N> {
   readonly aborted: boolean;
   readonly reason: R;
   throwIfAborted(): E.Either<R, void>;
