@@ -1,5 +1,5 @@
+import { HierarchyRequestErrorDomException } from "@/exceptions/DomException.js";
 import * as E from "fp-ts/Either";
-import { HierarchyRequestErrorDomException } from "../exceptions/DomException.js";
 import { IDomDocumentType } from "../interfaces/IDomDocumentType.js";
 import { DomNodeBase } from "./DomNodeBase.js";
 

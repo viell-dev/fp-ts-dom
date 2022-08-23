@@ -1,20 +1,20 @@
+import {
+  InvalidStateErrorDomException,
+  isDomException,
+} from "@/exceptions/DomException.js";
+import { UnknownException } from "@/exceptions/UnknownException.js";
 import * as E from "fp-ts/es6/Either";
 import { pipe } from "fp-ts/es6/function";
 import * as O from "fp-ts/es6/Option";
 import { DomEventListenerOrDomEventListenerObject } from "../callbacks/DomEventListenerOrDomEventListenerObject.js";
-import {
-  InvalidStateErrorDomException,
-  isDomException,
-} from "../exceptions/DomException.js";
-import { UnknownException } from "../exceptions/UnknownException.js";
 import { optional, Optional } from "../helpers/Optional.js";
 import { IDomEvent } from "../interfaces/IDomEvent.js";
 import { IDomEventTarget } from "../interfaces/IDomEventTarget.js";
-import { Dom } from "./Dom.js";
+import { Wrapper } from "../wrapper/Wrapper.js";
 import { DomEvent } from "./DomEvent.js";
 
 export abstract class DomEventTargetBase<N extends EventTarget>
-  extends Dom<N>
+  extends Wrapper<N>
   implements IDomEventTarget<N>
 {
   addEventListener(
@@ -67,7 +67,7 @@ export abstract class DomEventTargetBase<N extends EventTarget>
     return E.tryCatch(
       () =>
         this.native.dispatchEvent(
-          event instanceof Dom ? event.getNative() : event
+          event instanceof Wrapper ? event.getNative() : event
         ),
       (error: unknown) =>
         isDomException(error) && error.name === "InvalidStateError"

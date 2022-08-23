@@ -1,33 +1,20 @@
-import { pipe } from "fp-ts/function";
-import * as O from "fp-ts/Option";
-import {
-  DomEventInit,
-  optionalDomEventInit,
-} from "../dictionaries/DomEventInit.js";
-import { Optional } from "../helpers/Optional.js";
-import { StaticImplements } from "../helpers/StaticImplements.js";
+import { DDomEventInit } from "@/specs/dom/dictionaries/DDomEventInit.js";
 import {
   IDomEvent,
   IDomEventConstants,
-  IDomEventConstructor,
-} from "../interfaces/IDomEvent.js";
+} from "@/specs/dom/interfaces/IDomEvent.js";
+import { StaticImplements } from "../helpers/StaticImplements.js";
 import { DomEventBase } from "./DomEventBase.js";
 
-@StaticImplements<IDomEventConstructor & IDomEventConstants>()
+@StaticImplements<IDomEventConstructors & IDomEventConstants>()
 export class DomEvent extends DomEventBase<Event> implements IDomEvent<Event> {
   constructor(event: Event);
-  constructor(type: string, eventInitDict?: Optional<DomEventInit>);
-  constructor(
-    eventOrType: Event | string,
-    eventInitDict?: Optional<DomEventInit>
-  ) {
+  constructor(type: string, eventInitDict?: DDomEventInit);
+  constructor(eventOrType: Event | string, eventInitDict?: DDomEventInit) {
     const nativeEvent =
       eventOrType instanceof Event
         ? eventOrType
-        : new Event(
-            eventOrType,
-            pipe(eventInitDict, optionalDomEventInit, O.toUndefined)
-          );
+        : new Event(eventOrType, eventInitDict);
 
     super(nativeEvent);
   }

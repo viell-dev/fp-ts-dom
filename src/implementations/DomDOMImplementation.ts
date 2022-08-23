@@ -1,19 +1,19 @@
-import * as E from "fp-ts/Either";
-import { pipe } from "fp-ts/function";
-import * as O from "fp-ts/Option";
 import {
   InvalidCharacterErrorDomException,
   NamespaceErrorDomException,
-} from "../exceptions/DomException.js";
+} from "@/exceptions/DomException.js";
+import * as E from "fp-ts/Either";
+import { pipe } from "fp-ts/function";
+import * as O from "fp-ts/Option";
 import { optional, Optional } from "../helpers/Optional.js";
 import { IDomDOMImplementation } from "../interfaces/IDomDOMImplementation.js";
-import { Dom } from "./Dom.js";
+import { Wrapper } from "../wrapper/Wrapper.js";
 import { DomDocument } from "./DomDocument.js";
 import { DomDocumentType } from "./DomDocumentType.js";
 import { DomXMLDocument } from "./DomXMLDocument.js";
 
 export class DomDOMImplementation
-  extends Dom<DOMImplementation>
+  extends Wrapper<DOMImplementation>
   implements IDomDOMImplementation<DOMImplementation>
 {
   createDocumentType(

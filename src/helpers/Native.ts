@@ -1,5 +1,5 @@
 /** Union of all DOM API interfaces. */
-export type Native =
+type NativeDom =
   | Event
   | CustomEvent
   | EventTarget
@@ -35,3 +35,8 @@ export type Native =
   | XPathEvaluatorBase
   | XPathEvaluator
   | XSLTProcessor;
+
+/** Union of all HTML API interfaces. */
+type NativeHtml = HTMLSlotElement | HTMLElement; // TODO
+
+export type Native = NativeDom | NativeHtml;

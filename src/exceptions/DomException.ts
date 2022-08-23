@@ -1,6 +1,17 @@
 import { Refinement } from "fp-ts/es6/Refinement";
 
 /**
+ * The index is not in the allowed range.
+ *
+ * @deprecated Use {@link RangeError} instead.
+ *
+ * @see https://webidl.spec.whatwg.org/#indexsizeerror
+ */
+export type IndexSizeErrorDomException = DOMException & {
+  readonly name: "IndexSizeError";
+};
+
+/**
  * The operation would yield an incorrect
  * {@link https://dom.spec.whatwg.org/#concept-node-tree | node tree}.
  *
@@ -99,6 +110,33 @@ export type InvalidModificationErrorDomException = DOMException & {
  */
 export type NamespaceErrorDomException = DOMException & {
   readonly name: "NamespaceError";
+};
+
+/**
+ * The object does not support the operation or argument.
+ *
+ * @deprecated
+ * Use {@link TypeError} for invalid arguments,
+ * {@link NotSupportedErrorDomException | "NotSupportedError" DOMException}
+ * for unsupported operations, and
+ * {@link NotAllowedErrorDomException | "NotAllowedError" DOMException}
+ * for denied requests instead.
+ *
+ * @see https://webidl.spec.whatwg.org/#invalidaccesserror
+ */
+export type InvalidAccessErrorDomException = DOMException & {
+  readonly name: "InvalidAccessError";
+};
+
+/**
+ * The type of the object does not match the expected type.
+ *
+ * @deprecated Use {@link TypeError} instead.
+ *
+ * @see https://webidl.spec.whatwg.org/#typemismatcherror
+ */
+export type TypeMismatchErrorDomException = DOMException & {
+  readonly name: "TypeMismatchError";
 };
 
 /**
@@ -275,6 +313,7 @@ export type NotAllowedErrorDomException = DOMException & {
  * @see https://webidl.spec.whatwg.org/#idl-DOMException-error-names
  */
 export type DomException =
+  | IndexSizeErrorDomException
   | HierarchyRequestErrorDomException
   | WrongDocumentErrorDomException
   | InvalidCharacterErrorDomException
@@ -286,6 +325,8 @@ export type DomException =
   | SyntaxErrorDomException
   | InvalidModificationErrorDomException
   | NamespaceErrorDomException
+  | InvalidAccessErrorDomException
+  | TypeMismatchErrorDomException
   | SecurityErrorDomException
   | NetworkErrorDomException
   | AbortErrorDomException
@@ -312,36 +353,4 @@ export type DomException =
  */
 export const isDomException: Refinement<unknown, DomException> = (
   value
-): value is DomException =>
-  value instanceof DOMException &&
-  [
-    "HierarchyRequestError",
-    "WrongDocumentError",
-    "InvalidCharacterError",
-    "NoModificationAllowedError",
-    "NotFoundError",
-    "NotSupportedError",
-    "InUseAttributeError",
-    "InvalidStateError",
-    "SyntaxError",
-    "InvalidModificationError",
-    "NamespaceError",
-    "SecurityError",
-    "NetworkError",
-    "AbortError",
-    "URLMismatchError",
-    "QuotaExceededError",
-    "TimeoutError",
-    "InvalidNodeTypeError",
-    "DataCloneError",
-    "EncodingError",
-    "NotReadableError",
-    "UnknownError",
-    "ConstraintError",
-    "DataError",
-    "TransactionInactiveError",
-    "ReadOnlyError",
-    "VersionError",
-    "OperationError",
-    "NotAllowedError",
-  ].includes(value.name);
+): value is DomException => value instanceof DOMException;

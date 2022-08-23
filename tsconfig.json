@@ -1,5 +1,6 @@
 {
   "include": ["src/**/*.ts"],
+  "exclude": ["src/_old/*"],
   "compilerOptions": {
     // Type Checking
     "allowUnreachableCode": false,
@@ -15,8 +16,14 @@
     "strict": true,
 
     // Modules
+    "baseUrl": "./src",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "paths": {
+      "@/*": ["./*"],
+      "@dom/*": ["./specs/dom/*"],
+      "@html/*": ["./specs/html/*"]
+    },
     "rootDir": "./src",
 
     // Emit

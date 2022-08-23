@@ -1,5 +1,5 @@
 import { StaticImplements } from "../helpers/StaticImplements.js";
-import { IDomNode, IDomNodeConstructor } from "../interfaces/IDomNode.js";
+import { IDomNode } from "../interfaces/IDomNode.js";
 import { DomNodeBase } from "./DomNodeBase.js";
 
 @StaticImplements<IDomNodeConstructor>()

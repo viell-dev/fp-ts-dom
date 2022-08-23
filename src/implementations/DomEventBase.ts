@@ -1,16 +1,20 @@
+import { DomEventPhase } from "@/specs/dom/constants/DomEventPhase.js";
+import {
+  IDomEvent,
+  IDomEventConstants,
+} from "@/specs/dom/interfaces/IDomEvent.js";
+import { IDomEventTarget } from "@/specs/dom/interfaces/IDomEventTarget.js";
 import * as A from "fp-ts/Array";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { DomEventPhase } from "../enums/DomEventPhase.js";
 import { StaticImplements } from "../helpers/StaticImplements.js";
-import { IDomEvent, IDomEventConstants } from "../interfaces/IDomEvent.js";
-import { Dom } from "./Dom.js";
+import { Wrapper } from "../wrapper/Wrapper.js";
 import { DomEventTarget } from "./DomEventTarget.js";
 
 /** Wrapper for native Events */
 @StaticImplements<IDomEventConstants>()
 export abstract class DomEventBase<N extends Event>
-  extends Dom<N>
+  extends Wrapper<N>
   implements IDomEvent<N>
 {
   get type(): string {
@@ -22,6 +26,10 @@ export abstract class DomEventBase<N extends Event>
       O.fromNullable,
       O.map((eventTarget) => new DomEventTarget(eventTarget))
     );
+  }
+  /** @deprecated Use {@link target} instead. */
+  get srcElement(): O.Option<IDomEventTarget<EventTarget>> {
+    return this.target;
   }
   get currentTarget(): O.Option<DomEventTarget> {
     return pipe(
@@ -48,6 +56,13 @@ export abstract class DomEventBase<N extends Event>
   stopPropagation(): void {
     this.native.stopPropagation();
   }
+  /** @deprecated Use {@link stopPropagation} instead. */
+  get cancelBubble(): boolean {
+    return this.native.cancelBubble;
+  }
+  set cancelBubble(value: boolean) {
+    this.native.cancelBubble = value;
+  }
   stopImmediatePropagation(): void {
     this.native.stopImmediatePropagation();
   }
@@ -57,6 +72,10 @@ export abstract class DomEventBase<N extends Event>
   }
   get cancelable(): boolean {
     return this.native.cancelable;
+  }
+  /** @deprecated Use {@link defaultPrevented} instead. */
+  get returnValue(): boolean {
+    return !this.defaultPrevented;
   }
   preventDefault(): void {
     this.native.preventDefault();
@@ -73,5 +92,10 @@ export abstract class DomEventBase<N extends Event>
   }
   get timeStamp(): number {
     return this.native.timeStamp;
+  }
+
+  /** @deprecated Create a new event instead. */
+  initEvent(type: string, bubbles?: boolean, cancelable?: boolean): void {
+    this.native.initEvent(type, bubbles, cancelable);
   }
 }
