@@ -1,16 +1,10 @@
-import {
-  InvalidStateErrorDomException,
-  isDomException,
-} from "@/exceptions/DomException.js";
-import { UnknownException } from "@/exceptions/UnknownException.js";
+import { InvalidStateErrorDomException } from "@/exceptions/DomException.js";
+import { CBDomEventListener } from "@/specs/dom/callbacks/CBDomEventListener.js";
+import { IDomEventTarget } from "@/specs/dom/interfaces/IDomEventTarget.js";
+import { Wrapper } from "@/wrapper/Wrapper.js";
 import * as E from "fp-ts/es6/Either";
 import { pipe } from "fp-ts/es6/function";
 import * as O from "fp-ts/es6/Option";
-import { DomEventListenerOrDomEventListenerObject } from "../callbacks/DomEventListenerOrDomEventListenerObject.js";
-import { optional, Optional } from "../helpers/Optional.js";
-import { IDomEvent } from "../interfaces/IDomEvent.js";
-import { IDomEventTarget } from "../interfaces/IDomEventTarget.js";
-import { Wrapper } from "../wrapper/Wrapper.js";
 import { DomEvent } from "./DomEvent.js";
 
 export abstract class DomEventTargetBase<N extends EventTarget>
@@ -19,13 +13,14 @@ export abstract class DomEventTargetBase<N extends EventTarget>
 {
   addEventListener(
     type: string,
-    callback?: Optional<DomEventListenerOrDomEventListenerObject>,
-    options?: Optional<boolean | AddEventListenerOptions>
+    callback?: CBDomEventListener,
+    options?: boolean | AddEventListenerOptions
   ): void {
     return this.native.addEventListener(
       type,
       pipe(
-        optional(callback),
+        callback,
+        O.fromNullable,
         O.map(
           (callback) => (event: Event) =>
             pipe(
@@ -35,19 +30,20 @@ export abstract class DomEventTargetBase<N extends EventTarget>
         ),
         O.toNullable
       ),
-      pipe(optional(options), O.toUndefined)
+      options
     );
   }
 
   removeEventListener(
     type: string,
-    callback?: Optional<DomEventListenerOrDomEventListenerObject>,
-    options?: Optional<boolean | EventListenerOptions>
+    callback?: DomEventListenerOrDomEventListenerObject,
+    options?: boolean | EventListenerOptions
   ): void {
     return this.native.removeEventListener(
       type,
       pipe(
-        optional(callback),
+        callback,
+        O.fromNullable,
         O.map(
           (callback) => (event: Event) =>
             pipe(
@@ -57,22 +53,19 @@ export abstract class DomEventTargetBase<N extends EventTarget>
         ),
         O.toNullable
       ),
-      pipe(optional(options), O.toUndefined)
+      options
     );
   }
 
   dispatchEvent<T extends Event>(
     event: T | IDomEvent<T>
-  ): E.Either<InvalidStateErrorDomException | UnknownException, boolean> {
+  ): E.Either<InvalidStateErrorDomException, boolean> {
     return E.tryCatch(
       () =>
         this.native.dispatchEvent(
           event instanceof Wrapper ? event.getNative() : event
         ),
-      (error: unknown) =>
-        isDomException(error) && error.name === "InvalidStateError"
-          ? error
-          : new UnknownException(error)
+      (error: unknown) => error as InvalidStateErrorDomException
     );
   }
 }

@@ -1,9 +1,7 @@
-import { Native } from "../helpers/Native.js";
-
-export interface IWrapperConstructors<N extends Native> {
+export interface IWrapperConstructors<N> {
   new (native: N): IWrapper<N>;
 }
 
-export interface IWrapper<N extends Native> {
+export interface IWrapper<N> {
   getNative(): N;
 }

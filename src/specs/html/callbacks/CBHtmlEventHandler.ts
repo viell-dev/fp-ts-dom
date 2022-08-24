@@ -1,7 +1,7 @@
 import { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.js";
 
-export interface CHtmlEventHandlerNonNull {
+export interface CBHtmlEventHandlerNonNull {
   (event: Event | IDomEvent<Event>): unknown;
 }
 
-export type CHtmlEventHandler = CHtmlEventHandlerNonNull | null;
+export type CBHtmlEventHandler = CBHtmlEventHandlerNonNull | null;

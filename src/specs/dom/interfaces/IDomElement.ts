@@ -11,7 +11,7 @@ import { IDomNamedNodeMap } from "./IDomNamedNodeMap.js";
 import { IDomNode } from "./IDomNode.js";
 import { IDomShadowRoot } from "./IDomShadowRoot.js";
 
-export interface IDomElement<N extends Element>
+export interface IDomElement<N extends Element, CN = string>
   extends IDomNode<N>,
     MDomParentNode,
     MDomNonDocumentTypeChildNode,
@@ -23,7 +23,7 @@ export interface IDomElement<N extends Element>
   readonly tagName: string;
 
   id: string;
-  className: string;
+  className: CN;
   readonly classList: IDomDOMTokenList<DOMTokenList>;
   slot: string;
 

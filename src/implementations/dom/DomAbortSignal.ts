@@ -1,9 +1,7 @@
+import { IDomAbortSignal } from "@/specs/dom/interfaces/IDomAbortSignal.js";
 import * as E from "fp-ts/Either";
 import { Lazy, pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { Optional, optional } from "../helpers/Optional.js";
-import { IDomAbortSignal } from "../interfaces/IDomAbortSignal.js";
-import { IDomEvent } from "../interfaces/IDomEvent.js";
 import { DomEventTargetBase } from "./DomEventTargetBase.js";
 
 export class DomAbortSignal<R = unknown>
@@ -51,16 +49,14 @@ export class DomAbortSignal<R = unknown>
     );
   }
   set onabort(
-    value: Optional<
-      <T extends Event, U = unknown>(
-        this: IDomAbortSignal<AbortSignal, U>,
-        event: T | IDomEvent<T>
-      ) => unknown
-    >
+    value: <T extends Event, U = unknown>(
+      this: IDomAbortSignal<AbortSignal, U>,
+      event: T | IDomEvent<T>
+    ) => unknown | null
   ) {
     this.native.onabort = pipe(
       value,
-      optional,
+      O.fromNullable,
       O.map((fn) => (event: Event): unknown => {
         return fn.call(this, event);
       }),

@@ -2,7 +2,7 @@ import {
   AbortErrorDomException,
   TimeoutErrorDomException,
 } from "@/exceptions/DomException.js";
-import { CHtmlEventHandlerNonNull } from "@/specs/html/callbacks/CHtmlEventHandler.js";
+import { CBHtmlEventHandlerNonNull } from "@/specs/html/callbacks/CBHtmlEventHandler.js";
 import * as E from "fp-ts/Either";
 import * as O from "fp-ts/Option";
 import { IDomEventTarget } from "./IDomEventTarget.js";
@@ -25,5 +25,5 @@ export interface IDomAbortSignal<N extends AbortSignal, R = unknown>
   readonly reason: R;
   throwIfAborted(): E.Either<R, void>;
 
-  onabort: O.Option<CHtmlEventHandlerNonNull>;
+  onabort: O.Option<CBHtmlEventHandlerNonNull>;
 }
