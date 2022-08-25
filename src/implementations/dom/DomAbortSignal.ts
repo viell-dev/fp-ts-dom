@@ -1,6 +1,8 @@
-import { IDomAbortSignal } from "@/specs/dom/interfaces/IDomAbortSignal.js";
+import type { IDomAbortSignal } from "@/specs/dom/interfaces/IDomAbortSignal.js";
+import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.js";
+import type { CBHtmlEventHandlerNonNull } from "@/specs/html/callbacks/CBHtmlEventHandler.js";
 import * as E from "fp-ts/Either";
-import { Lazy, pipe } from "fp-ts/function";
+import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import { DomEventTargetBase } from "./DomEventTargetBase.js";
 
@@ -25,12 +27,7 @@ export class DomAbortSignal<R = unknown>
     );
   }
 
-  get onabort(): O.Option<
-    <T extends Event, U = unknown>(
-      this: IDomAbortSignal<AbortSignal, U>,
-      event: T | IDomEvent<T>
-    ) => Lazy<unknown>
-  > {
+  get onabort(): CBHtmlEventHandlerNonNull | null {
     return pipe(
       this.native.onabort,
       O.fromNullable,
@@ -45,15 +42,11 @@ export class DomAbortSignal<R = unknown>
               event instanceof Event ? event : event.getNative()
             );
           }
-      )
+      ),
+      O.toNullable
     );
   }
-  set onabort(
-    value: <T extends Event, U = unknown>(
-      this: IDomAbortSignal<AbortSignal, U>,
-      event: T | IDomEvent<T>
-    ) => unknown | null
-  ) {
+  set onabort(value: CBHtmlEventHandlerNonNull | null) {
     this.native.onabort = pipe(
       value,
       O.fromNullable,

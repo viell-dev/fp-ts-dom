@@ -1,6 +1,6 @@
+import type { IDomDocument } from "@/specs/dom/interfaces/IDomDocument.js";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { IDomDocument } from "../interfaces/IDomDocument.js";
 import { DomDocumentType } from "./DomDocumentType.js";
 import { DomDOMImplementation } from "./DomDOMImplementation.js";
 import { DomNodeBase } from "./DomNodeBase.js";

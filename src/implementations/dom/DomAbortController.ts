@@ -1,6 +1,4 @@
-import { IDomAbortController } from "@/specs/dom/interfaces/IDomAbortController.js";
-import { pipe } from "fp-ts/function";
-import * as O from "fp-ts/Option";
+import type { IDomAbortController } from "@/specs/dom/interfaces/IDomAbortController.js";
 import { Wrapper } from "../../global/Wrapper.js";
 import { DomAbortSignal } from "./DomAbortSignal.js";
 
@@ -12,7 +10,7 @@ export class DomAbortController
     return new DomAbortSignal(this.native.signal);
   }
 
-  abort(reason?: Optional<unknown>): void {
-    this.native.abort(pipe(reason, optional, O.toUndefined));
+  abort(reason?: unknown): void {
+    this.native.abort(reason);
   }
 }

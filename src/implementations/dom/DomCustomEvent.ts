@@ -1,40 +1,32 @@
-import { pipe } from "fp-ts/function";
-import * as O from "fp-ts/Option";
-import {
-  DDomCustomEventInit,
-  optionalDomCustomEventInit,
-} from "../dictionaries/DDomCustomEventInit.js";
-import { Optional } from "../helpers/Optional.js";
-import { StaticImplements } from "../helpers/StaticImplements.js";
-import {
+import { StaticImplements } from "@/decorators/StaticImplements.js";
+import type { DDomCustomEventInit } from "@/specs/dom/dictionaries/DDomCustomEventInit.js";
+import type {
   IDomCustomEvent,
   IDomCustomEventConstants,
-} from "../interfaces/IDomCustomEvent.js";
+  IDomCustomEventConstructors,
+} from "@/specs/dom/interfaces/IDomCustomEvent.js";
 import { DomEventBase } from "./DomEventBase.js";
 
 @StaticImplements<IDomCustomEventConstructors & IDomCustomEventConstants>()
-export class DomCustomEvent<T = unknown>
-  extends DomEventBase<CustomEvent<T>>
-  implements IDomCustomEvent<CustomEvent<T>>
+export class DomCustomEvent<D>
+  extends DomEventBase<CustomEvent<D>>
+  implements IDomCustomEvent<CustomEvent<D>, D>
 {
-  constructor(customEvent: CustomEvent<T>);
-  constructor(type: string, eventInitDict?: Optional<DDomCustomEventInit<T>>);
+  constructor(customEvent: CustomEvent<D>);
+  constructor(type: string, eventInitDict?: DDomCustomEventInit<D>);
   constructor(
-    customEventOrType: CustomEvent<T> | string,
-    eventInitDict?: Optional<DDomCustomEventInit<T>>
+    customEventOrType: CustomEvent<D> | string,
+    eventInitDict?: DDomCustomEventInit<D>
   ) {
     const nativeCustomEvent =
       customEventOrType instanceof CustomEvent
         ? customEventOrType
-        : new CustomEvent(
-            customEventOrType,
-            pipe(eventInitDict, optionalDomCustomEventInit, O.toUndefined)
-          );
+        : new CustomEvent(customEventOrType, eventInitDict);
 
     super(nativeCustomEvent);
   }
 
-  get detail(): T {
+  get detail(): D {
     return this.native.detail;
   }
 }

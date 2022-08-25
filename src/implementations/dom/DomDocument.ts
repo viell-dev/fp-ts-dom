@@ -1,4 +1,5 @@
-import { IDomDocument } from "../interfaces/IDomDocument.js";
+import type { IDomDocument } from "@/specs/dom/interfaces/IDomDocument.js";
+import { DomDocumentBase } from "./DomDocumentBase.js";
 
 export class DomDocument
   extends DomDocumentBase<Document>

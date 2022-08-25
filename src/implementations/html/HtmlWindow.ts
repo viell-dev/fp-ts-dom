@@ -1,5 +1,6 @@
-import { Wrapper } from "@/global/Wrapper.js";
+import type { IHtmlWindow } from "@/specs/html/interfaces/IHtmlWindow.js";
+import { HtmlWindowBase } from "./HtmlWindowBase.js";
 
-export class HtmlWindow<N extends Window>
-  extends Wrapper<N>
-  implements IHtmlWindow<N> {}
+export class HtmlWindow
+  extends HtmlWindowBase<Window>
+  implements IHtmlWindow<Window> {}
