@@ -1,5 +1,5 @@
-import { IDomDOMTokenList } from "@/specs/dom/interfaces/IDomDOMTokenList.js";
-import { IHtmlHTMLElement } from "./IHtmlHTMLElement.js";
+import type { IDomDOMTokenList } from "@/specs/dom/interfaces/IDomDOMTokenList.js";
+import type { IHtmlHTMLElement } from "./IHtmlHTMLElement.js";
 
 export interface IHtmlHTMLScriptElementStatic {
   supports(type: string): boolean;

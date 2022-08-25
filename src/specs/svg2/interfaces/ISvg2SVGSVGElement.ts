@@ -1,20 +1,25 @@
-import { IDomElement } from "@/specs/dom/interfaces/IDomElement.js";
-import { IDomNodeList } from "@/specs/dom/interfaces/IDomNodeList.js";
-import { IGeometry1DOMMatrix } from "@/specs/geometry-1/interfaces/IGeometry1DOMMatrix.js";
-import { IGeometry1DOMRect } from "@/specs/geometry-1/interfaces/IGeometry1DOMRect.js";
-import { IGeomtery1DOMPoint } from "@/specs/geometry-1/interfaces/IGeomtery1DOMPoint.js";
-import { IGeomtery1DOMPointReadOnly } from "@/specs/geometry-1/interfaces/IGeomtery1DOMPointReadOnly.js";
-import { IGeomtery1DOMRectReadOnly } from "@/specs/geometry-1/interfaces/IGeomtery1DOMRectReadOnly.js";
-import { MHtmlWindowEventHandlers } from "@/specs/html/mixins/MHtmlWindowEventHandlers.js";
-import { MSvg2SVGFitToViewBox } from "../mixins/MSvg2SVGFitToViewBox.js";
-import { MSvg2SVGZoomAndPan } from "../mixins/MSvg2SVGZoomAndPan.js";
-import { ISvg2SVGAngle } from "./ISvg2SVGAngle.js";
-import { ISvg2SVGAnimatedLength } from "./ISvg2SVGAnimatedLength.js";
-import { ISvg2SVGElement } from "./ISvg2SVGElement.js";
-import { ISvg2SVGGraphicsElement } from "./ISvg2SVGGraphicsElement.js";
-import { ISvg2SVGLength } from "./ISvg2SVGLength.js";
-import { ISvg2SVGNumber } from "./ISvg2SVGNumber.js";
-import { ISvg2SVGTransform } from "./ISvg2SVGTransform.js";
+import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.js";
+import type { IDomNodeList } from "@/specs/dom/interfaces/IDomNodeList.js";
+import type { IGeometry1DOMMatrix } from "@/specs/geometry-1/interfaces/IGeometry1DOMMatrix.js";
+import type { IGeometry1DOMRect } from "@/specs/geometry-1/interfaces/IGeometry1DOMRect.js";
+import type { IGeomtery1DOMPoint } from "@/specs/geometry-1/interfaces/IGeomtery1DOMPoint.js";
+import type { IGeomtery1DOMPointReadOnly } from "@/specs/geometry-1/interfaces/IGeomtery1DOMPointReadOnly.js";
+import type { IGeomtery1DOMRectReadOnly } from "@/specs/geometry-1/interfaces/IGeomtery1DOMRectReadOnly.js";
+import type { MHtmlWindowEventHandlers } from "@/specs/html/mixins/MHtmlWindowEventHandlers.js";
+import type { MSvg2SVGFitToViewBox } from "../mixins/MSvg2SVGFitToViewBox.js";
+import type {
+  MSvg2SVGZoomAndPan,
+  MSvg2SVGZoomAndPanConstants,
+} from "../mixins/MSvg2SVGZoomAndPan.js";
+import type { ISvg2SVGAngle } from "./ISvg2SVGAngle.js";
+import type { ISvg2SVGAnimatedLength } from "./ISvg2SVGAnimatedLength.js";
+import type { ISvg2SVGElement } from "./ISvg2SVGElement.js";
+import type { ISvg2SVGGraphicsElement } from "./ISvg2SVGGraphicsElement.js";
+import type { ISvg2SVGLength } from "./ISvg2SVGLength.js";
+import type { ISvg2SVGNumber } from "./ISvg2SVGNumber.js";
+import type { ISvg2SVGTransform } from "./ISvg2SVGTransform.js";
+
+export type ISvg2SVGSVGElementConstants = MSvg2SVGZoomAndPanConstants;
 
 export interface ISvg2SVGSVGElement<N extends SVGSVGElement>
   extends ISvg2SVGGraphicsElement<N>,

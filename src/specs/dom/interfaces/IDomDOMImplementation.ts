@@ -1,13 +1,12 @@
-import {
+import type {
   InvalidCharacterErrorDomException,
   NamespaceErrorDomException,
 } from "@/exceptions/DomException.js";
-import { IWrapper } from "@/wrapper/IWrapper.js";
-import * as E from "fp-ts/Either";
-import { Optional } from "../helpers/Optional.js";
-import { IDomDocument } from "./IDomDocument.js";
-import { IDomDocumentType } from "./IDomDocumentType.js";
-import { IDomXMLDocument } from "./IDomXMLDocument.js";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type * as E from "fp-ts/Either";
+import type { IDomDocument } from "./IDomDocument.js";
+import type { IDomDocumentType } from "./IDomDocumentType.js";
+import type { IDomXMLDocument } from "./IDomXMLDocument.js";
 
 export interface IDomDOMImplementation<N extends DOMImplementation>
   extends IWrapper<N> {
@@ -22,10 +21,10 @@ export interface IDomDOMImplementation<N extends DOMImplementation>
   createDocument(
     namepsace: string | null,
     qualifiedName: string | null,
-    doctype?: Optional<IDomDocumentType<DocumentType>>
+    doctype?: IDomDocumentType<DocumentType>
   ): E.Either<
     InvalidCharacterErrorDomException | NamespaceErrorDomException,
     IDomXMLDocument<XMLDocument>
   >;
-  createHTMLDocument(title?: Optional<string>): IDomDocument<Document>;
+  createHTMLDocument(title?: string): IDomDocument<Document>;
 }

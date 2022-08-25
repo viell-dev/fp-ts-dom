@@ -1,6 +1,6 @@
-import { IWrapper } from "@/wrapper/IWrapper.js";
-import * as O from "fp-ts/Option";
-import { IDomAttr } from "./IDomAttr.js";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type * as O from "fp-ts/Option";
+import type { IDomAttr } from "./IDomAttr.js";
 
 export interface IDomNamedNodeMap<N extends NamedNodeMap> extends IWrapper<N> {
   readonly length: number;

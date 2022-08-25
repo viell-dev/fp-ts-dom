@@ -1,6 +1,6 @@
-import { IGeometry1DOMMatrix } from "@/specs/geometry-1/interfaces/IGeometry1DOMMatrix.js";
-import { IGeometry1DOMMatrixReadOnly } from "@/specs/geometry-1/interfaces/IGeometry1DOMMatrixReadOnly.js";
-import { IWrapper } from "@/wrapper/IWrapper.js";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type { IGeometry1DOMMatrix } from "@/specs/geometry-1/interfaces/IGeometry1DOMMatrix.js";
+import type { IGeometry1DOMMatrixReadOnly } from "@/specs/geometry-1/interfaces/IGeometry1DOMMatrixReadOnly.js";
 
 export interface ISvg2SVGTransform<N extends SVGTransform> extends IWrapper<N> {
   readonly type: number; // TODO transform type class constants

@@ -1,15 +1,15 @@
-import * as O from "fp-ts/Option";
-import { DomShadowRootInit } from "../dictionaries/DomShadowRootInit.js";
-import { MDomChildNode } from "../mixins/MDomChildNode.js";
-import { MDomNonDocumentTypeChildNode } from "../mixins/MDomNonDocumentTypeChildNode.js";
-import { MDomParentNode } from "../mixins/MDomParentNode.js";
-import { MDomSlottable } from "../mixins/MDomSlottable.js";
-import { IDomAttr } from "./IDomAttr.js";
-import { IDomDOMTokenList } from "./IDomDOMTokenList.js";
-import { IDomHTMLCollection } from "./IDomHTMLCollection.js";
-import { IDomNamedNodeMap } from "./IDomNamedNodeMap.js";
-import { IDomNode } from "./IDomNode.js";
-import { IDomShadowRoot } from "./IDomShadowRoot.js";
+import type * as O from "fp-ts/Option";
+import type { DomShadowRootInit } from "../dictionaries/DomShadowRootInit.js";
+import type { MDomChildNode } from "../mixins/MDomChildNode.js";
+import type { MDomNonDocumentTypeChildNode } from "../mixins/MDomNonDocumentTypeChildNode.js";
+import type { MDomParentNode } from "../mixins/MDomParentNode.js";
+import type { MDomSlottable } from "../mixins/MDomSlottable.js";
+import type { IDomAttr } from "./IDomAttr.js";
+import type { IDomDOMTokenList } from "./IDomDOMTokenList.js";
+import type { IDomHTMLCollection } from "./IDomHTMLCollection.js";
+import type { IDomNamedNodeMap } from "./IDomNamedNodeMap.js";
+import type { IDomNode } from "./IDomNode.js";
+import type { IDomShadowRoot } from "./IDomShadowRoot.js";
 
 export interface IDomElement<N extends Element, CN = string>
   extends IDomNode<N>,

@@ -1,11 +1,11 @@
-import { IDomNodeList } from "@/specs/dom/interfaces/IDomNodeList.js";
-import { IDomShadowRoot } from "@/specs/dom/interfaces/IDomShadowRoot.js";
-import { IWrapper } from "@/wrapper/IWrapper.js";
-import * as O from "fp-ts/Option";
-import { DHtmlValidityStateFlags } from "../dictionaries/DHtmlValidityStateFlags.js";
-import { IHtmlHTMLElement } from "./IHtmlHTMLElement.js";
-import { IHtmlHTMLFormElement } from "./IHtmlHTMLFormElement.js";
-import { IHtmlValidityState } from "./IHtmlValidityState.js";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type { IDomNodeList } from "@/specs/dom/interfaces/IDomNodeList.js";
+import type { IDomShadowRoot } from "@/specs/dom/interfaces/IDomShadowRoot.js";
+import type * as O from "fp-ts/Option";
+import type { DHtmlValidityStateFlags } from "../dictionaries/DHtmlValidityStateFlags.js";
+import type { IHtmlHTMLElement } from "./IHtmlHTMLElement.js";
+import type { IHtmlHTMLFormElement } from "./IHtmlHTMLFormElement.js";
+import type { IHtmlValidityState } from "./IHtmlValidityState.js";
 
 // TODO: ElementInternals includes ARIAMixin
 export interface IHtmlElementInternals<N extends ElementInternals>

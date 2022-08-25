@@ -1,5 +1,5 @@
-import { IWrapper } from "@/wrapper/IWrapper.js";
-import { ISvg2SVGTransformList } from "./ISvg2SVGTransformList.js";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type { ISvg2SVGTransformList } from "./ISvg2SVGTransformList.js";
 
 export interface ISvg2SVGAnimatedTransformList<
   N extends SVGAnimatedTransformList

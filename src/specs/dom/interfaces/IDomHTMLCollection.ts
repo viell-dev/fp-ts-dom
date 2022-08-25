@@ -1,6 +1,6 @@
-import { IWrapper } from "@/wrapper/IWrapper.js";
-import * as O from "fp-ts/Option";
-import { IDomElement } from "./IDomElement.js";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type * as O from "fp-ts/Option";
+import type { IDomElement } from "./IDomElement.js";
 
 export interface IDomHTMLCollection<
   N extends HTMLCollectionBase, // typescript made a base

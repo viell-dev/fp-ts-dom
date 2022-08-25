@@ -1,6 +1,6 @@
-import { IWrapperConstructors } from "@/wrapper/IWrapper.js";
-import { DDomCustomEventInit } from "../dictionaries/DDomCustomEventInit.js";
-import { IDomEvent, IDomEventConstants } from "./IDomEvent.js";
+import type { IWrapperConstructors } from "@/global/IWrapper.js";
+import type { DDomCustomEventInit } from "../dictionaries/DDomCustomEventInit.js";
+import type { IDomEvent, IDomEventConstants } from "./IDomEvent.js";
 
 export interface IDomCustomEventConstructor
   extends IWrapperConstructors<CustomEvent> {

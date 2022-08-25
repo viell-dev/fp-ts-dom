@@ -1,6 +1,6 @@
-import { IDomAbstractRange } from "./IDomAbstractRange.js";
-import { IDomDocumentFragment } from "./IDomDocumentFragment.js";
-import { IDomNode } from "./IDomNode.js";
+import type { IDomAbstractRange } from "./IDomAbstractRange.js";
+import type { IDomDocumentFragment } from "./IDomDocumentFragment.js";
+import type { IDomNode } from "./IDomNode.js";
 
 export interface IDomRange<N extends Range> extends IDomAbstractRange<N> {
   readonly commonAncestorContainer: IDomNode<Node>;

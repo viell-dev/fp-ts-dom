@@ -1,6 +1,6 @@
-import * as O from "fp-ts/Option";
-import { IDomElement } from "./IDomElement.js";
-import { IDomNode } from "./IDomNode.js";
+import type * as O from "fp-ts/Option";
+import type { IDomElement } from "./IDomElement.js";
+import type { IDomNode } from "./IDomNode.js";
 
 export interface IDomAttr<N extends Attr> extends IDomNode<N> {
   readonly namespaceURI: O.Option<string>;

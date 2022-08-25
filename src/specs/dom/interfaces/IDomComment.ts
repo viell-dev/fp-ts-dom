@@ -1,3 +1,3 @@
-import { IDomCharacterData } from "./IDomCharacterData.js";
+import type { IDomCharacterData } from "./IDomCharacterData.js";
 
 export type IDomComment<N extends Comment> = IDomCharacterData<N>;

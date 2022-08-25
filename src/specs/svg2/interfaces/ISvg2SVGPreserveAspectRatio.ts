@@ -1,4 +1,4 @@
-import { IWrapper } from "@/wrapper/IWrapper.js";
+import type { IWrapper } from "@/global/IWrapper.js";
 
 export interface ISvg2SVGPreserveAspectRatio<N extends SVGPreserveAspectRatio>
   extends IWrapper<N> {

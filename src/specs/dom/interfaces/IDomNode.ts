@@ -1,11 +1,11 @@
-import * as O from "fp-ts/Option";
-import { CDomNodeType } from "../constants/CDomNodeType.js";
-import { DomNodeDocumentPosition } from "../constants/DomNodeDocumentPosition.js";
-import { DDomGetRootNodeOptions } from "../dictionaries/DDomGetRootNodeOptions.js";
-import { IDomDocument } from "./IDomDocument.js";
-import { IDomElement } from "./IDomElement.js";
-import { IDomEventTarget } from "./IDomEventTarget.js";
-import { IDomNodeList } from "./IDomNodeList.js";
+import type * as O from "fp-ts/Option";
+import type { CDomNodeType } from "../constants/CDomNodeType.js";
+import type { DomNodeDocumentPosition } from "../constants/DomNodeDocumentPosition.js";
+import type { DDomGetRootNodeOptions } from "../dictionaries/DDomGetRootNodeOptions.js";
+import type { IDomDocument } from "./IDomDocument.js";
+import type { IDomElement } from "./IDomElement.js";
+import type { IDomEventTarget } from "./IDomEventTarget.js";
+import type { IDomNodeList } from "./IDomNodeList.js";
 
 export interface IDomNodeConstants {
   // Node Types:

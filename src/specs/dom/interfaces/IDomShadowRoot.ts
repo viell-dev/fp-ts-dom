@@ -1,7 +1,7 @@
-import { MDomDocumentOrShadowRoot } from "../mixins/MDomDocumentOrShadowRoot.js";
-import { IDomDocumentFragment } from "./IDomDocumentFragment.js";
-import { IDomElement } from "./IDomElement.js";
-import { IDomEvent } from "./IDomEvent.js";
+import type { MDomDocumentOrShadowRoot } from "../mixins/MDomDocumentOrShadowRoot.js";
+import type { IDomDocumentFragment } from "./IDomDocumentFragment.js";
+import type { IDomElement } from "./IDomElement.js";
+import type { IDomEvent } from "./IDomEvent.js";
 
 export interface IDomShadowRoot<N extends ShadowRoot>
   extends IDomDocumentFragment<N>,

@@ -1,6 +1,6 @@
-import { MDomChildNode } from "../mixins/MDomChildNode.js";
-import { MDomNonDocumentTypeChildNode } from "../mixins/MDomNonDocumentTypeChildNode.js";
-import { IDomNode } from "./IDomNode.js";
+import type { MDomChildNode } from "../mixins/MDomChildNode.js";
+import type { MDomNonDocumentTypeChildNode } from "../mixins/MDomNonDocumentTypeChildNode.js";
+import type { IDomNode } from "./IDomNode.js";
 
 export interface IDomCharacterData<N extends CharacterData>
   extends IDomNode<N>,

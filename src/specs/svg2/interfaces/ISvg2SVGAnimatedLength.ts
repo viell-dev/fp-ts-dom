@@ -1,5 +1,5 @@
-import { IWrapper } from "@/wrapper/IWrapper.js";
-import { ISvg2SVGLength } from "./ISvg2SVGLength.js";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type { ISvg2SVGLength } from "./ISvg2SVGLength.js";
 
 export interface ISvg2SVGAnimatedLength<N extends SVGAnimatedLength>
   extends IWrapper<N> {

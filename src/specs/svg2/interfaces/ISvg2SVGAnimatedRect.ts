@@ -1,6 +1,6 @@
-import { IGeometry1DOMRect } from "@/specs/geometry-1/interfaces/IGeometry1DOMRect.js";
-import { IGeometry1DOMRectReadOnly } from "@/specs/geometry-1/interfaces/IGeometry1DOMRectReadOnly.js";
-import { IWrapper } from "@/wrapper/IWrapper.js";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type { IGeometry1DOMRect } from "@/specs/geometry-1/interfaces/IGeometry1DOMRect.js";
+import type { IGeometry1DOMRectReadOnly } from "@/specs/geometry-1/interfaces/IGeometry1DOMRectReadOnly.js";
 
 export interface ISvg2SVGAnimatedRect<N extends SVGAnimatedRect>
   extends IWrapper<N> {

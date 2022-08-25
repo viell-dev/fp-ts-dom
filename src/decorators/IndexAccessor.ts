@@ -11,6 +11,8 @@ export function IndexAccessor(clazz: { prototype: unknown }): void {
     // eslint-disable-next-line @typescript-eslint/ban-types
     newTarget?: Function
   ): void => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const instance = Reflect.construct(target, argumentsList, newTarget);
     const instanceHandler = Object.create(null);

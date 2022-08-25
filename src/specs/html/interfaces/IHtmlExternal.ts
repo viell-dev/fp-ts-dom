@@ -1,4 +1,4 @@
-import { IWrapper } from "@/wrapper/IWrapper.js";
+import type { IWrapper } from "@/global/IWrapper.js";
 
 /** @deprecated Not used anymore. */
 export interface IHtmlExternal<N extends External> extends IWrapper<N> {

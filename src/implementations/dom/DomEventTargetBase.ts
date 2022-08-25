@@ -1,7 +1,7 @@
 import { InvalidStateErrorDomException } from "@/exceptions/DomException.js";
+import { Wrapper } from "@/global/Wrapper.js";
 import { CBDomEventListener } from "@/specs/dom/callbacks/CBDomEventListener.js";
 import { IDomEventTarget } from "@/specs/dom/interfaces/IDomEventTarget.js";
-import { Wrapper } from "@/wrapper/Wrapper.js";
 import * as E from "fp-ts/es6/Either";
 import { pipe } from "fp-ts/es6/function";
 import * as O from "fp-ts/es6/Option";

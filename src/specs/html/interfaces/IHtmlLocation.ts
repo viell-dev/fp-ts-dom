@@ -1,5 +1,5 @@
-import { IWrapper } from "@/wrapper/IWrapper.js";
-import { IHtmlDOMStringList } from "./IHtmlDOMStringList.js";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type { IHtmlDOMStringList } from "./IHtmlDOMStringList.js";
 
 export interface IHtmlLocation<N extends Location> extends IWrapper<N> {
   href: string;

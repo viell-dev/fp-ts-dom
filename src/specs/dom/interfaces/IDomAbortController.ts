@@ -1,5 +1,5 @@
-import { IWrapper, IWrapperConstructors } from "@/wrapper/IWrapper.js";
-import { IDomAbortSignal } from "./IDomAbortSignal.js";
+import type { IWrapper, IWrapperConstructors } from "@/global/IWrapper.js";
+import type { IDomAbortSignal } from "./IDomAbortSignal.js";
 
 export interface IDomAbortControllerConstructor
   extends IWrapperConstructors<AbortController> {

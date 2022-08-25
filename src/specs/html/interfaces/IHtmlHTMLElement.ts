@@ -1,10 +1,10 @@
-import { IWrapper } from "@/wrapper/IWrapper.js";
-import * as O from "fp-ts/Option";
-import { MHtmlDocumentAndElementEventHandlers } from "../mixins/MHtmlDocumentAndElementEventHandlers.js";
-import { MHtmlElementContentEditable } from "../mixins/MHtmlElementContentEditable.js";
-import { MHtmlGlobalEventHandlers } from "../mixins/MHtmlGlobalEventHandlers.js";
-import { MHtmlHTMLOrSVGElement } from "../mixins/MHtmlHTMLOrSVGElement.js";
-import { IHtmlElementInternals } from "./IHtmlElementInternals.js";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type * as O from "fp-ts/Option";
+import type { MHtmlDocumentAndElementEventHandlers } from "../mixins/MHtmlDocumentAndElementEventHandlers.js";
+import type { MHtmlElementContentEditable } from "../mixins/MHtmlElementContentEditable.js";
+import type { MHtmlGlobalEventHandlers } from "../mixins/MHtmlGlobalEventHandlers.js";
+import type { MHtmlHTMLOrSVGElement } from "../mixins/MHtmlHTMLOrSVGElement.js";
+import type { IHtmlElementInternals } from "./IHtmlElementInternals.js";
 
 export interface IHtmlHTMLElement<N extends HTMLElement>
   extends IWrapper<N>,

@@ -1,21 +1,21 @@
-import * as O from "fp-ts/Option";
-import { MDomDocumentOrShadowRoot } from "../mixins/MDomDocumentOrShadowRoot.js";
-import { MDomNonElementParentNode } from "../mixins/MDomNonElementParentNode.js";
-import { MDomParentNode } from "../mixins/MDomParentNode.js";
-import { IDomAttr } from "./IDomAttr.js";
-import { IDomCDATASection } from "./IDomCDATASection.js";
-import { IDomComment } from "./IDomComment.js";
-import { IDomDocumentFragment } from "./IDomDocumentFragment.js";
-import { IDomDocumentType } from "./IDomDocumentType.js";
-import { IDomDOMImplementation } from "./IDomDOMImplementation.js";
-import { IDomElement } from "./IDomElement.js";
-import { IDomHTMLCollection } from "./IDomHTMLCollection.js";
-import { IDomNode } from "./IDomNode.js";
-import { IDomNodeIterator } from "./IDomNodeIterator.js";
-import { IDomProccessingInstruction } from "./IDomProccessingInstruction.js";
-import { IDomRange } from "./IDomRange.js";
-import { IDomText } from "./IDomText.js";
-import { IDomTreeWalker } from "./IDomTreeWalker.js";
+import type * as O from "fp-ts/Option";
+import type { MDomDocumentOrShadowRoot } from "../mixins/MDomDocumentOrShadowRoot.js";
+import type { MDomNonElementParentNode } from "../mixins/MDomNonElementParentNode.js";
+import type { MDomParentNode } from "../mixins/MDomParentNode.js";
+import type { IDomAttr } from "./IDomAttr.js";
+import type { IDomCDATASection } from "./IDomCDATASection.js";
+import type { IDomComment } from "./IDomComment.js";
+import type { IDomDocumentFragment } from "./IDomDocumentFragment.js";
+import type { IDomDocumentType } from "./IDomDocumentType.js";
+import type { IDomDOMImplementation } from "./IDomDOMImplementation.js";
+import type { IDomElement } from "./IDomElement.js";
+import type { IDomHTMLCollection } from "./IDomHTMLCollection.js";
+import type { IDomNode } from "./IDomNode.js";
+import type { IDomNodeIterator } from "./IDomNodeIterator.js";
+import type { IDomProccessingInstruction } from "./IDomProccessingInstruction.js";
+import type { IDomRange } from "./IDomRange.js";
+import type { IDomText } from "./IDomText.js";
+import type { IDomTreeWalker } from "./IDomTreeWalker.js";
 
 export interface IDomDocument<N extends Document>
   extends IDomNode<N>,

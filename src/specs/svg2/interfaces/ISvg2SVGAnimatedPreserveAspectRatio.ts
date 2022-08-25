@@ -1,5 +1,5 @@
-import { IWrapper } from "@/wrapper/IWrapper.js";
-import { ISvg2SVGPreserveAspectRatio } from "./ISvg2SVGPreserveAspectRatio.js";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type { ISvg2SVGPreserveAspectRatio } from "./ISvg2SVGPreserveAspectRatio.js";
 
 export interface ISvg2SVGAnimatedPreserveAspectRatio<
   N extends SVGAnimatedPreserveAspectRatio

@@ -1,8 +1,8 @@
-import { IDomElement } from "@/specs/dom/interfaces/IDomElement.js";
-import { IDomNode } from "@/specs/dom/interfaces/IDomNode.js";
-import { IDomText } from "@/specs/dom/interfaces/IDomText.js";
-import { IWrapper, IWrapperConstructors } from "@/wrapper/IWrapper.js";
-import { DHtmlAssignedNodesOptions } from "../dictionaries/DHtmlAssignedNodesOptions.js";
+import type { IWrapper, IWrapperConstructors } from "@/global/IWrapper.js";
+import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.js";
+import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.js";
+import type { IDomText } from "@/specs/dom/interfaces/IDomText.js";
+import type { DHtmlAssignedNodesOptions } from "../dictionaries/DHtmlAssignedNodesOptions.js";
 
 export interface IHtmlHTMLSlotElementConstructors
   extends IWrapperConstructors<HTMLSlotElement> {

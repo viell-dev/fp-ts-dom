@@ -1,7 +1,7 @@
-import { IGeometry1DOMMatrixReadOnly } from "@/specs/geometry-1/interfaces/IGeometry1DOMMatrixReadOnly.js";
-import { IWrapper } from "@/wrapper/IWrapper.js";
-import * as O from "fp-ts/Option";
-import { ISvg2SVGTransform } from "./ISvg2SVGTransform.js";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type { IGeometry1DOMMatrixReadOnly } from "@/specs/geometry-1/interfaces/IGeometry1DOMMatrixReadOnly.js";
+import type * as O from "fp-ts/Option";
+import type { ISvg2SVGTransform } from "./ISvg2SVGTransform.js";
 
 export interface ISvg2SVGTransformList<N extends SVGTransformList>
   extends IWrapper<N> {

@@ -1,5 +1,5 @@
-import { CBHtmlEventHandler } from "../callbacks/CBHtmlEventHandler.js";
-import { CBHtmlOnErrorEventHandler } from "../callbacks/CBHtmlOnErrorEventHandler.js";
+import type { CBHtmlEventHandler } from "../callbacks/CBHtmlEventHandler.js";
+import type { CBHtmlOnErrorEventHandler } from "../callbacks/CBHtmlOnErrorEventHandler.js";
 
 export interface MHtmlGlobalEventHandlers {
   onabort: CBHtmlEventHandler;

@@ -1,5 +1,5 @@
-import { CBHtmlEventHandler } from "../callbacks/CBHtmlEventHandler.js";
-import { CBHtmlOnBeforeUnloadEventHandler } from "../callbacks/CBHtmlOnBeforeUnloadEventHandler.js";
+import type { CBHtmlEventHandler } from "../callbacks/CBHtmlEventHandler.js";
+import type { CBHtmlOnBeforeUnloadEventHandler } from "../callbacks/CBHtmlOnBeforeUnloadEventHandler.js";
 
 export interface MHtmlWindowEventHandlers {
   onafterprint: CBHtmlEventHandler;

@@ -1,5 +1,5 @@
-import { IDomMutationObserver } from "../interfaces/IDomMutationObserver.js";
-import { IDomMutationRecord } from "../interfaces/IDomMutationRecord.js";
+import type { IDomMutationObserver } from "../interfaces/IDomMutationObserver.js";
+import type { IDomMutationRecord } from "../interfaces/IDomMutationRecord.js";
 
 export interface CBDomMutationCallback {
   (

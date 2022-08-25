@@ -1,3 +1,3 @@
-import { IDomText } from "./IDomText.js";
+import type { IDomText } from "./IDomText.js";
 
 export type IDomCDATASection<N extends CDATASection> = IDomText<N>;

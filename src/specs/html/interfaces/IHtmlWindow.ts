@@ -1,16 +1,17 @@
-import { IDomElement } from "@/specs/dom/interfaces/IDomElement.js";
-import { IWrapper } from "@/wrapper/IWrapper.js";
-import * as O from "fp-ts/Option";
-import { DHtmlWindowPostMessageOptions } from "../dictionaries/DHtmlWindowPostMessageOptions.js";
-import { MHtmlGlobalEventHandlers } from "../mixins/MHtmlGlobalEventHandlers.js";
-import { MHtmlWindowEventHandlers } from "../mixins/MHtmlWindowEventHandlers.js";
-import { IHtmlBarProp } from "./IHtmlBarProp.js";
-import { IHtmlCustomElementRegistry } from "./IHtmlCustomElementRegistry.js";
-import { IHtmlExternal } from "./IHtmlExternal.js";
-import { IHtmlHistory } from "./IHtmlHistory.js";
-import { IHtmlLocation } from "./IHtmlLocation.js";
-import { IHtmlNavigator } from "./IHtmlNavigator.js";
-import { IHtmlWindowProxy } from "./IHtmlWindowProxy.js";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.js";
+import type * as O from "fp-ts/Option";
+import type { DHtmlWindowPostMessageOptions } from "../dictionaries/DHtmlWindowPostMessageOptions.js";
+import type { MHtmlGlobalEventHandlers } from "../mixins/MHtmlGlobalEventHandlers.js";
+import type { MHtmlWindowEventHandlers } from "../mixins/MHtmlWindowEventHandlers.js";
+import type { IHtmlBarProp } from "./IHtmlBarProp.js";
+import type { IHtmlCustomElementRegistry } from "./IHtmlCustomElementRegistry.js";
+import type { IHtmlDocument } from "./IHtmlDocument.js";
+import type { IHtmlExternal } from "./IHtmlExternal.js";
+import type { IHtmlHistory } from "./IHtmlHistory.js";
+import type { IHtmlLocation } from "./IHtmlLocation.js";
+import type { IHtmlNavigator } from "./IHtmlNavigator.js";
+import type { IHtmlWindowProxy } from "./IHtmlWindowProxy.js";
 
 export interface IHtmlWindow<N extends Window>
   extends IWrapper<N>,

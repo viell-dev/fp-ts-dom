@@ -1,5 +1,5 @@
-import { IWrapper } from "@/wrapper/IWrapper.js";
-import { IHtmlPlugin } from "./IHtmlPlugin.js";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type { IHtmlPlugin } from "./IHtmlPlugin.js";
 
 export interface IHtmlMimeType<N extends MimeType> extends IWrapper<N> {
   readonly type: string;

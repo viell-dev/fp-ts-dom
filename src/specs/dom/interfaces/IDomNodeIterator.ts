@@ -1,6 +1,6 @@
-import { IWrapper } from "@/wrapper/IWrapper.js";
-import * as O from "fp-ts/Option";
-import { IDomNode } from "./IDomNode.js";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type * as O from "fp-ts/Option";
+import type { IDomNode } from "./IDomNode.js";
 
 export interface IDomNodeIterator<N extends NodeIterator> extends IWrapper<N> {
   readonly root: IDomNode<Node>;

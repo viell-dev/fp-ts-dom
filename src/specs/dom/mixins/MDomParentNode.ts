@@ -1,10 +1,10 @@
-import { HierarchyRequestErrorDomException } from "@/exceptions/DomException.js";
-import * as E from "fp-ts/Either";
-import * as O from "fp-ts/Option";
-import { IDomElement } from "../interfaces/IDomElement.js";
-import { IDomHTMLCollection } from "../interfaces/IDomHTMLCollection.js";
-import { IDomNode } from "../interfaces/IDomNode.js";
-import { IDomNodeList } from "../interfaces/IDomNodeList.js";
+import type { HierarchyRequestErrorDomException } from "@/exceptions/DomException.js";
+import type * as E from "fp-ts/Either";
+import type * as O from "fp-ts/Option";
+import type { IDomElement } from "../interfaces/IDomElement.js";
+import type { IDomHTMLCollection } from "../interfaces/IDomHTMLCollection.js";
+import type { IDomNode } from "../interfaces/IDomNode.js";
+import type { IDomNodeList } from "../interfaces/IDomNodeList.js";
 
 export interface MDomParentNode {
   readonly children: IDomHTMLCollection<HTMLCollection>;

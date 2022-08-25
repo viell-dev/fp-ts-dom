@@ -1,5 +1,5 @@
-import { IWrapper } from "@/wrapper/IWrapper.js";
-import { EHtmlScrollRestoration } from "../enums/EHtmlScrollRestoration.js";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type { EHtmlScrollRestoration } from "../enums/EHtmlScrollRestoration.js";
 
 export interface IHtmlHistory<N extends History> extends IWrapper<N> {
   readonly length: number;

@@ -1,5 +1,5 @@
-import { IWrapper } from "@/wrapper/IWrapper.js";
-import * as O from "fp-ts/Option";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type * as O from "fp-ts/Option";
 
 export interface IHtmlDOMStringList<N extends DOMStringList>
   extends IWrapper<N> {

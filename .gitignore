@@ -1,5 +1,9 @@
 _old
 
+# Build
+lib
+tsconfig.tsbuildinfo
+
 # Yarn
 .yarn/*
 !.yarn/patches

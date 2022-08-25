@@ -1,5 +1,5 @@
-import { IHtmlMimeTypeArray } from "../interfaces/IHtmlMimeTypeArray.js";
-import { IHtmlPluginArray } from "../interfaces/IHtmlPluginArray.js";
+import type { IHtmlMimeTypeArray } from "../interfaces/IHtmlMimeTypeArray.js";
+import type { IHtmlPluginArray } from "../interfaces/IHtmlPluginArray.js";
 
 export interface MHtmlNavigatorPlugins {
   readonly plugins: IHtmlPluginArray<PluginArray>;

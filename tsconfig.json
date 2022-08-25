@@ -28,6 +28,7 @@
 
     // Emit
     "declarationMap": true,
+    "importsNotUsedAsValues": "error",
     "newLine": "lf",
     "outDir": "./lib",
     "removeComments": true,

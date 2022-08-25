@@ -1,11 +1,11 @@
-import {
+import type {
   AbortErrorDomException,
   TimeoutErrorDomException,
 } from "@/exceptions/DomException.js";
-import { CBHtmlEventHandlerNonNull } from "@/specs/html/callbacks/CBHtmlEventHandler.js";
-import * as E from "fp-ts/Either";
-import * as O from "fp-ts/Option";
-import { IDomEventTarget } from "./IDomEventTarget.js";
+import type { CBHtmlEventHandlerNonNull } from "@/specs/html/callbacks/CBHtmlEventHandler.js";
+import type * as E from "fp-ts/Either";
+import type * as O from "fp-ts/Option";
+import type { IDomEventTarget } from "./IDomEventTarget.js";
 
 export interface IDomAbortSignalConstructors {
   abort<R = unknown>(

@@ -1,5 +1,6 @@
-import { IWrapper } from "@/wrapper/IWrapper.js";
-import * as O from "fp-ts/Option";
+import type { IWrapper } from "@/global/IWrapper.js";
+import type * as O from "fp-ts/Option";
+import type { IHtmlPlugin } from "./IHtmlPlugin.js";
 
 export interface IHtmlPluginArray<N extends PluginArray> extends IWrapper<N> {
   refresh(): void;

@@ -1,5 +1,5 @@
-import { MDomSlottable } from "../mixins/MDomSlottable.js";
-import { IDomCharacterData } from "./IDomCharacterData.js";
+import type { MDomSlottable } from "../mixins/MDomSlottable.js";
+import type { IDomCharacterData } from "./IDomCharacterData.js";
 
 export interface IDomText<N extends Text>
   extends IDomCharacterData<N>,

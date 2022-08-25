@@ -1,7 +1,19 @@
-import { IGeometry1DOMMatrixReadOnly } from "./IGeometry1DOMMatrixReadOnly.js";
+import type { IWrapperConstructors } from "@/global/IWrapper.js";
+import type { DGeometry1DOMMatrixInit } from "../dictionaries/DGeometry1DOMMatrixInit.js";
+import type { IGeometry1DOMMatrixReadOnly } from "./IGeometry1DOMMatrixReadOnly.js";
+
+export interface IGeometry1DOMMatrixConstructors
+  extends IWrapperConstructors<DOMMatrix> {
+  new (init: string | number[]): IGeometry1DOMMatrix<DOMMatrix>;
+
+  fromMatrix(other?: DGeometry1DOMMatrixInit): IGeometry1DOMMatrix<DOMMatrix>;
+  fromFloat32Array(array32: Float32Array): IGeometry1DOMMatrix<DOMMatrix>;
+  fromFloat64Array(array64: Float64Array): IGeometry1DOMMatrix<DOMMatrix>;
+}
 
 export interface IGeometry1DOMMatrix<N extends DOMMatrix>
   extends IGeometry1DOMMatrixReadOnly<N> {
+  // These attributes are simple aliases for certain elements of the 4x4 matrix
   a: number;
   b: number;
   c: number;

@@ -1,4 +1,4 @@
-import { IDomCharacterData } from "./IDomCharacterData.js";
+import type { IDomCharacterData } from "./IDomCharacterData.js";
 
 export interface IDomProccessingInstruction<N extends ProcessingInstruction>
   extends IDomCharacterData<N> {

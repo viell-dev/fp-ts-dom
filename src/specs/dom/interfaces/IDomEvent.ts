@@ -1,8 +1,8 @@
-import { IWrapper, IWrapperConstructors } from "@/wrapper/IWrapper.js";
-import * as O from "fp-ts/Option";
-import { DomEventPhase } from "../constants/DomEventPhase.js";
-import { DDomEventInit } from "../dictionaries/DDomEventInit.js";
-import { IDomEventTarget } from "./IDomEventTarget.js";
+import type { IWrapper, IWrapperConstructors } from "@/global/IWrapper.js";
+import type * as O from "fp-ts/Option";
+import type { DomEventPhase } from "../constants/DomEventPhase.js";
+import type { DDomEventInit } from "../dictionaries/DDomEventInit.js";
+import type { IDomEventTarget } from "./IDomEventTarget.js";
 
 export interface IDomEventConstructors extends IWrapperConstructors<Event> {
   new (type: string, eventInitDict?: DDomEventInit): IDomEvent<Event>;
