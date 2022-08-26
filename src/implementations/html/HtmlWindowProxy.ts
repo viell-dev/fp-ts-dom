@@ -1,6 +1,4 @@
-import type { IHtmlWindowProxy } from "@/specs/html/interfaces/IHtmlWindowProxy.js";
-import { HtmlWindowBase } from "./HtmlWindowBase.js";
+import { HtmlWindow } from "./HtmlWindow.js";
 
-export class HtmlWindowProxy
-  extends HtmlWindowBase<WindowProxy>
-  implements IHtmlWindowProxy<WindowProxy> {}
+export type HtmlWindowProxy = HtmlWindow;
+export const HtmlWindowProxy = HtmlWindow;

@@ -1,10 +1,19 @@
+import type {
+  SecurityErrorDomException,
+  SyntaxErrorDomException,
+} from "@/exceptions/DomException.js";
 import type { IWrapper } from "@/global/IWrapper.js";
+import type * as E from "fp-ts/Either";
 import type { IHtmlDOMStringList } from "./IHtmlDOMStringList.js";
 
 export interface IHtmlLocation<N extends Location> extends IWrapper<N> {
-  href: string;
-  readonly origin: string;
-  protocol: string;
+  readonly href: E.Either<SecurityErrorDomException, string>;
+  setHref(value: string): E.Either<TypeError, void>;
+  readonly origin: E.Either<SecurityErrorDomException, string>;
+  readonly protocol: E.Either<SecurityErrorDomException, string>;
+  setProtocol(
+    value: string
+  ): E.Either<SecurityErrorDomException | SyntaxErrorDomException, void>;
   host: string;
   hostname: string;
   port: string;

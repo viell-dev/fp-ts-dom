@@ -28,7 +28,7 @@ export interface IHtmlWindow<N extends Window>
   readonly locationbar: IHtmlBarProp<BarProp>;
   readonly menubar: IHtmlBarProp<BarProp>;
   readonly personalbar: IHtmlBarProp<BarProp>;
-  readonly scrollbar: IHtmlBarProp<BarProp>;
+  readonly scrollbars: IHtmlBarProp<BarProp>;
   readonly statusbar: IHtmlBarProp<BarProp>;
   readonly toolbar: IHtmlBarProp<BarProp>;
   status: string;
