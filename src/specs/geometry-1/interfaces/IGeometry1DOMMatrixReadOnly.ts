@@ -3,7 +3,7 @@ import type { IWrapper, IWrapperConstructors } from "@/global/IWrapper.js";
 import type { DGeometry1DOMMatrixInit } from "../dictionaries/DGeometry1DOMMatrixInit.js";
 import type { DGeometry1DOMPointInit } from "../dictionaries/DGeometry1DOMPointInit.js";
 import type { IGeometry1DOMMatrix } from "./IGeometry1DOMMatrix.js";
-import type { IGeomtery1DOMPoint } from "./IGeomtery1DOMPoint.js";
+import type { IGeometry1DOMPoint } from "./IGeometry1DOMPoint.js";
 
 export interface IGeometry1DOMMatrixReadOnlyConstructors
   extends IWrapperConstructors<DOMMatrixReadOnly> {
@@ -94,7 +94,7 @@ export interface IGeometry1DOMMatrixReadOnly<N extends DOMMatrixReadOnly>
   flipY(): IGeometry1DOMMatrix<DOMMatrix>;
   inverse(): IGeometry1DOMMatrix<DOMMatrix>;
 
-  transformPoint(point?: DGeometry1DOMPointInit): IGeomtery1DOMPoint<DOMPoint>;
+  transformPoint(point?: DGeometry1DOMPointInit): IGeometry1DOMPoint<DOMPoint>;
   toFloat32Array(): Float32Array;
   toFloat64Array(): Float64Array;
 }

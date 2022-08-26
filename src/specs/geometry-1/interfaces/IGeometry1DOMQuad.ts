@@ -3,8 +3,8 @@ import type { IWrapper, IWrapperConstructors } from "@/global/IWrapper.js";
 import type { DGeometry1DOMPointInit } from "../dictionaries/DGeometry1DOMPointInit.js";
 import type { DGeometry1DOMQuadInit } from "../dictionaries/DGeometry1DOMQuadInit.js";
 import type { DGeometry1DOMRectInit } from "../dictionaries/DGeometry1DOMRectInit.js";
+import type { IGeometry1DOMPoint } from "./IGeometry1DOMPoint.js";
 import type { IGeometry1DOMRect } from "./IGeometry1DOMRect.js";
-import type { IGeomtery1DOMPoint } from "./IGeomtery1DOMPoint.js";
 
 export interface IGeometry1DOMQuadConstructors
   extends IWrapperConstructors<DOMQuad> {
@@ -22,9 +22,9 @@ export interface IGeometry1DOMQuadConstructors
 export interface IGeometry1DOMQuad<N extends DOMQuad>
   extends IWrapper<N>,
     ISerializable {
-  readonly p1: IGeomtery1DOMPoint<DOMPoint>;
-  readonly p2: IGeomtery1DOMPoint<DOMPoint>;
-  readonly p3: IGeomtery1DOMPoint<DOMPoint>;
-  readonly p4: IGeomtery1DOMPoint<DOMPoint>;
+  readonly p1: IGeometry1DOMPoint<DOMPoint>;
+  readonly p2: IGeometry1DOMPoint<DOMPoint>;
+  readonly p3: IGeometry1DOMPoint<DOMPoint>;
+  readonly p4: IGeometry1DOMPoint<DOMPoint>;
   getBounds(): IGeometry1DOMRect<DOMRect>;
 }

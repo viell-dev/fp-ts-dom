@@ -1,10 +1,10 @@
 import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.js";
 import type { IDomNodeList } from "@/specs/dom/interfaces/IDomNodeList.js";
 import type { IGeometry1DOMMatrix } from "@/specs/geometry-1/interfaces/IGeometry1DOMMatrix.js";
+import type { IGeometry1DOMPoint } from "@/specs/geometry-1/interfaces/IGeometry1DOMPoint.js";
+import type { IGeometry1DOMPointReadOnly } from "@/specs/geometry-1/interfaces/IGeometry1DOMPointReadOnly.js";
 import type { IGeometry1DOMRect } from "@/specs/geometry-1/interfaces/IGeometry1DOMRect.js";
-import type { IGeomtery1DOMPoint } from "@/specs/geometry-1/interfaces/IGeomtery1DOMPoint.js";
-import type { IGeomtery1DOMPointReadOnly } from "@/specs/geometry-1/interfaces/IGeomtery1DOMPointReadOnly.js";
-import type { IGeomtery1DOMRectReadOnly } from "@/specs/geometry-1/interfaces/IGeomtery1DOMRectReadOnly.js";
+import type { IGeometry1DOMRectReadOnly } from "@/specs/geometry-1/interfaces/IGeometry1DOMRectReadOnly.js";
 import type { MHtmlWindowEventHandlers } from "@/specs/html/mixins/MHtmlWindowEventHandlers.js";
 import type { MSvg2SVGFitToViewBox } from "../mixins/MSvg2SVGFitToViewBox.js";
 import type {
@@ -32,23 +32,23 @@ export interface ISvg2SVGSVGElement<N extends SVGSVGElement>
   readonly height: ISvg2SVGAnimatedLength<SVGAnimatedLength>;
 
   currentScale: number;
-  readonly currentTranslate: IGeomtery1DOMPointReadOnly<DOMPointReadOnly>;
+  readonly currentTranslate: IGeometry1DOMPointReadOnly<DOMPointReadOnly>;
 
   getIntersectionList(
-    rect: DOMRectReadOnly | IGeomtery1DOMRectReadOnly<DOMRectReadOnly>,
+    rect: DOMRectReadOnly | IGeometry1DOMRectReadOnly<DOMRectReadOnly>,
     referenceElement: SVGElement | ISvg2SVGElement<SVGElement> | null
   ): IDomNodeList<NodeList>;
   getEnclosureList(
-    rect: DOMRectReadOnly | IGeomtery1DOMRectReadOnly<DOMRectReadOnly>,
+    rect: DOMRectReadOnly | IGeometry1DOMRectReadOnly<DOMRectReadOnly>,
     referenceElement: SVGElement | ISvg2SVGElement<SVGElement> | null
   ): IDomNodeList<NodeList>;
   checkIntersectionList(
     element: SVGElement | ISvg2SVGElement<SVGElement>,
-    rect: DOMRectReadOnly | IGeomtery1DOMRectReadOnly<DOMRectReadOnly>
+    rect: DOMRectReadOnly | IGeometry1DOMRectReadOnly<DOMRectReadOnly>
   ): boolean;
   checkEnclosureList(
     element: SVGElement | ISvg2SVGElement<SVGElement>,
-    rect: DOMRectReadOnly | IGeomtery1DOMRectReadOnly<DOMRectReadOnly>
+    rect: DOMRectReadOnly | IGeometry1DOMRectReadOnly<DOMRectReadOnly>
   ): boolean;
 
   deselectAll(): void;
@@ -56,7 +56,7 @@ export interface ISvg2SVGSVGElement<N extends SVGSVGElement>
   createSVGNumber(): ISvg2SVGNumber<SVGNumber>;
   createSVGLength(): ISvg2SVGLength<SVGLength>;
   createSVGAngle(): ISvg2SVGAngle<SVGAngle>;
-  createSVGPoint(): IGeomtery1DOMPoint<DOMPoint>;
+  createSVGPoint(): IGeometry1DOMPoint<DOMPoint>;
   createSVGMatrix(): IGeometry1DOMMatrix<DOMMatrix>;
   createSVGRect(): IGeometry1DOMRect<DOMRect>;
   createSVGTransform(): ISvg2SVGTransform<SVGTransform>;
