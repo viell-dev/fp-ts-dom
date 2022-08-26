@@ -16,8 +16,8 @@ export interface IGeomtery1DOMPointConstructors
 
 export interface IGeomtery1DOMPoint<N extends DOMPoint>
   extends IGeomtery1DOMPointReadOnly<N> {
-  w: number;
   x: number;
   y: number;
   z: number;
+  w: number;
 }

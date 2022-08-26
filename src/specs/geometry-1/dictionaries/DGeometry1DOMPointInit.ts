@@ -1,1 +1,6 @@
-export type DGeometry1DOMPointInit = DOMPointInit;
+export interface DGeometry1DOMPointInit {
+  x?: number;
+  y?: number;
+  z?: number;
+  w?: number;
+}

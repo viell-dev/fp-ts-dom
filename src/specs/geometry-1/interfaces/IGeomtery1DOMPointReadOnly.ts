@@ -21,10 +21,10 @@ export interface IGeomtery1DOMPointReadOnlyConstructors
 export interface IGeomtery1DOMPointReadOnly<N extends DOMPointReadOnly>
   extends IWrapper<N>,
     ISerializable {
-  readonly w: number;
   readonly x: number;
   readonly y: number;
   readonly z: number;
+  readonly w: number;
 
   matrixTransform(
     matrix?: DGeometry1DOMMatrixInit
