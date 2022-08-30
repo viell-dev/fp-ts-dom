@@ -14,11 +14,20 @@
   "plugins": ["@typescript-eslint", "eslint-plugin-tsdoc"],
   "overrides": [
     {
-      "files": ["**/*.ts"],
+      "files": ["src/**/*.ts"],
       "rules": {
         "multiline-comment-style": ["warn", "bare-block"],
         "eslint-comments/no-unused-disable": "warn",
         "eslint-comments/require-description": "warn",
+        "@typescript-eslint/ban-types": [
+          "warn",
+          {
+            "types": {
+              "{}": false
+            },
+            "extendDefaults": true
+          }
+        ],
         "@typescript-eslint/consistent-type-assertions": [
           "warn",
           { "assertionStyle": "never" }

@@ -1,6 +1,5 @@
 import type { IWrapper } from "./IWrapper.js";
 
-// eslint-disable-next-line @typescript-eslint/ban-types -- allow {} here
 export abstract class Wrapper<N extends {}> implements IWrapper<N> {
   protected native: N;
 
