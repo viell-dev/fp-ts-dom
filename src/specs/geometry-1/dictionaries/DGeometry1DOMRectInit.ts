@@ -1,1 +1,6 @@
-export type DGeometry1DOMRectInit = DOMRectInit;
+export interface DGeometry1DOMRectInit {
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+}
