@@ -1,5 +1,6 @@
 import type { ISerializable } from "@/global/ISerializable.js";
 import type { IWrapper, IWrapperConstructors } from "@/global/IWrapper.js";
+import type * as E from "fp-ts/Either";
 import type { DGeometry1DOMMatrixInit } from "../dictionaries/DGeometry1DOMMatrixInit.js";
 import type { DGeometry1DOMPointInit } from "../dictionaries/DGeometry1DOMPointInit.js";
 import type { IGeometry1DOMPoint } from "./IGeometry1DOMPoint.js";
@@ -28,5 +29,5 @@ export interface IGeometry1DOMPointReadOnly<N extends DOMPointReadOnly>
 
   matrixTransform(
     matrix?: DGeometry1DOMMatrixInit
-  ): IGeometry1DOMPoint<DOMPoint>;
+  ): E.Either<TypeError, IGeometry1DOMPoint<DOMPoint>>;
 }
