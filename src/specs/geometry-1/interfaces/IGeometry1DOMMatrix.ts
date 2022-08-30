@@ -1,14 +1,25 @@
+import type { SyntaxErrorDomException } from "@/exceptions/DomException.js";
 import type { IWrapperConstructors } from "@/global/IWrapper.js";
+import type * as E from "fp-ts/Either";
 import type { DGeometry1DOMMatrixInit } from "../dictionaries/DGeometry1DOMMatrixInit.js";
 import type { IGeometry1DOMMatrixReadOnly } from "./IGeometry1DOMMatrixReadOnly.js";
 
 export interface IGeometry1DOMMatrixConstructors
   extends IWrapperConstructors<DOMMatrix> {
-  new (init: string | number[]): IGeometry1DOMMatrix<DOMMatrix>;
+  new (init: string | number[]): E.Either<
+    SyntaxErrorDomException | TypeError,
+    IGeometry1DOMMatrix<DOMMatrix>
+  >;
 
-  fromMatrix(other?: DGeometry1DOMMatrixInit): IGeometry1DOMMatrix<DOMMatrix>;
-  fromFloat32Array(array32: Float32Array): IGeometry1DOMMatrix<DOMMatrix>;
-  fromFloat64Array(array64: Float64Array): IGeometry1DOMMatrix<DOMMatrix>;
+  fromMatrix(
+    other?: DGeometry1DOMMatrixInit
+  ): E.Either<TypeError, IGeometry1DOMMatrix<DOMMatrix>>;
+  fromFloat32Array(
+    array32: Float32Array
+  ): E.Either<TypeError, IGeometry1DOMMatrix<DOMMatrix>>;
+  fromFloat64Array(
+    array64: Float64Array
+  ): E.Either<TypeError, IGeometry1DOMMatrix<DOMMatrix>>;
 }
 
 export interface IGeometry1DOMMatrix<N extends DOMMatrix>
@@ -38,13 +49,9 @@ export interface IGeometry1DOMMatrix<N extends DOMMatrix>
   m43: number;
   m44: number;
 
-  multiplySelf(other?: DOMMatrixInit): IGeometry1DOMMatrix<DOMMatrix>;
-  preMultiplySelf(other?: DOMMatrixInit): IGeometry1DOMMatrix<DOMMatrix>;
-  translateSelf(
-    tx?: number,
-    ty?: number,
-    tz?: number
-  ): IGeometry1DOMMatrix<DOMMatrix>;
+  multiplySelf(other?: DOMMatrixInit): E.Either<TypeError, this>;
+  preMultiplySelf(other?: DOMMatrixInit): E.Either<TypeError, this>;
+  translateSelf(tx?: number, ty?: number, tz?: number): this;
   scaleSelf(
     scaleX?: number,
     scaleY?: number,
@@ -52,28 +59,21 @@ export interface IGeometry1DOMMatrix<N extends DOMMatrix>
     originX?: number,
     originY?: number,
     originZ?: number
-  ): IGeometry1DOMMatrix<DOMMatrix>;
+  ): this;
   scale3dSelf(
     scale?: number,
     originX?: number,
     originY?: number,
     originZ?: number
-  ): IGeometry1DOMMatrix<DOMMatrix>;
-  rotateSelf(
-    rotX?: number,
-    rotY?: number,
-    rotZ?: number
-  ): IGeometry1DOMMatrix<DOMMatrix>;
-  rotateFromVectorSelf(x?: number, y?: number): IGeometry1DOMMatrix<DOMMatrix>;
-  rotateAxisAngleSelf(
-    x?: number,
-    y?: number,
-    z?: number,
-    angle?: number
-  ): IGeometry1DOMMatrix<DOMMatrix>;
-  skewXSelf(sx?: number): IGeometry1DOMMatrix<DOMMatrix>;
-  skewYSelf(sy?: number): IGeometry1DOMMatrix<DOMMatrix>;
-  invertSelf(): IGeometry1DOMMatrix<DOMMatrix>;
+  ): this;
+  rotateSelf(rotX?: number, rotY?: number, rotZ?: number): this;
+  rotateFromVectorSelf(x?: number, y?: number): this;
+  rotateAxisAngleSelf(x?: number, y?: number, z?: number, angle?: number): this;
+  skewXSelf(sx?: number): this;
+  skewYSelf(sy?: number): this;
+  invertSelf(): this;
 
-  setMatrixValue(transformList: string): IGeometry1DOMMatrix<DOMMatrix>;
+  setMatrixValue(
+    transformList: string
+  ): E.Either<SyntaxErrorDomException, IGeometry1DOMMatrix<DOMMatrix>>;
 }

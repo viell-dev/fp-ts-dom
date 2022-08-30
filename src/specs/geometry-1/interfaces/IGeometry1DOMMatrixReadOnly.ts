@@ -1,27 +1,36 @@
+import type {
+  InvalidStateErrorDomException,
+  SyntaxErrorDomException,
+} from "@/exceptions/DomException.js";
 import type { ISerializable } from "@/global/ISerializable.js";
+import type { IStringifier } from "@/global/IStringifier.js";
 import type { IWrapper, IWrapperConstructors } from "@/global/IWrapper.js";
+import type * as E from "fp-ts/Either";
 import type { DGeometry1DOMMatrixInit } from "../dictionaries/DGeometry1DOMMatrixInit.js";
 import type { DGeometry1DOMPointInit } from "../dictionaries/DGeometry1DOMPointInit.js";
 import type { IGeometry1DOMMatrix } from "./IGeometry1DOMMatrix.js";
 import type { IGeometry1DOMPoint } from "./IGeometry1DOMPoint.js";
-
 export interface IGeometry1DOMMatrixReadOnlyConstructors
   extends IWrapperConstructors<DOMMatrixReadOnly> {
-  new (init: string | number[]): IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>;
+  new (init: string | number[]): E.Either<
+    SyntaxErrorDomException | TypeError,
+    IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>
+  >;
 
   fromMatrix(
     other?: DGeometry1DOMMatrixInit
-  ): IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>;
+  ): E.Either<TypeError, IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>>;
   fromFloat32Array(
     array32: Float32Array
-  ): IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>;
+  ): E.Either<TypeError, IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>>;
   fromFloat64Array(
     array64: Float64Array
-  ): IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>;
+  ): E.Either<TypeError, IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>>;
 }
 
 export interface IGeometry1DOMMatrixReadOnly<N extends DOMMatrixReadOnly>
   extends IWrapper<N>,
+    IStringifier<InvalidStateErrorDomException, `matrix${string}`>,
     ISerializable {
   // These attributes are simple aliases for certain elements of the 4x4 matrix
   readonly a: number;
@@ -64,7 +73,9 @@ export interface IGeometry1DOMMatrixReadOnly<N extends DOMMatrixReadOnly>
     originY?: number,
     originZ?: number
   ): IGeometry1DOMMatrix<DOMMatrix>;
-  /** @deprecated Use {@link scale} instead. */
+  /**
+   * @deprecated Use {@link scale | scale(scaleX, scaleY, 1, 0, 0, 0)} instead.
+   */
   scaleNonUniform(
     scaleX?: number,
     scaleY?: number
