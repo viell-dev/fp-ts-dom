@@ -842,9 +842,9 @@ __metadata:
   linkType: soft
 
 "fp-ts@file:../fp-ts/dist#../fp-ts/dist::hash=08e30a&locator=fp-ts-dom%40workspace%3A.":
-  version: 2.12.2
-  resolution: "fp-ts@file:../fp-ts/dist#../fp-ts/dist::hash=08e30a&locator=fp-ts-dom%40workspace%3A."
-  checksum: 9145841771c2c80679539e13a19785757aed8c3c97443b67a254b7867320577a1fb40239929f47ad0d95db54c4756cfc29872de4665aa294fe57bfc5c9b7d5fc
+  version: 2.12.3
+  resolution: "fp-ts@file:../fp-ts/dist#../fp-ts/dist::hash=456b65&locator=fp-ts-dom%40workspace%3A."
+  checksum: 4bc663e1a897debb0d8cdb75336727a279dc0f4a6d198d73ce24f5e825a2e6c9d0b5942507f76bf00b49de69afae3b4c2bd54745ecef6de910c27f7e214940e4
   languageName: node
   linkType: hard
 
