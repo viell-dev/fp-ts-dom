@@ -13,6 +13,7 @@ export interface IGeometry1DOMMatrixConstructors
    * @throws TypeError
    */
   new (init: string | number[]): IGeometry1DOMMatrix<DOMMatrix>;
+
   create(domMatrix: DOMMatrix): E.Right<IGeometry1DOMMatrix<DOMMatrix>>;
   create(
     init: string | number[]

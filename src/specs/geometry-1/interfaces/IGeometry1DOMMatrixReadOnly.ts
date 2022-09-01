@@ -19,6 +19,7 @@ export interface IGeometry1DOMMatrixReadOnlyConstructors
    * @throws TypeError
    */
   new (init: string | number[]): IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>;
+
   create(
     domMatrix: DOMMatrix
   ): E.Right<IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>>;
