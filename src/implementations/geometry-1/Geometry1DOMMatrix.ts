@@ -266,5 +266,3 @@ export class Geometry1DOMMatrix
     );
   }
 }
-
-Geometry1DOMMatrix.create();
