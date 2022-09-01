@@ -12,7 +12,20 @@ import type { IGeometry1DOMMatrix } from "./IGeometry1DOMMatrix.js";
 import type { IGeometry1DOMPoint } from "./IGeometry1DOMPoint.js";
 export interface IGeometry1DOMMatrixReadOnlyConstructors
   extends IWrapperConstructors<DOMMatrixReadOnly> {
-  new (init: string | number[]): E.Either<
+  /**
+   * Use {@link create} instead to get an `E.Either`.
+   *
+   * @throws "SyntaxError" DOMException
+   * @throws TypeError
+   */
+  new (init: string | number[]): IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>;
+
+  create(
+    domMatrix: DOMMatrix
+  ): E.Right<IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>>;
+  create(
+    init: string | number[]
+  ): E.Either<
     SyntaxErrorDomException | TypeError,
     IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>
   >;

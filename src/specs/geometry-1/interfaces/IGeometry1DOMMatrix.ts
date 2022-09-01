@@ -6,7 +6,18 @@ import type { IGeometry1DOMMatrixReadOnly } from "./IGeometry1DOMMatrixReadOnly.
 
 export interface IGeometry1DOMMatrixConstructors
   extends IWrapperConstructors<DOMMatrix> {
-  new (init: string | number[]): E.Either<
+  /**
+   * Use {@link create} instead to get an `E.Either`.
+   *
+   * @throws "SyntaxError" DOMException
+   * @throws TypeError
+   */
+  new (init: string | number[]): IGeometry1DOMMatrix<DOMMatrix>;
+
+  create(domMatrix: DOMMatrix): E.Right<IGeometry1DOMMatrix<DOMMatrix>>;
+  create(
+    init: string | number[]
+  ): E.Either<
     SyntaxErrorDomException | TypeError,
     IGeometry1DOMMatrix<DOMMatrix>
   >;
@@ -75,5 +86,5 @@ export interface IGeometry1DOMMatrix<N extends DOMMatrix>
 
   setMatrixValue(
     transformList: string
-  ): E.Either<SyntaxErrorDomException, IGeometry1DOMMatrix<DOMMatrix>>;
+  ): E.Either<SyntaxErrorDomException, this>;
 }

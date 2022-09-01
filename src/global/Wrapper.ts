@@ -10,8 +10,4 @@ export abstract class Wrapper<N extends {}> implements IWrapper<N> {
   getNative(): N {
     return this.native;
   }
-
-  toString(): string {
-    return this.native.toString();
-  }
 }
