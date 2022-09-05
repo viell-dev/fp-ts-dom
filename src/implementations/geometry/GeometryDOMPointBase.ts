@@ -1,12 +1,12 @@
 import { Wrapper } from "@/global/Wrapper.js";
-import type { DGeometry1DOMMatrixInit } from "@/specs/geometry-1/dictionaries/DGeometry1DOMMatrixInit.js";
-import type { IGeometry1DOMPointReadOnly } from "@/specs/geometry-1/interfaces/IGeometry1DOMPointReadOnly.js";
+import type { DGeometryDOMMatrixInit } from "@/specs/geometry/dictionaries/DGeometryDOMMatrixInit.js";
+import type { IGeometryDOMPointReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMPointReadOnly.js";
 import * as E from "fp-ts/Either";
-import { Geometry1DOMPoint } from "./Geometry1DOMPoint.js";
+import { GeometryDOMPoint } from "./GeometryDOMPoint.js";
 
-export abstract class Geometry1DOMPointBase<N extends DOMPointReadOnly>
+export abstract class GeometryDOMPointBase<N extends DOMPointReadOnly>
   extends Wrapper<N>
-  implements IGeometry1DOMPointReadOnly<N>
+  implements IGeometryDOMPointReadOnly<N>
 {
   get x(): number {
     return this.native.x;
@@ -22,10 +22,10 @@ export abstract class Geometry1DOMPointBase<N extends DOMPointReadOnly>
   }
 
   matrixTransform(
-    matrix?: DGeometry1DOMMatrixInit
-  ): E.Either<TypeError, Geometry1DOMPoint> {
+    matrix?: DGeometryDOMMatrixInit
+  ): E.Either<TypeError, GeometryDOMPoint> {
     return E.tryCatch(
-      () => new Geometry1DOMPoint(this.native.matrixTransform(matrix)),
+      () => new GeometryDOMPoint(this.native.matrixTransform(matrix)),
       /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       -- The spec only lists `TypeError` as a possible exception. */
       (error) => error as TypeError

@@ -1,33 +1,33 @@
 import { StaticImplements } from "@/decorators/StaticImplements.js";
 import { Wrapper } from "@/global/Wrapper.js";
-import type { DGeometry1DOMPointInit } from "@/specs/geometry-1/dictionaries/DGeometry1DOMPointInit.js";
-import type { DGeometry1DOMQuadInit } from "@/specs/geometry-1/dictionaries/DGeometry1DOMQuadInit.js";
-import type { DGeometry1DOMRectInit } from "@/specs/geometry-1/dictionaries/DGeometry1DOMRectInit.js";
+import type { DGeometryDOMPointInit } from "@/specs/geometry/dictionaries/DGeometryDOMPointInit.js";
+import type { DGeometryDOMQuadInit } from "@/specs/geometry/dictionaries/DGeometryDOMQuadInit.js";
+import type { DGeometryDOMRectInit } from "@/specs/geometry/dictionaries/DGeometryDOMRectInit.js";
 import type {
-  IGeometry1DOMQuad,
-  IGeometry1DOMQuadConstructors,
-} from "@/specs/geometry-1/interfaces/IGeometry1DOMQuad.js";
+  IGeometryDOMQuad,
+  IGeometryDOMQuadConstructors,
+} from "@/specs/geometry/interfaces/IGeometryDOMQuad.js";
 import * as O from "fp-ts/Option";
-import { Geometry1DOMPoint } from "./Geometry1DOMPoint.js";
-import { Geometry1DOMRect } from "./Geometry1DOMRect.js";
+import { GeometryDOMPoint } from "./GeometryDOMPoint.js";
+import { GeometryDOMRect } from "./GeometryDOMRect.js";
 
-@StaticImplements<IGeometry1DOMQuadConstructors>()
-export class Geometry1DOMQuad
+@StaticImplements<IGeometryDOMQuadConstructors>()
+export class GeometryDOMQuad
   extends Wrapper<DOMQuad>
-  implements IGeometry1DOMQuad<DOMQuad>
+  implements IGeometryDOMQuad<DOMQuad>
 {
   constructor(domQuad: DOMQuad);
   constructor(
-    p1?: DGeometry1DOMPointInit,
-    p2?: DGeometry1DOMPointInit,
-    p3?: DGeometry1DOMPointInit,
-    p4?: DGeometry1DOMPointInit
+    p1?: DGeometryDOMPointInit,
+    p2?: DGeometryDOMPointInit,
+    p3?: DGeometryDOMPointInit,
+    p4?: DGeometryDOMPointInit
   );
   constructor(
-    domQuadOrP1?: DOMQuad | DGeometry1DOMPointInit,
-    p2?: DGeometry1DOMPointInit,
-    p3?: DGeometry1DOMPointInit,
-    p4?: DGeometry1DOMPointInit
+    domQuadOrP1?: DOMQuad | DGeometryDOMPointInit,
+    p2?: DGeometryDOMPointInit,
+    p3?: DGeometryDOMPointInit,
+    p4?: DGeometryDOMPointInit
   ) {
     const nativeDomQuad =
       domQuadOrP1 instanceof DOMQuad
@@ -37,63 +37,63 @@ export class Geometry1DOMQuad
     super(nativeDomQuad);
   }
 
-  static fromRect(other?: DGeometry1DOMRectInit): Geometry1DOMQuad {
-    return new Geometry1DOMQuad(DOMQuad.fromRect(other));
+  static fromRect(other?: DGeometryDOMRectInit): GeometryDOMQuad {
+    return new GeometryDOMQuad(DOMQuad.fromRect(other));
   }
-  static fromQuad(other?: DGeometry1DOMQuadInit): Geometry1DOMQuad {
-    return new Geometry1DOMQuad(DOMQuad.fromQuad(other));
+  static fromQuad(other?: DGeometryDOMQuadInit): GeometryDOMQuad {
+    return new GeometryDOMQuad(DOMQuad.fromQuad(other));
   }
 
-  protected p1Internal: O.Option<Geometry1DOMPoint> = O.none;
-  get p1(): Geometry1DOMPoint {
+  protected p1Internal: O.Option<GeometryDOMPoint> = O.none;
+  get p1(): GeometryDOMPoint {
     if (O.isNone(this.p1Internal)) {
       /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       -- `O.some` always returns an `O.Some`. */
       this.p1Internal = O.some(
-        new Geometry1DOMPoint(this.native.p1)
-      ) as O.Some<Geometry1DOMPoint>;
+        new GeometryDOMPoint(this.native.p1)
+      ) as O.Some<GeometryDOMPoint>;
     }
 
     return this.p1Internal.value;
   }
-  protected p2Internal: O.Option<Geometry1DOMPoint> = O.none;
-  get p2(): Geometry1DOMPoint {
+  protected p2Internal: O.Option<GeometryDOMPoint> = O.none;
+  get p2(): GeometryDOMPoint {
     if (O.isNone(this.p2Internal)) {
       /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       -- `O.some` always returns an `O.Some`. */
       this.p2Internal = O.some(
-        new Geometry1DOMPoint(this.native.p2)
-      ) as O.Some<Geometry1DOMPoint>;
+        new GeometryDOMPoint(this.native.p2)
+      ) as O.Some<GeometryDOMPoint>;
     }
 
     return this.p2Internal.value;
   }
-  protected p3Internal: O.Option<Geometry1DOMPoint> = O.none;
-  get p3(): Geometry1DOMPoint {
+  protected p3Internal: O.Option<GeometryDOMPoint> = O.none;
+  get p3(): GeometryDOMPoint {
     if (O.isNone(this.p3Internal)) {
       /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       -- `O.some` always returns an `O.Some`. */
       this.p3Internal = O.some(
-        new Geometry1DOMPoint(this.native.p3)
-      ) as O.Some<Geometry1DOMPoint>;
+        new GeometryDOMPoint(this.native.p3)
+      ) as O.Some<GeometryDOMPoint>;
     }
 
     return this.p3Internal.value;
   }
-  protected p4Internal: O.Option<Geometry1DOMPoint> = O.none;
-  get p4(): Geometry1DOMPoint {
+  protected p4Internal: O.Option<GeometryDOMPoint> = O.none;
+  get p4(): GeometryDOMPoint {
     if (O.isNone(this.p4Internal)) {
       /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       -- `O.some` always returns an `O.Some`. */
       this.p4Internal = O.some(
-        new Geometry1DOMPoint(this.native.p4)
-      ) as O.Some<Geometry1DOMPoint>;
+        new GeometryDOMPoint(this.native.p4)
+      ) as O.Some<GeometryDOMPoint>;
     }
 
     return this.p4Internal.value;
   }
-  getBounds(): Geometry1DOMRect {
-    return new Geometry1DOMRect(this.native.getBounds());
+  getBounds(): GeometryDOMRect {
+    return new GeometryDOMRect(this.native.getBounds());
   }
 
   toJSON(): {} {

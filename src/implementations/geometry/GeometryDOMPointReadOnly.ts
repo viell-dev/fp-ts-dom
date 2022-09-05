@@ -1,15 +1,15 @@
 import { StaticImplements } from "@/decorators/StaticImplements.js";
-import type { DGeometry1DOMPointInit } from "@/specs/geometry-1/dictionaries/DGeometry1DOMPointInit.js";
+import type { DGeometryDOMPointInit } from "@/specs/geometry/dictionaries/DGeometryDOMPointInit.js";
 import type {
-  IGeometry1DOMPointReadOnly,
-  IGeometry1DOMPointReadOnlyConstructors,
-} from "@/specs/geometry-1/interfaces/IGeometry1DOMPointReadOnly.js";
-import { Geometry1DOMPointBase } from "./Geometry1DOMPointBase.js";
+  IGeometryDOMPointReadOnly,
+  IGeometryDOMPointReadOnlyConstructors,
+} from "@/specs/geometry/interfaces/IGeometryDOMPointReadOnly.js";
+import { GeometryDOMPointBase } from "./GeometryDOMPointBase.js";
 
-@StaticImplements<IGeometry1DOMPointReadOnlyConstructors>()
-export class Geometry1DOMPointReadOnly
-  extends Geometry1DOMPointBase<DOMPointReadOnly>
-  implements IGeometry1DOMPointReadOnly<DOMPointReadOnly>
+@StaticImplements<IGeometryDOMPointReadOnlyConstructors>()
+export class GeometryDOMPointReadOnly
+  extends GeometryDOMPointBase<DOMPointReadOnly>
+  implements IGeometryDOMPointReadOnly<DOMPointReadOnly>
 {
   constructor(domPointReadOnly: DOMPointReadOnly);
   constructor(x?: number, y?: number, z?: number, w?: number);
@@ -27,7 +27,7 @@ export class Geometry1DOMPointReadOnly
     super(nativeDomPointReadOnly);
   }
 
-  static fromPoint(other?: DGeometry1DOMPointInit): Geometry1DOMPointReadOnly {
-    return new Geometry1DOMPointReadOnly(DOMPointReadOnly.fromPoint(other));
+  static fromPoint(other?: DGeometryDOMPointInit): GeometryDOMPointReadOnly {
+    return new GeometryDOMPointReadOnly(DOMPointReadOnly.fromPoint(other));
   }
 }

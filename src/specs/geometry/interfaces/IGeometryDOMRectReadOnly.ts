@@ -1,22 +1,22 @@
 import type { ISerializable } from "@/global/ISerializable.js";
 import type { IWrapper, IWrapperConstructors } from "@/global/IWrapper.js";
-import type { DGeometry1DOMRectInit } from "../dictionaries/DGeometry1DOMRectInit.js";
+import type { DGeometryDOMRectInit } from "../dictionaries/DGeometryDOMRectInit.js";
 
-export interface IGeometry1DOMRectReadOnlyConstructors
+export interface IGeometryDOMRectReadOnlyConstructors
   extends IWrapperConstructors<DOMRectReadOnly> {
   new (
     x?: number,
     y?: number,
     width?: number,
     height?: number
-  ): IGeometry1DOMRectReadOnly<DOMRectReadOnly>;
+  ): IGeometryDOMRectReadOnly<DOMRectReadOnly>;
 
   fromRect(
-    other?: DGeometry1DOMRectInit
-  ): IGeometry1DOMRectReadOnly<DOMRectReadOnly>;
+    other?: DGeometryDOMRectInit
+  ): IGeometryDOMRectReadOnly<DOMRectReadOnly>;
 }
 
-export interface IGeometry1DOMRectReadOnly<N extends DOMRectReadOnly>
+export interface IGeometryDOMRectReadOnly<N extends DOMRectReadOnly>
   extends IWrapper<N>,
     ISerializable {
   readonly x: number;

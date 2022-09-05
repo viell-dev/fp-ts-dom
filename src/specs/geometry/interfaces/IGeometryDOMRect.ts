@@ -1,21 +1,21 @@
 import type { IWrapperConstructors } from "@/global/IWrapper.js";
-import type { DGeometry1DOMRectInit } from "../dictionaries/DGeometry1DOMRectInit.js";
-import type { IGeometry1DOMRectReadOnly } from "./IGeometry1DOMRectReadOnly.js";
+import type { DGeometryDOMRectInit } from "../dictionaries/DGeometryDOMRectInit.js";
+import type { IGeometryDOMRectReadOnly } from "./IGeometryDOMRectReadOnly.js";
 
-export interface IGeometry1DOMRectConstructors
+export interface IGeometryDOMRectConstructors
   extends IWrapperConstructors<DOMRect> {
   new (
     x?: number,
     y?: number,
     width?: number,
     height?: number
-  ): IGeometry1DOMRect<DOMRect>;
+  ): IGeometryDOMRect<DOMRect>;
 
-  fromRect(other?: DGeometry1DOMRectInit): IGeometry1DOMRect<DOMRect>;
+  fromRect(other?: DGeometryDOMRectInit): IGeometryDOMRect<DOMRect>;
 }
 
-export interface IGeometry1DOMRect<N extends DOMRect>
-  extends IGeometry1DOMRectReadOnly<N> {
+export interface IGeometryDOMRect<N extends DOMRect>
+  extends IGeometryDOMRectReadOnly<N> {
   x: number;
   y: number;
   width: number;

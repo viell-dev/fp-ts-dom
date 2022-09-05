@@ -1,3 +1,3 @@
-import type { IGeometry1DOMPoint } from "@/specs/geometry-1/interfaces/IGeometry1DOMPoint.js";
+import type { IGeometryDOMPoint } from "@/specs/geometry/interfaces/IGeometryDOMPoint.js";
 
-export type ISvg2SVGPoint<N extends SVGPoint> = IGeometry1DOMPoint<N>;
+export type ISvg2SVGPoint<N extends SVGPoint> = IGeometryDOMPoint<N>;

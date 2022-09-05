@@ -1,4 +1,4 @@
-export interface DGeometry1DOMPointInit {
+export interface DGeometryDOMPointInit {
   x?: number;
   y?: number;
   z?: number;

@@ -1,5 +1,5 @@
-import type { IGeometry1DOMMatrix } from "@/specs/geometry-1/interfaces/IGeometry1DOMMatrix.js";
-import type { IGeometry1DOMRect } from "@/specs/geometry-1/interfaces/IGeometry1DOMRect.js";
+import type { IGeometryDOMMatrix } from "@/specs/geometry/interfaces/IGeometryDOMMatrix.js";
+import type { IGeometryDOMRect } from "@/specs/geometry/interfaces/IGeometryDOMRect.js";
 import type * as O from "fp-ts/Option";
 import type { DSvg2SVGBoundingBoxOptions } from "../dictionaries/DSvg2SVGBoundingBoxOptions.js";
 import type { MSvg2SVGTests } from "../mixins/MSvg2SVGTests.js";
@@ -11,7 +11,7 @@ export interface ISvg2SVGGraphicsElement<N extends SVGGraphicsElement>
     MSvg2SVGTests {
   readonly transform: ISvg2SVGAnimatedTransformList<SVGAnimatedTransformList>;
 
-  getBBox(options?: DSvg2SVGBoundingBoxOptions): IGeometry1DOMRect<DOMRect>;
-  getCTM(): O.Option<IGeometry1DOMMatrix<DOMMatrix>>;
-  getScreenCTM(): O.Option<IGeometry1DOMMatrix<DOMMatrix>>;
+  getBBox(options?: DSvg2SVGBoundingBoxOptions): IGeometryDOMRect<DOMRect>;
+  getCTM(): O.Option<IGeometryDOMMatrix<DOMMatrix>>;
+  getScreenCTM(): O.Option<IGeometryDOMMatrix<DOMMatrix>>;
 }

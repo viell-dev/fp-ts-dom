@@ -1,9 +1,9 @@
 import { Wrapper } from "@/global/Wrapper.js";
-import type { IGeometry1DOMRectReadOnly } from "@/specs/geometry-1/interfaces/IGeometry1DOMRectReadOnly.js";
+import type { IGeometryDOMRectReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMRectReadOnly.js";
 
-export abstract class Geometry1DOMRectBase<N extends DOMRectReadOnly>
+export abstract class GeometryDOMRectBase<N extends DOMRectReadOnly>
   extends Wrapper<N>
-  implements IGeometry1DOMRectReadOnly<N>
+  implements IGeometryDOMRectReadOnly<N>
 {
   get x(): number {
     return this.native.x;

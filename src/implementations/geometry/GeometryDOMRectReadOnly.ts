@@ -1,15 +1,15 @@
 import { StaticImplements } from "@/decorators/StaticImplements.js";
-import type { DGeometry1DOMRectInit } from "@/specs/geometry-1/dictionaries/DGeometry1DOMRectInit.js";
+import type { DGeometryDOMRectInit } from "@/specs/geometry/dictionaries/DGeometryDOMRectInit.js";
 import type {
-  IGeometry1DOMRectReadOnly,
-  IGeometry1DOMRectReadOnlyConstructors,
-} from "@/specs/geometry-1/interfaces/IGeometry1DOMRectReadOnly.js";
-import { Geometry1DOMRectBase } from "./Geometry1DOMRectBase.js";
+  IGeometryDOMRectReadOnly,
+  IGeometryDOMRectReadOnlyConstructors,
+} from "@/specs/geometry/interfaces/IGeometryDOMRectReadOnly.js";
+import { GeometryDOMRectBase } from "./GeometryDOMRectBase.js";
 
-@StaticImplements<IGeometry1DOMRectReadOnlyConstructors>()
-export class Geometry1DOMRectReadOnly
-  extends Geometry1DOMRectBase<DOMRectReadOnly>
-  implements IGeometry1DOMRectReadOnly<DOMRectReadOnly>
+@StaticImplements<IGeometryDOMRectReadOnlyConstructors>()
+export class GeometryDOMRectReadOnly
+  extends GeometryDOMRectBase<DOMRectReadOnly>
+  implements IGeometryDOMRectReadOnly<DOMRectReadOnly>
 {
   constructor(domRectReadOnly: DOMRectReadOnly);
   constructor(x?: number, y?: number, width?: number, height?: number);
@@ -27,7 +27,7 @@ export class Geometry1DOMRectReadOnly
     super(nativeDomRectReadOnly);
   }
 
-  static fromRect(other: DGeometry1DOMRectInit): Geometry1DOMRectReadOnly {
-    return new Geometry1DOMRectReadOnly(DOMRectReadOnly.fromRect(other));
+  static fromRect(other: DGeometryDOMRectInit): GeometryDOMRectReadOnly {
+    return new GeometryDOMRectReadOnly(DOMRectReadOnly.fromRect(other));
   }
 }

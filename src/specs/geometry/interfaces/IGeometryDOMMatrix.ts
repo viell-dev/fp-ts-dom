@@ -1,10 +1,10 @@
 import type { SyntaxErrorDomException } from "@/exceptions/DomException.js";
 import type { IWrapperConstructors } from "@/global/IWrapper.js";
 import type * as E from "fp-ts/Either";
-import type { DGeometry1DOMMatrixInit } from "../dictionaries/DGeometry1DOMMatrixInit.js";
-import type { IGeometry1DOMMatrixReadOnly } from "./IGeometry1DOMMatrixReadOnly.js";
+import type { DGeometryDOMMatrixInit } from "../dictionaries/DGeometryDOMMatrixInit.js";
+import type { IGeometryDOMMatrixReadOnly } from "./IGeometryDOMMatrixReadOnly.js";
 
-export interface IGeometry1DOMMatrixConstructors
+export interface IGeometryDOMMatrixConstructors
   extends IWrapperConstructors<DOMMatrix> {
   /**
    * Use {@link create} instead to get an `E.Either`.
@@ -12,29 +12,29 @@ export interface IGeometry1DOMMatrixConstructors
    * @throws "SyntaxError" DOMException
    * @throws TypeError
    */
-  new (init: string | number[]): IGeometry1DOMMatrix<DOMMatrix>;
+  new (init: string | number[]): IGeometryDOMMatrix<DOMMatrix>;
 
-  create(domMatrix: DOMMatrix): E.Right<IGeometry1DOMMatrix<DOMMatrix>>;
+  create(domMatrix: DOMMatrix): E.Right<IGeometryDOMMatrix<DOMMatrix>>;
   create(
     init: string | number[]
   ): E.Either<
     SyntaxErrorDomException | TypeError,
-    IGeometry1DOMMatrix<DOMMatrix>
+    IGeometryDOMMatrix<DOMMatrix>
   >;
 
   fromMatrix(
-    other?: DGeometry1DOMMatrixInit
-  ): E.Either<TypeError, IGeometry1DOMMatrix<DOMMatrix>>;
+    other?: DGeometryDOMMatrixInit
+  ): E.Either<TypeError, IGeometryDOMMatrix<DOMMatrix>>;
   fromFloat32Array(
     array32: Float32Array
-  ): E.Either<TypeError, IGeometry1DOMMatrix<DOMMatrix>>;
+  ): E.Either<TypeError, IGeometryDOMMatrix<DOMMatrix>>;
   fromFloat64Array(
     array64: Float64Array
-  ): E.Either<TypeError, IGeometry1DOMMatrix<DOMMatrix>>;
+  ): E.Either<TypeError, IGeometryDOMMatrix<DOMMatrix>>;
 }
 
-export interface IGeometry1DOMMatrix<N extends DOMMatrix>
-  extends IGeometry1DOMMatrixReadOnly<N> {
+export interface IGeometryDOMMatrix<N extends DOMMatrix>
+  extends IGeometryDOMMatrixReadOnly<N> {
   // These attributes are simple aliases for certain elements of the 4x4 matrix
   a: number;
   b: number;

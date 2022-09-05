@@ -1,15 +1,15 @@
 import { StaticImplements } from "@/decorators/StaticImplements.js";
-import type { DGeometry1DOMRectInit } from "@/specs/geometry-1/dictionaries/DGeometry1DOMRectInit.js";
+import type { DGeometryDOMRectInit } from "@/specs/geometry/dictionaries/DGeometryDOMRectInit.js";
 import type {
-  IGeometry1DOMRect,
-  IGeometry1DOMRectConstructors,
-} from "@/specs/geometry-1/interfaces/IGeometry1DOMRect.js";
-import { Geometry1DOMRectBase } from "./Geometry1DOMRectBase.js";
+  IGeometryDOMRect,
+  IGeometryDOMRectConstructors,
+} from "@/specs/geometry/interfaces/IGeometryDOMRect.js";
+import { GeometryDOMRectBase } from "./GeometryDOMRectBase.js";
 
-@StaticImplements<IGeometry1DOMRectConstructors>()
-export class Geometry1DOMRect
-  extends Geometry1DOMRectBase<DOMRect>
-  implements IGeometry1DOMRect<DOMRect>
+@StaticImplements<IGeometryDOMRectConstructors>()
+export class GeometryDOMRect
+  extends GeometryDOMRectBase<DOMRect>
+  implements IGeometryDOMRect<DOMRect>
 {
   constructor(domRect: DOMRect);
   constructor(x?: number, y?: number, width?: number, height?: number);
@@ -27,8 +27,8 @@ export class Geometry1DOMRect
     super(nativeDomRect);
   }
 
-  static fromRect(other: DGeometry1DOMRectInit): Geometry1DOMRect {
-    return new Geometry1DOMRect(DOMRect.fromRect(other));
+  static fromRect(other: DGeometryDOMRectInit): GeometryDOMRect {
+    return new GeometryDOMRect(DOMRect.fromRect(other));
   }
 
   override set x(x: number) {

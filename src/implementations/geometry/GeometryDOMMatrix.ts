@@ -1,18 +1,18 @@
 import { StaticImplements } from "@/decorators/StaticImplements.js";
 import type { SyntaxErrorDomException } from "@/exceptions/DomException.js";
-import type { DGeometry1DOMMatrixInit } from "@/specs/geometry-1/dictionaries/DGeometry1DOMMatrixInit.js";
+import type { DGeometryDOMMatrixInit } from "@/specs/geometry/dictionaries/DGeometryDOMMatrixInit.js";
 import type {
-  IGeometry1DOMMatrix,
-  IGeometry1DOMMatrixConstructors,
-} from "@/specs/geometry-1/interfaces/IGeometry1DOMMatrix.js";
+  IGeometryDOMMatrix,
+  IGeometryDOMMatrixConstructors,
+} from "@/specs/geometry/interfaces/IGeometryDOMMatrix.js";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
-import { Geometry1DOMMatrixBase } from "./Geometry1DOMMatrixBase.js";
+import { GeometryDOMMatrixBase } from "./GeometryDOMMatrixBase.js";
 
-@StaticImplements<IGeometry1DOMMatrixConstructors>()
-export class Geometry1DOMMatrix
-  extends Geometry1DOMMatrixBase<DOMMatrix>
-  implements IGeometry1DOMMatrix<DOMMatrix>
+@StaticImplements<IGeometryDOMMatrixConstructors>()
+export class GeometryDOMMatrix
+  extends GeometryDOMMatrixBase<DOMMatrix>
+  implements IGeometryDOMMatrix<DOMMatrix>
 {
   /**
    * Use {@link create} instead to get an `E.Either`.
@@ -41,13 +41,13 @@ export class Geometry1DOMMatrix
     super(maybeNativeDomMatrix.right);
   }
 
-  static create(domMatrix: DOMMatrix): E.Right<Geometry1DOMMatrix>;
+  static create(domMatrix: DOMMatrix): E.Right<GeometryDOMMatrix>;
   static create(
     init?: string | number[]
-  ): E.Either<SyntaxErrorDomException | TypeError, Geometry1DOMMatrix>;
+  ): E.Either<SyntaxErrorDomException | TypeError, GeometryDOMMatrix>;
   static create(
     domMatrixOrInit?: DOMMatrix | string | number[]
-  ): E.Either<SyntaxErrorDomException | TypeError, Geometry1DOMMatrix> {
+  ): E.Either<SyntaxErrorDomException | TypeError, GeometryDOMMatrix> {
     return pipe(
       E.tryCatch(
         () =>
@@ -65,8 +65,8 @@ export class Geometry1DOMMatrix
   }
 
   static fromMatrix(
-    other?: DGeometry1DOMMatrixInit
-  ): E.Either<TypeError, Geometry1DOMMatrix> {
+    other?: DGeometryDOMMatrixInit
+  ): E.Either<TypeError, GeometryDOMMatrix> {
     return pipe(
       E.tryCatch(
         () => DOMMatrix.fromMatrix(other),
@@ -74,13 +74,13 @@ export class Geometry1DOMMatrix
         -- The spec only lists `TypeError` as possible exception. */
         (error) => error as TypeError
       ),
-      E.map((nativeDomMatrix) => Geometry1DOMMatrix.create(nativeDomMatrix)),
+      E.map((nativeDomMatrix) => GeometryDOMMatrix.create(nativeDomMatrix)),
       E.flatten
     );
   }
   static fromFloat32Array(
     array32: Float32Array
-  ): E.Either<TypeError, Geometry1DOMMatrix> {
+  ): E.Either<TypeError, GeometryDOMMatrix> {
     return pipe(
       E.tryCatch(
         () => DOMMatrix.fromFloat32Array(array32),
@@ -88,13 +88,13 @@ export class Geometry1DOMMatrix
         -- The spec only lists `TypeError` as possible exception. */
         (error) => error as TypeError
       ),
-      E.map((nativeDomMatrix) => Geometry1DOMMatrix.create(nativeDomMatrix)),
+      E.map((nativeDomMatrix) => GeometryDOMMatrix.create(nativeDomMatrix)),
       E.flatten
     );
   }
   static fromFloat64Array(
     array64: Float64Array
-  ): E.Either<TypeError, Geometry1DOMMatrix> {
+  ): E.Either<TypeError, GeometryDOMMatrix> {
     return pipe(
       E.tryCatch(
         () => DOMMatrix.fromFloat64Array(array64),
@@ -102,7 +102,7 @@ export class Geometry1DOMMatrix
         -- The spec only lists `TypeError` as possible exception. */
         (error) => error as TypeError
       ),
-      E.map((nativeDomMatrix) => Geometry1DOMMatrix.create(nativeDomMatrix)),
+      E.map((nativeDomMatrix) => GeometryDOMMatrix.create(nativeDomMatrix)),
       E.flatten
     );
   }
@@ -175,7 +175,7 @@ export class Geometry1DOMMatrix
     this.native.m44 = m44;
   }
 
-  multiplySelf(other?: DGeometry1DOMMatrixInit): E.Either<TypeError, this> {
+  multiplySelf(other?: DGeometryDOMMatrixInit): E.Either<TypeError, this> {
     return E.tryCatch(
       () => {
         this.native.multiplySelf(other);
@@ -186,7 +186,7 @@ export class Geometry1DOMMatrix
       (error) => error as TypeError
     );
   }
-  preMultiplySelf(other?: DGeometry1DOMMatrixInit): E.Either<TypeError, this> {
+  preMultiplySelf(other?: DGeometryDOMMatrixInit): E.Either<TypeError, this> {
     return E.tryCatch(
       () => {
         this.native.preMultiplySelf(other);

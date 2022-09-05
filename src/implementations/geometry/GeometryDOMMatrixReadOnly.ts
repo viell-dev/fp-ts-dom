@@ -1,18 +1,18 @@
 import { StaticImplements } from "@/decorators/StaticImplements.js";
 import type { SyntaxErrorDomException } from "@/exceptions/DomException.js";
-import type { DGeometry1DOMMatrixInit } from "@/specs/geometry-1/dictionaries/DGeometry1DOMMatrixInit.js";
+import type { DGeometryDOMMatrixInit } from "@/specs/geometry/dictionaries/DGeometryDOMMatrixInit.js";
 import type {
-  IGeometry1DOMMatrixReadOnly,
-  IGeometry1DOMMatrixReadOnlyConstructors,
-} from "@/specs/geometry-1/interfaces/IGeometry1DOMMatrixReadOnly.js";
+  IGeometryDOMMatrixReadOnly,
+  IGeometryDOMMatrixReadOnlyConstructors,
+} from "@/specs/geometry/interfaces/IGeometryDOMMatrixReadOnly.js";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
-import { Geometry1DOMMatrixBase } from "./Geometry1DOMMatrixBase.js";
+import { GeometryDOMMatrixBase } from "./GeometryDOMMatrixBase.js";
 
-@StaticImplements<IGeometry1DOMMatrixReadOnlyConstructors>()
-export class Geometry1DOMMatrixReadOnly
-  extends Geometry1DOMMatrixBase<DOMMatrixReadOnly>
-  implements IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>
+@StaticImplements<IGeometryDOMMatrixReadOnlyConstructors>()
+export class GeometryDOMMatrixReadOnly
+  extends GeometryDOMMatrixBase<DOMMatrixReadOnly>
+  implements IGeometryDOMMatrixReadOnly<DOMMatrixReadOnly>
 {
   /**
    * Use {@link create} instead to get an `E.Either`.
@@ -43,13 +43,13 @@ export class Geometry1DOMMatrixReadOnly
 
   static create(
     domMatrixReadOnly: DOMMatrixReadOnly
-  ): E.Right<Geometry1DOMMatrixReadOnly>;
+  ): E.Right<GeometryDOMMatrixReadOnly>;
   static create(
     init?: string | number[]
-  ): E.Either<SyntaxErrorDomException | TypeError, Geometry1DOMMatrixReadOnly>;
+  ): E.Either<SyntaxErrorDomException | TypeError, GeometryDOMMatrixReadOnly>;
   static create(
     domMatrixReadOnlyOrInit?: DOMMatrixReadOnly | string | number[]
-  ): E.Either<SyntaxErrorDomException | TypeError, Geometry1DOMMatrixReadOnly> {
+  ): E.Either<SyntaxErrorDomException | TypeError, GeometryDOMMatrixReadOnly> {
     return pipe(
       E.tryCatch(
         () =>
@@ -67,8 +67,8 @@ export class Geometry1DOMMatrixReadOnly
   }
 
   static fromMatrix(
-    other?: DGeometry1DOMMatrixInit
-  ): E.Either<TypeError, Geometry1DOMMatrixReadOnly> {
+    other?: DGeometryDOMMatrixInit
+  ): E.Either<TypeError, GeometryDOMMatrixReadOnly> {
     return pipe(
       E.tryCatch(
         () => DOMMatrixReadOnly.fromMatrix(other),
@@ -78,14 +78,14 @@ export class Geometry1DOMMatrixReadOnly
         (error) => error as TypeError
       ),
       E.map((nativeDomMatrix) =>
-        Geometry1DOMMatrixReadOnly.create(nativeDomMatrix)
+        GeometryDOMMatrixReadOnly.create(nativeDomMatrix)
       ),
       E.flatten
     );
   }
   static fromFloat32Array(
     array32: Float32Array
-  ): E.Either<TypeError, Geometry1DOMMatrixReadOnly> {
+  ): E.Either<TypeError, GeometryDOMMatrixReadOnly> {
     return pipe(
       E.tryCatch(
         () => DOMMatrixReadOnly.fromFloat32Array(array32),
@@ -95,14 +95,14 @@ export class Geometry1DOMMatrixReadOnly
         (error) => error as TypeError
       ),
       E.map((nativeDomMatrix) =>
-        Geometry1DOMMatrixReadOnly.create(nativeDomMatrix)
+        GeometryDOMMatrixReadOnly.create(nativeDomMatrix)
       ),
       E.flatten
     );
   }
   static fromFloat64Array(
     array64: Float64Array
-  ): E.Either<TypeError, Geometry1DOMMatrixReadOnly> {
+  ): E.Either<TypeError, GeometryDOMMatrixReadOnly> {
     return pipe(
       E.tryCatch(
         () => DOMMatrixReadOnly.fromFloat64Array(array64),
@@ -112,7 +112,7 @@ export class Geometry1DOMMatrixReadOnly
         (error) => error as TypeError
       ),
       E.map((nativeDomMatrix) =>
-        Geometry1DOMMatrixReadOnly.create(nativeDomMatrix)
+        GeometryDOMMatrixReadOnly.create(nativeDomMatrix)
       ),
       E.flatten
     );

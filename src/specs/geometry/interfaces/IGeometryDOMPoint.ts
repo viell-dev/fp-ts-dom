@@ -1,21 +1,21 @@
 import type { IWrapperConstructors } from "@/global/IWrapper.js";
-import type { DGeometry1DOMPointInit } from "../dictionaries/DGeometry1DOMPointInit.js";
-import type { IGeometry1DOMPointReadOnly } from "./IGeometry1DOMPointReadOnly.js";
+import type { DGeometryDOMPointInit } from "../dictionaries/DGeometryDOMPointInit.js";
+import type { IGeometryDOMPointReadOnly } from "./IGeometryDOMPointReadOnly.js";
 
-export interface IGeometry1DOMPointConstructors
+export interface IGeometryDOMPointConstructors
   extends IWrapperConstructors<DOMPoint> {
   new (
     x?: number,
     y?: number,
     z?: number,
     w?: number
-  ): IGeometry1DOMPoint<DOMPoint>;
+  ): IGeometryDOMPoint<DOMPoint>;
 
-  fromPoint(other?: DGeometry1DOMPointInit): IGeometry1DOMPoint<DOMPoint>;
+  fromPoint(other?: DGeometryDOMPointInit): IGeometryDOMPoint<DOMPoint>;
 }
 
-export interface IGeometry1DOMPoint<N extends DOMPoint>
-  extends IGeometry1DOMPointReadOnly<N> {
+export interface IGeometryDOMPoint<N extends DOMPoint>
+  extends IGeometryDOMPointReadOnly<N> {
   x: number;
   y: number;
   z: number;

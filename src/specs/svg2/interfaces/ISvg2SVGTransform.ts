@@ -1,14 +1,14 @@
 import type { IWrapper } from "@/global/IWrapper.js";
-import type { IGeometry1DOMMatrix } from "@/specs/geometry-1/interfaces/IGeometry1DOMMatrix.js";
-import type { IGeometry1DOMMatrixReadOnly } from "@/specs/geometry-1/interfaces/IGeometry1DOMMatrixReadOnly.js";
+import type { IGeometryDOMMatrix } from "@/specs/geometry/interfaces/IGeometryDOMMatrix.js";
+import type { IGeometryDOMMatrixReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMMatrixReadOnly.js";
 
 export interface ISvg2SVGTransform<N extends SVGTransform> extends IWrapper<N> {
   readonly type: number; // TODO transform type class constants
-  readonly matrix: IGeometry1DOMMatrix<DOMMatrix>;
+  readonly matrix: IGeometryDOMMatrix<DOMMatrix>;
   readonly angle: number;
 
   setMatrix(
-    matrix: DOMMatrixReadOnly | IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>
+    matrix: DOMMatrixReadOnly | IGeometryDOMMatrixReadOnly<DOMMatrixReadOnly>
   ): void;
   setTranslate(tx: number, ty: number): void;
   setScale(sx: number, sy: number): void;
