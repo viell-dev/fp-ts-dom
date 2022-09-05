@@ -1,4 +1,4 @@
-export interface DGeometry1DOMMatrix2DInit {
+export interface DGeometryDOMMatrix2DInit {
   a?: number;
   b?: number;
   c?: number;

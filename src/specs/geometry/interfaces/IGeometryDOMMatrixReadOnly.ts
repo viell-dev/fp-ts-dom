@@ -6,11 +6,11 @@ import type { ISerializable } from "@/global/ISerializable.js";
 import type { IStringifier } from "@/global/IStringifier.js";
 import type { IWrapper, IWrapperConstructors } from "@/global/IWrapper.js";
 import type * as E from "fp-ts/Either";
-import type { DGeometry1DOMMatrixInit } from "../dictionaries/DGeometry1DOMMatrixInit.js";
-import type { DGeometry1DOMPointInit } from "../dictionaries/DGeometry1DOMPointInit.js";
-import type { IGeometry1DOMMatrix } from "./IGeometry1DOMMatrix.js";
-import type { IGeometry1DOMPoint } from "./IGeometry1DOMPoint.js";
-export interface IGeometry1DOMMatrixReadOnlyConstructors
+import type { DGeometryDOMMatrixInit } from "../dictionaries/DGeometryDOMMatrixInit.js";
+import type { DGeometryDOMPointInit } from "../dictionaries/DGeometryDOMPointInit.js";
+import type { IGeometryDOMMatrix } from "./IGeometryDOMMatrix.js";
+import type { IGeometryDOMPoint } from "./IGeometryDOMPoint.js";
+export interface IGeometryDOMMatrixReadOnlyConstructors
   extends IWrapperConstructors<DOMMatrixReadOnly> {
   /**
    * Use {@link create} instead to get an `E.Either`.
@@ -18,30 +18,30 @@ export interface IGeometry1DOMMatrixReadOnlyConstructors
    * @throws "SyntaxError" DOMException
    * @throws TypeError
    */
-  new (init: string | number[]): IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>;
+  new (init: string | number[]): IGeometryDOMMatrixReadOnly<DOMMatrixReadOnly>;
 
   create(
     domMatrix: DOMMatrix
-  ): E.Right<IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>>;
+  ): E.Right<IGeometryDOMMatrixReadOnly<DOMMatrixReadOnly>>;
   create(
     init: string | number[]
   ): E.Either<
     SyntaxErrorDomException | TypeError,
-    IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>
+    IGeometryDOMMatrixReadOnly<DOMMatrixReadOnly>
   >;
 
   fromMatrix(
-    other?: DGeometry1DOMMatrixInit
-  ): E.Either<TypeError, IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>>;
+    other?: DGeometryDOMMatrixInit
+  ): E.Either<TypeError, IGeometryDOMMatrixReadOnly<DOMMatrixReadOnly>>;
   fromFloat32Array(
     array32: Float32Array
-  ): E.Either<TypeError, IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>>;
+  ): E.Either<TypeError, IGeometryDOMMatrixReadOnly<DOMMatrixReadOnly>>;
   fromFloat64Array(
     array64: Float64Array
-  ): E.Either<TypeError, IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>>;
+  ): E.Either<TypeError, IGeometryDOMMatrixReadOnly<DOMMatrixReadOnly>>;
 }
 
-export interface IGeometry1DOMMatrixReadOnly<N extends DOMMatrixReadOnly>
+export interface IGeometryDOMMatrixReadOnly<N extends DOMMatrixReadOnly>
   extends IWrapper<N>,
     IStringifier<InvalidStateErrorDomException, `matrix${string}`>,
     ISerializable {
@@ -77,7 +77,7 @@ export interface IGeometry1DOMMatrixReadOnly<N extends DOMMatrixReadOnly>
     tx?: number,
     ty?: number,
     tz?: number
-  ): IGeometry1DOMMatrix<DOMMatrix>;
+  ): IGeometryDOMMatrix<DOMMatrix>;
   scale(
     scaleX?: number,
     scaleY?: number,
@@ -85,40 +85,40 @@ export interface IGeometry1DOMMatrixReadOnly<N extends DOMMatrixReadOnly>
     originX?: number,
     originY?: number,
     originZ?: number
-  ): IGeometry1DOMMatrix<DOMMatrix>;
+  ): IGeometryDOMMatrix<DOMMatrix>;
   /**
    * @deprecated Use {@link scale | scale(scaleX, scaleY, 1, 0, 0, 0)} instead.
    */
   scaleNonUniform(
     scaleX?: number,
     scaleY?: number
-  ): IGeometry1DOMMatrix<DOMMatrix>;
+  ): IGeometryDOMMatrix<DOMMatrix>;
   scale3d(
     scale?: number,
     originX?: number,
     originY?: number,
     originZ?: number
-  ): IGeometry1DOMMatrix<DOMMatrix>;
+  ): IGeometryDOMMatrix<DOMMatrix>;
   rotate(
     rotX?: number,
     rotY?: number,
     rotZ?: number
-  ): IGeometry1DOMMatrix<DOMMatrix>;
-  rotateFromVector(x?: number, y?: number): IGeometry1DOMMatrix<DOMMatrix>;
+  ): IGeometryDOMMatrix<DOMMatrix>;
+  rotateFromVector(x?: number, y?: number): IGeometryDOMMatrix<DOMMatrix>;
   rotateAxisAngle(
     x?: number,
     y?: number,
     z?: number,
     angle?: number
-  ): IGeometry1DOMMatrix<DOMMatrix>;
-  skewX(sx?: number): IGeometry1DOMMatrix<DOMMatrix>;
-  skewY(sy?: number): IGeometry1DOMMatrix<DOMMatrix>;
-  multiply(other?: DGeometry1DOMMatrixInit): IGeometry1DOMMatrix<DOMMatrix>;
-  flipX(): IGeometry1DOMMatrix<DOMMatrix>;
-  flipY(): IGeometry1DOMMatrix<DOMMatrix>;
-  inverse(): IGeometry1DOMMatrix<DOMMatrix>;
+  ): IGeometryDOMMatrix<DOMMatrix>;
+  skewX(sx?: number): IGeometryDOMMatrix<DOMMatrix>;
+  skewY(sy?: number): IGeometryDOMMatrix<DOMMatrix>;
+  multiply(other?: DGeometryDOMMatrixInit): IGeometryDOMMatrix<DOMMatrix>;
+  flipX(): IGeometryDOMMatrix<DOMMatrix>;
+  flipY(): IGeometryDOMMatrix<DOMMatrix>;
+  inverse(): IGeometryDOMMatrix<DOMMatrix>;
 
-  transformPoint(point?: DGeometry1DOMPointInit): IGeometry1DOMPoint<DOMPoint>;
+  transformPoint(point?: DGeometryDOMPointInit): IGeometryDOMPoint<DOMPoint>;
   toFloat32Array(): Float32Array;
   toFloat64Array(): Float64Array;
 }

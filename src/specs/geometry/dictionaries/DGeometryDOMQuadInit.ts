@@ -1,4 +1,4 @@
-export interface DGeometry1DOMQuadInit {
+export interface DGeometryDOMQuadInit {
   p1?: DOMPointInit;
   p2?: DOMPointInit;
   p3?: DOMPointInit;

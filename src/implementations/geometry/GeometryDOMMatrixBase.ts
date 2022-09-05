@@ -1,15 +1,15 @@
 import type { InvalidStateErrorDomException } from "@/exceptions/DomException.js";
 import { Wrapper } from "@/global/Wrapper.js";
-import type { DGeometry1DOMMatrixInit } from "@/specs/geometry-1/dictionaries/DGeometry1DOMMatrixInit.js";
-import type { DGeometry1DOMPointInit } from "@/specs/geometry-1/dictionaries/DGeometry1DOMPointInit.js";
-import type { IGeometry1DOMMatrixReadOnly } from "@/specs/geometry-1/interfaces/IGeometry1DOMMatrixReadOnly.js";
+import type { DGeometryDOMMatrixInit } from "@/specs/geometry/dictionaries/DGeometryDOMMatrixInit.js";
+import type { DGeometryDOMPointInit } from "@/specs/geometry/dictionaries/DGeometryDOMPointInit.js";
+import type { IGeometryDOMMatrixReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMMatrixReadOnly.js";
 import * as E from "fp-ts/Either";
-import { Geometry1DOMMatrix } from "./Geometry1DOMMatrix.js";
-import { Geometry1DOMPoint } from "./Geometry1DOMPoint.js";
+import { GeometryDOMMatrix } from "./GeometryDOMMatrix.js";
+import { GeometryDOMPoint } from "./GeometryDOMPoint.js";
 
-export abstract class Geometry1DOMMatrixBase<N extends DOMMatrixReadOnly>
+export abstract class GeometryDOMMatrixBase<N extends DOMMatrixReadOnly>
   extends Wrapper<N>
-  implements IGeometry1DOMMatrixReadOnly<N>
+  implements IGeometryDOMMatrixReadOnly<N>
 {
   get a(): number {
     return this.native.a;
@@ -86,8 +86,8 @@ export abstract class Geometry1DOMMatrixBase<N extends DOMMatrixReadOnly>
     return this.native.isIdentity;
   }
 
-  translate(tx?: number, ty?: number, tz?: number): Geometry1DOMMatrix {
-    return Geometry1DOMMatrix.create(this.native.translate(tx, ty, tz)).right;
+  translate(tx?: number, ty?: number, tz?: number): GeometryDOMMatrix {
+    return GeometryDOMMatrix.create(this.native.translate(tx, ty, tz)).right;
   }
   scale(
     scaleX?: number,
@@ -96,67 +96,64 @@ export abstract class Geometry1DOMMatrixBase<N extends DOMMatrixReadOnly>
     originX?: number,
     originY?: number,
     originZ?: number
-  ): Geometry1DOMMatrix {
-    return Geometry1DOMMatrix.create(
+  ): GeometryDOMMatrix {
+    return GeometryDOMMatrix.create(
       this.native.scale(scaleX, scaleY, scaleZ, originX, originY, originZ)
     ).right;
   }
   /**
    * @deprecated Use {@link scale | scale(scaleX, scaleY, 1, 0, 0, 0)} instead.
    */
-  scaleNonUniform(scaleX?: number, scaleY?: number): Geometry1DOMMatrix {
-    return Geometry1DOMMatrix.create(
-      this.native.scaleNonUniform(scaleX, scaleY)
-    ).right;
+  scaleNonUniform(scaleX?: number, scaleY?: number): GeometryDOMMatrix {
+    return GeometryDOMMatrix.create(this.native.scaleNonUniform(scaleX, scaleY))
+      .right;
   }
   scale3d(
     scale?: number,
     originX?: number,
     originY?: number,
     originZ?: number
-  ): Geometry1DOMMatrix {
-    return Geometry1DOMMatrix.create(
+  ): GeometryDOMMatrix {
+    return GeometryDOMMatrix.create(
       this.native.scale3d(scale, originX, originY, originZ)
     ).right;
   }
-  rotate(rotX?: number, rotY?: number, rotZ?: number): Geometry1DOMMatrix {
-    return Geometry1DOMMatrix.create(this.native.rotate(rotX, rotY, rotZ))
-      .right;
+  rotate(rotX?: number, rotY?: number, rotZ?: number): GeometryDOMMatrix {
+    return GeometryDOMMatrix.create(this.native.rotate(rotX, rotY, rotZ)).right;
   }
-  rotateFromVector(x?: number, y?: number): Geometry1DOMMatrix {
-    return Geometry1DOMMatrix.create(this.native.rotateFromVector(x, y)).right;
+  rotateFromVector(x?: number, y?: number): GeometryDOMMatrix {
+    return GeometryDOMMatrix.create(this.native.rotateFromVector(x, y)).right;
   }
   rotateAxisAngle(
     x?: number,
     y?: number,
     z?: number,
     angle?: number
-  ): Geometry1DOMMatrix {
-    return Geometry1DOMMatrix.create(
-      this.native.rotateAxisAngle(x, y, z, angle)
-    ).right;
+  ): GeometryDOMMatrix {
+    return GeometryDOMMatrix.create(this.native.rotateAxisAngle(x, y, z, angle))
+      .right;
   }
-  skewX(sx?: number): Geometry1DOMMatrix {
-    return Geometry1DOMMatrix.create(this.native.skewX(sx)).right;
+  skewX(sx?: number): GeometryDOMMatrix {
+    return GeometryDOMMatrix.create(this.native.skewX(sx)).right;
   }
-  skewY(sy?: number): Geometry1DOMMatrix {
-    return Geometry1DOMMatrix.create(this.native.skewY(sy)).right;
+  skewY(sy?: number): GeometryDOMMatrix {
+    return GeometryDOMMatrix.create(this.native.skewY(sy)).right;
   }
-  multiply(other?: DGeometry1DOMMatrixInit): Geometry1DOMMatrix {
-    return Geometry1DOMMatrix.create(this.native.multiply(other)).right;
+  multiply(other?: DGeometryDOMMatrixInit): GeometryDOMMatrix {
+    return GeometryDOMMatrix.create(this.native.multiply(other)).right;
   }
-  flipX(): Geometry1DOMMatrix {
-    return Geometry1DOMMatrix.create(this.native.flipX()).right;
+  flipX(): GeometryDOMMatrix {
+    return GeometryDOMMatrix.create(this.native.flipX()).right;
   }
-  flipY(): Geometry1DOMMatrix {
-    return Geometry1DOMMatrix.create(this.native.flipY()).right;
+  flipY(): GeometryDOMMatrix {
+    return GeometryDOMMatrix.create(this.native.flipY()).right;
   }
-  inverse(): Geometry1DOMMatrix {
-    return Geometry1DOMMatrix.create(this.native.inverse()).right;
+  inverse(): GeometryDOMMatrix {
+    return GeometryDOMMatrix.create(this.native.inverse()).right;
   }
 
-  transformPoint(point?: DGeometry1DOMPointInit): Geometry1DOMPoint {
-    return new Geometry1DOMPoint(this.native.transformPoint(point));
+  transformPoint(point?: DGeometryDOMPointInit): GeometryDOMPoint {
+    return new GeometryDOMPoint(this.native.transformPoint(point));
   }
   toFloat32Array(): Float32Array {
     return this.native.toFloat32Array();

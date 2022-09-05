@@ -1,15 +1,15 @@
 import { StaticImplements } from "@/decorators/StaticImplements.js";
-import type { DGeometry1DOMPointInit } from "@/specs/geometry-1/dictionaries/DGeometry1DOMPointInit.js";
+import type { DGeometryDOMPointInit } from "@/specs/geometry/dictionaries/DGeometryDOMPointInit.js";
 import type {
-  IGeometry1DOMPoint,
-  IGeometry1DOMPointConstructors,
-} from "@/specs/geometry-1/interfaces/IGeometry1DOMPoint.js";
-import { Geometry1DOMPointBase } from "./Geometry1DOMPointBase.js";
+  IGeometryDOMPoint,
+  IGeometryDOMPointConstructors,
+} from "@/specs/geometry/interfaces/IGeometryDOMPoint.js";
+import { GeometryDOMPointBase } from "./GeometryDOMPointBase.js";
 
-@StaticImplements<IGeometry1DOMPointConstructors>()
-export class Geometry1DOMPoint
-  extends Geometry1DOMPointBase<DOMPoint>
-  implements IGeometry1DOMPoint<DOMPoint>
+@StaticImplements<IGeometryDOMPointConstructors>()
+export class GeometryDOMPoint
+  extends GeometryDOMPointBase<DOMPoint>
+  implements IGeometryDOMPoint<DOMPoint>
 {
   constructor(domPoint: DOMPoint);
   constructor(x?: number, y?: number, z?: number, w?: number);
@@ -27,8 +27,8 @@ export class Geometry1DOMPoint
     super(nativeDomPoint);
   }
 
-  static fromPoint(other?: DGeometry1DOMPointInit): Geometry1DOMPoint {
-    return new Geometry1DOMPoint(DOMPoint.fromPoint(other));
+  static fromPoint(other?: DGeometryDOMPointInit): GeometryDOMPoint {
+    return new GeometryDOMPoint(DOMPoint.fromPoint(other));
   }
 
   override set x(x: number) {

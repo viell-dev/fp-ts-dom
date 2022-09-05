@@ -1,4 +1,4 @@
-export interface DGeometry1DOMRectInit {
+export interface DGeometryDOMRectInit {
   x?: number;
   y?: number;
   width?: number;

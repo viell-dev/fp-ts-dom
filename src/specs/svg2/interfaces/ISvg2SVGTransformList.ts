@@ -1,5 +1,5 @@
 import type { IWrapper } from "@/global/IWrapper.js";
-import type { IGeometry1DOMMatrixReadOnly } from "@/specs/geometry-1/interfaces/IGeometry1DOMMatrixReadOnly.js";
+import type { IGeometryDOMMatrixReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMMatrixReadOnly.js";
 import type * as O from "fp-ts/Option";
 import type { ISvg2SVGTransform } from "./ISvg2SVGTransform.js";
 
@@ -28,7 +28,7 @@ export interface ISvg2SVGTransformList<N extends SVGTransformList>
   ): ISvg2SVGTransform<SVGTransform>;
 
   createSVGTransformationFromMatrix(
-    matrix: IGeometry1DOMMatrixReadOnly<DOMMatrixReadOnly>
+    matrix: IGeometryDOMMatrixReadOnly<DOMMatrixReadOnly>
   ): ISvg2SVGTransform<SVGTransform>;
   consolidate(): O.Option<ISvg2SVGTransform<SVGTransform>>;
 }

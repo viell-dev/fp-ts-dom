@@ -1,3 +1,3 @@
-import type { IGeometry1DOMMatrix } from "@/specs/geometry-1/interfaces/IGeometry1DOMMatrix.js";
+import type { IGeometryDOMMatrix } from "@/specs/geometry/interfaces/IGeometryDOMMatrix.js";
 
-export type ISvg2SVGMatrix<N extends SVGMatrix> = IGeometry1DOMMatrix<N>;
+export type ISvg2SVGMatrix<N extends SVGMatrix> = IGeometryDOMMatrix<N>;
