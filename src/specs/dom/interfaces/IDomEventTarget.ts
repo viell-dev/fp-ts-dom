@@ -6,16 +6,17 @@ import type { DDomAddEventListenerOptions } from "../dictionaries/DDomAddEventLi
 import type { DDomEventListenerOptions } from "../dictionaries/DDomEventListenerOptions.js";
 import type { IDomEvent } from "./IDomEvent.js";
 
+/** @sealed */
 export interface IDomEventTargetConstructor
   extends IWrapperConstructors<EventTarget> {
-  new (): IDomEventTarget<EventTarget>;
+  new <T extends EventTarget>(): IDomEventTarget<T>;
 }
 
 export interface IDomEventTarget<N extends EventTarget> extends IWrapper<N> {
-  addEventListener(
+  addEventListener<R = unknown>(
     type: string,
     callback: CBDomEventListener | null,
-    options?: boolean | DDomAddEventListenerOptions
+    options?: boolean | DDomAddEventListenerOptions<R>
   ): void;
   removeEventListener(
     type: string,

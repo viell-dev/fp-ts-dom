@@ -1,1 +1,3 @@
-export type DDomEventListenerOptions = EventListenerOptions;
+export interface DDomEventListenerOptions {
+  capture?: boolean;
+}

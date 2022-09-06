@@ -1,11 +1,11 @@
 import type { IDomEvent } from "../interfaces/IDomEvent.js";
 
 interface CBDomEventListenerFunction {
-  (evt: Event | IDomEvent<Event>): void;
+  <T extends Event>(evt: IDomEvent<T>): void;
 }
 
 interface CBDomEventListenerObject {
-  handleEvent(evt: Event | IDomEvent<Event>): void;
+  handleEvent<T extends Event>(evt: IDomEvent<T>): void;
 }
 
 export type CBDomEventListener =
