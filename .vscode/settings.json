@@ -21,5 +21,27 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": true,
     "source.fixAll.eslint": true
+  },
+  "material-icon-theme.folders.associations": {
+    ".lift": "github",
+    "decorators": "rules",
+    "exceptions": "error",
+    "globals": "global",
+    "impls": "components",
+    "impls/dom": "import",
+    "impls/geometry": "import",
+    "impls/hr-time": "import",
+    "impls/html": "import",
+    "impls/svg2": "import",
+    "specs": "contract",
+    "specs/dom": "include",
+    "specs/geometry": "include",
+    "specs/hr-time": "include",
+    "specs/html": "include",
+    "specs/svg2": "include",
+    "callbacks": "functions",
+    "dictionaries": "json",
+    "mixins": "plugin",
+    "enums": "mappings"
   }
 }

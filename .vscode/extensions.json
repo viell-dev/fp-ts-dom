@@ -2,6 +2,8 @@
   "recommendations": [
     "arcanis.vscode-zipfs",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    "EditorConfig.EditorConfig",
+    "esbenp.prettier-vscode",
+    "pkief.material-icon-theme"
   ]
 }
