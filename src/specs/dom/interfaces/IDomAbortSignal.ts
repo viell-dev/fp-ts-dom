@@ -2,11 +2,13 @@ import type {
   AbortErrorDomException,
   TimeoutErrorDomException,
 } from "@/exceptions/DomException.js";
+import type { IWrapperConstructors } from "@/globals/IWrapper.js";
 import type { CBHtmlEventHandler } from "@/specs/html/callbacks/CBHtmlEventHandler.js";
 import type { IDomEventTarget } from "./IDomEventTarget.js";
 
 /** @sealed */
-export interface IDomAbortSignalConstructors {
+export interface IDomAbortSignalConstructors
+  extends IWrapperConstructors<AbortSignal> {
   abort<R = unknown>(
     reason?: R
   ): IDomAbortSignal<
