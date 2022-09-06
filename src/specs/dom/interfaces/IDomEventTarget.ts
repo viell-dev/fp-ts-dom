@@ -9,7 +9,7 @@ import type { IDomEvent } from "./IDomEvent.js";
 /** @sealed */
 export interface IDomEventTargetConstructor
   extends IWrapperConstructors<EventTarget> {
-  new <T extends EventTarget>(): IDomEventTarget<T>;
+  new (): IDomEventTarget<EventTarget>;
 }
 
 export interface IDomEventTarget<N extends EventTarget> extends IWrapper<N> {
@@ -23,7 +23,7 @@ export interface IDomEventTarget<N extends EventTarget> extends IWrapper<N> {
     callback: CBDomEventListener | null,
     options?: boolean | DDomEventListenerOptions
   ): void;
-  dispatchEvent<T extends Event>(
-    event: T | IDomEvent<T>
+  dispatchEvent(
+    event: Event | IDomEvent<Event>
   ): E.Either<InvalidStateErrorDomException, boolean>;
 }

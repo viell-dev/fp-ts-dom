@@ -7,12 +7,15 @@ import type { IDomEventTarget } from "./IDomEventTarget.js";
 
 /** @sealed */
 export interface IDomAbortSignalConstructors {
-  abort<T extends AbortSignal, R = unknown>(
+  abort<R = unknown>(
     reason?: R
-  ): IDomAbortSignal<T, R extends undefined ? AbortErrorDomException : R>;
-  timeout<T extends AbortSignal>(
+  ): IDomAbortSignal<
+    AbortSignal,
+    R extends undefined ? AbortErrorDomException : R
+  >;
+  timeout(
     milliseconds: number
-  ): IDomAbortSignal<T, TimeoutErrorDomException>;
+  ): IDomAbortSignal<AbortSignal, TimeoutErrorDomException>;
 }
 
 export interface IDomAbortSignal<N extends AbortSignal, R = unknown>

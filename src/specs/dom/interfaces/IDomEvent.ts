@@ -7,10 +7,7 @@ import type { IDomEventTarget } from "./IDomEventTarget.js";
 
 /** @sealed */
 export interface IDomEventConstructors extends IWrapperConstructors<Event> {
-  new <T extends Event>(
-    type: string,
-    eventInitDict?: DDomEventInit
-  ): IDomEvent<T>;
+  new (type: string, eventInitDict?: DDomEventInit): IDomEvent<Event>;
 }
 
 export interface IDomEventConstants {
