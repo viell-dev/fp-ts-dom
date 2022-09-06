@@ -1,5 +1,5 @@
 import type { SyntaxErrorDomException } from "@/exceptions/DomException.js";
-import type { IWrapperConstructors } from "@/global/IWrapper.js";
+import type { IWrapperConstructors } from "@/globals/IWrapper.js";
 import type * as E from "fp-ts/Either";
 import type { DGeometryDOMMatrixInit } from "../dictionaries/DGeometryDOMMatrixInit.js";
 import type { IGeometryDOMMatrixReadOnly } from "./IGeometryDOMMatrixReadOnly.js";

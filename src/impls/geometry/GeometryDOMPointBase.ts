@@ -1,4 +1,4 @@
-import { Wrapper } from "@/global/Wrapper.js";
+import { Wrapper } from "@/globals/Wrapper.js";
 import type { DGeometryDOMMatrixInit } from "@/specs/geometry/dictionaries/DGeometryDOMMatrixInit.js";
 import type { IGeometryDOMPointReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMPointReadOnly.js";
 import * as E from "fp-ts/Either";

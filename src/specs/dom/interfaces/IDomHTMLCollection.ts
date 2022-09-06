@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/global/IWrapper.js";
+import type { IWrapper } from "@/globals/IWrapper.js";
 import type * as O from "fp-ts/Option";
 import type { IDomElement } from "./IDomElement.js";
 

@@ -1,5 +1,5 @@
 import type { InvalidStateErrorDomException } from "@/exceptions/DomException.js";
-import { Wrapper } from "@/global/Wrapper.js";
+import { Wrapper } from "@/globals/Wrapper.js";
 import type { DGeometryDOMMatrixInit } from "@/specs/geometry/dictionaries/DGeometryDOMMatrixInit.js";
 import type { DGeometryDOMPointInit } from "@/specs/geometry/dictionaries/DGeometryDOMPointInit.js";
 import type { IGeometryDOMMatrixReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMMatrixReadOnly.js";

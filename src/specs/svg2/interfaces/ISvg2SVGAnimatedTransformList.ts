@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/global/IWrapper.js";
+import type { IWrapper } from "@/globals/IWrapper.js";
 import type { ISvg2SVGTransformList } from "./ISvg2SVGTransformList.js";
 
 export interface ISvg2SVGAnimatedTransformList<

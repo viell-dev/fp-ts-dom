@@ -2,9 +2,9 @@ import type {
   InvalidStateErrorDomException,
   SyntaxErrorDomException,
 } from "@/exceptions/DomException.js";
-import type { ISerializable } from "@/global/ISerializable.js";
-import type { IStringifier } from "@/global/IStringifier.js";
-import type { IWrapper, IWrapperConstructors } from "@/global/IWrapper.js";
+import type { ISerializable } from "@/globals/ISerializable.js";
+import type { IStringifier } from "@/globals/IStringifier.js";
+import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.js";
 import type * as E from "fp-ts/Either";
 import type { DGeometryDOMMatrixInit } from "../dictionaries/DGeometryDOMMatrixInit.js";
 import type { DGeometryDOMPointInit } from "../dictionaries/DGeometryDOMPointInit.js";

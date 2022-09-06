@@ -1,4 +1,4 @@
-import type { ISerializable } from "@/global/ISerializable.js";
+import type { ISerializable } from "@/globals/ISerializable.js";
 import type { IDomEventTarget } from "@/specs/dom/interfaces/IDomEventTarget.js";
 import type { THrTimeDOMHighResTimeStamp } from "../types/THrTimeDOMHighResTimeStamp.js";
 

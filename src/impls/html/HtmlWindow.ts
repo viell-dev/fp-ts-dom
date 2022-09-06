@@ -1,4 +1,4 @@
-import { Wrapper } from "@/global/Wrapper.js";
+import { Wrapper } from "@/globals/Wrapper.js";
 import type { IHtmlWindow } from "@/specs/html/interfaces/IHtmlWindow.js";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";

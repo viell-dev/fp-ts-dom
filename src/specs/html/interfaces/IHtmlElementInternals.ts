@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/global/IWrapper.js";
+import type { IWrapper } from "@/globals/IWrapper.js";
 import type { IDomNodeList } from "@/specs/dom/interfaces/IDomNodeList.js";
 import type { IDomShadowRoot } from "@/specs/dom/interfaces/IDomShadowRoot.js";
 import type * as O from "fp-ts/Option";

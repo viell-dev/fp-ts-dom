@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/global/IWrapper.js";
+import type { IWrapper } from "@/globals/IWrapper.js";
 
 export interface IHtmlValidityState<N extends ValidityState>
   extends IWrapper<N> {

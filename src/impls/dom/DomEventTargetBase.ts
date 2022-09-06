@@ -1,5 +1,5 @@
 import { InvalidStateErrorDomException } from "@/exceptions/DomException.js";
-import { Wrapper } from "@/global/Wrapper.js";
+import { Wrapper } from "@/globals/Wrapper.js";
 import { CBDomEventListener } from "@/specs/dom/callbacks/CBDomEventListener.js";
 import { IDomEventTarget } from "@/specs/dom/interfaces/IDomEventTarget.js";
 import * as E from "fp-ts/es6/Either";

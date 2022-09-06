@@ -1,4 +1,4 @@
-import type { IWrapper, IWrapperConstructors } from "@/global/IWrapper.js";
+import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.js";
 import type * as O from "fp-ts/Option";
 import type { DomEventPhase } from "../constants/DomEventPhase.js";
 import type { DDomEventInit } from "../dictionaries/DDomEventInit.js";

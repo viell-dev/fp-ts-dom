@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/global/IWrapper.js";
+import type { IWrapper } from "@/globals/IWrapper.js";
 import type { IHtmlPlugin } from "./IHtmlPlugin.js";
 
 export interface IHtmlMimeType<N extends MimeType> extends IWrapper<N> {

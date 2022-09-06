@@ -1,5 +1,5 @@
 import { StaticImplements } from "@/decorators/StaticImplements.js";
-import { Wrapper } from "@/global/Wrapper.js";
+import { Wrapper } from "@/globals/Wrapper.js";
 import type { DGeometryDOMPointInit } from "@/specs/geometry/dictionaries/DGeometryDOMPointInit.js";
 import type { DGeometryDOMQuadInit } from "@/specs/geometry/dictionaries/DGeometryDOMQuadInit.js";
 import type { DGeometryDOMRectInit } from "@/specs/geometry/dictionaries/DGeometryDOMRectInit.js";

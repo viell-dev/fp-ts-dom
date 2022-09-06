@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/global/IWrapper.js";
+import type { IWrapper } from "@/globals/IWrapper.js";
 import type { MHtmlNavigatorConcurrentHardware } from "../mixins/MHtmlNavigatorConcurrentHardware.js";
 import type { MHtmlNavigatorContentUtils } from "../mixins/MHtmlNavigatorContentUtils.js";
 import type { MHtmlNavigatorCookies } from "../mixins/MHtmlNavigatorCookies.js";

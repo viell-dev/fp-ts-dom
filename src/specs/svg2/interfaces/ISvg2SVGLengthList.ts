@@ -1,5 +1,5 @@
 import type { IndexSizeErrorDomException } from "@/exceptions/DomException.js";
-import type { IWrapper } from "@/global/IWrapper.js";
+import type { IWrapper } from "@/globals/IWrapper.js";
 import type * as E from "fp-ts/Either";
 import type { ISvg2SVGLength } from "./ISvg2SVGLength.js";
 

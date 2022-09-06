@@ -1,4 +1,4 @@
-import type { IWrapper, IWrapperConstructors } from "@/global/IWrapper.js";
+import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.js";
 import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.js";
 import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.js";
 import type { IDomText } from "@/specs/dom/interfaces/IDomText.js";

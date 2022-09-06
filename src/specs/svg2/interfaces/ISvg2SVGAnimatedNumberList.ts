@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/global/IWrapper.js";
+import type { IWrapper } from "@/globals/IWrapper.js";
 import type { ISvg2SVGNumberList } from "./ISvg2SVGNumberList.js";
 
 export interface ISvg2SVGAnimatedNumberList<N extends SVGAnimatedNumberList>

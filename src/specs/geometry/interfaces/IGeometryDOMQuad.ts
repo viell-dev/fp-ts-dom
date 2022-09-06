@@ -1,5 +1,5 @@
-import type { ISerializable } from "@/global/ISerializable.js";
-import type { IWrapper, IWrapperConstructors } from "@/global/IWrapper.js";
+import type { ISerializable } from "@/globals/ISerializable.js";
+import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.js";
 import type { DGeometryDOMPointInit } from "../dictionaries/DGeometryDOMPointInit.js";
 import type { DGeometryDOMQuadInit } from "../dictionaries/DGeometryDOMQuadInit.js";
 import type { DGeometryDOMRectInit } from "../dictionaries/DGeometryDOMRectInit.js";

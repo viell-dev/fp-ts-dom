@@ -2,7 +2,7 @@ import type {
   SecurityErrorDomException,
   SyntaxErrorDomException,
 } from "@/exceptions/DomException.js";
-import { Wrapper } from "@/global/Wrapper.js";
+import { Wrapper } from "@/globals/Wrapper.js";
 import type { IHtmlLocation } from "@/specs/html/interfaces/IHtmlLocation.js";
 import * as E from "fp-ts/Either";
 

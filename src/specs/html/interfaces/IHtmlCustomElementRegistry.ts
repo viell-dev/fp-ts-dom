@@ -1,5 +1,5 @@
 import type { SyntaxErrorDomException } from "@/exceptions/DomException.js";
-import type { IWrapper } from "@/global/IWrapper.js";
+import type { IWrapper } from "@/globals/IWrapper.js";
 import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.js";
 import type * as O from "fp-ts/Option";
 import type * as TE from "fp-ts/TaskEither";

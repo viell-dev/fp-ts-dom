@@ -1,5 +1,5 @@
 import type { IDomAbortController } from "@/specs/dom/interfaces/IDomAbortController.js";
-import { Wrapper } from "../../global/Wrapper.js";
+import { Wrapper } from "../../globals/Wrapper.js";
 import { DomAbortSignal } from "./DomAbortSignal.js";
 
 export class DomAbortController

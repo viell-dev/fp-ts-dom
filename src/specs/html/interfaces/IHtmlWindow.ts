@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/global/IWrapper.js";
+import type { IWrapper } from "@/globals/IWrapper.js";
 import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.js";
 import type * as O from "fp-ts/Option";
 import type { DHtmlWindowPostMessageOptions } from "../dictionaries/DHtmlWindowPostMessageOptions.js";

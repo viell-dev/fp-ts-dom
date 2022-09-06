@@ -1,3 +1,3 @@
-import { HtmlWindow } from "./implementations/html/HtmlWindow.js";
+import { HtmlWindow } from "./impls/html/HtmlWindow.js";
 
 export const safeWindow = new HtmlWindow(window);

@@ -1,5 +1,5 @@
 import type { InvalidStateErrorDomException } from "@/exceptions/DomException.js";
-import type { IWrapper, IWrapperConstructors } from "@/global/IWrapper.js";
+import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.js";
 import type * as E from "fp-ts/es6/Either";
 import type { CBDomEventListener } from "../callbacks/CBDomEventListener.js";
 import type { DDomAddEventListenerOptions } from "../dictionaries/DDomAddEventListenerOptions.js";

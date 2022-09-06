@@ -1,4 +1,4 @@
-import type { IWrapper, IWrapperConstructors } from "@/global/IWrapper.js";
+import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.js";
 import type { CBDomMutationCallback } from "../callbacks/CBDomMutationCallback.js";
 import type { DDomMutationObserverInit } from "../dictionaries/DDomMutationObserverInit.js";
 import type { IDomMutationRecord } from "./IDomMutationRecord.js";

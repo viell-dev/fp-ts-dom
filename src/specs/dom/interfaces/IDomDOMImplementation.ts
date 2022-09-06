@@ -2,7 +2,7 @@ import type {
   InvalidCharacterErrorDomException,
   NamespaceErrorDomException,
 } from "@/exceptions/DomException.js";
-import type { IWrapper } from "@/global/IWrapper.js";
+import type { IWrapper } from "@/globals/IWrapper.js";
 import type * as E from "fp-ts/Either";
 import type { IDomDocument } from "./IDomDocument.js";
 import type { IDomDocumentType } from "./IDomDocumentType.js";
