@@ -2,12 +2,10 @@ import type { HierarchyRequestErrorDomException } from "@/exceptions/DomExceptio
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
 import type { IDomElement } from "../interfaces/IDomElement.js";
-import type { IDomHTMLCollection } from "../interfaces/IDomHTMLCollection.js";
 import type { IDomNode } from "../interfaces/IDomNode.js";
-import type { IDomNodeList } from "../interfaces/IDomNodeList.js";
 
 export interface MDomParentNode {
-  readonly children: IDomHTMLCollection<HTMLCollection>;
+  readonly children: IDomElement<Element>[];
   readonly firstElementChild: O.Option<IDomElement<Element>>;
   readonly lastElementChild: O.Option<IDomElement<Element>>;
   readonly childElementCount: number;
@@ -23,5 +21,5 @@ export interface MDomParentNode {
   ): E.Either<HierarchyRequestErrorDomException, void>;
 
   querySelector(selectors: string): O.Option<IDomElement<Element>>;
-  querySelectorAll(selectors: string): IDomNodeList<NodeList>;
+  querySelectorAll(selectors: string): IDomNode<Node>[];
 }
