@@ -5,10 +5,10 @@ import type { IDomEvent } from "./IDomEvent.js";
 /** @sealed */
 export interface IDomCustomEventConstructors
   extends IWrapperConstructors<CustomEvent> {
-  new <T extends DDomCustomEventInit<D>, D>(
+  new <I extends DDomCustomEventInit<D>, T extends CustomEvent<D>, D>(
     type: string,
-    eventInitDict?: T
-  ): IDomCustomEvent<CustomEvent<D>, D>;
+    eventInitDict?: I
+  ): IDomCustomEvent<T, D>;
 }
 
 export interface IDomCustomEvent<N extends CustomEvent<D>, D>
