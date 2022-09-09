@@ -1,4 +1,4 @@
-export enum DomNodeDocumentPosition {
+export enum CDomNodeDocumentPosition {
   DOCUMENT_POSITION_DISCONNECTED = 0x01,
   DOCUMENT_POSITION_PRECEDING = 0x02,
   DOCUMENT_POSITION_FOLLOWING = 0x04,

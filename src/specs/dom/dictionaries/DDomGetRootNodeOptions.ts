@@ -1,1 +1,3 @@
-export type DDomGetRootNodeOptions = GetRootNodeOptions;
+export interface DDomGetRootNodeOptions {
+  composed?: boolean;
+}
