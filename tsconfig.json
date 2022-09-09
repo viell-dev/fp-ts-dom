@@ -1,6 +1,6 @@
 {
   "include": ["src/**/*.ts"],
-  "exclude": ["src/_old/*"],
+
   "compilerOptions": {
     // Type Checking
     "allowUnreachableCode": false,
