@@ -1,6 +1,6 @@
 import type { Values } from "@/helpers/Values.js";
 
-export const CDomNodeType = {
+export const CDomNodeNodeType = {
   ELEMENT_NODE: 1,
   ATTRIBUTE_NODE: 2,
   TEXT_NODE: 3,
@@ -12,4 +12,4 @@ export const CDomNodeType = {
   DOCUMENT_FRAGMENT_NODE: 11,
 } as const;
 
-export type CDomNodeType = Values<typeof CDomNodeType>;
+export type CDomNodeNodeType = Values<typeof CDomNodeNodeType>;

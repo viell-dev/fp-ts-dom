@@ -1,6 +1,6 @@
 import type { Values } from "@/helpers/Values.js";
 
-export const CDomNodeDocumentPosition = {
+export const CDomNodeNodeDocumentPosition = {
   DOCUMENT_POSITION_DISCONNECTED: 0x01,
   DOCUMENT_POSITION_PRECEDING: 0x02,
   DOCUMENT_POSITION_FOLLOWING: 0x04,
@@ -9,4 +9,6 @@ export const CDomNodeDocumentPosition = {
   DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: 0x20,
 } as const;
 
-export type CDomNodeDocumentPosition = Values<typeof CDomNodeDocumentPosition>;
+export type CDomNodeNodeDocumentPosition = Values<
+  typeof CDomNodeNodeDocumentPosition
+>;
