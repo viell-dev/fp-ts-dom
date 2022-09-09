@@ -2,8 +2,9 @@
   "recommendations": [
     "arcanis.vscode-zipfs",
     "dbaeumer.vscode-eslint",
-    "EditorConfig.EditorConfig",
+    "editorconfig.editorconfig",
     "esbenp.prettier-vscode",
-    "pkief.material-icon-theme"
+    "pkief.material-icon-theme",
+    "streetsidesoftware.code-spell-checker"
   ]
 }
