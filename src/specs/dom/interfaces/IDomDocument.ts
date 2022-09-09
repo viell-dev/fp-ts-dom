@@ -1,3 +1,10 @@
+import type {
+  HierarchyRequestErrorDomException,
+  InvalidCharacterErrorDomException,
+  NamespaceErrorDomException,
+  NotSupportedErrorDomException,
+} from "@/exceptions/DomException.js";
+import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
 import type { CBDomNodeFilter } from "../callbacks/CBDomNodeFilter.js";
 import type { CDomNodeFilterWhatToShow } from "../constants/CDomNodeFilterWhatToShow.js";
@@ -46,29 +53,58 @@ export interface IDomDocument<N extends Document>
   createElement(
     localName: string,
     options?: string | DDomElementCreationOptions
-  ): IDomElement<Element>;
+  ): E.Either<
+    InvalidCharacterErrorDomException | NotSupportedErrorDomException,
+    IDomElement<Element>
+  >;
   createElementNS(
     namepsace: string | null,
     qualifiedName: string,
     options?: string | DDomElementCreationOptions
-  ): IDomElement<Element>;
+  ): E.Either<
+    | InvalidCharacterErrorDomException
+    | NamespaceErrorDomException
+    | NotSupportedErrorDomException,
+    IDomElement<Element>
+  >;
   createDocumentFragment(): IDomDocumentFragment<DocumentFragment>;
   createTextNode(data: string): IDomText<Text>;
-  createCDATASection(data: string): IDomCDATASection<CDATASection>;
+  createCDATASection(
+    data: string
+  ): E.Either<
+    NotSupportedErrorDomException | InvalidCharacterErrorDomException,
+    IDomCDATASection<CDATASection>
+  >;
   createComment(data: string): IDomComment<Comment>;
   createProcessingInstruction(
     target: string,
     data: string
-  ): IDomProccessingInstruction<ProcessingInstruction>;
+  ): E.Either<
+    InvalidCharacterErrorDomException,
+    IDomProccessingInstruction<ProcessingInstruction>
+  >;
 
-  importNode(node: Node | IDomNode<Node>, deep?: boolean): IDomNode<Node>;
-  adoptNode(node: Node | IDomNode<Node>): IDomNode<Node>;
+  importNode(
+    node: Node | IDomNode<Node>,
+    deep?: boolean
+  ): E.Either<NotSupportedErrorDomException, IDomNode<Node>>;
+  adoptNode(
+    node: Node | IDomNode<Node>
+  ): E.Either<
+    NotSupportedErrorDomException | HierarchyRequestErrorDomException,
+    IDomNode<Node>
+  >;
 
-  createAttribute(localName: string): IDomAttr<Attr>;
+  createAttribute(
+    localName: string
+  ): E.Either<InvalidCharacterErrorDomException, IDomAttr<Attr>>;
   createAttributeNS(
     namepsace: string | null,
     qualifiedName: string
-  ): IDomAttr<Attr>;
+  ): E.Either<
+    InvalidCharacterErrorDomException | NamespaceErrorDomException,
+    IDomAttr<Attr>
+  >;
 
   createRange(): IDomRange<Range>;
 
