@@ -1,3 +1,5 @@
+import type { NotSupportedErrorDomException } from "@/exceptions/DomException.js";
+import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
 import type { CDomNodeDocumentPosition } from "../constants/CDomNodeDocumentPosition.js";
 import type { CDomNodeType } from "../constants/CDomNodeType.js";
@@ -50,7 +52,9 @@ export interface IDomNode<N extends Node> extends IDomEventTarget<N> {
   textContent: O.Option<string>;
   normalize(): void;
 
-  cloneNode(deep?: boolean): IDomNode<Node>;
+  cloneNode(
+    deep?: boolean
+  ): E.Either<NotSupportedErrorDomException, IDomNode<Node>>;
   isEqualNode(otherNode: Node | IDomNode<Node> | null): boolean;
 
   // Document position class constants are declared in the interface above.
