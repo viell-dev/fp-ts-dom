@@ -19,7 +19,7 @@ export interface IDomDOMImplementation<N extends DOMImplementation>
     IDomDocumentType<DocumentType>
   >;
   createDocument(
-    namepsace: string | null,
+    namespace: string | null,
     qualifiedName: string | null,
     doctype?: IDomDocumentType<DocumentType>
   ): E.Either<

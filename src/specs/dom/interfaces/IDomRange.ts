@@ -15,7 +15,7 @@ export interface IDomRange<N extends Range> extends IDomAbstractRange<N> {
   selectNode(node: Node | IDomNode<Node>): void;
   selectNodeContents(node: Node | IDomNode<Node>): void;
 
-  compareBoundryPoints(how: number, sourceRange: IDomRange<Range>): number;
+  compareBoundaryPoints(how: number, sourceRange: IDomRange<Range>): number;
 
   deleteContents(): void;
   extractContents(): IDomDocumentFragment<DocumentFragment>;

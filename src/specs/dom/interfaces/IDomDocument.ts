@@ -21,7 +21,7 @@ import type { IDomDOMImplementation } from "./IDomDOMImplementation.js";
 import type { IDomElement } from "./IDomElement.js";
 import type { IDomNode } from "./IDomNode.js";
 import type { IDomNodeIterator } from "./IDomNodeIterator.js";
-import type { IDomProccessingInstruction } from "./IDomProccessingInstruction.js";
+import type { IDomProcessingInstruction } from "./IDomProcessingInstruction.js";
 import type { IDomRange } from "./IDomRange.js";
 import type { IDomText } from "./IDomText.js";
 import type { IDomTreeWalker } from "./IDomTreeWalker.js";
@@ -58,7 +58,7 @@ export interface IDomDocument<N extends Document>
     IDomElement<Element>
   >;
   createElementNS(
-    namepsace: string | null,
+    namespace: string | null,
     qualifiedName: string,
     options?: string | DDomElementCreationOptions
   ): E.Either<
@@ -81,7 +81,7 @@ export interface IDomDocument<N extends Document>
     data: string
   ): E.Either<
     InvalidCharacterErrorDomException,
-    IDomProccessingInstruction<ProcessingInstruction>
+    IDomProcessingInstruction<ProcessingInstruction>
   >;
 
   importNode(
@@ -99,7 +99,7 @@ export interface IDomDocument<N extends Document>
     localName: string
   ): E.Either<InvalidCharacterErrorDomException, IDomAttr<Attr>>;
   createAttributeNS(
-    namepsace: string | null,
+    namespace: string | null,
     qualifiedName: string
   ): E.Either<
     InvalidCharacterErrorDomException | NamespaceErrorDomException,
