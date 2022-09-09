@@ -1,4 +1,7 @@
 import type * as O from "fp-ts/Option";
+import type { CBDomNodeFilter } from "../callbacks/CBDomNodeFilter.js";
+import type { CDomNodeFilterWhatToShow } from "../constants/CDomNodeFilterWhatToShow.js";
+import type { DDomElementCreationOptions } from "../dictionaries/DDomElementCreationOptions.js";
 import type { MDomDocumentOrShadowRoot } from "../mixins/MDomDocumentOrShadowRoot.js";
 import type { MDomNonElementParentNode } from "../mixins/MDomNonElementParentNode.js";
 import type { MDomParentNode } from "../mixins/MDomParentNode.js";
@@ -9,7 +12,6 @@ import type { IDomDocumentFragment } from "./IDomDocumentFragment.js";
 import type { IDomDocumentType } from "./IDomDocumentType.js";
 import type { IDomDOMImplementation } from "./IDomDOMImplementation.js";
 import type { IDomElement } from "./IDomElement.js";
-import type { IDomHTMLCollection } from "./IDomHTMLCollection.js";
 import type { IDomNode } from "./IDomNode.js";
 import type { IDomNodeIterator } from "./IDomNodeIterator.js";
 import type { IDomProccessingInstruction } from "./IDomProccessingInstruction.js";
@@ -21,7 +23,10 @@ export interface IDomDocument<N extends Document>
   extends IDomNode<N>,
     MDomNonElementParentNode,
     MDomDocumentOrShadowRoot,
-    MDomParentNode {
+    MDomParentNode /*,
+    MDomXPathEvaluatorBase,
+    IHtmlDocument,
+    ISvg2Document*/ {
   readonly implementation: IDomDOMImplementation<DOMImplementation>;
   readonly URL: string;
   readonly documentURI: string;
@@ -31,25 +36,21 @@ export interface IDomDocument<N extends Document>
 
   readonly doctype: O.Option<IDomDocumentType<DocumentType>>;
   readonly documentElement: O.Option<IDomElement<Element>>;
-  getElementsByTagName(
-    qualifiedName: string
-  ): IDomHTMLCollection<HTMLCollection>;
+  getElementsByTagName(qualifiedName: string): IDomElement<Element>[];
   getElementsByTagNameNS(
     namespace: string | null,
     localName: string
-  ): IDomHTMLCollection<HTMLCollection>;
-  getElementsByClassName(
-    qualifiedName: string
-  ): IDomHTMLCollection<HTMLCollection>;
+  ): IDomElement<Element>[];
+  getElementsByClassName(qualifiedName: string): IDomElement<Element>[];
 
   createElement(
-    qualifiedName: string,
-    options?: string | ElementCreationOptions
+    localName: string,
+    options?: string | DDomElementCreationOptions
   ): IDomElement<Element>;
   createElementNS(
     namepsace: string | null,
-    localName: string,
-    options?: string | ElementCreationOptions
+    qualifiedName: string,
+    options?: string | DDomElementCreationOptions
   ): IDomElement<Element>;
   createDocumentFragment(): IDomDocumentFragment<DocumentFragment>;
   createTextNode(data: string): IDomText<Text>;
@@ -63,22 +64,22 @@ export interface IDomDocument<N extends Document>
   importNode(node: Node | IDomNode<Node>, deep?: boolean): IDomNode<Node>;
   adoptNode(node: Node | IDomNode<Node>): IDomNode<Node>;
 
-  createAttribute(qualifiedName: string): IDomAttr<Attr>;
+  createAttribute(localName: string): IDomAttr<Attr>;
   createAttributeNS(
     namepsace: string | null,
-    localName: string
+    qualifiedName: string
   ): IDomAttr<Attr>;
 
   createRange(): IDomRange<Range>;
 
   createNodeIterator(
     root: Node | IDomNode<Node>,
-    whatToShow?: number,
-    filter?: NodeFilter | null
+    whatToShow?: CDomNodeFilterWhatToShow,
+    filter?: CBDomNodeFilter | null
   ): IDomNodeIterator<NodeIterator>;
   createTreeWalker(
     root: Node | IDomNode<Node>,
-    whatToShow?: number,
-    filter?: NodeFilter | null
+    whatToShow?: CDomNodeFilterWhatToShow,
+    filter?: CBDomNodeFilter | null
   ): IDomTreeWalker<TreeWalker>;
 }
