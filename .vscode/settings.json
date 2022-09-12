@@ -49,5 +49,5 @@
   "cSpell.enabled": true,
   "cSpell.caseSensitive": true,
   "cSpell.language": "en-GB,en",
-  "cSpell.words": ["onslotchange"]
+  "cSpell.words": ["onslotchange", "Stringifier"]
 }

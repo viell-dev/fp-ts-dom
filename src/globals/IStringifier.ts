@@ -1,5 +1,8 @@
 import type * as E from "fp-ts/Either";
 
-export interface IStringifier<T extends Error, S extends string = string> {
-  toString(): E.Either<T, S>;
+export interface IStringifier<
+  S extends string = string,
+  T extends Error | null = null
+> {
+  toString(): T extends Error ? E.Either<T, S> : S;
 }
