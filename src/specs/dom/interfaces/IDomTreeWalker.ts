@@ -1,11 +1,13 @@
 import type { IWrapper } from "@/globals/IWrapper.js";
 import type * as O from "fp-ts/Option";
+import type { CBDomNodeFilter } from "../callbacks/CBDomNodeFilter.js";
+import type { CDomNodeFilterWhatToShow } from "../constants/CDomNodeFilterWhatToShow.js";
 import type { IDomNode } from "./IDomNode.js";
 
 export interface IDomTreeWalker<N extends TreeWalker> extends IWrapper<N> {
   readonly root: IDomNode<Node>;
-  readonly whatToShow: number;
-  readonly filter: NodeFilter | null;
+  readonly whatToShow: CDomNodeFilterWhatToShow;
+  readonly filter: O.Option<CBDomNodeFilter>;
   currentNode: IDomNode<Node>;
 
   parentNode(): O.Option<IDomNode<Node>>;
