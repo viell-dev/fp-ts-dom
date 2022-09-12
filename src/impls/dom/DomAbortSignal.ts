@@ -1,12 +1,12 @@
 import type { IDomAbortSignal } from "@/specs/dom/interfaces/IDomAbortSignal.js";
 import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.js";
-import type { CBHtmlEventHandlerNonNull } from "@/specs/html/callbacks/CBHtmlEventHandler.js";
-import * as E from "fp-ts/Either";
+import type { CBHtmlEventHandler } from "@/specs/html/callbacks/CBHtmlEventHandler.js";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import { DomEvent } from "./DomEvent.js";
 import { DomEventTargetBase } from "./DomEventTargetBase.js";
 
-export class DomAbortSignal<R = unknown>
+export class DomAbortSignal<R>
   extends DomEventTargetBase<AbortSignal>
   implements IDomAbortSignal<AbortSignal, R>
 {
@@ -18,40 +18,31 @@ export class DomAbortSignal<R = unknown>
     return this.native.reason;
   }
 
-  throwIfAborted(): E.Either<R, void> {
-    return E.tryCatch(
-      () => this.native.throwIfAborted(),
-      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-         -- Throws signal's abort reason if the signal has been aborted. */
-      (error: unknown) => error as R
-    );
+  /**
+   * @throws
+   * The value of {@link reason} is if {@link aborted} is `true`; otherwise,
+   * does nothing.
+   */
+  throwIfAborted(): void {
+    this.native.throwIfAborted();
   }
 
-  get onabort(): CBHtmlEventHandlerNonNull | null {
+  get onabort(): CBHtmlEventHandler {
     return pipe(
       this.native.onabort,
       O.fromNullable,
-      O.map(
-        (fn) =>
-          function <T extends Event, U = unknown>(
-            this: IDomAbortSignal<AbortSignal, U>,
-            event: T | IDomEvent<T>
-          ) {
-            return fn.bind(
-              this.getNative(),
-              event instanceof Event ? event : event.getNative()
-            );
-          }
-      ),
+      O.map((callback) => (event: IDomEvent<Event>) => {
+        return callback.bind(this.getNative(), event.getNative());
+      }),
       O.toNullable
     );
   }
-  set onabort(value: CBHtmlEventHandlerNonNull | null) {
+  set onabort(value: CBHtmlEventHandler) {
     this.native.onabort = pipe(
       value,
       O.fromNullable,
-      O.map((fn) => (event: Event): unknown => {
-        return fn.call(this, event);
+      O.map((callback) => (event: Event): unknown => {
+        return callback.call(this, new DomEvent(event));
       }),
       O.toNullable
     );

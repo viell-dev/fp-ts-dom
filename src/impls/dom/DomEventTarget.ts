@@ -1,8 +1,8 @@
-import { StaticImplements } from "../helpers/StaticImplements.js";
-import {
+import { StaticImplements } from "@/decorators/StaticImplements.js";
+import type {
   IDomEventTarget,
   IDomEventTargetConstructor,
-} from "../interfaces/IDomEventTarget.js";
+} from "@/specs/dom/interfaces/IDomEventTarget.js";
 import { DomEventTargetBase } from "./DomEventTargetBase.js";
 
 @StaticImplements<IDomEventTargetConstructor>()
@@ -13,6 +13,9 @@ export class DomEventTarget
   constructor();
   constructor(eventTarget: EventTarget);
   constructor(eventTarget?: EventTarget) {
-    super(eventTarget ?? new EventTarget());
+    const nativeEventTarget =
+      eventTarget instanceof EventTarget ? eventTarget : new EventTarget();
+
+    super(nativeEventTarget);
   }
 }

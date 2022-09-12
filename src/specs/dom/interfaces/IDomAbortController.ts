@@ -4,10 +4,10 @@ import type { IDomAbortSignal } from "./IDomAbortSignal.js";
 /** @sealed */
 export interface IDomAbortControllerConstructor
   extends IWrapperConstructors<AbortController> {
-  new (): IDomAbortController<AbortController>;
+  new (): IDomAbortController<AbortController, unknown>;
 }
 
-export interface IDomAbortController<N extends AbortController, R = unknown>
+export interface IDomAbortController<N extends AbortController, R>
   extends IWrapper<N> {
   readonly signal: IDomAbortSignal<AbortSignal, R>;
 

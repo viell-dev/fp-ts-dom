@@ -1,9 +1,10 @@
-import { DDomEventInit } from "@/specs/dom/dictionaries/DDomEventInit.js";
-import {
+import { StaticImplements } from "@/decorators/StaticImplements.js";
+import type { DDomEventInit } from "@/specs/dom/dictionaries/DDomEventInit.js";
+import type {
   IDomEvent,
   IDomEventConstants,
+  IDomEventConstructors,
 } from "@/specs/dom/interfaces/IDomEvent.js";
-import { StaticImplements } from "../helpers/StaticImplements.js";
 import { DomEventBase } from "./DomEventBase.js";
 
 @StaticImplements<IDomEventConstructors & IDomEventConstants>()

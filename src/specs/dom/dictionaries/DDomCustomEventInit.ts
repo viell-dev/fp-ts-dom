@@ -1,5 +1,5 @@
 import type { DDomEventInit } from "./DDomEventInit.js";
 
-export interface DDomCustomEventInit<D = unknown> extends DDomEventInit {
+export interface DDomCustomEventInit<D> extends DDomEventInit {
   detail?: D;
 }

@@ -1,17 +1,15 @@
-import { DomEventPhase } from "@/specs/dom/constants/DomEventPhase.js";
-import {
+import { StaticImplements } from "@/decorators/StaticImplements.js";
+import { Wrapper } from "@/globals/Wrapper.js";
+import { CDomEventEventPhase } from "@/specs/dom/constants/CDomEventEventPhase.js";
+import type {
   IDomEvent,
   IDomEventConstants,
 } from "@/specs/dom/interfaces/IDomEvent.js";
-import { IDomEventTarget } from "@/specs/dom/interfaces/IDomEventTarget.js";
 import * as A from "fp-ts/Array";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { StaticImplements } from "../helpers/StaticImplements.js";
-import { Wrapper } from "../wrapper/Wrapper.js";
 import { DomEventTarget } from "./DomEventTarget.js";
 
-/** Wrapper for native Events */
 @StaticImplements<IDomEventConstants>()
 export abstract class DomEventBase<N extends Event>
   extends Wrapper<N>
@@ -27,10 +25,6 @@ export abstract class DomEventBase<N extends Event>
       O.map((eventTarget) => new DomEventTarget(eventTarget))
     );
   }
-  /** @deprecated Use {@link target} instead. */
-  get srcElement(): O.Option<IDomEventTarget<EventTarget>> {
-    return this.target;
-  }
   get currentTarget(): O.Option<DomEventTarget> {
     return pipe(
       this.native.currentTarget,
@@ -45,23 +39,20 @@ export abstract class DomEventBase<N extends Event>
     );
   }
 
-  static readonly NONE = DomEventPhase.NONE;
-  static readonly CAPTURING_PHASE = DomEventPhase.CAPTURING_PHASE;
-  static readonly AT_TARGET = DomEventPhase.AT_TARGET;
-  static readonly BUBBLING_PHASE = DomEventPhase.BUBBLING_PHASE;
-  get eventPhase(): DomEventPhase {
-    return this.native.eventPhase;
+  static readonly NONE = CDomEventEventPhase.NONE;
+  static readonly CAPTURING_PHASE = CDomEventEventPhase.CAPTURING_PHASE;
+  static readonly AT_TARGET = CDomEventEventPhase.AT_TARGET;
+  static readonly BUBBLING_PHASE = CDomEventEventPhase.BUBBLING_PHASE;
+  get eventPhase(): CDomEventEventPhase {
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- According to the spec, the eventPhase property returns the value of one
+        of the class constants: NONE (0), CAPTURING_PHASE (1), AT_TARGET (2) or
+        BUBBLING_PHASE (3). */
+    return this.native.eventPhase as CDomEventEventPhase;
   }
 
   stopPropagation(): void {
     this.native.stopPropagation();
-  }
-  /** @deprecated Use {@link stopPropagation} instead. */
-  get cancelBubble(): boolean {
-    return this.native.cancelBubble;
-  }
-  set cancelBubble(value: boolean) {
-    this.native.cancelBubble = value;
   }
   stopImmediatePropagation(): void {
     this.native.stopImmediatePropagation();
@@ -72,10 +63,6 @@ export abstract class DomEventBase<N extends Event>
   }
   get cancelable(): boolean {
     return this.native.cancelable;
-  }
-  /** @deprecated Use {@link defaultPrevented} instead. */
-  get returnValue(): boolean {
-    return !this.defaultPrevented;
   }
   preventDefault(): void {
     this.native.preventDefault();
@@ -92,10 +79,5 @@ export abstract class DomEventBase<N extends Event>
   }
   get timeStamp(): number {
     return this.native.timeStamp;
-  }
-
-  /** @deprecated Create a new event instead. */
-  initEvent(type: string, bubbles?: boolean, cancelable?: boolean): void {
-    this.native.initEvent(type, bubbles, cancelable);
   }
 }
