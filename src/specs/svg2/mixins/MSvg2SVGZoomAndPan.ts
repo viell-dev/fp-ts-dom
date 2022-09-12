@@ -8,6 +8,6 @@ export interface MSvg2SVGZoomAndPanConstants {
 }
 
 export interface MSvg2SVGZoomAndPan {
-  // Zoom and Pan type class constants are declared in the interface above.
+  // Zoom and pan type class constants are declared in the interface above.
   zoomAndPan: CSvg2SVGZoomAndPanZoomAndPanType;
 }

@@ -23,7 +23,7 @@ export interface IDomEvent<N extends Event> extends IWrapper<N> {
   readonly currentTarget: O.Option<IDomEventTarget<EventTarget>>;
   composedPath(): IDomEventTarget<EventTarget>[];
 
-  // DomEventPhase class constants are declared in the interface above.
+  // Event phase class constants are declared in the interface above.
   readonly eventPhase: CDomEventEventPhase;
 
   stopPropagation(): void;
