@@ -1,35 +1,46 @@
+import { StaticImplements } from "@/decorators/StaticImplements.js";
+import type { NotSupportedErrorDomException } from "@/exceptions/DomException.js";
+import { getNative, getNativeOrNull } from "@/helpers/getNative.js";
+import { CDomNodeNodeDocumentPosition } from "@/specs/dom/constants/CDomNodeNodeDocumentPosition.js";
+import { CDomNodeNodeType } from "@/specs/dom/constants/CDomNodeNodeType.js";
+import type { DDomGetRootNodeOptions } from "@/specs/dom/dictionaries/DDomGetRootNodeOptions.js";
+import type {
+  IDomNode,
+  IDomNodeConstants,
+} from "@/specs/dom/interfaces/IDomNode.js";
+import * as A from "fp-ts/Array";
+import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { DomGetRootNodeOptions } from "../dictionaries/DomGetRootNodeOptions.js";
-import { DomNodeDocumentPosition } from "../enums/DomNodeDocumentPosition.js";
-import { DomNodeType } from "../enums/DomNodeType.js";
-import { optional, Optional } from "../helpers/Optional.js";
-import { StaticImplements } from "../helpers/StaticImplements.js";
-import { IDomNode, IDomNodeConstants } from "../interfaces/IDomNode.js";
 import { DomDocument } from "./DomDocument.js";
+import { DomElement } from "./DomElement.js";
 import { DomEventTargetBase } from "./DomEventTargetBase.js";
 import { DomNode } from "./DomNode.js";
-import { DomNodeList } from "./DomNodeList.js";
 
 @StaticImplements<IDomNodeConstants>()
 export class DomNodeBase<N extends Node>
   extends DomEventTargetBase<N>
   implements IDomNode<N>
 {
-  private childNodesInternal: O.Option<DomNodeList> = O.none;
-
-  static readonly ELEMENT_NODE = DomNodeType.ELEMENT_NODE;
-  static readonly ATTRIBUTE_NODE = DomNodeType.ATTRIBUTE_NODE;
-  static readonly TEXT_NODE = DomNodeType.TEXT_NODE;
-  static readonly CDATA_SECTION_NODE = DomNodeType.CDATA_SECTION_NODE;
+  static readonly ELEMENT_NODE = CDomNodeNodeType.ELEMENT_NODE;
+  static readonly ATTRIBUTE_NODE = CDomNodeNodeType.ATTRIBUTE_NODE;
+  static readonly TEXT_NODE = CDomNodeNodeType.TEXT_NODE;
+  static readonly CDATA_SECTION_NODE = CDomNodeNodeType.CDATA_SECTION_NODE;
   static readonly PROCESSING_INSTRUCTION_NODE =
-    DomNodeType.PROCESSING_INSTRUCTION_NODE;
-  static readonly COMMENT_NODE = DomNodeType.COMMENT_NODE;
-  static readonly DOCUMENT_NODE = DomNodeType.DOCUMENT_NODE;
-  static readonly DOCUMENT_TYPE_NODE = DomNodeType.DOCUMENT_TYPE_NODE;
-  static readonly DOCUMENT_FRAGMENT_NODE = DomNodeType.DOCUMENT_FRAGMENT_NODE;
-  get nodeType(): DomNodeType {
-    return this.native.nodeType;
+    CDomNodeNodeType.PROCESSING_INSTRUCTION_NODE;
+  static readonly COMMENT_NODE = CDomNodeNodeType.COMMENT_NODE;
+  static readonly DOCUMENT_NODE = CDomNodeNodeType.DOCUMENT_NODE;
+  static readonly DOCUMENT_TYPE_NODE = CDomNodeNodeType.DOCUMENT_TYPE_NODE;
+  static readonly DOCUMENT_FRAGMENT_NODE =
+    CDomNodeNodeType.DOCUMENT_FRAGMENT_NODE;
+  get nodeType(): CDomNodeNodeType {
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- According to the spec, the nodeType property returns the value of one
+        of the class constants: ELEMENT_NODE (1), ATTRIBUTE_NODE (2),
+        TEXT_NODE (3), CDATA_SECTION_NODE (4), PROCESSING_INSTRUCTION_NODE (7),
+        COMMENT_NODE (8), DOCUMENT_NODE (9), DOCUMENT_TYPE_NODE (10) and
+        DOCUMENT_FRAGMENT_NODE (11) */
+    return this.native.nodeType as CDomNodeNodeType;
   }
   get nodeName(): string {
     return this.native.nodeName;
@@ -44,185 +55,160 @@ export class DomNodeBase<N extends Node>
   }
   get ownerDocument(): O.Option<DomDocument> {
     return pipe(
-      this.native.ownerDocument,
-      O.fromNullable,
+      O.fromNullable(this.native.ownerDocument),
       O.map((document) => new DomDocument(document))
     );
   }
-  getRootNode(options?: Optional<DomGetRootNodeOptions>): DomNode {
-    return pipe(
-      options,
-      optional,
-      O.toUndefined,
-      this.native.getRootNode,
-      (node) => new DomNode(node)
-    );
+  getRootNode(options?: DDomGetRootNodeOptions): DomNode {
+    return pipe(this.native.getRootNode(options), (node) => new DomNode(node));
   }
   get parentNode(): O.Option<DomNode> {
     return pipe(
-      this.native.parentNode,
-      O.fromNullable,
+      O.fromNullable(this.native.parentNode),
       O.map((node) => new DomNode(node))
     );
   }
   get parentElement(): O.Option<DomElement> {
     return pipe(
-      this.native.parentElement,
-      O.fromNullable,
+      O.fromNullable(this.native.parentElement),
       O.map((element) => new DomElement(element))
     );
   }
   hasChildNodes(): boolean {
     return this.native.hasChildNodes();
   }
-  get childNodes(): DomNodeList {
-    if (O.isNone(this.childNodesInternal))
-      this.childNodesInternal = O.some(new DomNodeList(this.childNodes));
-    else return this.childNodesInternal.value;
+  get childNodes(): DomNode[] {
+    return pipe(
+      Array.from(this.native.childNodes),
+      A.map((node) => new DomNode(node))
+    );
   }
   get firstChild(): O.Option<DomNode> {
     return pipe(
-      this.native.firstChild,
-      O.fromNullable,
+      O.fromNullable(this.native.firstChild),
       O.map((node) => new DomNode(node))
     );
   }
   get lastChild(): O.Option<DomNode> {
     return pipe(
-      this.native.lastChild,
-      O.fromNullable,
+      O.fromNullable(this.native.lastChild),
       O.map((node) => new DomNode(node))
     );
   }
   get previousSibling(): O.Option<DomNode> {
     return pipe(
-      this.native.previousSibling,
-      O.fromNullable,
+      O.fromNullable(this.native.previousSibling),
       O.map((node) => new DomNode(node))
     );
   }
   get nextSibling(): O.Option<DomNode> {
     return pipe(
-      this.native.nextSibling,
-      O.fromNullable,
+      O.fromNullable(this.native.nextSibling),
       O.map((node) => new DomNode(node))
     );
   }
 
-  get nodeValue(): N extends Attr | CharacterData ? string : null {
-    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-       -- Trusting the spec.
-       See: https://dom.spec.whatwg.org/#dom-node-nodevalue */
-    return this.native.nodeValue as N extends Attr | CharacterData
-      ? string
-      : null;
+  get nodeValue(): O.Option<string> {
+    return O.fromNullable(this.native.nodeValue);
   }
-  get textContent(): N extends Attr | CharacterData | DocumentFragment | Element
-    ? string
-    : null {
-    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-       -- Trusting the spec.
-       See: https://dom.spec.whatwg.org/#dom-node-textcontent */
-    return this.native.nodeValue as N extends
-      | DocumentFragment
-      | Element
-      | Attr
-      | CharacterData
-      ? string
-      : null;
+  get textContent(): O.Option<string> {
+    return O.fromNullable(this.native.textContent);
   }
   normalize(): void {
     this.native.normalize();
   }
 
-  cloneNode(deep?: Optional<boolean>): DomNode {
+  cloneNode(deep?: boolean): E.Either<NotSupportedErrorDomException, DomNode> {
     return pipe(
-      deep,
-      optional,
-      O.toUndefined,
-      this.native.cloneNode,
-      (node) => new DomNode(node)
+      E.tryCatch(
+        () => this.native.cloneNode(deep),
+        /* eslint-disable-next-line
+            @typescript-eslint/consistent-type-assertions
+        -- According to the spec, this is the only possible error. */
+        (error) => error as NotSupportedErrorDomException
+      ),
+      E.map((node) => new DomNode(node))
     );
   }
-  isEqualNode(otherNode: Node | DomNode | null): boolean {
-    return pipe(
-      otherNode,
-      O.fromNullable,
-      O.map((node) => (node instanceof Node ? node : node.getNative())),
-      O.toNullable,
-      this.native.isEqualNode
-    );
+  isEqualNode(otherNode: Node | IDomNode<Node> | null): boolean {
+    return pipe(getNativeOrNull(otherNode), this.native.isEqualNode);
   }
 
   static readonly DOCUMENT_POSITION_DISCONNECTED =
-    DomNodeDocumentPosition.DOCUMENT_POSITION_DISCONNECTED;
+    CDomNodeNodeDocumentPosition.DOCUMENT_POSITION_DISCONNECTED;
   static readonly DOCUMENT_POSITION_PRECEDING =
-    DomNodeDocumentPosition.DOCUMENT_POSITION_PRECEDING;
+    CDomNodeNodeDocumentPosition.DOCUMENT_POSITION_PRECEDING;
   static readonly DOCUMENT_POSITION_FOLLOWING =
-    DomNodeDocumentPosition.DOCUMENT_POSITION_FOLLOWING;
+    CDomNodeNodeDocumentPosition.DOCUMENT_POSITION_FOLLOWING;
   static readonly DOCUMENT_POSITION_CONTAINS =
-    DomNodeDocumentPosition.DOCUMENT_POSITION_CONTAINS;
+    CDomNodeNodeDocumentPosition.DOCUMENT_POSITION_CONTAINS;
   static readonly DOCUMENT_POSITION_CONTAINED_BY =
-    DomNodeDocumentPosition.DOCUMENT_POSITION_CONTAINED_BY;
+    CDomNodeNodeDocumentPosition.DOCUMENT_POSITION_CONTAINED_BY;
   static readonly DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC =
-    DomNodeDocumentPosition.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
-  compareDocumentPosition(other: Node | DomNode): DomNodeDocumentPosition {
-    return this.native.compareDocumentPosition(
-      other instanceof Node ? other : other.getNative()
-    );
+    CDomNodeNodeDocumentPosition.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
+  compareDocumentPosition(
+    other: Node | IDomNode<Node>
+  ): CDomNodeNodeDocumentPosition {
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- According to the spec, the compareDocumentPosition() method returns the
+        value of one of the class constants:
+        DOCUMENT_POSITION_DISCONNECTED (0x01),
+        DOCUMENT_POSITION_PRECEDING (0x02),
+        DOCUMENT_POSITION_FOLLOWING (0x04),
+        DOCUMENT_POSITION_CONTAINS (0x08),
+        DOCUMENT_POSITION_CONTAINED_BY (0x10) and
+        DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC (0x20) */
+    return pipe(
+      getNative(other),
+      this.native.compareDocumentPosition
+    ) as CDomNodeNodeDocumentPosition;
   }
-  contains(other: Node | DomNode | null): boolean {
-    return this.native.contains(
-      other === null ? null : other instanceof Node ? other : other.getNative()
-    );
+  contains(other: Node | IDomNode<Node> | null): boolean {
+    return pipe(getNativeOrNull(other), this.native.contains);
   }
 
   lookupPrefix(namespace: string | null): O.Option<string> {
-    return O.fromNullable(this.native.lookupPrefix(namespace));
+    return pipe(this.native.lookupPrefix(namespace), O.fromNullable);
   }
   lookupNamespaceURI(namespace: string | null): O.Option<string> {
-    return O.fromNullable(this.native.lookupNamespaceURI(namespace));
+    return pipe(this.native.lookupNamespaceURI(namespace), O.fromNullable);
   }
   isDefaultNamespace(namespace: string | null): boolean {
     return this.native.isDefaultNamespace(namespace);
   }
 
-  insertBefore(node: Node | DomNode, child: Node | DomNode | null): DomNode {
+  insertBefore(
+    node: Node | IDomNode<Node>,
+    child: Node | IDomNode<Node> | null
+  ): DomNode {
     return pipe(
-      this.native.insertBefore(
-        pipe(node, (node) => (node instanceof Node ? node : node.getNative())),
-        pipe(
-          child,
-          O.fromNullable,
-          O.map((node) => (node instanceof Node ? node : node.getNative())),
-          O.toNullable
-        )
-      ),
+      [getNative(node), getNativeOrNull(child)] as const,
+      (params) => this.native.insertBefore(...params),
       (node) => new DomNode(node)
     );
   }
-  appendChild(node: Node | DomNode): DomNode {
+
+  appendChild(node: Node | IDomNode<Node>): DomNode {
     return pipe(
-      this.native.appendChild(
-        pipe(node, (node) => (node instanceof Node ? node : node.getNative()))
-      ),
+      getNative(node),
+      this.native.appendChild,
       (node) => new DomNode(node)
     );
   }
-  replaceChild(node: Node | DomNode, child: Node | DomNode): DomNode {
+  replaceChild(
+    node: Node | IDomNode<Node>,
+    child: Node | IDomNode<Node>
+  ): DomNode {
     return pipe(
-      this.native.replaceChild(
-        pipe(node, (node) => (node instanceof Node ? node : node.getNative())),
-        pipe(child, (node) => (node instanceof Node ? node : node.getNative()))
-      ),
+      [getNative(node), getNative(child)] as const,
+      (params) => this.native.replaceChild(...params),
       (node) => new DomNode(node)
     );
   }
-  removeChild(child: Node | DomNode): DomNode {
+  removeChild(child: Node | IDomNode<Node>): DomNode {
     return pipe(
-      this.native.removeChild(
-        pipe(child, (node) => (node instanceof Node ? node : node.getNative()))
-      ),
+      getNative(child),
+      this.native.removeChild,
       (node) => new DomNode(node)
     );
   }

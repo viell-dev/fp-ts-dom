@@ -1,4 +1,12 @@
-import type { IDomAbortSignal } from "@/specs/dom/interfaces/IDomAbortSignal.js";
+import { StaticImplements } from "@/decorators/StaticImplements.js";
+import type {
+  AbortErrorDomException,
+  TimeoutErrorDomException,
+} from "@/exceptions/DomException.js";
+import type {
+  IDomAbortSignal,
+  IDomAbortSignalConstructors,
+} from "@/specs/dom/interfaces/IDomAbortSignal.js";
 import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.js";
 import type { CBHtmlEventHandler } from "@/specs/html/callbacks/CBHtmlEventHandler.js";
 import { pipe } from "fp-ts/function";
@@ -6,10 +14,40 @@ import * as O from "fp-ts/Option";
 import { DomEvent } from "./DomEvent.js";
 import { DomEventTargetBase } from "./DomEventTargetBase.js";
 
+/* The typescript typings are missing the abort and timeout methods. */
+type CorrectedAbortSignal = {
+  abort: (reason?: unknown) => AbortSignal;
+  timeout: (milliseconds: number) => AbortSignal;
+} & typeof AbortSignal;
+
+@StaticImplements<IDomAbortSignalConstructors>()
 export class DomAbortSignal<R>
   extends DomEventTargetBase<AbortSignal>
   implements IDomAbortSignal<AbortSignal, R>
 {
+  static abort<R>(
+    reason?: R
+  ): DomAbortSignal<R extends undefined ? AbortErrorDomException : R> {
+    return pipe(
+      /* eslint-disable-next-line
+          @typescript-eslint/consistent-type-assertions
+      -- The abort method is missing in the typescript typings. */
+      (AbortSignal as CorrectedAbortSignal).abort(reason),
+      (signal) => new DomAbortSignal(signal)
+    );
+  }
+  static timeout(
+    milliseconds: number
+  ): DomAbortSignal<TimeoutErrorDomException> {
+    return pipe(
+      /* eslint-disable-next-line
+          @typescript-eslint/consistent-type-assertions
+      -- The timeout method is missing in the typescript typings. */
+      (AbortSignal as CorrectedAbortSignal).timeout(milliseconds),
+      (signal) => new DomAbortSignal(signal)
+    );
+  }
+
   get aborted(): boolean {
     return this.native.aborted;
   }

@@ -1,9 +1,14 @@
-import type { IDomAbortController } from "@/specs/dom/interfaces/IDomAbortController.js";
+import { StaticImplements } from "@/decorators/StaticImplements.js";
+import type {
+  IDomAbortController,
+  IDomAbortControllerConstructors,
+} from "@/specs/dom/interfaces/IDomAbortController.js";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import { Wrapper } from "../../globals/Wrapper.js";
 import { DomAbortSignal } from "./DomAbortSignal.js";
 
+@StaticImplements<IDomAbortControllerConstructors>()
 export class DomAbortController<R>
   extends Wrapper<AbortController>
   implements IDomAbortController<AbortController, R>

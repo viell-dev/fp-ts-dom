@@ -2,7 +2,7 @@ import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.js";
 import type { IDomAbortSignal } from "./IDomAbortSignal.js";
 
 /** @sealed */
-export interface IDomAbortControllerConstructor
+export interface IDomAbortControllerConstructors
   extends IWrapperConstructors<AbortController> {
   new (): IDomAbortController<AbortController, unknown>;
 }
