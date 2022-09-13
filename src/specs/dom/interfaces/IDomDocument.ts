@@ -4,6 +4,7 @@ import type {
   NamespaceErrorDomException,
   NotSupportedErrorDomException,
 } from "@/exceptions/DomException.js";
+import type { IWrapperConstructors } from "@/globals/IWrapper.js";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
 import type { CBDomNodeFilter } from "../callbacks/CBDomNodeFilter.js";
@@ -25,6 +26,12 @@ import type { IDomProcessingInstruction } from "./IDomProcessingInstruction.js";
 import type { IDomRange } from "./IDomRange.js";
 import type { IDomText } from "./IDomText.js";
 import type { IDomTreeWalker } from "./IDomTreeWalker.js";
+
+/** @sealed */
+export interface IDomDocumentConstructors
+  extends IWrapperConstructors<Document> {
+  new (): IDomDocument<Document>;
+}
 
 export interface IDomDocument<N extends Document>
   extends IDomNode<N>,
