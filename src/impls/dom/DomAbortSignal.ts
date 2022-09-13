@@ -16,9 +16,11 @@ import { DomEventTargetBase } from "./DomEventTargetBase.js";
 
 /* The typescript typings are missing the abort and timeout methods. */
 type CorrectedAbortSignal = {
-  abort: (reason?: unknown) => AbortSignal;
-  timeout: (milliseconds: number) => AbortSignal;
-} & typeof AbortSignal;
+  prototype: AbortSignal;
+  new (): AbortSignal;
+  abort(reason?: unknown): AbortSignal;
+  timeout(milliseconds: number): AbortSignal;
+};
 
 @StaticImplements<IDomAbortSignalConstructors>()
 export class DomAbortSignal<R>
