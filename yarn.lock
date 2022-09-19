@@ -834,17 +834,19 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-eslint-comments: ^3.2.0
     eslint-plugin-tsdoc: ^0.2.16
-    fp-ts: "file:../fp-ts/dist#../fp-ts/dist::hash=08e30a&locator=fp-ts-dom%40workspace%3A."
+    fp-ts: ^2.13.0-rc.3
     npm-run-all: ^4.1.5
     prettier: ^2.7.1
     typescript: ^4.8.2
+  peerDependencies:
+    fp-ts: ^2.13.0-rc.3
   languageName: unknown
   linkType: soft
 
-"fp-ts@file:../fp-ts/dist#../fp-ts/dist::hash=08e30a&locator=fp-ts-dom%40workspace%3A.":
-  version: 2.12.3
-  resolution: "fp-ts@file:../fp-ts/dist#../fp-ts/dist::hash=456b65&locator=fp-ts-dom%40workspace%3A."
-  checksum: 4bc663e1a897debb0d8cdb75336727a279dc0f4a6d198d73ce24f5e825a2e6c9d0b5942507f76bf00b49de69afae3b4c2bd54745ecef6de910c27f7e214940e4
+"fp-ts@npm:^2.13.0-rc.3":
+  version: 2.13.0-rc.3
+  resolution: "fp-ts@npm:2.13.0-rc.3"
+  checksum: bc6a05ecde1d708be5b685d0cdb67e51a37731ef3286fb8266527de96b458c73c02f6b0fa3982e4b393cce17e3546b19642a6635f963cb00fd88e982b0f205fe
   languageName: node
   linkType: hard
 

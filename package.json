@@ -2,9 +2,17 @@
   "name": "fp-ts-dom",
   "version": "0.1.0",
   "type": "module",
+  "license": "MIT",
   "exports": {
     ".": {
-      "import": "./lib/index.js"
+      "import": "./mjs/index.mjs",
+      "require": "./cjs/index.cjs",
+      "types": "./types/index.d.ts"
+    },
+    "./*": {
+      "import": "./mjs/*.mjs",
+      "require": "./cjs/*.cjs",
+      "types": "./types/*.d.ts"
     }
   },
   "packageManager": "yarn@3.2.3",
@@ -13,8 +21,8 @@
     "lint:prettier": "prettier --write --loglevel=warn src",
     "lint": "npm-run-all lint:eslint lint:prettier"
   },
-  "dependencies": {
-    "fp-ts": "file:../fp-ts/dist#../fp-ts/dist::hash=08e30a&locator=fp-ts-dom%40workspace%3A."
+  "peerDependencies": {
+    "fp-ts": "^2.13.0-rc.3"
   },
   "devDependencies": {
     "@types/eslint": "^8.4.6",
@@ -25,6 +33,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-tsdoc": "^0.2.16",
+    "fp-ts": "^2.13.0-rc.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
     "typescript": "^4.8.2"
