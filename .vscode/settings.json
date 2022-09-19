@@ -48,5 +48,7 @@
   // Spell checker
   "cSpell.enabled": true,
   "cSpell.caseSensitive": true,
-  "cSpell.language": "en-GB,en"
+  "cSpell.language": "en-GB,en",
+  "cSpell.words": ["viell"],
+  "cSpell.ignoreWords": ["loglevel", "tsdoc"]
 }

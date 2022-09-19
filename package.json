@@ -2,9 +2,17 @@
   "name": "fp-ts-dom",
   "version": "0.1.0",
   "type": "module",
+  "license": "MIT",
   "exports": {
     ".": {
-      "import": "./lib/index.js"
+      "import": "./mjs/index.mjs",
+      "require": "./cjs/index.cjs",
+      "types": "./types/index.d.ts"
+    },
+    "./*": {
+      "import": "./mjs/*.mjs",
+      "require": "./cjs/*.cjs",
+      "types": "./types/*.d.ts"
     }
   },
   "packageManager": "yarn@3.2.3",
