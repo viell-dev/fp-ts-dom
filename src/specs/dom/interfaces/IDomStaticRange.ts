@@ -15,7 +15,7 @@ export interface IDomStaticRangeConstructors
 
   create(
     init: DDomStaticRangeInit
-  ): E.Either<InvalidNodeTypeErrorDomException, StaticRange>;
+  ): E.Either<InvalidNodeTypeErrorDomException, IDomStaticRange<StaticRange>>;
 }
 
 export type IDomStaticRange<N extends StaticRange> = IDomAbstractRange<N>;

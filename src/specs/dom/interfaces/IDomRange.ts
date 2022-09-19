@@ -60,7 +60,7 @@ export interface IDomRange<N extends Range>
   // How class constants are declared in the interface above.
   compareBoundaryPoints(
     how: CDomRangeHow,
-    sourceRange: IDomRange<Range>
+    sourceRange: Range | IDomRange<Range>
   ): E.Either<
     NotSupportedErrorDomException | WrongDocumentErrorDomException,
     -1 | 0 | 1
