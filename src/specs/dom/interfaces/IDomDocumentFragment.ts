@@ -3,7 +3,7 @@ import type { MDomNonElementParentNode } from "../mixins/MDomNonElementParentNod
 import type { MDomParentNode } from "../mixins/MDomParentNode.js";
 import type { IDomNode } from "./IDomNode.js";
 
-export interface IDomDocumentFragmentConstructor
+export interface IDomDocumentFragmentConstructors
   extends IWrapperConstructors<DocumentFragment> {
   new (): IDomDocumentFragment<DocumentFragment>;
 }

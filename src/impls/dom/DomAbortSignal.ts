@@ -69,18 +69,16 @@ export class DomAbortSignal<R>
 
   get onabort(): CBHtmlEventHandler {
     return pipe(
-      this.native.onabort,
-      O.fromNullable,
+      O.fromNullable(this.native.onabort),
       O.map((callback) => (event: IDomEvent<Event>) => {
         return callback.bind(this.getNative(), event.getNative());
       }),
       O.toNullable
     );
   }
-  set onabort(value: CBHtmlEventHandler) {
+  set onabort(callback: CBHtmlEventHandler) {
     this.native.onabort = pipe(
-      value,
-      O.fromNullable,
+      O.fromNullable(callback),
       O.map((callback) => (event: Event): unknown => {
         return callback.call(this, new DomEvent(event));
       }),
