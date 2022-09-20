@@ -1,4 +1,5 @@
 import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.js";
+import type * as E from "fp-ts/Either";
 import type { CBDomMutationCallback } from "../callbacks/CBDomMutationCallback.js";
 import type { DDomMutationObserverInit } from "../dictionaries/DDomMutationObserverInit.js";
 import type { IDomMutationRecord } from "./IDomMutationRecord.js";
@@ -14,7 +15,7 @@ export interface IDomMutationObserver<N extends MutationObserver>
   observe(
     target: Node | IDomNode<Node>,
     options?: DDomMutationObserverInit
-  ): void;
+  ): E.Either<TypeError, void>;
   disconnect(): void;
   takeRecords(): IDomMutationRecord<MutationRecord>[];
 }

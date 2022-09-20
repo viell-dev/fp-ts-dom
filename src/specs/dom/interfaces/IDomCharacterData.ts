@@ -1,3 +1,4 @@
+import type * as E from "fp-ts/Either";
 import type { MDomChildNode } from "../mixins/MDomChildNode.js";
 import type { MDomNonDocumentTypeChildNode } from "../mixins/MDomNonDocumentTypeChildNode.js";
 import type { IDomNode } from "./IDomNode.js";
@@ -8,9 +9,13 @@ export interface IDomCharacterData<N extends CharacterData>
     MDomChildNode {
   data: string;
   readonly length: number;
-  substringData(offset: number, count: number): string;
-  appendData(data: string): void;
-  insertData(offset: number, data: string): void;
-  deleteData(offset: number, count: number): void;
-  replaceData(offset: number, count: number, data: string): void;
+  substringData(offset: number, count: number): E.Either<RangeError, string>;
+  appendData(data: string): E.Either<RangeError, void>;
+  insertData(offset: number, data: string): E.Either<RangeError, void>;
+  deleteData(offset: number, count: number): E.Either<RangeError, void>;
+  replaceData(
+    offset: number,
+    count: number,
+    data: string
+  ): E.Either<RangeError, void>;
 }

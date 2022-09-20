@@ -1,6 +1,9 @@
-import { HierarchyRequestErrorDomException } from "@/exceptions/DomException.js";
+import type { HierarchyRequestErrorDomException } from "@/exceptions/DomException.js";
+import type { IDomDocumentType } from "@/specs/dom/interfaces/IDomDocumentType.js";
+import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.js";
+import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
-import { IDomDocumentType } from "../interfaces/IDomDocumentType.js";
+import { pipe } from "fp-ts/function";
 import { DomNodeBase } from "./DomNodeBase.js";
 
 export class DomDocumentType
@@ -18,33 +21,60 @@ export class DomDocumentType
   }
 
   before(
-    ...nodes: (Node | string)[]
+    ...nodes: (Node | IDomNode<Node> | string)[]
   ): E.Either<HierarchyRequestErrorDomException, void> {
-    return E.tryCatch(
-      () => this.native.before(...nodes),
-      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-      -- Trusting the spec. See: https://dom.spec.whatwg.org/#childnode */
-      (error) => error as HierarchyRequestErrorDomException
+    return pipe(
+      nodes,
+      A.map((node) =>
+        typeof node === "string" || node instanceof Node
+          ? node
+          : node.getNative()
+      ),
+      E.tryCatchK(
+        (params) => this.native.before(...params),
+        /* eslint-disable-next-line
+            @typescript-eslint/consistent-type-assertions
+        -- According to the spec, this is the only possible error. */
+        (error) => error as HierarchyRequestErrorDomException
+      )
     );
   }
   after(
-    ...nodes: (Node | string)[]
+    ...nodes: (Node | IDomNode<Node> | string)[]
   ): E.Either<HierarchyRequestErrorDomException, void> {
-    return E.tryCatch(
-      () => this.native.after(...nodes),
-      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-      -- Trusting the spec. See: https://dom.spec.whatwg.org/#childnode */
-      (error) => error as HierarchyRequestErrorDomException
+    return pipe(
+      nodes,
+      A.map((node) =>
+        typeof node === "string" || node instanceof Node
+          ? node
+          : node.getNative()
+      ),
+      E.tryCatchK(
+        (params) => this.native.after(...params),
+        /* eslint-disable-next-line
+            @typescript-eslint/consistent-type-assertions
+        -- According to the spec, this is the only possible error. */
+        (error) => error as HierarchyRequestErrorDomException
+      )
     );
   }
   replaceWith(
-    ...nodes: (Node | string)[]
+    ...nodes: (Node | IDomNode<Node> | string)[]
   ): E.Either<HierarchyRequestErrorDomException, void> {
-    return E.tryCatch(
-      () => this.native.replaceWith(...nodes),
-      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-      -- Trusting the spec. See: https://dom.spec.whatwg.org/#childnode */
-      (error) => error as HierarchyRequestErrorDomException
+    return pipe(
+      nodes,
+      A.map((node) =>
+        typeof node === "string" || node instanceof Node
+          ? node
+          : node.getNative()
+      ),
+      E.tryCatchK(
+        (params) => this.native.replaceWith(...params),
+        /* eslint-disable-next-line
+            @typescript-eslint/consistent-type-assertions
+        -- According to the spec, this is the only possible error. */
+        (error) => error as HierarchyRequestErrorDomException
+      )
     );
   }
   remove(): void {

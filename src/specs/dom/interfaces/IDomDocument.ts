@@ -1,4 +1,15 @@
+import type {
+  HierarchyRequestErrorDomException,
+  InvalidCharacterErrorDomException,
+  NamespaceErrorDomException,
+  NotSupportedErrorDomException,
+} from "@/exceptions/DomException.js";
+import type { IWrapperConstructors } from "@/globals/IWrapper.js";
+import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
+import type { CBDomNodeFilter } from "../callbacks/CBDomNodeFilter.js";
+import type { CDomNodeFilterWhatToShow } from "../constants/CDomNodeFilterWhatToShow.js";
+import type { DDomElementCreationOptions } from "../dictionaries/DDomElementCreationOptions.js";
 import type { MDomDocumentOrShadowRoot } from "../mixins/MDomDocumentOrShadowRoot.js";
 import type { MDomNonElementParentNode } from "../mixins/MDomNonElementParentNode.js";
 import type { MDomParentNode } from "../mixins/MDomParentNode.js";
@@ -9,19 +20,27 @@ import type { IDomDocumentFragment } from "./IDomDocumentFragment.js";
 import type { IDomDocumentType } from "./IDomDocumentType.js";
 import type { IDomDOMImplementation } from "./IDomDOMImplementation.js";
 import type { IDomElement } from "./IDomElement.js";
-import type { IDomHTMLCollection } from "./IDomHTMLCollection.js";
 import type { IDomNode } from "./IDomNode.js";
 import type { IDomNodeIterator } from "./IDomNodeIterator.js";
-import type { IDomProccessingInstruction } from "./IDomProccessingInstruction.js";
+import type { IDomProcessingInstruction } from "./IDomProcessingInstruction.js";
 import type { IDomRange } from "./IDomRange.js";
 import type { IDomText } from "./IDomText.js";
 import type { IDomTreeWalker } from "./IDomTreeWalker.js";
+
+/** @sealed */
+export interface IDomDocumentConstructors
+  extends IWrapperConstructors<Document> {
+  new (): IDomDocument<Document>;
+}
 
 export interface IDomDocument<N extends Document>
   extends IDomNode<N>,
     MDomNonElementParentNode,
     MDomDocumentOrShadowRoot,
-    MDomParentNode {
+    MDomParentNode /*,
+    MDomXPathEvaluatorBase,
+    IHtmlDocument,
+    ISvg2Document*/ {
   readonly implementation: IDomDOMImplementation<DOMImplementation>;
   readonly URL: string;
   readonly documentURI: string;
@@ -31,54 +50,79 @@ export interface IDomDocument<N extends Document>
 
   readonly doctype: O.Option<IDomDocumentType<DocumentType>>;
   readonly documentElement: O.Option<IDomElement<Element>>;
-  getElementsByTagName(
-    qualifiedName: string
-  ): IDomHTMLCollection<HTMLCollection>;
+  getElementsByTagName(qualifiedName: string): IDomElement<Element>[];
   getElementsByTagNameNS(
     namespace: string | null,
     localName: string
-  ): IDomHTMLCollection<HTMLCollection>;
-  getElementsByClassName(
-    qualifiedName: string
-  ): IDomHTMLCollection<HTMLCollection>;
+  ): IDomElement<Element>[];
+  getElementsByClassName(qualifiedName: string): IDomElement<Element>[];
 
   createElement(
-    qualifiedName: string,
-    options?: string | ElementCreationOptions
-  ): IDomElement<Element>;
-  createElementNS(
-    namepsace: string | null,
     localName: string,
-    options?: string | ElementCreationOptions
-  ): IDomElement<Element>;
+    options?: string | DDomElementCreationOptions
+  ): E.Either<
+    InvalidCharacterErrorDomException | NotSupportedErrorDomException,
+    IDomElement<Element>
+  >;
+  createElementNS(
+    namespace: string | null,
+    qualifiedName: string,
+    options?: string | DDomElementCreationOptions
+  ): E.Either<
+    | InvalidCharacterErrorDomException
+    | NamespaceErrorDomException
+    | NotSupportedErrorDomException,
+    IDomElement<Element>
+  >;
   createDocumentFragment(): IDomDocumentFragment<DocumentFragment>;
   createTextNode(data: string): IDomText<Text>;
-  createCDATASection(data: string): IDomCDATASection<CDATASection>;
+  createCDATASection(
+    data: string
+  ): E.Either<
+    NotSupportedErrorDomException | InvalidCharacterErrorDomException,
+    IDomCDATASection<CDATASection>
+  >;
   createComment(data: string): IDomComment<Comment>;
   createProcessingInstruction(
     target: string,
     data: string
-  ): IDomProccessingInstruction<ProcessingInstruction>;
+  ): E.Either<
+    InvalidCharacterErrorDomException,
+    IDomProcessingInstruction<ProcessingInstruction>
+  >;
 
-  importNode(node: Node | IDomNode<Node>, deep?: boolean): IDomNode<Node>;
-  adoptNode(node: Node | IDomNode<Node>): IDomNode<Node>;
+  importNode(
+    node: Node | IDomNode<Node>,
+    deep?: boolean
+  ): E.Either<NotSupportedErrorDomException, IDomNode<Node>>;
+  adoptNode(
+    node: Node | IDomNode<Node>
+  ): E.Either<
+    NotSupportedErrorDomException | HierarchyRequestErrorDomException,
+    IDomNode<Node>
+  >;
 
-  createAttribute(qualifiedName: string): IDomAttr<Attr>;
-  createAttributeNS(
-    namepsace: string | null,
+  createAttribute(
     localName: string
-  ): IDomAttr<Attr>;
+  ): E.Either<InvalidCharacterErrorDomException, IDomAttr<Attr>>;
+  createAttributeNS(
+    namespace: string | null,
+    qualifiedName: string
+  ): E.Either<
+    InvalidCharacterErrorDomException | NamespaceErrorDomException,
+    IDomAttr<Attr>
+  >;
 
   createRange(): IDomRange<Range>;
 
   createNodeIterator(
     root: Node | IDomNode<Node>,
-    whatToShow?: number,
-    filter?: NodeFilter | null
+    whatToShow?: CDomNodeFilterWhatToShow,
+    filter?: CBDomNodeFilter | null
   ): IDomNodeIterator<NodeIterator>;
   createTreeWalker(
     root: Node | IDomNode<Node>,
-    whatToShow?: number,
-    filter?: NodeFilter | null
+    whatToShow?: CDomNodeFilterWhatToShow,
+    filter?: CBDomNodeFilter | null
   ): IDomTreeWalker<TreeWalker>;
 }

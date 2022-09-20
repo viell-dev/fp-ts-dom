@@ -49,6 +49,6 @@
   "cSpell.enabled": true,
   "cSpell.caseSensitive": true,
   "cSpell.language": "en-GB,en",
-  "cSpell.words": ["viell"],
+  "cSpell.words": ["viell", "onslotchange", "Stringifier"],
   "cSpell.ignoreWords": ["loglevel", "tsdoc"]
 }

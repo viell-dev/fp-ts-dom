@@ -1,17 +1,24 @@
+import type {
+  InvalidCharacterErrorDomException,
+  NamespaceErrorDomException,
+  NotFoundErrorDomException,
+  NotSupportedErrorDomException,
+  SyntaxErrorDomException,
+} from "@/exceptions/DomException.js";
+import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
-import type { DomShadowRootInit } from "../dictionaries/DomShadowRootInit.js";
+import type { DDomShadowRootInit } from "../dictionaries/DDomShadowRootInit.js";
 import type { MDomChildNode } from "../mixins/MDomChildNode.js";
 import type { MDomNonDocumentTypeChildNode } from "../mixins/MDomNonDocumentTypeChildNode.js";
 import type { MDomParentNode } from "../mixins/MDomParentNode.js";
 import type { MDomSlottable } from "../mixins/MDomSlottable.js";
 import type { IDomAttr } from "./IDomAttr.js";
 import type { IDomDOMTokenList } from "./IDomDOMTokenList.js";
-import type { IDomHTMLCollection } from "./IDomHTMLCollection.js";
 import type { IDomNamedNodeMap } from "./IDomNamedNodeMap.js";
 import type { IDomNode } from "./IDomNode.js";
 import type { IDomShadowRoot } from "./IDomShadowRoot.js";
 
-export interface IDomElement<N extends Element, CN = string>
+export interface IDomElement<N extends Element>
   extends IDomNode<N>,
     MDomParentNode,
     MDomNonDocumentTypeChildNode,
@@ -23,7 +30,7 @@ export interface IDomElement<N extends Element, CN = string>
   readonly tagName: string;
 
   id: string;
-  className: CN;
+  className: string;
   readonly classList: IDomDOMTokenList<DOMTokenList>;
   slot: string;
 
@@ -32,15 +39,24 @@ export interface IDomElement<N extends Element, CN = string>
   getAttributeNames(): string[];
   getAttribute(qualifiedName: string): O.Option<string>;
   getAttributeNS(namespace: string | null, localName: string): O.Option<string>;
-  setAttribute(qualifiedName: string, value: string): void;
+  setAttribute(
+    qualifiedName: string,
+    value: string
+  ): E.Either<InvalidCharacterErrorDomException, void>;
   setAttributeNS(
     namespace: string | null,
     localName: string,
     value: string
-  ): void;
+  ): E.Either<
+    InvalidCharacterErrorDomException | NamespaceErrorDomException,
+    void
+  >;
   removeAttribute(qualifiedName: string): void;
   removeAttributeNS(namespace: string | null, localName: string): void;
-  toggleAttribute(qualifiedName: string, force?: boolean): boolean;
+  toggleAttribute(
+    qualifiedName: string,
+    force?: boolean
+  ): E.Either<InvalidCharacterErrorDomException, boolean>;
   hasAttribute(qualifiedName: string): boolean;
   hasAttributeNS(namespace: string | null, localName: string): boolean;
 
@@ -50,23 +66,25 @@ export interface IDomElement<N extends Element, CN = string>
     localName: string
   ): O.Option<IDomAttr<Attr>>;
   setAttributeNode(attr: Attr | IDomAttr<Attr>): O.Option<IDomAttr<Attr>>;
-  setAttributeNodNSe(attr: Attr | IDomAttr<Attr>): O.Option<IDomAttr<Attr>>;
-  removeAttributeNode(attr: Attr | IDomAttr<Attr>): IDomAttr<Attr>;
+  setAttributeNodeNS(attr: Attr | IDomAttr<Attr>): O.Option<IDomAttr<Attr>>;
+  removeAttributeNode(
+    attr: Attr | IDomAttr<Attr>
+  ): E.Either<NotFoundErrorDomException, IDomAttr<Attr>>;
 
-  attachShadow(init: DomShadowRootInit): IDomShadowRoot<ShadowRoot>;
+  attachShadow(
+    init: DDomShadowRootInit
+  ): E.Either<NotSupportedErrorDomException, IDomShadowRoot<ShadowRoot>>;
   readonly shadowRoot: O.Option<IDomShadowRoot<ShadowRoot>>;
 
-  closest(selectors: string): O.Option<IDomElement<Element>>;
-  matches(selectors: string): boolean;
+  closest(
+    selectors: string
+  ): E.Either<SyntaxErrorDomException, O.Option<IDomElement<Element>>>;
+  matches(selectors: string): E.Either<SyntaxErrorDomException, boolean>;
 
-  getElementsByTagName(
-    qualifiedName: string
-  ): IDomHTMLCollection<HTMLCollection>;
+  getElementsByTagName(qualifiedName: string): IDomElement<Element>[];
   getElementsByTagNameNS(
-    namepsace: string | null,
+    namespace: string | null,
     localName: string
-  ): IDomHTMLCollection<HTMLCollection>;
-  getElementsByClassName(
-    qualifiedName: string
-  ): IDomHTMLCollection<HTMLCollection>;
+  ): IDomElement<Element>[];
+  getElementsByClassName(classNames: string): IDomElement<Element>[];
 }

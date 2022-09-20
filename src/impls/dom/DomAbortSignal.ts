@@ -1,15 +1,55 @@
-import type { IDomAbortSignal } from "@/specs/dom/interfaces/IDomAbortSignal.js";
+import { StaticImplements } from "@/decorators/StaticImplements.js";
+import type {
+  AbortErrorDomException,
+  TimeoutErrorDomException,
+} from "@/exceptions/DomException.js";
+import type {
+  IDomAbortSignal,
+  IDomAbortSignalConstructors,
+} from "@/specs/dom/interfaces/IDomAbortSignal.js";
 import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.js";
-import type { CBHtmlEventHandlerNonNull } from "@/specs/html/callbacks/CBHtmlEventHandler.js";
-import * as E from "fp-ts/Either";
+import type { CBHtmlEventHandler } from "@/specs/html/callbacks/CBHtmlEventHandler.js";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import { DomEvent } from "./DomEvent.js";
 import { DomEventTargetBase } from "./DomEventTargetBase.js";
 
-export class DomAbortSignal<R = unknown>
+/* The typescript typings are missing the abort and timeout methods. */
+type CorrectedAbortSignal = {
+  prototype: AbortSignal;
+  new (): AbortSignal;
+  abort(reason?: unknown): AbortSignal;
+  timeout(milliseconds: number): AbortSignal;
+};
+
+@StaticImplements<IDomAbortSignalConstructors>()
+export class DomAbortSignal<R>
   extends DomEventTargetBase<AbortSignal>
   implements IDomAbortSignal<AbortSignal, R>
 {
+  static abort<R>(
+    reason?: R
+  ): DomAbortSignal<R extends undefined ? AbortErrorDomException : R> {
+    return pipe(
+      /* eslint-disable-next-line
+          @typescript-eslint/consistent-type-assertions
+      -- The abort method is missing in the typescript typings. */
+      (AbortSignal as CorrectedAbortSignal).abort(reason),
+      (signal) => new DomAbortSignal(signal)
+    );
+  }
+  static timeout(
+    milliseconds: number
+  ): DomAbortSignal<TimeoutErrorDomException> {
+    return pipe(
+      /* eslint-disable-next-line
+          @typescript-eslint/consistent-type-assertions
+      -- The timeout method is missing in the typescript typings. */
+      (AbortSignal as CorrectedAbortSignal).timeout(milliseconds),
+      (signal) => new DomAbortSignal(signal)
+    );
+  }
+
   get aborted(): boolean {
     return this.native.aborted;
   }
@@ -18,41 +58,33 @@ export class DomAbortSignal<R = unknown>
     return this.native.reason;
   }
 
-  throwIfAborted(): E.Either<R, void> {
-    return E.tryCatch(
-      () => this.native.throwIfAborted(),
-      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-         -- Throws signal's abort reason if the signal has been aborted. */
-      (error: unknown) => error as R
-    );
+  /**
+   * @throws
+   * The value of {@link reason} is if {@link aborted} is `true`; otherwise,
+   * does nothing.
+   */
+  throwIfAborted(): void {
+    this.native.throwIfAborted();
   }
 
-  get onabort(): CBHtmlEventHandlerNonNull | null {
+  get onabort(): CBHtmlEventHandler {
     return pipe(
-      this.native.onabort,
-      O.fromNullable,
+      O.fromNullable(this.native.onabort),
       O.map(
-        (fn) =>
-          function <T extends Event, U = unknown>(
-            this: IDomAbortSignal<AbortSignal, U>,
-            event: T | IDomEvent<T>
-          ) {
-            return fn.bind(
-              this.getNative(),
-              event instanceof Event ? event : event.getNative()
-            );
-          }
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
       ),
       O.toNullable
     );
   }
-  set onabort(value: CBHtmlEventHandlerNonNull | null) {
+  set onabort(callback: CBHtmlEventHandler) {
     this.native.onabort = pipe(
-      value,
-      O.fromNullable,
-      O.map((fn) => (event: Event): unknown => {
-        return fn.call(this, event);
-      }),
+      O.fromNullable(callback),
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
       O.toNullable
     );
   }

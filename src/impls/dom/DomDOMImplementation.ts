@@ -1,13 +1,12 @@
-import {
+import type {
   InvalidCharacterErrorDomException,
   NamespaceErrorDomException,
 } from "@/exceptions/DomException.js";
+import { Wrapper } from "@/globals/Wrapper.js";
+import type { IDomDocumentType } from "@/specs/dom/interfaces/IDomDocumentType.js";
+import type { IDomDOMImplementation } from "@/specs/dom/interfaces/IDomDOMImplementation.js";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
-import * as O from "fp-ts/Option";
-import { optional, Optional } from "../helpers/Optional.js";
-import { IDomDOMImplementation } from "../interfaces/IDomDOMImplementation.js";
-import { Wrapper } from "../wrapper/Wrapper.js";
 import { DomDocument } from "./DomDocument.js";
 import { DomDocumentType } from "./DomDocumentType.js";
 import { DomXMLDocument } from "./DomXMLDocument.js";
@@ -24,47 +23,56 @@ export class DomDOMImplementation
     InvalidCharacterErrorDomException | NamespaceErrorDomException,
     DomDocumentType
   > {
-    return E.tryCatch(
-      () =>
-        new DomDocumentType(
-          this.native.createDocumentType(qualifiedName, publicId, systemId)
-        ),
-      (error) =>
-        /* eslint-disable-next-line
-           @typescript-eslint/consistent-type-assertions
-        -- Trusting the spec.
-           See: https://dom.spec.whatwg.org/#domimplementation */
-        error as InvalidCharacterErrorDomException | NamespaceErrorDomException
+    return pipe(
+      [qualifiedName, publicId, systemId] as const,
+      E.tryCatchK(
+        (params) => this.native.createDocumentType(...params),
+        (error) =>
+          /* eslint-disable-next-line
+              @typescript-eslint/consistent-type-assertions
+          -- According to the spec, these are the only possible errors. */
+          error as
+            | InvalidCharacterErrorDomException
+            | NamespaceErrorDomException
+      ),
+      E.map((doctype) => new DomDocumentType(doctype))
     );
   }
   createDocument(
     namespace: string | null,
-    qualifiedName: string,
-    doctype?: Optional<DocumentType>
+    qualifiedName: string | null,
+    doctype?: DocumentType | IDomDocumentType<DocumentType> | null
   ): E.Either<
     InvalidCharacterErrorDomException | NamespaceErrorDomException,
     DomXMLDocument
   > {
-    return E.tryCatch(
-      () =>
-        new DomXMLDocument(
-          this.native.createDocument(
-            namespace,
-            qualifiedName,
-            pipe(doctype, optional, O.toUndefined)
-          )
-        ),
-      (error) =>
-        /* eslint-disable-next-line
-           @typescript-eslint/consistent-type-assertions
-        -- Trusting the spec.
-           See: https://dom.spec.whatwg.org/#domimplementation */
-        error as InvalidCharacterErrorDomException | NamespaceErrorDomException
+    return pipe(
+      [namespace, qualifiedName, doctype] as const,
+      ([namespace, qualifiedName, doctype]) =>
+        [
+          namespace,
+          qualifiedName,
+          doctype == null || doctype instanceof DocumentType
+            ? doctype
+            : doctype.getNative(),
+        ] as const,
+      E.tryCatchK(
+        (params) => this.native.createDocument(...params),
+        (error) =>
+          /* eslint-disable-next-line
+              @typescript-eslint/consistent-type-assertions
+          -- According to the spec, these are the only possible errors. */
+          error as
+            | InvalidCharacterErrorDomException
+            | NamespaceErrorDomException
+      ),
+      E.map((document) => new DomXMLDocument(document))
     );
   }
-  createHTMLDocument(title?: Optional<string>): DomDocument {
-    return new DomDocument(
-      this.native.createHTMLDocument(pipe(title, optional, O.toUndefined))
+  createHTMLDocument(title?: string): DomDocument {
+    return pipe(
+      this.native.createHTMLDocument(title),
+      (document) => new DomDocument(document)
     );
   }
 }

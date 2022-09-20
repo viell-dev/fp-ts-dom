@@ -1,14 +1,15 @@
 import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.js";
 import type { IDomAbortSignal } from "./IDomAbortSignal.js";
 
-export interface IDomAbortControllerConstructor
+/** @sealed */
+export interface IDomAbortControllerConstructors
   extends IWrapperConstructors<AbortController> {
-  new (): IDomAbortController<AbortController>;
+  new (): IDomAbortController<AbortController, unknown>;
 }
 
-export interface IDomAbortController<N extends AbortController>
+export interface IDomAbortController<N extends AbortController, R>
   extends IWrapper<N> {
-  readonly signal: IDomAbortSignal<AbortSignal>;
+  readonly signal: IDomAbortSignal<AbortSignal, R>;
 
-  abort(reason?: unknown): void;
+  abort(reason?: R): void;
 }

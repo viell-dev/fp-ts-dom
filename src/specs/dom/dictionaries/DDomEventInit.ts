@@ -1,1 +1,5 @@
-export type DDomEventInit = EventInit;
+export interface DDomEventInit {
+  bubbles?: boolean;
+  cancelable?: boolean;
+  composed?: boolean;
+}

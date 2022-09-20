@@ -43,7 +43,7 @@ export interface IGeometryDOMMatrixReadOnlyConstructors
 
 export interface IGeometryDOMMatrixReadOnly<N extends DOMMatrixReadOnly>
   extends IWrapper<N>,
-    IStringifier<InvalidStateErrorDomException, `matrix${string}`>,
+    IStringifier<`matrix${string}`, InvalidStateErrorDomException>,
     ISerializable {
   // These attributes are simple aliases for certain elements of the 4x4 matrix
   readonly a: number;
