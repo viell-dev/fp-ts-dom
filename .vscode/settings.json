@@ -50,5 +50,17 @@
   "cSpell.caseSensitive": true,
   "cSpell.language": "en-GB,en",
   "cSpell.words": ["viell", "onslotchange", "Stringifier"],
-  "cSpell.ignoreWords": ["loglevel", "tsdoc"]
+  "cSpell.ignoreWords": [
+    "loglevel",
+    "onbeforeinput",
+    "onbeforematch",
+    "oncontextlost",
+    "oncontextrestored",
+    "onformdata",
+    "onwebkitanimationend",
+    "onwebkitanimationiteration",
+    "onwebkitanimationstart",
+    "onwebkittransitionend",
+    "tsdoc"
+  ]
 }

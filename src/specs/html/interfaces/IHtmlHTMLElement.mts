@@ -1,4 +1,10 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
+import type {
+  InvalidStateErrorDomException,
+  NoModificationAllowedErrorDomException,
+} from "@/exceptions/DomException.mjs";
+import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
+import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
+import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
 import type { MHtmlDocumentAndElementEventHandlers } from "../mixins/MHtmlDocumentAndElementEventHandlers.mjs";
 import type { MHtmlElementContentEditable } from "../mixins/MHtmlElementContentEditable.mjs";
@@ -6,8 +12,29 @@ import type { MHtmlGlobalEventHandlers } from "../mixins/MHtmlGlobalEventHandler
 import type { MHtmlHTMLOrSVGElement } from "../mixins/MHtmlHTMLOrSVGElement.mjs";
 import type { IHtmlElementInternals } from "./IHtmlElementInternals.mjs";
 
+/** @sealed */
+export interface IHtmlHTMLElementConstructorsBase<N extends HTMLElement>
+  extends IWrapperConstructors<N> {
+  /**
+   * Use {@link create} instead to get an `Either`.
+   *
+   * @throws TypeError
+   * @throws "InvalidStateError" DOMException
+   */
+  new (): IHtmlHTMLElement<N>;
+
+  create(): E.Either<
+    TypeError | InvalidStateErrorDomException,
+    IHtmlHTMLElement<N>
+  >;
+}
+
+/** @sealed */
+export type IHtmlHTMLElementConstructors =
+  IHtmlHTMLElementConstructorsBase<HTMLElement>;
+
 export interface IHtmlHTMLElement<N extends HTMLElement>
-  extends IWrapper<N>,
+  extends IDomElement<N>,
     MHtmlGlobalEventHandlers,
     MHtmlDocumentAndElementEventHandlers,
     MHtmlElementContentEditable,
@@ -19,7 +46,7 @@ export interface IHtmlHTMLElement<N extends HTMLElement>
   dir: string;
 
   // user interaction
-  hidden: O.Option<string | number | boolean>;
+  hidden: O.Option<boolean | number | string>;
   inert: boolean;
   click(): void;
   accessKey: string;
@@ -29,7 +56,17 @@ export interface IHtmlHTMLElement<N extends HTMLElement>
   autocapitalize: string;
 
   innerText: string;
+  /**
+   * Use {@link setOuterText} instead, when setting, to get an `Either`.
+   *
+   * @throws
+   * When setting, if *this*'s parent is `null`, then throw a
+   * "NoModificationAllowedError" DOMException.
+   */
   outerText: string;
+  setOuterText(
+    outerText: string
+  ): E.Either<NoModificationAllowedErrorDomException, void>;
 
   attachInternals(): IHtmlElementInternals<ElementInternals>;
 }
