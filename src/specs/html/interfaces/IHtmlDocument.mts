@@ -1,7 +1,12 @@
+import type {
+  HierarchyRequestErrorDomException,
+  SecurityErrorDomException,
+} from "@/exceptions/DomException.mjs";
 import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type { IDomDocument } from "@/specs/dom/interfaces/IDomDocument.mjs";
 import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
 import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
+import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
 import type { CBHtmlEventHandler } from "../callbacks/CBHtmlEventHandler.mjs";
 import type { EHtmlDocumentReadyState } from "../enums/EHtmlDocumentReadyState.mjs";
@@ -23,7 +28,8 @@ export interface IHtmlDocument<N extends Document>
   readonly location: O.Option<IHtmlLocation<Location>>;
   domain: string;
   readonly referrer: string;
-  cookie: string;
+  readonly cookie: E.Either<SecurityErrorDomException, string>;
+  setCookie(cookie: string): E.Either<SecurityErrorDomException, void>;
   readonly lastModified: string;
   readonly readyState: EHtmlDocumentReadyState;
 
@@ -32,7 +38,10 @@ export interface IHtmlDocument<N extends Document>
   [name: string extends keyof IHtmlDocument<N> ? never : string]: {};
   title: string;
   dir: string;
-  body: O.Option<IHtmlHTMLElement<HTMLElement>>;
+  readonly body: O.Option<IHtmlHTMLElement<HTMLElement>>;
+  setBody(
+    body: HTMLElement | IHtmlHTMLElement<HTMLElement>
+  ): E.Either<HierarchyRequestErrorDomException, void>;
   readonly head: O.Option<IHtmlHTMLHeadElement<HTMLHeadElement>>;
   readonly images: IDomElement<Element>[];
   readonly embeds: IDomElement<Element>[];
