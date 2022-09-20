@@ -1,23 +1,23 @@
-import { StaticImplements } from "@/decorators/StaticImplements.js";
+import { StaticImplements } from "@/decorators/StaticImplements.mjs";
 import type {
   HierarchyRequestErrorDomException,
   InvalidNodeTypeErrorDomException,
   InvalidStateErrorDomException,
   NotSupportedErrorDomException,
   WrongDocumentErrorDomException,
-} from "@/exceptions/DomException.js";
-import { CDomRangeHow } from "@/specs/dom/constants/CDomRangeHow.js";
-import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.js";
+} from "@/exceptions/DomException.mjs";
+import { CDomRangeHow } from "@/specs/dom/constants/CDomRangeHow.mjs";
+import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import type {
   IDomRange,
   IDomRangeConstants,
   IDomRangeConstructors,
-} from "@/specs/dom/interfaces/IDomRange.js";
+} from "@/specs/dom/interfaces/IDomRange.mjs";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
-import { DomAbstractRangeBase } from "./DomAbstractRangeBase.js";
-import { DomDocumentFragment } from "./DomDocumentFragment.js";
-import { DomNode } from "./DomNode.js";
+import { DomAbstractRangeBase } from "./DomAbstractRangeBase.mjs";
+import { DomDocumentFragment } from "./DomDocumentFragment.mjs";
+import { DomNode } from "./DomNode.mjs";
 
 @StaticImplements<IDomRangeConstructors & IDomRangeConstants>()
 export class DomRange

@@ -1,17 +1,17 @@
-import { StaticImplements } from "@/decorators/StaticImplements.js";
-import { Wrapper } from "@/globals/Wrapper.js";
-import { getNative } from "@/helpers/getNative.js";
-import type { CBDomMutationCallback } from "@/specs/dom/callbacks/CBDomMutationCallback.js";
-import type { DDomMutationObserverInit } from "@/specs/dom/dictionaries/DDomMutationObserverInit.js";
+import { StaticImplements } from "@/decorators/StaticImplements.mjs";
+import { Wrapper } from "@/globals/Wrapper.mjs";
+import { getNative } from "@/helpers/getNative.mjs";
+import type { CBDomMutationCallback } from "@/specs/dom/callbacks/CBDomMutationCallback.mjs";
+import type { DDomMutationObserverInit } from "@/specs/dom/dictionaries/DDomMutationObserverInit.mjs";
 import type {
   IDomMutationObserver,
   IDomMutationObserverConstructors,
-} from "@/specs/dom/interfaces/IDomMutationObserver.js";
-import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.js";
+} from "@/specs/dom/interfaces/IDomMutationObserver.mjs";
+import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
-import { DomMutationRecord } from "./DomMutationRecord.js";
+import { DomMutationRecord } from "./DomMutationRecord.mjs";
 
 @StaticImplements<IDomMutationObserverConstructors>()
 export class DomMutationObserver

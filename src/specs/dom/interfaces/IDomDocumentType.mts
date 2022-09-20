@@ -1,5 +1,5 @@
-import type { MDomChildNode } from "../mixins/MDomChildNode.js";
-import type { IDomNode } from "./IDomNode.js";
+import type { MDomChildNode } from "../mixins/MDomChildNode.mjs";
+import type { IDomNode } from "./IDomNode.mjs";
 
 export interface IDomDocumentType<N extends DocumentType>
   extends IDomNode<N>,

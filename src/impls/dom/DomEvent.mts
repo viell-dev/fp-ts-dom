@@ -1,11 +1,11 @@
-import { StaticImplements } from "@/decorators/StaticImplements.js";
-import type { DDomEventInit } from "@/specs/dom/dictionaries/DDomEventInit.js";
+import { StaticImplements } from "@/decorators/StaticImplements.mjs";
+import type { DDomEventInit } from "@/specs/dom/dictionaries/DDomEventInit.mjs";
 import type {
   IDomEvent,
   IDomEventConstants,
   IDomEventConstructors,
-} from "@/specs/dom/interfaces/IDomEvent.js";
-import { DomEventBase } from "./DomEventBase.js";
+} from "@/specs/dom/interfaces/IDomEvent.mjs";
+import { DomEventBase } from "./DomEventBase.mjs";
 
 @StaticImplements<IDomEventConstructors & IDomEventConstants>()
 export class DomEvent extends DomEventBase<Event> implements IDomEvent<Event> {

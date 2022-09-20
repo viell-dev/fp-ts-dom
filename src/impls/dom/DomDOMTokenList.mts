@@ -1,9 +1,9 @@
 import type {
   InvalidCharacterErrorDomException,
   SyntaxErrorDomException,
-} from "@/exceptions/DomException.js";
-import { Wrapper } from "@/globals/Wrapper.js";
-import type { IDomDOMTokenList } from "@/specs/dom/interfaces/IDomDOMTokenList.js";
+} from "@/exceptions/DomException.mjs";
+import { Wrapper } from "@/globals/Wrapper.mjs";
+import type { IDomDOMTokenList } from "@/specs/dom/interfaces/IDomDOMTokenList.mjs";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";

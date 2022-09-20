@@ -1,12 +1,12 @@
-import type { NotSupportedErrorDomException } from "@/exceptions/DomException.js";
+import type { NotSupportedErrorDomException } from "@/exceptions/DomException.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
-import type { CDomNodeNodeDocumentPosition } from "../constants/CDomNodeNodeDocumentPosition.js";
-import type { CDomNodeNodeType } from "../constants/CDomNodeNodeType.js";
-import type { DDomGetRootNodeOptions } from "../dictionaries/DDomGetRootNodeOptions.js";
-import type { IDomDocument } from "./IDomDocument.js";
-import type { IDomElement } from "./IDomElement.js";
-import type { IDomEventTarget } from "./IDomEventTarget.js";
+import type { CDomNodeNodeDocumentPosition } from "../constants/CDomNodeNodeDocumentPosition.mjs";
+import type { CDomNodeNodeType } from "../constants/CDomNodeNodeType.mjs";
+import type { DDomGetRootNodeOptions } from "../dictionaries/DDomGetRootNodeOptions.mjs";
+import type { IDomDocument } from "./IDomDocument.mjs";
+import type { IDomElement } from "./IDomElement.mjs";
+import type { IDomEventTarget } from "./IDomEventTarget.mjs";
 
 export interface IDomNodeConstants {
   // Node Types:

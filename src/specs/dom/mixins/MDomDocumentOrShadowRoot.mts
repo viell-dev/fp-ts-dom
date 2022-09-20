@@ -1,3 +1,3 @@
-import { MHtmlDocumentOrShadowRoot } from "@/specs/html/mixins/MHtmlDocumentOrShadowRoot.js";
+import { MHtmlDocumentOrShadowRoot } from "@/specs/html/mixins/MHtmlDocumentOrShadowRoot.mjs";
 
 export type MDomDocumentOrShadowRoot = MHtmlDocumentOrShadowRoot;

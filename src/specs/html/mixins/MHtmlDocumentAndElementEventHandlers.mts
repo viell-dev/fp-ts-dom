@@ -1,4 +1,4 @@
-import type { CBHtmlEventHandler } from "../callbacks/CBHtmlEventHandler.js";
+import type { CBHtmlEventHandler } from "../callbacks/CBHtmlEventHandler.mjs";
 
 export interface MHtmlDocumentAndElementEventHandlers {
   oncopy: CBHtmlEventHandler;

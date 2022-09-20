@@ -1,8 +1,8 @@
 import type * as O from "fp-ts/Option";
-import type { MSvg2SVGURIReference } from "../mixins/MSvg2SVGURIReference.js";
-import type { ISvg2SVGAnimatedLength } from "./ISvg2SVGAnimatedLength.js";
-import type { ISvg2SVGElement } from "./ISvg2SVGElement.js";
-import type { ISvg2SVGGraphicsElement } from "./ISvg2SVGGraphicsElement.js";
+import type { MSvg2SVGURIReference } from "../mixins/MSvg2SVGURIReference.mjs";
+import type { ISvg2SVGAnimatedLength } from "./ISvg2SVGAnimatedLength.mjs";
+import type { ISvg2SVGElement } from "./ISvg2SVGElement.mjs";
+import type { ISvg2SVGGraphicsElement } from "./ISvg2SVGGraphicsElement.mjs";
 
 export interface ISvg2SVGUseElement<N extends SVGUseElement>
   extends ISvg2SVGGraphicsElement<N>,

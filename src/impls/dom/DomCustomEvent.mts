@@ -1,11 +1,11 @@
-import { StaticImplements } from "@/decorators/StaticImplements.js";
-import type { DDomCustomEventInit } from "@/specs/dom/dictionaries/DDomCustomEventInit.js";
+import { StaticImplements } from "@/decorators/StaticImplements.mjs";
+import type { DDomCustomEventInit } from "@/specs/dom/dictionaries/DDomCustomEventInit.mjs";
 import type {
   IDomCustomEvent,
   IDomCustomEventConstants,
   IDomCustomEventConstructors,
-} from "@/specs/dom/interfaces/IDomCustomEvent.js";
-import { DomEventBase } from "./DomEventBase.js";
+} from "@/specs/dom/interfaces/IDomCustomEvent.mjs";
+import { DomEventBase } from "./DomEventBase.mjs";
 
 @StaticImplements<IDomCustomEventConstructors & IDomCustomEventConstants>()
 export class DomCustomEvent<D>

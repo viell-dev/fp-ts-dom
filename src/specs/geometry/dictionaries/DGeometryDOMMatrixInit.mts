@@ -1,4 +1,4 @@
-import type { DGeometryDOMMatrix2DInit } from "./DGeometryDOMMatrix2DInit.js";
+import type { DGeometryDOMMatrix2DInit } from "./DGeometryDOMMatrix2DInit.mjs";
 
 export interface DGeometryDOMMatrixInit extends DGeometryDOMMatrix2DInit {
   m13?: number;

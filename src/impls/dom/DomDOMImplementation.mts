@@ -1,15 +1,15 @@
 import type {
   InvalidCharacterErrorDomException,
   NamespaceErrorDomException,
-} from "@/exceptions/DomException.js";
-import { Wrapper } from "@/globals/Wrapper.js";
-import type { IDomDocumentType } from "@/specs/dom/interfaces/IDomDocumentType.js";
-import type { IDomDOMImplementation } from "@/specs/dom/interfaces/IDomDOMImplementation.js";
+} from "@/exceptions/DomException.mjs";
+import { Wrapper } from "@/globals/Wrapper.mjs";
+import type { IDomDocumentType } from "@/specs/dom/interfaces/IDomDocumentType.mjs";
+import type { IDomDOMImplementation } from "@/specs/dom/interfaces/IDomDOMImplementation.mjs";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
-import { DomDocument } from "./DomDocument.js";
-import { DomDocumentType } from "./DomDocumentType.js";
-import { DomXMLDocument } from "./DomXMLDocument.js";
+import { DomDocument } from "./DomDocument.mjs";
+import { DomDocumentType } from "./DomDocumentType.mjs";
+import { DomXMLDocument } from "./DomXMLDocument.mjs";
 
 export class DomDOMImplementation
   extends Wrapper<DOMImplementation>

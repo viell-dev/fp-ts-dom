@@ -1,18 +1,18 @@
-import type { IDomDocument } from "@/specs/dom/interfaces/IDomDocument.js";
-import type { IDomHTMLCollection } from "@/specs/dom/interfaces/IDomHTMLCollection.js";
-import type { IDomNodeList } from "@/specs/dom/interfaces/IDomNodeList.js";
+import type { IDomDocument } from "@/specs/dom/interfaces/IDomDocument.mjs";
+import type { IDomHTMLCollection } from "@/specs/dom/interfaces/IDomHTMLCollection.mjs";
+import type { IDomNodeList } from "@/specs/dom/interfaces/IDomNodeList.mjs";
 import type * as O from "fp-ts/Option";
-import type { CBHtmlEventHandler } from "../callbacks/CBHtmlEventHandler.js";
-import type { EHtmlDocumentReadyState } from "../enums/EHtmlDocumentReadyState.js";
-import type { EHtmlDocumentVisibilityState } from "../enums/EHtmlDocumentVisibilityState.js";
-import type { MHtmlDocumentAndElementEventHandlers } from "../mixins/MHtmlDocumentAndElementEventHandlers.js";
-import type { MHtmlGlobalEventHandlers } from "../mixins/MHtmlGlobalEventHandlers.js";
-import type { IHtmlHTMLAllCollection } from "./IHtmlHTMLAllCollection.js";
-import type { IHtmlHTMLElement } from "./IHtmlHTMLElement.js";
-import type { IHtmlHTMLHeadElement } from "./IHtmlHTMLHeadElement.js";
-import type { IHtmlHTMLOrSVGScriptElement } from "./IHtmlHTMLOrSVGScriptElement.js";
-import type { IHtmlLocation } from "./IHtmlLocation.js";
-import type { IHtmlWindowProxy } from "./IHtmlWindowProxy.js";
+import type { CBHtmlEventHandler } from "../callbacks/CBHtmlEventHandler.mjs";
+import type { EHtmlDocumentReadyState } from "../enums/EHtmlDocumentReadyState.mjs";
+import type { EHtmlDocumentVisibilityState } from "../enums/EHtmlDocumentVisibilityState.mjs";
+import type { MHtmlDocumentAndElementEventHandlers } from "../mixins/MHtmlDocumentAndElementEventHandlers.mjs";
+import type { MHtmlGlobalEventHandlers } from "../mixins/MHtmlGlobalEventHandlers.mjs";
+import type { IHtmlHTMLAllCollection } from "./IHtmlHTMLAllCollection.mjs";
+import type { IHtmlHTMLElement } from "./IHtmlHTMLElement.mjs";
+import type { IHtmlHTMLHeadElement } from "./IHtmlHTMLHeadElement.mjs";
+import type { IHtmlHTMLOrSVGScriptElement } from "./IHtmlHTMLOrSVGScriptElement.mjs";
+import type { IHtmlLocation } from "./IHtmlLocation.mjs";
+import type { IHtmlWindowProxy } from "./IHtmlWindowProxy.mjs";
 
 export interface IHtmlDocument<N extends Document>
   extends IDomDocument<N>,

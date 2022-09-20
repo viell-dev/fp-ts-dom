@@ -1,8 +1,8 @@
-import type { IWrapper } from "@/globals/IWrapper.js";
+import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type * as O from "fp-ts/Option";
-import type { CBDomNodeFilter } from "../callbacks/CBDomNodeFilter.js";
-import type { CDomNodeFilterWhatToShow } from "../constants/CDomNodeFilterWhatToShow.js";
-import type { IDomNode } from "./IDomNode.js";
+import type { CBDomNodeFilter } from "../callbacks/CBDomNodeFilter.mjs";
+import type { CDomNodeFilterWhatToShow } from "../constants/CDomNodeFilterWhatToShow.mjs";
+import type { IDomNode } from "./IDomNode.mjs";
 
 export interface IDomTreeWalker<N extends TreeWalker> extends IWrapper<N> {
   readonly root: IDomNode<Node>;

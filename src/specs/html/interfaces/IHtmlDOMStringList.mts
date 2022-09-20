@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/globals/IWrapper.js";
+import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type * as O from "fp-ts/Option";
 
 export interface IHtmlDOMStringList<N extends DOMStringList>

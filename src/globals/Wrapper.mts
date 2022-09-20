@@ -1,4 +1,4 @@
-import type { IWrapper } from "./IWrapper.js";
+import type { IWrapper } from "./IWrapper.mjs";
 
 export abstract class Wrapper<N extends {}> implements IWrapper<N> {
   protected native: N;

@@ -1,5 +1,5 @@
-import type { DHtmlFocusOptions } from "../dictionaries/DHtmlFocusOptions.js";
-import type { IHtmlDOMStringMap } from "../interfaces/IHtmlDOMStringMap.js";
+import type { DHtmlFocusOptions } from "../dictionaries/DHtmlFocusOptions.mjs";
+import type { IHtmlDOMStringMap } from "../interfaces/IHtmlDOMStringMap.mjs";
 
 export interface MHtmlHTMLOrSVGElement {
   dataset: IHtmlDOMStringMap<DOMStringMap>;

@@ -4,19 +4,19 @@ import type {
   NotFoundErrorDomException,
   NotSupportedErrorDomException,
   SyntaxErrorDomException,
-} from "@/exceptions/DomException.js";
+} from "@/exceptions/DomException.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
-import type { DDomShadowRootInit } from "../dictionaries/DDomShadowRootInit.js";
-import type { MDomChildNode } from "../mixins/MDomChildNode.js";
-import type { MDomNonDocumentTypeChildNode } from "../mixins/MDomNonDocumentTypeChildNode.js";
-import type { MDomParentNode } from "../mixins/MDomParentNode.js";
-import type { MDomSlottable } from "../mixins/MDomSlottable.js";
-import type { IDomAttr } from "./IDomAttr.js";
-import type { IDomDOMTokenList } from "./IDomDOMTokenList.js";
-import type { IDomNamedNodeMap } from "./IDomNamedNodeMap.js";
-import type { IDomNode } from "./IDomNode.js";
-import type { IDomShadowRoot } from "./IDomShadowRoot.js";
+import type { DDomShadowRootInit } from "../dictionaries/DDomShadowRootInit.mjs";
+import type { MDomChildNode } from "../mixins/MDomChildNode.mjs";
+import type { MDomNonDocumentTypeChildNode } from "../mixins/MDomNonDocumentTypeChildNode.mjs";
+import type { MDomParentNode } from "../mixins/MDomParentNode.mjs";
+import type { MDomSlottable } from "../mixins/MDomSlottable.mjs";
+import type { IDomAttr } from "./IDomAttr.mjs";
+import type { IDomDOMTokenList } from "./IDomDOMTokenList.mjs";
+import type { IDomNamedNodeMap } from "./IDomNamedNodeMap.mjs";
+import type { IDomNode } from "./IDomNode.mjs";
+import type { IDomShadowRoot } from "./IDomShadowRoot.mjs";
 
 export interface IDomElement<N extends Element>
   extends IDomNode<N>,

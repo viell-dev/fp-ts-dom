@@ -1,6 +1,6 @@
-import type { IWrapperConstructors } from "@/globals/IWrapper.js";
-import type { DDomCustomEventInit } from "../dictionaries/DDomCustomEventInit.js";
-import type { IDomEvent, IDomEventConstants } from "./IDomEvent.js";
+import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
+import type { DDomCustomEventInit } from "../dictionaries/DDomCustomEventInit.mjs";
+import type { IDomEvent, IDomEventConstants } from "./IDomEvent.mjs";
 
 /** @sealed */
 export interface IDomCustomEventConstructors

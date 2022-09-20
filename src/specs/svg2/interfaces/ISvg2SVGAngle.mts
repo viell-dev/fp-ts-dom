@@ -1,5 +1,5 @@
-import type { IWrapper } from "@/globals/IWrapper.js";
-import type { CSvg2SVGAngleAngleUnitType } from "../constants/CSvg2SVGAngleAngleUnitType.js";
+import type { IWrapper } from "@/globals/IWrapper.mjs";
+import type { CSvg2SVGAngleAngleUnitType } from "../constants/CSvg2SVGAngleAngleUnitType.mjs";
 
 export interface ISvg2SVGAngleConstants {
   // Angle Unit Types

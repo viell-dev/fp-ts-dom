@@ -1,12 +1,12 @@
-import { Wrapper } from "@/globals/Wrapper.js";
-import type { CBDomNodeFilter } from "@/specs/dom/callbacks/CBDomNodeFilter.js";
-import type { CDomNodeFilterFilter } from "@/specs/dom/constants/CDomNodeFilterFilter.js";
-import type { CDomNodeFilterWhatToShow } from "@/specs/dom/constants/CDomNodeFilterWhatToShow.js";
-import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.js";
-import type { IDomNodeIterator } from "@/specs/dom/interfaces/IDomNodeIterator.js";
+import { Wrapper } from "@/globals/Wrapper.mjs";
+import type { CBDomNodeFilter } from "@/specs/dom/callbacks/CBDomNodeFilter.mjs";
+import type { CDomNodeFilterFilter } from "@/specs/dom/constants/CDomNodeFilterFilter.mjs";
+import type { CDomNodeFilterWhatToShow } from "@/specs/dom/constants/CDomNodeFilterWhatToShow.mjs";
+import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
+import type { IDomNodeIterator } from "@/specs/dom/interfaces/IDomNodeIterator.mjs";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { DomNode } from "./DomNode.js";
+import { DomNode } from "./DomNode.mjs";
 
 export class DomNodeIterator
   extends Wrapper<NodeIterator>

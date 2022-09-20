@@ -1,12 +1,12 @@
 import type {
   InvalidCharacterErrorDomException,
   NamespaceErrorDomException,
-} from "@/exceptions/DomException.js";
-import type { IWrapper } from "@/globals/IWrapper.js";
+} from "@/exceptions/DomException.mjs";
+import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
-import type { IDomDocument } from "./IDomDocument.js";
-import type { IDomDocumentType } from "./IDomDocumentType.js";
-import type { IDomXMLDocument } from "./IDomXMLDocument.js";
+import type { IDomDocument } from "./IDomDocument.mjs";
+import type { IDomDocumentType } from "./IDomDocumentType.mjs";
+import type { IDomXMLDocument } from "./IDomXMLDocument.mjs";
 
 export interface IDomDOMImplementation<N extends DOMImplementation>
   extends IWrapper<N> {

@@ -1,18 +1,18 @@
-import { StaticImplements } from "@/decorators/StaticImplements.js";
+import { StaticImplements } from "@/decorators/StaticImplements.mjs";
 import type {
   AbortErrorDomException,
   TimeoutErrorDomException,
-} from "@/exceptions/DomException.js";
+} from "@/exceptions/DomException.mjs";
 import type {
   IDomAbortSignal,
   IDomAbortSignalConstructors,
-} from "@/specs/dom/interfaces/IDomAbortSignal.js";
-import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.js";
-import type { CBHtmlEventHandler } from "@/specs/html/callbacks/CBHtmlEventHandler.js";
+} from "@/specs/dom/interfaces/IDomAbortSignal.mjs";
+import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
+import type { CBHtmlEventHandler } from "@/specs/html/callbacks/CBHtmlEventHandler.mjs";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { DomEvent } from "./DomEvent.js";
-import { DomEventTargetBase } from "./DomEventTargetBase.js";
+import { DomEvent } from "./DomEvent.mjs";
+import { DomEventTargetBase } from "./DomEventTargetBase.mjs";
 
 /* The typescript typings are missing the abort and timeout methods. */
 type CorrectedAbortSignal = {

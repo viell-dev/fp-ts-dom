@@ -1,16 +1,16 @@
-import { StaticImplements } from "@/decorators/StaticImplements.js";
-import { Wrapper } from "@/globals/Wrapper.js";
-import type { DGeometryDOMPointInit } from "@/specs/geometry/dictionaries/DGeometryDOMPointInit.js";
-import type { DGeometryDOMQuadInit } from "@/specs/geometry/dictionaries/DGeometryDOMQuadInit.js";
-import type { DGeometryDOMRectInit } from "@/specs/geometry/dictionaries/DGeometryDOMRectInit.js";
+import { StaticImplements } from "@/decorators/StaticImplements.mjs";
+import { Wrapper } from "@/globals/Wrapper.mjs";
+import type { DGeometryDOMPointInit } from "@/specs/geometry/dictionaries/DGeometryDOMPointInit.mjs";
+import type { DGeometryDOMQuadInit } from "@/specs/geometry/dictionaries/DGeometryDOMQuadInit.mjs";
+import type { DGeometryDOMRectInit } from "@/specs/geometry/dictionaries/DGeometryDOMRectInit.mjs";
 import type {
   IGeometryDOMQuad,
   IGeometryDOMQuadConstructors,
-} from "@/specs/geometry/interfaces/IGeometryDOMQuad.js";
+} from "@/specs/geometry/interfaces/IGeometryDOMQuad.mjs";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { GeometryDOMPoint } from "./GeometryDOMPoint.js";
-import { GeometryDOMRect } from "./GeometryDOMRect.js";
+import { GeometryDOMPoint } from "./GeometryDOMPoint.mjs";
+import { GeometryDOMRect } from "./GeometryDOMRect.mjs";
 
 @StaticImplements<IGeometryDOMQuadConstructors>()
 export class GeometryDOMQuad

@@ -1,4 +1,4 @@
-import type { IDomEvent } from "../interfaces/IDomEvent.js";
+import type { IDomEvent } from "../interfaces/IDomEvent.mjs";
 
 interface CBDomEventListenerFunction {
   (event: IDomEvent<Event>): void;

@@ -1,5 +1,5 @@
-import type { IDomCDATASection } from "@/specs/dom/interfaces/IDomCDATASection.js";
-import { DomTextBase } from "./DomTextBase.js";
+import type { IDomCDATASection } from "@/specs/dom/interfaces/IDomCDATASection.mjs";
+import { DomTextBase } from "./DomTextBase.mjs";
 
 export class DomCDATASection
   extends DomTextBase<CDATASection>

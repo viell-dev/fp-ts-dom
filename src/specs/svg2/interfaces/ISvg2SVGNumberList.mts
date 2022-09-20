@@ -1,7 +1,7 @@
-import type { IndexSizeErrorDomException } from "@/exceptions/DomException.js";
-import type { IWrapper } from "@/globals/IWrapper.js";
+import type { IndexSizeErrorDomException } from "@/exceptions/DomException.mjs";
+import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
-import type { ISvg2SVGNumber } from "./ISvg2SVGNumber.js";
+import type { ISvg2SVGNumber } from "./ISvg2SVGNumber.mjs";
 
 export interface ISvg2SVGNumberList<N extends SVGNumberList>
   extends IWrapper<N> {

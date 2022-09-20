@@ -1,9 +1,9 @@
-import { StaticImplements } from "@/decorators/StaticImplements.js";
+import { StaticImplements } from "@/decorators/StaticImplements.mjs";
 import type {
   IDomComment,
   IDomCommentConstructors,
-} from "@/specs/dom/interfaces/IDomComment.js";
-import { DomCharacterDataBase } from "./DomCharacterDataBase.js";
+} from "@/specs/dom/interfaces/IDomComment.mjs";
+import { DomCharacterDataBase } from "./DomCharacterDataBase.mjs";
 
 @StaticImplements<IDomCommentConstructors>()
 export class DomComment

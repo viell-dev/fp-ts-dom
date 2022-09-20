@@ -3,29 +3,29 @@ import type {
   InvalidCharacterErrorDomException,
   NamespaceErrorDomException,
   NotSupportedErrorDomException,
-} from "@/exceptions/DomException.js";
-import type { IWrapperConstructors } from "@/globals/IWrapper.js";
+} from "@/exceptions/DomException.mjs";
+import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
-import type { CBDomNodeFilter } from "../callbacks/CBDomNodeFilter.js";
-import type { CDomNodeFilterWhatToShow } from "../constants/CDomNodeFilterWhatToShow.js";
-import type { DDomElementCreationOptions } from "../dictionaries/DDomElementCreationOptions.js";
-import type { MDomDocumentOrShadowRoot } from "../mixins/MDomDocumentOrShadowRoot.js";
-import type { MDomNonElementParentNode } from "../mixins/MDomNonElementParentNode.js";
-import type { MDomParentNode } from "../mixins/MDomParentNode.js";
-import type { IDomAttr } from "./IDomAttr.js";
-import type { IDomCDATASection } from "./IDomCDATASection.js";
-import type { IDomComment } from "./IDomComment.js";
-import type { IDomDocumentFragment } from "./IDomDocumentFragment.js";
-import type { IDomDocumentType } from "./IDomDocumentType.js";
-import type { IDomDOMImplementation } from "./IDomDOMImplementation.js";
-import type { IDomElement } from "./IDomElement.js";
-import type { IDomNode } from "./IDomNode.js";
-import type { IDomNodeIterator } from "./IDomNodeIterator.js";
-import type { IDomProcessingInstruction } from "./IDomProcessingInstruction.js";
-import type { IDomRange } from "./IDomRange.js";
-import type { IDomText } from "./IDomText.js";
-import type { IDomTreeWalker } from "./IDomTreeWalker.js";
+import type { CBDomNodeFilter } from "../callbacks/CBDomNodeFilter.mjs";
+import type { CDomNodeFilterWhatToShow } from "../constants/CDomNodeFilterWhatToShow.mjs";
+import type { DDomElementCreationOptions } from "../dictionaries/DDomElementCreationOptions.mjs";
+import type { MDomDocumentOrShadowRoot } from "../mixins/MDomDocumentOrShadowRoot.mjs";
+import type { MDomNonElementParentNode } from "../mixins/MDomNonElementParentNode.mjs";
+import type { MDomParentNode } from "../mixins/MDomParentNode.mjs";
+import type { IDomAttr } from "./IDomAttr.mjs";
+import type { IDomCDATASection } from "./IDomCDATASection.mjs";
+import type { IDomComment } from "./IDomComment.mjs";
+import type { IDomDocumentFragment } from "./IDomDocumentFragment.mjs";
+import type { IDomDocumentType } from "./IDomDocumentType.mjs";
+import type { IDomDOMImplementation } from "./IDomDOMImplementation.mjs";
+import type { IDomElement } from "./IDomElement.mjs";
+import type { IDomNode } from "./IDomNode.mjs";
+import type { IDomNodeIterator } from "./IDomNodeIterator.mjs";
+import type { IDomProcessingInstruction } from "./IDomProcessingInstruction.mjs";
+import type { IDomRange } from "./IDomRange.mjs";
+import type { IDomText } from "./IDomText.mjs";
+import type { IDomTreeWalker } from "./IDomTreeWalker.mjs";
 
 /** @sealed */
 export interface IDomDocumentConstructors

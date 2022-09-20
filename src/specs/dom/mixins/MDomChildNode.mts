@@ -1,6 +1,6 @@
-import type { HierarchyRequestErrorDomException } from "@/exceptions/DomException.js";
+import type { HierarchyRequestErrorDomException } from "@/exceptions/DomException.mjs";
 import type * as E from "fp-ts/Either";
-import type { IDomNode } from "../interfaces/IDomNode.js";
+import type { IDomNode } from "../interfaces/IDomNode.mjs";
 
 export interface MDomChildNode {
   before(

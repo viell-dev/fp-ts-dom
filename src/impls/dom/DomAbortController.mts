@@ -1,12 +1,12 @@
-import { StaticImplements } from "@/decorators/StaticImplements.js";
+import { StaticImplements } from "@/decorators/StaticImplements.mjs";
 import type {
   IDomAbortController,
   IDomAbortControllerConstructors,
-} from "@/specs/dom/interfaces/IDomAbortController.js";
+} from "@/specs/dom/interfaces/IDomAbortController.mjs";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { Wrapper } from "../../globals/Wrapper.js";
-import { DomAbortSignal } from "./DomAbortSignal.js";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import { DomAbortSignal } from "./DomAbortSignal.mjs";
 
 @StaticImplements<IDomAbortControllerConstructors>()
 export class DomAbortController<R>

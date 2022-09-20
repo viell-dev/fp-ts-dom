@@ -1,8 +1,8 @@
-import { Wrapper } from "@/globals/Wrapper.js";
-import type { DGeometryDOMMatrixInit } from "@/specs/geometry/dictionaries/DGeometryDOMMatrixInit.js";
-import type { IGeometryDOMPointReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMPointReadOnly.js";
+import { Wrapper } from "@/globals/Wrapper.mjs";
+import type { DGeometryDOMMatrixInit } from "@/specs/geometry/dictionaries/DGeometryDOMMatrixInit.mjs";
+import type { IGeometryDOMPointReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMPointReadOnly.mjs";
 import * as E from "fp-ts/Either";
-import { GeometryDOMPoint } from "./GeometryDOMPoint.js";
+import { GeometryDOMPoint } from "./GeometryDOMPoint.mjs";
 
 export abstract class GeometryDOMPointBase<N extends DOMPointReadOnly>
   extends Wrapper<N>

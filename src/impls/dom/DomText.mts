@@ -1,9 +1,9 @@
-import { StaticImplements } from "@/decorators/StaticImplements.js";
+import { StaticImplements } from "@/decorators/StaticImplements.mjs";
 import type {
   IDomText,
   IDomTextConstructors,
-} from "@/specs/dom/interfaces/IDomText.js";
-import { DomTextBase } from "./DomTextBase.js";
+} from "@/specs/dom/interfaces/IDomText.mjs";
+import { DomTextBase } from "./DomTextBase.mjs";
 
 @StaticImplements<IDomTextConstructors>()
 export class DomText extends DomTextBase<Text> implements IDomText<Text> {

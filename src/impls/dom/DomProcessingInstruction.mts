@@ -1,5 +1,5 @@
-import type { IDomProcessingInstruction } from "@/specs/dom/interfaces/IDomProcessingInstruction.js";
-import { DomCharacterDataBase } from "./DomCharacterDataBase.js";
+import type { IDomProcessingInstruction } from "@/specs/dom/interfaces/IDomProcessingInstruction.mjs";
+import { DomCharacterDataBase } from "./DomCharacterDataBase.mjs";
 
 export class DomProcessingInstruction
   extends DomCharacterDataBase<ProcessingInstruction>

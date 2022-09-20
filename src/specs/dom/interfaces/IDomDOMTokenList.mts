@@ -1,8 +1,8 @@
 import type {
   InvalidCharacterErrorDomException,
   SyntaxErrorDomException,
-} from "@/exceptions/DomException.js";
-import type { IWrapper } from "@/globals/IWrapper.js";
+} from "@/exceptions/DomException.mjs";
+import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
 

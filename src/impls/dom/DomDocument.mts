@@ -1,37 +1,37 @@
-import { StaticImplements } from "@/decorators/StaticImplements.js";
+import { StaticImplements } from "@/decorators/StaticImplements.mjs";
 import type {
   HierarchyRequestErrorDomException,
   InvalidCharacterErrorDomException,
   NamespaceErrorDomException,
   NotSupportedErrorDomException,
-} from "@/exceptions/DomException.js";
-import { getNative } from "@/helpers/getNative.js";
-import type { CBDomNodeFilter } from "@/specs/dom/callbacks/CBDomNodeFilter.js";
-import type { CDomNodeFilterWhatToShow } from "@/specs/dom/constants/CDomNodeFilterWhatToShow.js";
-import type { DDomElementCreationOptions } from "@/specs/dom/dictionaries/DDomElementCreationOptions.js";
+} from "@/exceptions/DomException.mjs";
+import { getNative } from "@/helpers/getNative.mjs";
+import type { CBDomNodeFilter } from "@/specs/dom/callbacks/CBDomNodeFilter.mjs";
+import type { CDomNodeFilterWhatToShow } from "@/specs/dom/constants/CDomNodeFilterWhatToShow.mjs";
+import type { DDomElementCreationOptions } from "@/specs/dom/dictionaries/DDomElementCreationOptions.mjs";
 import type {
   IDomDocument,
   IDomDocumentConstructors,
-} from "@/specs/dom/interfaces/IDomDocument.js";
-import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.js";
+} from "@/specs/dom/interfaces/IDomDocument.mjs";
+import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { DomAttr } from "./DomAttr.js";
-import { DomCDATASection } from "./DomCDATASection.js";
-import { DomComment } from "./DomComment.js";
-import { DomDocumentFragment } from "./DomDocumentFragment.js";
-import { DomDocumentType } from "./DomDocumentType.js";
-import { DomDOMImplementation } from "./DomDOMImplementation.js";
-import { DomElement } from "./DomElement.js";
-import { DomNode } from "./DomNode.js";
-import { DomNodeBase } from "./DomNodeBase.js";
-import { DomNodeIterator } from "./DomNodeIterator.js";
-import { DomProcessingInstruction } from "./DomProcessingInstruction.js";
-import { DomRange } from "./DomRange.js";
-import { DomText } from "./DomText.js";
-import { DomTreeWalker } from "./DomTreeWalker.js";
+import { DomAttr } from "./DomAttr.mjs";
+import { DomCDATASection } from "./DomCDATASection.mjs";
+import { DomComment } from "./DomComment.mjs";
+import { DomDocumentFragment } from "./DomDocumentFragment.mjs";
+import { DomDocumentType } from "./DomDocumentType.mjs";
+import { DomDOMImplementation } from "./DomDOMImplementation.mjs";
+import { DomElement } from "./DomElement.mjs";
+import { DomNode } from "./DomNode.mjs";
+import { DomNodeBase } from "./DomNodeBase.mjs";
+import { DomNodeIterator } from "./DomNodeIterator.mjs";
+import { DomProcessingInstruction } from "./DomProcessingInstruction.mjs";
+import { DomRange } from "./DomRange.mjs";
+import { DomText } from "./DomText.mjs";
+import { DomTreeWalker } from "./DomTreeWalker.mjs";
 
 type CorrectedCreateElement = (
   localName: string,

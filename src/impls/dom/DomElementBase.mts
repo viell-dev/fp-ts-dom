@@ -5,23 +5,23 @@ import type {
   NotFoundErrorDomException,
   NotSupportedErrorDomException,
   SyntaxErrorDomException,
-} from "@/exceptions/DomException.js";
-import type { DDomShadowRootInit } from "@/specs/dom/dictionaries/DDomShadowRootInit.js";
-import type { IDomAttr } from "@/specs/dom/interfaces/IDomAttr.js";
-import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.js";
-import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.js";
+} from "@/exceptions/DomException.mjs";
+import type { DDomShadowRootInit } from "@/specs/dom/dictionaries/DDomShadowRootInit.mjs";
+import type { IDomAttr } from "@/specs/dom/interfaces/IDomAttr.mjs";
+import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
+import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { HtmlHTMLSlotElement } from "../html/HtmlHTMLSlotElement.js";
-import { DomAttr } from "./DomAttr.js";
-import { DomDOMTokenList } from "./DomDOMTokenList.js";
-import { DomElement } from "./DomElement.js";
-import { DomNamedNodeMap } from "./DomNamedNodeMap.js";
-import { DomNode } from "./DomNode.js";
-import { DomNodeBase } from "./DomNodeBase.js";
-import { DomShadowRoot } from "./DomShadowRoot.js";
+import { HtmlHTMLSlotElement } from "../html/HtmlHTMLSlotElement.mjs";
+import { DomAttr } from "./DomAttr.mjs";
+import { DomDOMTokenList } from "./DomDOMTokenList.mjs";
+import { DomElement } from "./DomElement.mjs";
+import { DomNamedNodeMap } from "./DomNamedNodeMap.mjs";
+import { DomNode } from "./DomNode.mjs";
+import { DomNodeBase } from "./DomNodeBase.mjs";
+import { DomShadowRoot } from "./DomShadowRoot.mjs";
 
 export abstract class DomElementBase<N extends Element>
   extends DomNodeBase<N>

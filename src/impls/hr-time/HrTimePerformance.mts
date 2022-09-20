@@ -1,6 +1,6 @@
-import type { IHrTimePerformance } from "@/specs/hr-time/interfaces/IHrTimePerformance.js";
-import type { THrTimeDOMHighResTimeStamp } from "@/specs/hr-time/types/THrTimeDOMHighResTimeStamp.js";
-import { DomEventTargetBase } from "../dom/DomEventTargetBase.js";
+import type { IHrTimePerformance } from "@/specs/hr-time/interfaces/IHrTimePerformance.mjs";
+import type { THrTimeDOMHighResTimeStamp } from "@/specs/hr-time/types/THrTimeDOMHighResTimeStamp.mjs";
+import { DomEventTargetBase } from "../dom/DomEventTargetBase.mjs";
 
 export class HrTimePerformance
   extends DomEventTargetBase<Performance>

@@ -1,6 +1,6 @@
-import type { IWrapper } from "@/globals/IWrapper.js";
+import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type * as O from "fp-ts/Option";
-import type { IDomNode } from "./IDomNode.js";
+import type { IDomNode } from "./IDomNode.mjs";
 
 export interface IDomMutationRecord<N extends MutationRecord>
   extends IWrapper<N> {

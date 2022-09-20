@@ -1,15 +1,15 @@
 import type {
   InvalidStateErrorDomException,
   SyntaxErrorDomException,
-} from "@/exceptions/DomException.js";
-import type { ISerializable } from "@/globals/ISerializable.js";
-import type { IStringifier } from "@/globals/IStringifier.js";
-import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.js";
+} from "@/exceptions/DomException.mjs";
+import type { ISerializable } from "@/globals/ISerializable.mjs";
+import type { IStringifier } from "@/globals/IStringifier.mjs";
+import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
-import type { DGeometryDOMMatrixInit } from "../dictionaries/DGeometryDOMMatrixInit.js";
-import type { DGeometryDOMPointInit } from "../dictionaries/DGeometryDOMPointInit.js";
-import type { IGeometryDOMMatrix } from "./IGeometryDOMMatrix.js";
-import type { IGeometryDOMPoint } from "./IGeometryDOMPoint.js";
+import type { DGeometryDOMMatrixInit } from "../dictionaries/DGeometryDOMMatrixInit.mjs";
+import type { DGeometryDOMPointInit } from "../dictionaries/DGeometryDOMPointInit.mjs";
+import type { IGeometryDOMMatrix } from "./IGeometryDOMMatrix.mjs";
+import type { IGeometryDOMPoint } from "./IGeometryDOMPoint.mjs";
 export interface IGeometryDOMMatrixReadOnlyConstructors
   extends IWrapperConstructors<DOMMatrixReadOnly> {
   /**

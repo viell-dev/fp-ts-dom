@@ -1,9 +1,9 @@
 import type {
   SecurityErrorDomException,
   SyntaxErrorDomException,
-} from "@/exceptions/DomException.js";
-import { Wrapper } from "@/globals/Wrapper.js";
-import type { IHtmlLocation } from "@/specs/html/interfaces/IHtmlLocation.js";
+} from "@/exceptions/DomException.mjs";
+import { Wrapper } from "@/globals/Wrapper.mjs";
+import type { IHtmlLocation } from "@/specs/html/interfaces/IHtmlLocation.mjs";
 import * as E from "fp-ts/Either";
 
 export class HtmlLocation

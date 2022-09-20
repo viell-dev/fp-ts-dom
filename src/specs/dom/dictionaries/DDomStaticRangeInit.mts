@@ -1,4 +1,4 @@
-import type { IDomNode } from "../interfaces/IDomNode.js";
+import type { IDomNode } from "../interfaces/IDomNode.mjs";
 
 export interface DDomStaticRangeInit {
   startContainer: Node | IDomNode<Node>;

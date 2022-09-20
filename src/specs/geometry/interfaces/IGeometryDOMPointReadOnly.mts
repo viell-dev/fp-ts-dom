@@ -1,9 +1,9 @@
-import type { ISerializable } from "@/globals/ISerializable.js";
-import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.js";
+import type { ISerializable } from "@/globals/ISerializable.mjs";
+import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
-import type { DGeometryDOMMatrixInit } from "../dictionaries/DGeometryDOMMatrixInit.js";
-import type { DGeometryDOMPointInit } from "../dictionaries/DGeometryDOMPointInit.js";
-import type { IGeometryDOMPoint } from "./IGeometryDOMPoint.js";
+import type { DGeometryDOMMatrixInit } from "../dictionaries/DGeometryDOMMatrixInit.mjs";
+import type { DGeometryDOMPointInit } from "../dictionaries/DGeometryDOMPointInit.mjs";
+import type { IGeometryDOMPoint } from "./IGeometryDOMPoint.mjs";
 
 export interface IGeometryDOMPointReadOnlyConstructors
   extends IWrapperConstructors<DOMPointReadOnly> {

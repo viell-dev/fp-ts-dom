@@ -1,11 +1,11 @@
-import type { InvalidStateErrorDomException } from "@/exceptions/DomException.js";
-import { Wrapper } from "@/globals/Wrapper.js";
-import type { DGeometryDOMMatrixInit } from "@/specs/geometry/dictionaries/DGeometryDOMMatrixInit.js";
-import type { DGeometryDOMPointInit } from "@/specs/geometry/dictionaries/DGeometryDOMPointInit.js";
-import type { IGeometryDOMMatrixReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMMatrixReadOnly.js";
+import type { InvalidStateErrorDomException } from "@/exceptions/DomException.mjs";
+import { Wrapper } from "@/globals/Wrapper.mjs";
+import type { DGeometryDOMMatrixInit } from "@/specs/geometry/dictionaries/DGeometryDOMMatrixInit.mjs";
+import type { DGeometryDOMPointInit } from "@/specs/geometry/dictionaries/DGeometryDOMPointInit.mjs";
+import type { IGeometryDOMMatrixReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMMatrixReadOnly.mjs";
 import * as E from "fp-ts/Either";
-import { GeometryDOMMatrix } from "./GeometryDOMMatrix.js";
-import { GeometryDOMPoint } from "./GeometryDOMPoint.js";
+import { GeometryDOMMatrix } from "./GeometryDOMMatrix.mjs";
+import { GeometryDOMPoint } from "./GeometryDOMPoint.mjs";
 
 export abstract class GeometryDOMMatrixBase<N extends DOMMatrixReadOnly>
   extends Wrapper<N>

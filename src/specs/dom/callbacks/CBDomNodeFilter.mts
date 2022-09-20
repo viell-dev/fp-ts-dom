@@ -1,6 +1,6 @@
-import type { CDomNodeFilterFilter } from "../constants/CDomNodeFilterFilter.js";
-import type { CDomNodeFilterWhatToShow } from "../constants/CDomNodeFilterWhatToShow.js";
-import type { IDomNode } from "../interfaces/IDomNode.js";
+import type { CDomNodeFilterFilter } from "../constants/CDomNodeFilterFilter.mjs";
+import type { CDomNodeFilterWhatToShow } from "../constants/CDomNodeFilterWhatToShow.mjs";
+import type { IDomNode } from "../interfaces/IDomNode.mjs";
 
 interface CBDomNodeFilterFunction {
   (node: IDomNode<Node>): CDomNodeFilterFilter;

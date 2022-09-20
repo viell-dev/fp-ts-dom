@@ -1,9 +1,9 @@
-import { Wrapper } from "@/globals/Wrapper.js";
-import type { IHtmlWindow } from "@/specs/html/interfaces/IHtmlWindow.js";
+import { Wrapper } from "@/globals/Wrapper.mjs";
+import type { IHtmlWindow } from "@/specs/html/interfaces/IHtmlWindow.mjs";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { DomDocument } from "../dom/DomDocument.js";
-import { HtmlWindowProxy } from "./HtmlWindowProxy.js";
+import { DomDocument } from "../dom/DomDocument.mjs";
+import { HtmlWindowProxy } from "./HtmlWindowProxy.mjs";
 
 export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   get window(): HtmlWindowProxy {

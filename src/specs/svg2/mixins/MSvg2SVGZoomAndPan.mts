@@ -1,4 +1,4 @@
-import type { CSvg2SVGZoomAndPanZoomAndPanType } from "../constants/CSvg2SVGZoomAndPanZoomAndPanType.js";
+import type { CSvg2SVGZoomAndPanZoomAndPanType } from "../constants/CSvg2SVGZoomAndPanZoomAndPanType.mjs";
 
 export interface MSvg2SVGZoomAndPanConstants {
   // Zoom and Pan Types

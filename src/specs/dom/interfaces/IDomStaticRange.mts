@@ -1,8 +1,8 @@
-import type { InvalidNodeTypeErrorDomException } from "@/exceptions/DomException.js";
-import type { IWrapperConstructors } from "@/globals/IWrapper.js";
+import type { InvalidNodeTypeErrorDomException } from "@/exceptions/DomException.mjs";
+import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
-import type { DDomStaticRangeInit } from "../dictionaries/DDomStaticRangeInit.js";
-import type { IDomAbstractRange } from "./IDomAbstractRange.js";
+import type { DDomStaticRangeInit } from "../dictionaries/DDomStaticRangeInit.mjs";
+import type { IDomAbstractRange } from "./IDomAbstractRange.mjs";
 
 export interface IDomStaticRangeConstructors
   extends IWrapperConstructors<StaticRange> {

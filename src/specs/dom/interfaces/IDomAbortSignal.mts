@@ -1,10 +1,10 @@
 import type {
   AbortErrorDomException,
   TimeoutErrorDomException,
-} from "@/exceptions/DomException.js";
-import type { IWrapperConstructors } from "@/globals/IWrapper.js";
-import type { CBHtmlEventHandler } from "@/specs/html/callbacks/CBHtmlEventHandler.js";
-import type { IDomEventTarget } from "./IDomEventTarget.js";
+} from "@/exceptions/DomException.mjs";
+import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
+import type { CBHtmlEventHandler } from "@/specs/html/callbacks/CBHtmlEventHandler.mjs";
+import type { IDomEventTarget } from "./IDomEventTarget.mjs";
 
 /** @sealed */
 export interface IDomAbortSignalConstructors

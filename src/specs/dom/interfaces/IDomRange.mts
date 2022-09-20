@@ -4,14 +4,14 @@ import type {
   InvalidStateErrorDomException,
   NotSupportedErrorDomException,
   WrongDocumentErrorDomException,
-} from "@/exceptions/DomException.js";
-import type { IStringifier } from "@/globals/IStringifier.js";
-import type { IWrapperConstructors } from "@/globals/IWrapper.js";
+} from "@/exceptions/DomException.mjs";
+import type { IStringifier } from "@/globals/IStringifier.mjs";
+import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
-import type { CDomRangeHow } from "../constants/CDomRangeHow.js";
-import type { IDomAbstractRange } from "./IDomAbstractRange.js";
-import type { IDomDocumentFragment } from "./IDomDocumentFragment.js";
-import type { IDomNode } from "./IDomNode.js";
+import type { CDomRangeHow } from "../constants/CDomRangeHow.mjs";
+import type { IDomAbstractRange } from "./IDomAbstractRange.mjs";
+import type { IDomDocumentFragment } from "./IDomDocumentFragment.mjs";
+import type { IDomNode } from "./IDomNode.mjs";
 
 export interface IDomRangeConstructors extends IWrapperConstructors<Range> {
   new (): IDomRange<Range>;

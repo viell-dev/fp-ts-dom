@@ -1,6 +1,6 @@
-import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.js";
-import type { IDomHTMLCollection } from "@/specs/dom/interfaces/IDomHTMLCollection.js";
-import type { IHtmlRadioNodeList } from "./IHtmlRadioNodeList.js";
+import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
+import type { IDomHTMLCollection } from "@/specs/dom/interfaces/IDomHTMLCollection.mjs";
+import type { IHtmlRadioNodeList } from "./IHtmlRadioNodeList.mjs";
 
 export type IHtmlHTMLFormControlsCollection<
   N extends HTMLFormControlsCollection

@@ -1,23 +1,23 @@
-import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.js";
-import type { IDomNodeList } from "@/specs/dom/interfaces/IDomNodeList.js";
-import type { IGeometryDOMMatrix } from "@/specs/geometry/interfaces/IGeometryDOMMatrix.js";
-import type { IGeometryDOMPoint } from "@/specs/geometry/interfaces/IGeometryDOMPoint.js";
-import type { IGeometryDOMPointReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMPointReadOnly.js";
-import type { IGeometryDOMRect } from "@/specs/geometry/interfaces/IGeometryDOMRect.js";
-import type { IGeometryDOMRectReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMRectReadOnly.js";
-import type { MHtmlWindowEventHandlers } from "@/specs/html/mixins/MHtmlWindowEventHandlers.js";
-import type { MSvg2SVGFitToViewBox } from "../mixins/MSvg2SVGFitToViewBox.js";
+import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
+import type { IDomNodeList } from "@/specs/dom/interfaces/IDomNodeList.mjs";
+import type { IGeometryDOMMatrix } from "@/specs/geometry/interfaces/IGeometryDOMMatrix.mjs";
+import type { IGeometryDOMPoint } from "@/specs/geometry/interfaces/IGeometryDOMPoint.mjs";
+import type { IGeometryDOMPointReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMPointReadOnly.mjs";
+import type { IGeometryDOMRect } from "@/specs/geometry/interfaces/IGeometryDOMRect.mjs";
+import type { IGeometryDOMRectReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMRectReadOnly.mjs";
+import type { MHtmlWindowEventHandlers } from "@/specs/html/mixins/MHtmlWindowEventHandlers.mjs";
+import type { MSvg2SVGFitToViewBox } from "../mixins/MSvg2SVGFitToViewBox.mjs";
 import type {
   MSvg2SVGZoomAndPan,
   MSvg2SVGZoomAndPanConstants,
-} from "../mixins/MSvg2SVGZoomAndPan.js";
-import type { ISvg2SVGAngle } from "./ISvg2SVGAngle.js";
-import type { ISvg2SVGAnimatedLength } from "./ISvg2SVGAnimatedLength.js";
-import type { ISvg2SVGElement } from "./ISvg2SVGElement.js";
-import type { ISvg2SVGGraphicsElement } from "./ISvg2SVGGraphicsElement.js";
-import type { ISvg2SVGLength } from "./ISvg2SVGLength.js";
-import type { ISvg2SVGNumber } from "./ISvg2SVGNumber.js";
-import type { ISvg2SVGTransform } from "./ISvg2SVGTransform.js";
+} from "../mixins/MSvg2SVGZoomAndPan.mjs";
+import type { ISvg2SVGAngle } from "./ISvg2SVGAngle.mjs";
+import type { ISvg2SVGAnimatedLength } from "./ISvg2SVGAnimatedLength.mjs";
+import type { ISvg2SVGElement } from "./ISvg2SVGElement.mjs";
+import type { ISvg2SVGGraphicsElement } from "./ISvg2SVGGraphicsElement.mjs";
+import type { ISvg2SVGLength } from "./ISvg2SVGLength.mjs";
+import type { ISvg2SVGNumber } from "./ISvg2SVGNumber.mjs";
+import type { ISvg2SVGTransform } from "./ISvg2SVGTransform.mjs";
 
 export type ISvg2SVGSVGElementConstants = MSvg2SVGZoomAndPanConstants;
 

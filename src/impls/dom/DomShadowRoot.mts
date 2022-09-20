@@ -1,13 +1,13 @@
-import type { EDomShadowRootMode } from "@/specs/dom/enums/EDomShadowRootMode.js";
-import type { EDomSlotAssignmentMode } from "@/specs/dom/enums/EDomSlotAssignmentMode.js";
-import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.js";
-import type { IDomShadowRoot } from "@/specs/dom/interfaces/IDomShadowRoot.js";
-import type { CBHtmlEventHandler } from "@/specs/html/callbacks/CBHtmlEventHandler.js";
+import type { EDomShadowRootMode } from "@/specs/dom/enums/EDomShadowRootMode.mjs";
+import type { EDomSlotAssignmentMode } from "@/specs/dom/enums/EDomSlotAssignmentMode.mjs";
+import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
+import type { IDomShadowRoot } from "@/specs/dom/interfaces/IDomShadowRoot.mjs";
+import type { CBHtmlEventHandler } from "@/specs/html/callbacks/CBHtmlEventHandler.mjs";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { DomDocumentFragmentBase } from "./DomDocumentFragmentBase.js";
-import { DomElement } from "./DomElement.js";
-import { DomEvent } from "./DomEvent.js";
+import { DomDocumentFragmentBase } from "./DomDocumentFragmentBase.mjs";
+import { DomElement } from "./DomElement.mjs";
+import { DomEvent } from "./DomEvent.mjs";
 
 export class DomShadowRoot
   extends DomDocumentFragmentBase<ShadowRoot>

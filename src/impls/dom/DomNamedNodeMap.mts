@@ -1,14 +1,14 @@
 import type {
   InUseAttributeErrorDomException,
   NotFoundErrorDomException,
-} from "@/exceptions/DomException.js";
-import { Wrapper } from "@/globals/Wrapper.js";
-import type { IDomAttr } from "@/specs/dom/interfaces/IDomAttr.js";
-import type { IDomNamedNodeMap } from "@/specs/dom/interfaces/IDomNamedNodeMap.js";
+} from "@/exceptions/DomException.mjs";
+import { Wrapper } from "@/globals/Wrapper.mjs";
+import type { IDomAttr } from "@/specs/dom/interfaces/IDomAttr.mjs";
+import type { IDomNamedNodeMap } from "@/specs/dom/interfaces/IDomNamedNodeMap.mjs";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { DomAttr } from "./DomAttr.js";
+import { DomAttr } from "./DomAttr.mjs";
 
 export class DomNamedNodeMap
   extends Wrapper<NamedNodeMap>

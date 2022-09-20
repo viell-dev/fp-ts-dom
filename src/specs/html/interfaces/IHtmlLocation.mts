@@ -1,10 +1,10 @@
 import type {
   SecurityErrorDomException,
   SyntaxErrorDomException,
-} from "@/exceptions/DomException.js";
-import type { IWrapper } from "@/globals/IWrapper.js";
+} from "@/exceptions/DomException.mjs";
+import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
-import type { IHtmlDOMStringList } from "./IHtmlDOMStringList.js";
+import type { IHtmlDOMStringList } from "./IHtmlDOMStringList.mjs";
 
 export interface IHtmlLocation<N extends Location> extends IWrapper<N> {
   readonly href: E.Either<SecurityErrorDomException, string>;

@@ -1,5 +1,5 @@
-import type { IDomAbortSignal } from "../interfaces/IDomAbortSignal.js";
-import type { DDomEventListenerOptions } from "./DDomEventListenerOptions.js";
+import type { IDomAbortSignal } from "../interfaces/IDomAbortSignal.mjs";
+import type { DDomEventListenerOptions } from "./DDomEventListenerOptions.mjs";
 
 export interface DDomAddEventListenerOptions<R>
   extends DDomEventListenerOptions {

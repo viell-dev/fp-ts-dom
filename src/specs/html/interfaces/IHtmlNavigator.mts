@@ -1,11 +1,11 @@
-import type { IWrapper } from "@/globals/IWrapper.js";
-import type { MHtmlNavigatorConcurrentHardware } from "../mixins/MHtmlNavigatorConcurrentHardware.js";
-import type { MHtmlNavigatorContentUtils } from "../mixins/MHtmlNavigatorContentUtils.js";
-import type { MHtmlNavigatorCookies } from "../mixins/MHtmlNavigatorCookies.js";
-import type { MHtmlNavigatorID } from "../mixins/MHtmlNavigatorID.js";
-import type { MHtmlNavigatorLanguage } from "../mixins/MHtmlNavigatorLanguage.js";
-import type { MHtmlNavigatorOnLine } from "../mixins/MHtmlNavigatorOnLine.js";
-import type { MHtmlNavigatorPlugins } from "../mixins/MHtmlNavigatorPlugins.js";
+import type { IWrapper } from "@/globals/IWrapper.mjs";
+import type { MHtmlNavigatorConcurrentHardware } from "../mixins/MHtmlNavigatorConcurrentHardware.mjs";
+import type { MHtmlNavigatorContentUtils } from "../mixins/MHtmlNavigatorContentUtils.mjs";
+import type { MHtmlNavigatorCookies } from "../mixins/MHtmlNavigatorCookies.mjs";
+import type { MHtmlNavigatorID } from "../mixins/MHtmlNavigatorID.mjs";
+import type { MHtmlNavigatorLanguage } from "../mixins/MHtmlNavigatorLanguage.mjs";
+import type { MHtmlNavigatorOnLine } from "../mixins/MHtmlNavigatorOnLine.mjs";
+import type { MHtmlNavigatorPlugins } from "../mixins/MHtmlNavigatorPlugins.mjs";
 
 export interface IHtmlNavigator<N extends Navigator>
   extends IWrapper<N>,

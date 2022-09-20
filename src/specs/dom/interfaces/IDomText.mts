@@ -1,7 +1,7 @@
-import type { IWrapperConstructors } from "@/globals/IWrapper.js";
+import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
-import type { MDomSlottable } from "../mixins/MDomSlottable.js";
-import type { IDomCharacterData } from "./IDomCharacterData.js";
+import type { MDomSlottable } from "../mixins/MDomSlottable.mjs";
+import type { IDomCharacterData } from "./IDomCharacterData.mjs";
 
 export interface IDomTextConstructors extends IWrapperConstructors<Text> {
   new (data?: string): IDomText<Text>;

@@ -1,9 +1,9 @@
-import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.js";
+import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
-import type { CBDomMutationCallback } from "../callbacks/CBDomMutationCallback.js";
-import type { DDomMutationObserverInit } from "../dictionaries/DDomMutationObserverInit.js";
-import type { IDomMutationRecord } from "./IDomMutationRecord.js";
-import type { IDomNode } from "./IDomNode.js";
+import type { CBDomMutationCallback } from "../callbacks/CBDomMutationCallback.mjs";
+import type { DDomMutationObserverInit } from "../dictionaries/DDomMutationObserverInit.mjs";
+import type { IDomMutationRecord } from "./IDomMutationRecord.mjs";
+import type { IDomNode } from "./IDomNode.mjs";
 
 export interface IDomMutationObserverConstructors
   extends IWrapperConstructors<MutationObserver> {

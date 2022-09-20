@@ -1,11 +1,11 @@
-import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.js";
-import type { MHtmlDocumentAndElementEventHandlers } from "@/specs/html/mixins/MHtmlDocumentAndElementEventHandlers.js";
-import type { MHtmlGlobalEventHandlers } from "@/specs/html/mixins/MHtmlGlobalEventHandlers.js";
-import type { MHtmlHTMLOrSVGElement } from "@/specs/html/mixins/MHtmlHTMLOrSVGElement.js";
+import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
+import type { MHtmlDocumentAndElementEventHandlers } from "@/specs/html/mixins/MHtmlDocumentAndElementEventHandlers.mjs";
+import type { MHtmlGlobalEventHandlers } from "@/specs/html/mixins/MHtmlGlobalEventHandlers.mjs";
+import type { MHtmlHTMLOrSVGElement } from "@/specs/html/mixins/MHtmlHTMLOrSVGElement.mjs";
 import type * as O from "fp-ts/Option";
-import type { MSvg2SVGElementInstance } from "../mixins/MSvg2SVGElementInstance.js";
-import type { ISvg2SVGAnimatedString } from "./ISvg2SVGAnimatedString.js";
-import type { ISvg2SVGSVGElement } from "./ISvg2SVGSVGElement.js";
+import type { MSvg2SVGElementInstance } from "../mixins/MSvg2SVGElementInstance.mjs";
+import type { ISvg2SVGAnimatedString } from "./ISvg2SVGAnimatedString.mjs";
+import type { ISvg2SVGSVGElement } from "./ISvg2SVGSVGElement.mjs";
 
 export interface ISvg2SVGElement<N extends SVGElement>
   extends IDomElement<N, ISvg2SVGAnimatedString<SVGAnimatedString>>,

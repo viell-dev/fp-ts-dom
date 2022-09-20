@@ -1,7 +1,7 @@
-import type { IWrapperConstructors } from "@/globals/IWrapper.js";
-import type { MDomNonElementParentNode } from "../mixins/MDomNonElementParentNode.js";
-import type { MDomParentNode } from "../mixins/MDomParentNode.js";
-import type { IDomNode } from "./IDomNode.js";
+import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
+import type { MDomNonElementParentNode } from "../mixins/MDomNonElementParentNode.mjs";
+import type { MDomParentNode } from "../mixins/MDomParentNode.mjs";
+import type { IDomNode } from "./IDomNode.mjs";
 
 export interface IDomDocumentFragmentConstructors
   extends IWrapperConstructors<DocumentFragment> {

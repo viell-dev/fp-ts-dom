@@ -1,4 +1,4 @@
-import type { EDomShadowRootMode } from "../enums/EDomShadowRootMode.js";
+import type { EDomShadowRootMode } from "../enums/EDomShadowRootMode.mjs";
 
 export interface DDomShadowRootInit {
   mode: EDomShadowRootMode;

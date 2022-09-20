@@ -1,10 +1,10 @@
-import type { IDomText } from "@/specs/dom/interfaces/IDomText.js";
+import type { IDomText } from "@/specs/dom/interfaces/IDomText.mjs";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { HtmlHTMLSlotElement } from "../html/HtmlHTMLSlotElement.js";
-import { DomCharacterDataBase } from "./DomCharacterDataBase.js";
-import { DomText } from "./DomText.js";
+import { HtmlHTMLSlotElement } from "../html/HtmlHTMLSlotElement.mjs";
+import { DomCharacterDataBase } from "./DomCharacterDataBase.mjs";
+import { DomText } from "./DomText.mjs";
 
 export abstract class DomTextBase<N extends Text>
   extends DomCharacterDataBase<N>

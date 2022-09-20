@@ -1,8 +1,8 @@
-import type { IDomAttr } from "@/specs/dom/interfaces/IDomAttr.js";
+import type { IDomAttr } from "@/specs/dom/interfaces/IDomAttr.mjs";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { DomElement } from "./DomElement.js";
-import { DomNodeBase } from "./DomNodeBase.js";
+import { DomElement } from "./DomElement.mjs";
+import { DomNodeBase } from "./DomNodeBase.mjs";
 
 export class DomAttr extends DomNodeBase<Attr> implements IDomAttr<Attr> {
   get namespaceURI(): O.Option<string> {

@@ -1,9 +1,9 @@
-import { StaticImplements } from "@/decorators/StaticImplements.js";
+import { StaticImplements } from "@/decorators/StaticImplements.mjs";
 import type {
   IDomDocumentFragment,
   IDomDocumentFragmentConstructors,
-} from "@/specs/dom/interfaces/IDomDocumentFragment.js";
-import { DomDocumentFragmentBase } from "./DomDocumentFragmentBase.js";
+} from "@/specs/dom/interfaces/IDomDocumentFragment.mjs";
+import { DomDocumentFragmentBase } from "./DomDocumentFragmentBase.mjs";
 
 @StaticImplements<IDomDocumentFragmentConstructors>()
 export class DomDocumentFragment

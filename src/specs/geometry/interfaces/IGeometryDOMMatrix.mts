@@ -1,8 +1,8 @@
-import type { SyntaxErrorDomException } from "@/exceptions/DomException.js";
-import type { IWrapperConstructors } from "@/globals/IWrapper.js";
+import type { SyntaxErrorDomException } from "@/exceptions/DomException.mjs";
+import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
-import type { DGeometryDOMMatrixInit } from "../dictionaries/DGeometryDOMMatrixInit.js";
-import type { IGeometryDOMMatrixReadOnly } from "./IGeometryDOMMatrixReadOnly.js";
+import type { DGeometryDOMMatrixInit } from "../dictionaries/DGeometryDOMMatrixInit.mjs";
+import type { IGeometryDOMMatrixReadOnly } from "./IGeometryDOMMatrixReadOnly.mjs";
 
 export interface IGeometryDOMMatrixConstructors
   extends IWrapperConstructors<DOMMatrix> {

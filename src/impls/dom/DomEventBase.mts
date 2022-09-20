@@ -1,14 +1,14 @@
-import { StaticImplements } from "@/decorators/StaticImplements.js";
-import { Wrapper } from "@/globals/Wrapper.js";
-import { CDomEventEventPhase } from "@/specs/dom/constants/CDomEventEventPhase.js";
+import { StaticImplements } from "@/decorators/StaticImplements.mjs";
+import { Wrapper } from "@/globals/Wrapper.mjs";
+import { CDomEventEventPhase } from "@/specs/dom/constants/CDomEventEventPhase.mjs";
 import type {
   IDomEvent,
   IDomEventConstants,
-} from "@/specs/dom/interfaces/IDomEvent.js";
+} from "@/specs/dom/interfaces/IDomEvent.mjs";
 import * as A from "fp-ts/Array";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { DomEventTarget } from "./DomEventTarget.js";
+import { DomEventTarget } from "./DomEventTarget.mjs";
 
 @StaticImplements<IDomEventConstants>()
 export abstract class DomEventBase<N extends Event>

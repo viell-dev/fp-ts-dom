@@ -1,10 +1,10 @@
-import type { HierarchyRequestErrorDomException } from "@/exceptions/DomException.js";
-import type { IDomDocumentType } from "@/specs/dom/interfaces/IDomDocumentType.js";
-import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.js";
+import type { HierarchyRequestErrorDomException } from "@/exceptions/DomException.mjs";
+import type { IDomDocumentType } from "@/specs/dom/interfaces/IDomDocumentType.mjs";
+import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
-import { DomNodeBase } from "./DomNodeBase.js";
+import { DomNodeBase } from "./DomNodeBase.mjs";
 
 export class DomDocumentType
   extends DomNodeBase<DocumentType>

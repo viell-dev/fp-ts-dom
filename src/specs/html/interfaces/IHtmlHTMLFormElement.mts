@@ -1,6 +1,6 @@
-import type { IDomDOMTokenList } from "@/specs/dom/interfaces/IDomDOMTokenList.js";
-import type { IHtmlHTMLElement } from "./IHtmlHTMLElement.js";
-import type { IHtmlHTMLFormControlsCollection } from "./IHtmlHTMLFormControlsCollection.js";
+import type { IDomDOMTokenList } from "@/specs/dom/interfaces/IDomDOMTokenList.mjs";
+import type { IHtmlHTMLElement } from "./IHtmlHTMLElement.mjs";
+import type { IHtmlHTMLFormControlsCollection } from "./IHtmlHTMLFormControlsCollection.mjs";
 
 export interface IHtmlHTMLFormElement<N extends HTMLFormElement>
   extends IHtmlHTMLElement<N> {

@@ -1,21 +1,21 @@
-import { StaticImplements } from "@/decorators/StaticImplements.js";
-import type { NotSupportedErrorDomException } from "@/exceptions/DomException.js";
-import { getNative, getNativeOrNull } from "@/helpers/getNative.js";
-import { CDomNodeNodeDocumentPosition } from "@/specs/dom/constants/CDomNodeNodeDocumentPosition.js";
-import { CDomNodeNodeType } from "@/specs/dom/constants/CDomNodeNodeType.js";
-import type { DDomGetRootNodeOptions } from "@/specs/dom/dictionaries/DDomGetRootNodeOptions.js";
+import { StaticImplements } from "@/decorators/StaticImplements.mjs";
+import type { NotSupportedErrorDomException } from "@/exceptions/DomException.mjs";
+import { getNative, getNativeOrNull } from "@/helpers/getNative.mjs";
+import { CDomNodeNodeDocumentPosition } from "@/specs/dom/constants/CDomNodeNodeDocumentPosition.mjs";
+import { CDomNodeNodeType } from "@/specs/dom/constants/CDomNodeNodeType.mjs";
+import type { DDomGetRootNodeOptions } from "@/specs/dom/dictionaries/DDomGetRootNodeOptions.mjs";
 import type {
   IDomNode,
   IDomNodeConstants,
-} from "@/specs/dom/interfaces/IDomNode.js";
+} from "@/specs/dom/interfaces/IDomNode.mjs";
 import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { DomDocument } from "./DomDocument.js";
-import { DomElement } from "./DomElement.js";
-import { DomEventTargetBase } from "./DomEventTargetBase.js";
-import { DomNode } from "./DomNode.js";
+import { DomDocument } from "./DomDocument.mjs";
+import { DomElement } from "./DomElement.mjs";
+import { DomEventTargetBase } from "./DomEventTargetBase.mjs";
+import { DomNode } from "./DomNode.mjs";
 
 @StaticImplements<IDomNodeConstants>()
 export class DomNodeBase<N extends Node>

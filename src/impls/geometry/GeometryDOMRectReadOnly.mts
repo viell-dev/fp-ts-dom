@@ -1,10 +1,10 @@
-import { StaticImplements } from "@/decorators/StaticImplements.js";
-import type { DGeometryDOMRectInit } from "@/specs/geometry/dictionaries/DGeometryDOMRectInit.js";
+import { StaticImplements } from "@/decorators/StaticImplements.mjs";
+import type { DGeometryDOMRectInit } from "@/specs/geometry/dictionaries/DGeometryDOMRectInit.mjs";
 import type {
   IGeometryDOMRectReadOnly,
   IGeometryDOMRectReadOnlyConstructors,
-} from "@/specs/geometry/interfaces/IGeometryDOMRectReadOnly.js";
-import { GeometryDOMRectBase } from "./GeometryDOMRectBase.js";
+} from "@/specs/geometry/interfaces/IGeometryDOMRectReadOnly.mjs";
+import { GeometryDOMRectBase } from "./GeometryDOMRectBase.mjs";
 
 @StaticImplements<IGeometryDOMRectReadOnlyConstructors>()
 export class GeometryDOMRectReadOnly

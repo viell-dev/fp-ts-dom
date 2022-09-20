@@ -1,4 +1,4 @@
-import type { IHtmlHTMLElement } from "./IHtmlHTMLElement.js";
+import type { IHtmlHTMLElement } from "./IHtmlHTMLElement.mjs";
 
 export type IHtmlHTMLHeadElement<N extends HTMLHeadElement> =
   IHtmlHTMLElement<N>;

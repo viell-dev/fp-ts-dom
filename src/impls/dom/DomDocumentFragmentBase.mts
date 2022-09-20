@@ -1,13 +1,13 @@
-import type { HierarchyRequestErrorDomException } from "@/exceptions/DomException.js";
-import type { IDomDocumentFragment } from "@/specs/dom/interfaces/IDomDocumentFragment.js";
-import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.js";
+import type { HierarchyRequestErrorDomException } from "@/exceptions/DomException.mjs";
+import type { IDomDocumentFragment } from "@/specs/dom/interfaces/IDomDocumentFragment.mjs";
+import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { DomElement } from "./DomElement.js";
-import { DomNode } from "./DomNode.js";
-import { DomNodeBase } from "./DomNodeBase.js";
+import { DomElement } from "./DomElement.mjs";
+import { DomNode } from "./DomNode.mjs";
+import { DomNodeBase } from "./DomNodeBase.mjs";
 
 export abstract class DomDocumentFragmentBase<N extends DocumentFragment>
   extends DomNodeBase<N>

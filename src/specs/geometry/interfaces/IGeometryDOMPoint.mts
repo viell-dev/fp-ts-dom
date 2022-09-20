@@ -1,6 +1,6 @@
-import type { IWrapperConstructors } from "@/globals/IWrapper.js";
-import type { DGeometryDOMPointInit } from "../dictionaries/DGeometryDOMPointInit.js";
-import type { IGeometryDOMPointReadOnly } from "./IGeometryDOMPointReadOnly.js";
+import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
+import type { DGeometryDOMPointInit } from "../dictionaries/DGeometryDOMPointInit.mjs";
+import type { IGeometryDOMPointReadOnly } from "./IGeometryDOMPointReadOnly.mjs";
 
 export interface IGeometryDOMPointConstructors
   extends IWrapperConstructors<DOMPoint> {
