@@ -5,6 +5,7 @@ import type {
   NotSupportedErrorDomException,
 } from "@/exceptions/DomException.mjs";
 import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
+import type { IHtmlDocument } from "@/specs/html/interfaces/IHtmlDocument.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
 import type { CBDomNodeFilter } from "../callbacks/CBDomNodeFilter.mjs";
@@ -37,10 +38,10 @@ export interface IDomDocument<N extends Document>
   extends IDomNode<N>,
     MDomNonElementParentNode,
     MDomDocumentOrShadowRoot,
-    MDomParentNode /*,
-    MDomXPathEvaluatorBase,
-    IHtmlDocument,
-    ISvg2Document*/ {
+    MDomParentNode,
+    /*MDomXPathEvaluatorBase,*/
+    IHtmlDocument<N> /*,
+    ISvg2Document<N>*/ {
   readonly implementation: IDomDOMImplementation<DOMImplementation>;
   readonly URL: string;
   readonly documentURI: string;

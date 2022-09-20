@@ -1,21 +1,22 @@
+import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type { IDomDocument } from "@/specs/dom/interfaces/IDomDocument.mjs";
-import type { IDomHTMLCollection } from "@/specs/dom/interfaces/IDomHTMLCollection.mjs";
-import type { IDomNodeList } from "@/specs/dom/interfaces/IDomNodeList.mjs";
+import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
+import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import type * as O from "fp-ts/Option";
 import type { CBHtmlEventHandler } from "../callbacks/CBHtmlEventHandler.mjs";
 import type { EHtmlDocumentReadyState } from "../enums/EHtmlDocumentReadyState.mjs";
 import type { EHtmlDocumentVisibilityState } from "../enums/EHtmlDocumentVisibilityState.mjs";
 import type { MHtmlDocumentAndElementEventHandlers } from "../mixins/MHtmlDocumentAndElementEventHandlers.mjs";
 import type { MHtmlGlobalEventHandlers } from "../mixins/MHtmlGlobalEventHandlers.mjs";
-import type { IHtmlHTMLAllCollection } from "./IHtmlHTMLAllCollection.mjs";
+import type { THtmlHTMLOrSVGScriptElement } from "../types/THtmlHTMLOrSVGScriptElement.mjs";
 import type { IHtmlHTMLElement } from "./IHtmlHTMLElement.mjs";
 import type { IHtmlHTMLHeadElement } from "./IHtmlHTMLHeadElement.mjs";
-import type { IHtmlHTMLOrSVGScriptElement } from "./IHtmlHTMLOrSVGScriptElement.mjs";
 import type { IHtmlLocation } from "./IHtmlLocation.mjs";
 import type { IHtmlWindowProxy } from "./IHtmlWindowProxy.mjs";
 
+/** @sealed */
 export interface IHtmlDocument<N extends Document>
-  extends IDomDocument<N>,
+  extends IWrapper<N>,
     MHtmlGlobalEventHandlers,
     MHtmlDocumentAndElementEventHandlers {
   // resource metadata management
@@ -26,31 +27,32 @@ export interface IHtmlDocument<N extends Document>
   readonly lastModified: string;
   readonly readyState: EHtmlDocumentReadyState;
 
-  // resource metadata management
-  /* [name: string]: object */
+  // DOM tree accessors
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  [name: string extends keyof IHtmlDocument<N> ? never : string]: {};
   title: string;
   dir: string;
   body: O.Option<IHtmlHTMLElement<HTMLElement>>;
   readonly head: O.Option<IHtmlHTMLHeadElement<HTMLHeadElement>>;
-  readonly images: IDomHTMLCollection<HTMLCollection>;
-  readonly embeds: IDomHTMLCollection<HTMLCollection>;
-  readonly plugins: IDomHTMLCollection<HTMLCollection>;
-  readonly links: IDomHTMLCollection<HTMLCollection>;
-  readonly forms: IDomHTMLCollection<HTMLCollection>;
-  readonly scripts: IDomHTMLCollection<HTMLCollection>;
-  getElementsByName(elementName: string): IDomNodeList<NodeList>;
-  readonly currentScript: O.Option<IHtmlHTMLOrSVGScriptElement>;
+  readonly images: IDomElement<Element>[];
+  readonly embeds: IDomElement<Element>[];
+  readonly plugins: IDomElement<Element>[];
+  readonly links: IDomElement<Element>[];
+  readonly forms: IDomElement<Element>[];
+  readonly scripts: IDomElement<Element>[];
+  getElementsByName(elementName: string): IDomNode<Node>[];
+  readonly currentScript: O.Option<THtmlHTMLOrSVGScriptElement>;
 
   // dynamic markup insertion
-  open(unused1?: string, unused2?: string): IHtmlDocument<Document>;
+  open(unused1?: string, unused2?: string): IDomDocument<Document>;
   open(
     url: string,
     name: string,
     features: string
   ): O.Option<IHtmlWindowProxy<WindowProxy>>;
   close(): void;
-  wirte(...text: string[]): void;
-  wirteln(...text: string[]): void;
+  write(...text: string[]): void;
+  writeln(...text: string[]): void;
 
   // user interaction
   readonly defaultView: O.Option<IHtmlWindowProxy<WindowProxy>>;
@@ -68,31 +70,4 @@ export interface IHtmlDocument<N extends Document>
   // special event handler IDL attributes that only apply to Document objects
   onreadystatechange: CBHtmlEventHandler;
   onvisibilitychange: CBHtmlEventHandler;
-
-  // also has obsolete members
-  /** @deprecated obsolete */
-  fgColor: string;
-  /** @deprecated obsolete */
-  linkColor: string;
-  /** @deprecated obsolete */
-  vlinkColor: string;
-  /** @deprecated obsolete */
-  alinkColor: string;
-  /** @deprecated obsolete */
-  bgColor: string;
-
-  /** @deprecated obsolete */
-  readonly anchors: IDomHTMLCollection<HTMLCollection>;
-  /** @deprecated obsolete */
-  readonly applets: IDomHTMLCollection<HTMLCollection>;
-
-  /** @deprecated obsolete */
-  clear(): void;
-  /** @deprecated obsolete */
-  captureEvents(): void;
-  /** @deprecated obsolete */
-  releaseEvents(): void;
-
-  /** @deprecated obsolete */
-  readonly all: IHtmlHTMLAllCollection<HTMLAllCollection>;
 }

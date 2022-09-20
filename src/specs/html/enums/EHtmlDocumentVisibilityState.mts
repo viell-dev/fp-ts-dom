@@ -1,1 +1,1 @@
-export type EHtmlDocumentVisibilityState = DocumentVisibilityState;
+export type EHtmlDocumentVisibilityState = "visible" | "hidden";

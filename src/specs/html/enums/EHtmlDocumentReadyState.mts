@@ -1,1 +1,1 @@
-export type EHtmlDocumentReadyState = DocumentReadyState;
+export type EHtmlDocumentReadyState = "loading" | "interactive" | "complete";
