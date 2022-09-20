@@ -39,7 +39,7 @@
 
     // Language and Environment
     "experimentalDecorators": true,
-    "lib": ["DOM", "ESNext"],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "target": "ESNext",
 
     // Project

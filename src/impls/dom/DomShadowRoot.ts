@@ -28,18 +28,21 @@ export class DomShadowRoot
   get onslotchange(): CBHtmlEventHandler {
     return pipe(
       O.fromNullable(this.native.onslotchange),
-      O.map((callback) => (event: IDomEvent<Event>) => {
-        return callback.bind(this.getNative(), event.getNative());
-      }),
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
       O.toNullable
     );
   }
   set onslotchange(callback: CBHtmlEventHandler) {
     this.native.onslotchange = pipe(
       O.fromNullable(callback),
-      O.map((callback) => (event: Event): unknown => {
-        return callback.call(this, new DomEvent(event));
-      }),
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
       O.toNullable
     );
   }

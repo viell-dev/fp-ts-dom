@@ -11,7 +11,7 @@ export interface IDomDOMTokenList<N extends DOMTokenList>
     Iterable<string> {
   readonly length: number;
   item(index: number): O.Option<string>;
-  //[index: number]: string;
+  [index: number]: string;
   contains(token: string): boolean;
   add(
     ...tokens: string[]

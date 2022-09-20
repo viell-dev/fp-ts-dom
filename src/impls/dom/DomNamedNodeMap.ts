@@ -19,7 +19,7 @@ export class DomNamedNodeMap
     qualifiedName: string extends keyof typeof DomNamedNodeMap ? never : string
   ]: DomAttr;
 
-  private static indexedHandler: ProxyHandler<DomNamedNodeMap> = {
+  private static indexHandler: ProxyHandler<DomNamedNodeMap> = {
     get(target, property) {
       if (typeof property === "string")
         return pipe(
@@ -30,13 +30,14 @@ export class DomNamedNodeMap
           O.map((attr) => new DomAttr(attr)),
           O.toUndefined
         );
+      return;
     },
   };
 
   constructor(namedNodeMap: NamedNodeMap) {
     super(namedNodeMap);
 
-    return new Proxy(this, DomNamedNodeMap.indexedHandler);
+    return new Proxy(this, DomNamedNodeMap.indexHandler);
   }
 
   get length(): number {
