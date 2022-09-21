@@ -2,7 +2,7 @@ import type { DHtmlFocusOptions } from "../dictionaries/DHtmlFocusOptions.mjs";
 import type { IHtmlDOMStringMap } from "../interfaces/IHtmlDOMStringMap.mjs";
 
 export interface MHtmlHTMLOrSVGElement {
-  dataset: IHtmlDOMStringMap<DOMStringMap>;
+  readonly dataset: IHtmlDOMStringMap<DOMStringMap>;
   nonce: string;
 
   autofocus: boolean;
