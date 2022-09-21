@@ -3,6 +3,7 @@ import type {
   NoModificationAllowedErrorDomException,
 } from "@/exceptions/DomException.mjs";
 import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
+import type { MCssomElementCSSInlineStyle } from "@/specs/cssom/mixins/MCssomElementCSSInlineStyle.mjs";
 import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
@@ -38,7 +39,8 @@ export interface IHtmlHTMLElement<N extends HTMLElement>
     MHtmlGlobalEventHandlers,
     MHtmlDocumentAndElementEventHandlers,
     MHtmlElementContentEditable,
-    MHtmlHTMLOrSVGElement {
+    MHtmlHTMLOrSVGElement,
+    MCssomElementCSSInlineStyle {
   // metadata attributes
   title: string;
   lang: string;

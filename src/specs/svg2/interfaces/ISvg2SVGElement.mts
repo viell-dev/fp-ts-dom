@@ -1,3 +1,4 @@
+import type { MCssomElementCSSInlineStyle } from "@/specs/cssom/mixins/MCssomElementCSSInlineStyle.mjs";
 import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
 import type { MHtmlDocumentAndElementEventHandlers } from "@/specs/html/mixins/MHtmlDocumentAndElementEventHandlers.mjs";
 import type { MHtmlGlobalEventHandlers } from "@/specs/html/mixins/MHtmlGlobalEventHandlers.mjs";
@@ -12,7 +13,8 @@ export interface ISvg2SVGElement<N extends SVGElement>
     MHtmlGlobalEventHandlers,
     MHtmlDocumentAndElementEventHandlers,
     MSvg2SVGElementInstance,
-    MHtmlHTMLOrSVGElement {
+    MHtmlHTMLOrSVGElement,
+    MCssomElementCSSInlineStyle {
   readonly className: ISvg2SVGAnimatedString<SVGAnimatedString>;
 
   readonly ownerSVGElement: O.Option<ISvg2SVGSVGElement<SVGSVGElement>>;
