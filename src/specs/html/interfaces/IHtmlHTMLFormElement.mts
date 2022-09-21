@@ -1,6 +1,10 @@
+import type { NotFoundErrorDomException } from "@/exceptions/DomException.mjs";
+import type { NotKeyOf } from "@/helpers/NotKeyOf.mjs";
 import type { IDomDOMTokenList } from "@/specs/dom/interfaces/IDomDOMTokenList.mjs";
+import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
+import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
+import type * as E from "fp-ts/Either";
 import type { IHtmlHTMLElement } from "./IHtmlHTMLElement.mjs";
-import type { IHtmlHTMLFormControlsCollection } from "./IHtmlHTMLFormControlsCollection.mjs";
 
 export interface IHtmlHTMLFormElement<N extends HTMLFormElement>
   extends IHtmlHTMLElement<N> {
@@ -16,15 +20,17 @@ export interface IHtmlHTMLFormElement<N extends HTMLFormElement>
   rel: string;
   readonly relList: IDomDOMTokenList<DOMTokenList>;
 
-  readonly elements: IHtmlHTMLFormControlsCollection<HTMLFormControlsCollection>;
+  readonly elements: IDomElement<Element>[];
   readonly length: number;
-  /* [index: number]: Element */
-  /* [name: string]: RadioNodeList | Element */
+  [index: number]: IDomElement<Element>;
+  [name: NotKeyOf<IHtmlHTMLFormElement<N>>]:
+    | IDomNode<Node>[]
+    | IDomElement<Element>;
 
   submit(): void;
   requestSubmit(
     submitter?: HTMLElement | IHtmlHTMLElement<HTMLElement> | null
-  ): void;
+  ): E.Either<TypeError | NotFoundErrorDomException, void>;
   reset(): void;
   checkValidity(): boolean;
   reportValidity(): boolean;
