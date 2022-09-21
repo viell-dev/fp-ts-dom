@@ -7,7 +7,7 @@ import type * as O from "fp-ts/Option";
 export interface ICssomCSSStyleDeclaration<N extends CSSStyleDeclaration>
   extends IWrapper<N> {
   /**
-   * Use {@link setCssText} instead, when setting, to get and `Either`.
+   * Use {@link setCssText} instead, when setting, to get an `Either`.
    *
    * @throws
    * When setting, if the computed flag is set, then throw a
@@ -32,7 +32,7 @@ export interface ICssomCSSStyleDeclaration<N extends CSSStyleDeclaration>
   ): E.Either<NoModificationAllowedErrorDomException, string>;
   readonly parentRule: O.Option<CSSRule>;
   /**
-   * Use {@link setCssFloat} instead, when setting, to get and `Either`.
+   * Use {@link setCssFloat} instead, when setting, to get an `Either`.
    *
    * @throws
    * When setting, if the computed flag is set, then throw a
@@ -44,7 +44,7 @@ export interface ICssomCSSStyleDeclaration<N extends CSSStyleDeclaration>
   ): E.Either<NoModificationAllowedErrorDomException, void>;
 
   /**
-   * Use {@link setProperty} instead, when setting, to get and `Either`.
+   * Use {@link setProperty} instead, when setting, to get an `Either`.
    *
    * @throws
    * When setting, if the computed flag is set, then throw a
