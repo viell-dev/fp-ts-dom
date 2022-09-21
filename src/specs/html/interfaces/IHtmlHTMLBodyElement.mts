@@ -7,6 +7,6 @@ import type {
 export type IHtmlHTMLBodyElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLBodyElement>;
 
-export interface IHtmlHTMLBodyElement
-  extends IHtmlHTMLElement<HTMLBodyElement>,
+export interface IHtmlHTMLBodyElement<N extends HTMLBodyElement>
+  extends IHtmlHTMLElement<N>,
     MHtmlWindowEventHandlers {}

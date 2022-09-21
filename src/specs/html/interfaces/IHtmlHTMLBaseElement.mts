@@ -6,8 +6,8 @@ import type {
 export type IHtmlHTMLBaseElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLBaseElement>;
 
-export interface IHtmlHTMLBaseElement
-  extends IHtmlHTMLElement<HTMLBaseElement> {
+export interface IHtmlHTMLBaseElement<N extends HTMLBaseElement>
+  extends IHtmlHTMLElement<N> {
   href: string;
   target: string;
 }

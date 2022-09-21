@@ -6,6 +6,7 @@ import type {
 export type IHtmlHTMLLIElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLLIElement>;
 
-export interface IHtmlHTMLLIElement extends IHtmlHTMLElement<HTMLLIElement> {
+export interface IHtmlHTMLLIElement<N extends HTMLLIElement>
+  extends IHtmlHTMLElement<N> {
   value: number;
 }

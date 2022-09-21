@@ -6,4 +6,4 @@ import type {
 export type IHtmlHTMLPreElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLPreElement>;
 
-export type IHtmlHTMLPreElement = IHtmlHTMLElement<HTMLPreElement>;
+export type IHtmlHTMLPreElement<N extends HTMLPreElement> = IHtmlHTMLElement<N>;

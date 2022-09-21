@@ -8,8 +8,8 @@ import type {
 export type IHtmlHTMLStyleElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLStyleElement>;
 
-export interface IHtmlHTMLStyleElement
-  extends IHtmlHTMLElement<HTMLStyleElement>,
+export interface IHtmlHTMLStyleElement<N extends HTMLStyleElement>
+  extends IHtmlHTMLElement<N>,
     MCssomLinkStyle {
   disabled: boolean;
   media: string;

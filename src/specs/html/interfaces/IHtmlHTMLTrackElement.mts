@@ -15,8 +15,8 @@ export interface IHtmlHTMLTrackElementConstants {
   readonly ERROR: typeof CHtmlHTMLTrackElementReadyState.ERROR;
 }
 
-export interface IHtmlHTMLTrackElement
-  extends IHtmlHTMLElement<HTMLTrackElement> {
+export interface IHtmlHTMLTrackElement<N extends HTMLTrackElement>
+  extends IHtmlHTMLElement<N> {
   kind: string;
   src: string;
   srclang: string;

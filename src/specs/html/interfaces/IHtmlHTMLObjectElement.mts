@@ -11,8 +11,8 @@ import type { IHtmlWindowProxy } from "./IHtmlWindowProxy.mjs";
 export type IHtmlHTMLObjectElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLObjectElement>;
 
-export interface IHtmlHTMLObjectElement
-  extends IHtmlHTMLElement<HTMLObjectElement> {
+export interface IHtmlHTMLObjectElement<N extends HTMLObjectElement>
+  extends IHtmlHTMLElement<N> {
   data: string;
   type: string;
   name: string;

@@ -42,8 +42,8 @@ export interface IHtmlHTMLMediaElementConstants {
   readonly HAVE_ENOUGH_DATA: typeof CHtmlHTMLMediaElementReadyState.HAVE_ENOUGH_DATA;
 }
 
-export interface IHtmlHTMLMediaElement
-  extends IHtmlHTMLElement<HTMLMediaElement> {
+export interface IHtmlHTMLMediaElement<N extends HTMLMediaElement>
+  extends IHtmlHTMLElement<N> {
   // error state
   readonly error: O.Option<IHtmlMediaError<MediaError>>;
 

@@ -6,4 +6,5 @@ import type {
 export type IHtmlHTMLUListElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLUListElement>;
 
-export type IHtmlHTMLUListElement = IHtmlHTMLElement<HTMLUListElement>;
+export type IHtmlHTMLUListElement<N extends HTMLUListElement> =
+  IHtmlHTMLElement<N>;

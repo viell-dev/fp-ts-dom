@@ -9,8 +9,8 @@ import type {
 export type IHtmlHTMLLinkElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLLinkElement>;
 
-export interface IHtmlHTMLLinkElement
-  extends IHtmlHTMLElement<HTMLLinkElement>,
+export interface IHtmlHTMLLinkElement<N extends HTMLLinkElement>
+  extends IHtmlHTMLElement<N>,
     MCssomLinkStyle {
   href: string;
   crossOrigin?: O.Option<string>;

@@ -6,7 +6,7 @@ import type {
 export type IHtmlHTMLTitleElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLTitleElement>;
 
-export interface IHtmlHTMLTitleElement
-  extends IHtmlHTMLElement<HTMLTitleElement> {
+export interface IHtmlHTMLTitleElement<N extends HTMLTitleElement>
+  extends IHtmlHTMLElement<N> {
   text: string;
 }

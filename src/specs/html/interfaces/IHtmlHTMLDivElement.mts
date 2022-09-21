@@ -6,4 +6,4 @@ import type {
 export type IHtmlHTMLDivElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLDivElement>;
 
-export type IHtmlHTMLDivElement = IHtmlHTMLElement<HTMLDivElement>;
+export type IHtmlHTMLDivElement<N extends HTMLDivElement> = IHtmlHTMLElement<N>;

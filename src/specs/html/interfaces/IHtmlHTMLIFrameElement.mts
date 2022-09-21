@@ -10,8 +10,8 @@ import type { IHtmlWindowProxy } from "./IHtmlWindowProxy.mjs";
 export type IHtmlHTMLIFrameElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLIFrameElement>;
 
-export interface IHtmlHTMLIFrameElement
-  extends IHtmlHTMLElement<HTMLIFrameElement> {
+export interface IHtmlHTMLIFrameElement<N extends HTMLIFrameElement>
+  extends IHtmlHTMLElement<N> {
   src: string;
   srcdoc: string;
   name: string;

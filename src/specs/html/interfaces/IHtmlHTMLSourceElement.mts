@@ -6,8 +6,8 @@ import type {
 export type IHtmlHTMLSourceElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLSourceElement>;
 
-export interface IHtmlHTMLSourceElement
-  extends IHtmlHTMLElement<HTMLSourceElement> {
+export interface IHtmlHTMLSourceElement<N extends HTMLSourceElement>
+  extends IHtmlHTMLElement<N> {
   src: string;
   type: string;
   srcset: string;

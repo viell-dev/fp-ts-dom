@@ -6,8 +6,8 @@ import type {
 export type IHtmlHTMLMetaElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLMetaElement>;
 
-export interface IHtmlHTMLMetaElement
-  extends IHtmlHTMLElement<HTMLMetaElement> {
+export interface IHtmlHTMLMetaElement<N extends HTMLMetaElement>
+  extends IHtmlHTMLElement<N> {
   name: string;
   httpEquiv: string;
   content: string;

@@ -6,4 +6,5 @@ import type {
 export type IHtmlHTMLMenuElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLMenuElement>;
 
-export type IHtmlHTMLMenuElement = IHtmlHTMLElement<HTMLMenuElement>;
+export type IHtmlHTMLMenuElement<N extends HTMLMenuElement> =
+  IHtmlHTMLElement<N>;

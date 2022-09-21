@@ -6,4 +6,5 @@ import type {
 export type IHtmlHTMLPictureElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLPictureElement>;
 
-export type IHtmlHTMLPictureElement = IHtmlHTMLElement<HTMLPictureElement>;
+export type IHtmlHTMLPictureElement<N extends HTMLPictureElement> =
+  IHtmlHTMLElement<N>;

@@ -7,7 +7,8 @@ import type {
 export type IHtmlHTMLMapElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLMapElement>;
 
-export interface IHtmlHTMLMapElement extends IHtmlHTMLElement<HTMLMapElement> {
+export interface IHtmlHTMLMapElement<N extends HTMLMapElement>
+  extends IHtmlHTMLElement<N> {
   name: string;
   readonly areas: IDomElement<Element>[];
 }

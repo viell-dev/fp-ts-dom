@@ -8,8 +8,8 @@ import type {
 export type IHtmlHTMLAnchorElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLAnchorElement>;
 
-export interface IHtmlHTMLAnchorElement
-  extends IHtmlHTMLElement<HTMLAnchorElement>,
+export interface IHtmlHTMLAnchorElement<N extends HTMLAnchorElement>
+  extends IHtmlHTMLElement<N>,
     MHtmlHTMLHyperlinkElementUtils {
   target: string;
   download: string;

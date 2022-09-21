@@ -9,8 +9,8 @@ import type {
 export type IHtmlHTMLImageElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLImageElement>;
 
-export interface IHtmlHTMLImageElement
-  extends IHtmlHTMLElement<HTMLImageElement> {
+export interface IHtmlHTMLImageElement<N extends HTMLImageElement>
+  extends IHtmlHTMLElement<N> {
   alt: string;
   src: string;
   srcset: string;

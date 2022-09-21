@@ -6,7 +6,8 @@ import type {
 export type IHtmlHTMLModElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLModElement>;
 
-export interface IHtmlHTMLModElement extends IHtmlHTMLElement<HTMLModElement> {
+export interface IHtmlHTMLModElement<N extends HTMLModElement>
+  extends IHtmlHTMLElement<N> {
   cite: string;
   dateTime: string;
 }

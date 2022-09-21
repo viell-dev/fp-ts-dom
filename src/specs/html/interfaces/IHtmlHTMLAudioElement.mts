@@ -4,4 +4,5 @@ import type { IHtmlHTMLMediaElement } from "./IHtmlHTMLMediaElement.mjs";
 export type IHtmlHTMLAudioElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLAudioElement>;
 
-export type IHtmlHTMLAudioElement = IHtmlHTMLMediaElement<HTMLAudioElement>;
+export type IHtmlHTMLAudioElement<N extends HTMLAudioElement> =
+  IHtmlHTMLMediaElement<N>;

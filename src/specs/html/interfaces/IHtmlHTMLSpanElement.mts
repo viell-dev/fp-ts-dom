@@ -6,4 +6,5 @@ import type {
 export type IHtmlHTMLSpanElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLSpanElement>;
 
-export type IHtmlHTMLSpanElement = IHtmlHTMLElement<HTMLSpanElement>;
+export type IHtmlHTMLSpanElement<N extends HTMLSpanElement> =
+  IHtmlHTMLElement<N>;

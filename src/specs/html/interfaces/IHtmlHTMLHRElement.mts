@@ -6,4 +6,4 @@ import type {
 export type IHtmlHTMLHRElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLHRElement>;
 
-export type IHtmlHTMLHRElement = IHtmlHTMLElement<HTMLHRElement>;
+export type IHtmlHTMLHRElement<N extends HTMLHRElement> = IHtmlHTMLElement<N>;

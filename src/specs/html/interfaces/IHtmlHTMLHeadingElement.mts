@@ -6,4 +6,5 @@ import type {
 export type IHtmlHTMLHeadingElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLHeadingElement>;
 
-export type IHtmlHTMLHeadingElement = IHtmlHTMLElement<HTMLHeadingElement>;
+export type IHtmlHTMLHeadingElement<N extends HTMLHeadingElement> =
+  IHtmlHTMLElement<N>;

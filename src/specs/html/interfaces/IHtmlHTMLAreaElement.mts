@@ -8,8 +8,8 @@ import type {
 export type IHtmlHTMLAreaElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLAreaElement>;
 
-export interface IHtmlHTMLAreaElement
-  extends IHtmlHTMLElement<HTMLAreaElement>,
+export interface IHtmlHTMLAreaElement<N extends HTMLAreaElement>
+  extends IHtmlHTMLElement<N>,
     MHtmlHTMLHyperlinkElementUtils {
   alt: string;
   coors: string;

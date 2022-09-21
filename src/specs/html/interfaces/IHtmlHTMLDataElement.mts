@@ -6,7 +6,7 @@ import type {
 export type IHtmlHTMLDataElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLDataElement>;
 
-export interface IHtmlHTMLDataElement
-  extends IHtmlHTMLElement<HTMLDataElement> {
+export interface IHtmlHTMLDataElement<N extends HTMLDataElement>
+  extends IHtmlHTMLElement<N> {
   value: string;
 }

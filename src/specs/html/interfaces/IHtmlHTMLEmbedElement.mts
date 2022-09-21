@@ -8,8 +8,8 @@ import type {
 export type IHtmlHTMLEmbedElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLEmbedElement>;
 
-export interface IHtmlHTMLEmbedElement
-  extends IHtmlHTMLElement<HTMLEmbedElement> {
+export interface IHtmlHTMLEmbedElement<N extends HTMLEmbedElement>
+  extends IHtmlHTMLElement<N> {
   src: string;
   type: string;
   width: number;

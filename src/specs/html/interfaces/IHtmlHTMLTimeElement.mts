@@ -6,7 +6,7 @@ import type {
 export type IHtmlHTMLTimeElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLTimeElement>;
 
-export interface IHtmlHTMLTimeElement
-  extends IHtmlHTMLElement<HTMLTimeElement> {
+export interface IHtmlHTMLTimeElement<N extends HTMLTimeElement>
+  extends IHtmlHTMLElement<N> {
   dateTime: string;
 }
