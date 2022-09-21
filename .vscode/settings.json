@@ -51,8 +51,9 @@
   "cSpell.enabled": true,
   "cSpell.caseSensitive": true,
   "cSpell.language": "en-GB,en",
-  "cSpell.words": ["viell", "onslotchange", "Stringifier"],
+  "cSpell.words": ["eithers", "onslotchange", "Stringifier", "viell"],
   "cSpell.ignoreWords": [
+    "CSSOM",
     "loglevel",
     "onbeforeinput",
     "onbeforematch",
