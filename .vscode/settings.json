@@ -64,6 +64,8 @@
     "onwebkitanimationiteration",
     "onwebkitanimationstart",
     "onwebkittransitionend",
-    "tsdoc"
+    "tsdoc",
+    "unicase",
+    "webgpu"
   ]
 }

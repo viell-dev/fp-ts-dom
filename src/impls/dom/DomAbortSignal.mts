@@ -14,7 +14,7 @@ import * as O from "fp-ts/Option";
 import { DomEvent } from "./DomEvent.mjs";
 import { DomEventTargetBase } from "./DomEventTargetBase.mjs";
 
-/* The typescript typings are missing the abort and timeout methods. */
+/* The TypeScript typings are missing the abort and timeout methods. */
 type CorrectedAbortSignal = {
   prototype: AbortSignal;
   new (): AbortSignal;
@@ -33,7 +33,7 @@ export class DomAbortSignal<R>
     return pipe(
       /* eslint-disable-next-line
           @typescript-eslint/consistent-type-assertions
-      -- The abort method is missing in the typescript typings. */
+      -- The abort method is missing in the TypeScript typings. */
       (AbortSignal as CorrectedAbortSignal).abort(reason),
       (signal) => new DomAbortSignal(signal)
     );
@@ -44,7 +44,7 @@ export class DomAbortSignal<R>
     return pipe(
       /* eslint-disable-next-line
           @typescript-eslint/consistent-type-assertions
-      -- The timeout method is missing in the typescript typings. */
+      -- The timeout method is missing in the TypeScript typings. */
       (AbortSignal as CorrectedAbortSignal).timeout(milliseconds),
       (signal) => new DomAbortSignal(signal)
     );

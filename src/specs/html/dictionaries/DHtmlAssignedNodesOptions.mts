@@ -1,1 +1,3 @@
-export type DHtmlAssignedNodesOptions = AssignedNodesOptions;
+export interface DHtmlAssignedNodesOptions {
+  flatten?: boolean;
+}

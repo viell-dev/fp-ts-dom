@@ -16,5 +16,6 @@ export interface DHtmlTrackEventInit extends DDomEventInit {
     | MissingAudioTrack
     | IHtmlAudioTrack<MissingAudioTrack>
     | TextTrack
-    | IHtmlTextTrack<TextTrack>;
+    | IHtmlTextTrack<TextTrack>
+    | null;
 }

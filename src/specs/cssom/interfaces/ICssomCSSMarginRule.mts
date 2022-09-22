@@ -1,7 +1,7 @@
 import type { ICssomCSSRule } from "./ICssomCSSRule.mjs";
 import type { ICssomCSSStyleDeclaration } from "./ICssomCSSStyleDeclaration.mjs";
 
-/** `CSSMarginRule` is missing in typescript typings. */
+/** `CSSMarginRule` is missing in TypeScript typings. */
 export interface MissingCSSMarginRule extends CSSRule {
   readonly name: string;
   readonly style: CSSStyleDeclaration;
