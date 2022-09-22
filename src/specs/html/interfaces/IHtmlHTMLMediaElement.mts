@@ -77,7 +77,7 @@ export interface IHtmlHTMLMediaElement<N extends HTMLMediaElement>
    *
    * @throws
    * When setting, if the given value is not supported by the user agent, then
-   * throw a "NotSupportedError" DOMException.
+   * throw an "NotSupportedError" DOMException.
    */
   playbackRate: number;
   setPlaybackRate(
@@ -102,7 +102,7 @@ export interface IHtmlHTMLMediaElement<N extends HTMLMediaElement>
    *
    * @throws
    * When setting, if the new value is outside the range 0.0 to 1.0 inclusive,
-   * then throw a RangeError.
+   * then throw an RangeError.
    */
   volume: number;
   setVolume(volume: number): E.Either<RangeError, void>;

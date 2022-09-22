@@ -1,6 +1,8 @@
+import type { NotSupportedErrorDomException } from "@/exceptions/DomException.mjs";
 import type { IWrapper } from "@/globals/IWrapper.mjs";
-import type { IDomNodeList } from "@/specs/dom/interfaces/IDomNodeList.mjs";
+import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import type { IDomShadowRoot } from "@/specs/dom/interfaces/IDomShadowRoot.mjs";
+import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
 import type { DHtmlValidityStateFlags } from "../dictionaries/DHtmlValidityStateFlags.mjs";
 import type { IHtmlHTMLElement } from "./IHtmlHTMLElement.mjs";
@@ -19,18 +21,24 @@ export interface IHtmlElementInternals<N extends ElementInternals>
     state?: string | File | FormData | null
   ): void;
 
-  readonly form: O.Option<IHtmlHTMLFormElement<HTMLFormElement>>;
+  readonly form: E.Either<
+    NotSupportedErrorDomException,
+    O.Option<IHtmlHTMLFormElement<HTMLFormElement>>
+  >;
 
   setValidity(
     flags?: DHtmlValidityStateFlags,
     message?: string,
     anchor?: HTMLElement | IHtmlHTMLElement<HTMLElement>
   ): void;
-  readonly willValidate: boolean;
-  readonly validity: IHtmlValidityState<ValidityState>;
+  readonly willValidate: E.Either<NotSupportedErrorDomException, boolean>;
+  readonly validity: E.Either<
+    NotSupportedErrorDomException,
+    IHtmlValidityState<ValidityState>
+  >;
   readonly validationMessage: string;
-  checkValidity(): boolean;
-  reportValidity(): boolean;
+  checkValidity(): E.Either<NotSupportedErrorDomException, boolean>;
+  reportValidity(): E.Either<NotSupportedErrorDomException, boolean>;
 
-  readonly lables: IDomNodeList<NodeList>;
+  readonly labels: IDomNode<Node>[];
 }

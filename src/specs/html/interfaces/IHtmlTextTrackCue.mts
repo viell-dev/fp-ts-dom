@@ -15,7 +15,7 @@ export interface IHtmlTextTrackCue<N extends TextTrackCue>
    *
    * @throws
    * When setting, if the new value is negative Infinity or a Not-a-Number
-   * (NaN) value, then throw a TypeError.
+   * (NaN) value, then throw an TypeError.
    */
   endTime: number;
   setEndTime(endTime: number): E.Either<TypeError, void>;

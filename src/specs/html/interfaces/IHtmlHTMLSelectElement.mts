@@ -33,7 +33,7 @@ export interface IHtmlHTMLButtonElement<N extends HTMLButtonElement>
   /**
    * @throws
    * If element is an ancestor of the element into which it is to be inserted,
-   * then throw a "HierarchyRequestError" DOMException.
+   * then throw an "HierarchyRequestError" DOMException.
    */
   add(
     element:

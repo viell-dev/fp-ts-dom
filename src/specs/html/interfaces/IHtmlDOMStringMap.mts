@@ -13,7 +13,7 @@ export interface IHtmlDOMStringMap<N extends DOMStringMap> extends IWrapper<N> {
    * @throws
    * When setting the value of a new or existing named property. If *name*
    * contains a U+002D HYPHEN-MINUS character (-) followed by an ASCII lower
-   * alpha, then throw a "SyntaxError" DOMException.
+   * alpha, then throw an "SyntaxError" DOMException.
    * @throws
    * When setting the value of a new or existing named property. If *name* does
    * not match the XML Name production, throw an "InvalidCharacterError"
