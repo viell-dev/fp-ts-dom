@@ -1,7 +1,7 @@
-_old
-
 # Build
-lib
+mjs
+cjs
+types
 tsconfig.tsbuildinfo
 
 # Yarn

@@ -25,12 +25,13 @@
     "rootDir": "./src",
 
     // Emit
-    "declarationMap": true,
+    "declarationDir": "./types",
+    "declarationMap": false,
     "importsNotUsedAsValues": "error",
     "newLine": "lf",
-    "outDir": "./lib",
+    "outDir": "./mjs",
     "removeComments": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "stripInternal": true,
 
     // Interop Constraints
