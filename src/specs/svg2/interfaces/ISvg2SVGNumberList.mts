@@ -1,4 +1,3 @@
-import type { IndexSizeErrorDomException } from "@/exceptions/DomException.mjs";
 import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
 import type { ISvg2SVGNumber } from "./ISvg2SVGNumber.mjs";
@@ -12,10 +11,8 @@ export interface ISvg2SVGNumberList<N extends SVGNumberList>
   initialize(
     newItem: SVGNumber | ISvg2SVGNumber<SVGNumber>
   ): ISvg2SVGNumber<SVGNumber>;
-  getItem(
-    index: number
-  ): E.Either<IndexSizeErrorDomException, ISvg2SVGNumber<SVGNumber>>;
-  // [index: number]: E.Either<IndexSizeErrorDomException, ISvg2SVGNumber<SVGNumber>>;
+  getItem(index: number): E.Either<RangeError, ISvg2SVGNumber<SVGNumber>>;
+  // [index: number]: E.Either<RangeError, ISvg2SVGNumber<SVGNumber>>;
   inserItemBefore(
     newItem: SVGNumber | ISvg2SVGNumber<SVGNumber>,
     index: number
