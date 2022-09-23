@@ -1,3 +1,4 @@
-export interface DHtmlFocusOptions extends FocusOptions {
-  focusVisible?: boolean; // missing in TypeScript type for some reason.
+export interface DHtmlFocusOptions {
+  preventScroll?: boolean;
+  focusVisible?: boolean;
 }

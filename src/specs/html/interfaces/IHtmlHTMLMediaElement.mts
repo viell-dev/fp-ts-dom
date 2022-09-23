@@ -60,7 +60,7 @@ export interface IHtmlHTMLMediaElement<N extends HTMLMediaElement>
   canPlayType(type: string): CanPlayTypeResult;
 
   // ready state
-  // Ready state class constants are declared in the interface above.
+  /* Ready state class constants are declared in the interface above. */
   readonly readyState: CHtmlHTMLMediaElementReadyState;
   readonly seeking: boolean;
 
@@ -68,7 +68,6 @@ export interface IHtmlHTMLMediaElement<N extends HTMLMediaElement>
   currentTime: number;
   fastSeek(time: number): void;
   readonly duration: number;
-  // eslint-disable-next-line @typescript-eslint/ban-types
   getStartDate(): {};
   readonly paused: boolean;
   defaultPlaybackRate: number;

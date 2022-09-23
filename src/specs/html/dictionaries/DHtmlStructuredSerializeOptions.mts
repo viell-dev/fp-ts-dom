@@ -1,1 +1,3 @@
-export type DHtmlStructuredSerializeOptions = StructuredSerializeOptions;
+export interface DHtmlStructuredSerializeOptions {
+  transfer?: {}[];
+}

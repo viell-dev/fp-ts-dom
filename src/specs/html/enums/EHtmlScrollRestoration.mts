@@ -1,1 +1,1 @@
-export type EHtmlScrollRestoration = ScrollRestoration;
+export type EHtmlScrollRestoration = "auto" | "manual";

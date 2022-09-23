@@ -1,1 +1,3 @@
-export type DHtmlElementDefinitionOptions = ElementDefinitionOptions;
+export interface DHtmlElementDefinitionOptions {
+  extends?: string;
+}

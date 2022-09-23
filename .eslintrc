@@ -14,7 +14,7 @@
   "plugins": ["@typescript-eslint", "eslint-plugin-tsdoc"],
   "overrides": [
     {
-      "files": ["src/**/*.ts"],
+      "files": ["src/**/*.mts"],
       "rules": {
         "multiline-comment-style": ["warn", "bare-block"],
         "eslint-comments/no-unused-disable": "warn",

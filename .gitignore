@@ -1,8 +1,8 @@
 # Build
-mjs
-cjs
-types
-tsconfig.tsbuildinfo
+/mjs
+/cjs
+/types
+/tsconfig.tsbuildinfo
 
 # Yarn
 .yarn/*

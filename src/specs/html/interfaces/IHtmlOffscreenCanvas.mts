@@ -27,7 +27,8 @@ export interface MissingOffscreenCanvas extends EventTarget {
   transferToImageBitmap(): IHtmlImageBitmap<ImageBitmap>;
   convertToBlob(options?: MissingImageEncodingOptions): Promise<Blob>;
 }
-// eslint-disable-next-line no-var
+/* eslint-disable-next-line no-var
+-- TypeScript uses `var`, so I'm copying them. */
 export declare var MissingOffscreenCanvas: {
   prototype: MissingOffscreenCanvas;
   new (width: number, height: number): MissingOffscreenCanvas;

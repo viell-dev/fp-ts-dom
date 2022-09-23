@@ -34,7 +34,6 @@ export interface IHtmlDocument<N extends Document>
   readonly readyState: EHtmlDocumentReadyState;
 
   // DOM tree accessors
-  // eslint-disable-next-line @typescript-eslint/ban-types
   [name: string extends keyof IHtmlDocument<N> ? never : string]: {};
   title: string;
   dir: string;

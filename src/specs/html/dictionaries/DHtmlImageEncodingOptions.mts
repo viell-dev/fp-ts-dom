@@ -1,9 +1,9 @@
 export interface MissingImageEncodingOptions {
   type?: string;
-  quality: number;
+  quality?: number;
 }
 
 export interface DHtmlImageEncodingOptions {
   type?: string;
-  quality: number;
+  quality?: number;
 }
