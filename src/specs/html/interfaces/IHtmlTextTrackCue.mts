@@ -1,7 +1,7 @@
 import type { IDomEventTarget } from "@/specs/dom/interfaces/IDomEventTarget.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
-import type { CBHtmlEventHandler } from "../callbacks/CBHtmlEventHandler.mjs";
+import type { THtmlEventHandler } from "../types/THtmlEventHandler.mjs";
 import type { IHtmlTextTrack } from "./IHtmlTextTrack.mjs";
 
 export interface IHtmlTextTrackCue<N extends TextTrackCue>
@@ -21,6 +21,6 @@ export interface IHtmlTextTrackCue<N extends TextTrackCue>
   setEndTime(endTime: number): E.Either<TypeError, void>;
   pauseOnExit: boolean;
 
-  onenter: CBHtmlEventHandler;
-  onexit: CBHtmlEventHandler;
+  onenter: THtmlEventHandler;
+  onexit: THtmlEventHandler;
 }

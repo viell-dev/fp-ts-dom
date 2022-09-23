@@ -1,9 +1,9 @@
 import type { IDomEventTarget } from "@/specs/dom/interfaces/IDomEventTarget.mjs";
 import type * as O from "fp-ts/Option";
 import type {
-  CBHtmlEventHandler,
   MissingEventHandler,
-} from "../callbacks/CBHtmlEventHandler.mjs";
+  THtmlEventHandler,
+} from "../types/THtmlEventHandler.mjs";
 import type { IHtmlVideoTrack, MissingVideoTrack } from "./IHtmlVideoTrack.mjs";
 
 export interface MissingVideoTrackList extends EventTarget {
@@ -24,7 +24,7 @@ export interface IHtmlVideoTrackList<N extends MissingVideoTrackList>
   getTrackById(id: string): O.Option<IHtmlVideoTrack<MissingVideoTrack>>;
   readonly selectedIndex: number;
 
-  onchange: CBHtmlEventHandler;
-  onaddtrack: CBHtmlEventHandler;
-  onremovetrack: CBHtmlEventHandler;
+  onchange: THtmlEventHandler;
+  onaddtrack: THtmlEventHandler;
+  onremovetrack: THtmlEventHandler;
 }

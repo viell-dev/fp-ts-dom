@@ -8,11 +8,11 @@ import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
 import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
-import type { CBHtmlEventHandler } from "../callbacks/CBHtmlEventHandler.mjs";
 import type { EHtmlDocumentReadyState } from "../enums/EHtmlDocumentReadyState.mjs";
 import type { EHtmlDocumentVisibilityState } from "../enums/EHtmlDocumentVisibilityState.mjs";
 import type { MHtmlDocumentAndElementEventHandlers } from "../mixins/MHtmlDocumentAndElementEventHandlers.mjs";
 import type { MHtmlGlobalEventHandlers } from "../mixins/MHtmlGlobalEventHandlers.mjs";
+import type { THtmlEventHandler } from "../types/THtmlEventHandler.mjs";
 import type { THtmlHTMLOrSVGScriptElement } from "../types/THtmlHTMLOrSVGScriptElement.mjs";
 import type { IHtmlHTMLElement } from "./IHtmlHTMLElement.mjs";
 import type { IHtmlHTMLHeadElement } from "./IHtmlHTMLHeadElement.mjs";
@@ -77,6 +77,6 @@ export interface IHtmlDocument<N extends Document>
   readonly visibilityState: EHtmlDocumentVisibilityState;
 
   // special event handler IDL attributes that only apply to Document objects
-  onreadystatechange: CBHtmlEventHandler;
-  onvisibilitychange: CBHtmlEventHandler;
+  onreadystatechange: THtmlEventHandler;
+  onvisibilitychange: THtmlEventHandler;
 }

@@ -5,9 +5,9 @@ import type {
 import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
-import type { CBHtmlEventHandler } from "../callbacks/CBHtmlEventHandler.mjs";
 import type { EHtmlTextTrackKind } from "../enums/EHtmlTextTrackKind.mjs";
 import type { EHtmlTextTrackMode } from "../enums/EHtmlTextTrackMode.mjs";
+import type { THtmlEventHandler } from "../types/THtmlEventHandler.mjs";
 import type { IHtmlTextTrackCue } from "./IHtmlTextTrackCue.mjs";
 import type { IHtmlTextTrackCueList } from "./IHtmlTextTrackCueList.mjs";
 
@@ -31,5 +31,5 @@ export interface IHtmlTextTrack<N extends TextTrack> extends IWrapper<N> {
     cue: IHtmlTextTrackCue<TextTrackCue>
   ): E.Either<NotFoundErrorDomException, void>;
 
-  oncuechange: CBHtmlEventHandler;
+  oncuechange: THtmlEventHandler;
 }

@@ -1,7 +1,7 @@
-import type { CBHtmlEventHandler } from "../callbacks/CBHtmlEventHandler.mjs";
+import type { THtmlEventHandler } from "../types/THtmlEventHandler.mjs";
 
 export interface MHtmlDocumentAndElementEventHandlers {
-  oncopy: CBHtmlEventHandler;
-  oncut: CBHtmlEventHandler;
-  onpaste: CBHtmlEventHandler;
+  oncopy: THtmlEventHandler;
+  oncut: THtmlEventHandler;
+  onpaste: THtmlEventHandler;
 }

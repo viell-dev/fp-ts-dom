@@ -9,5 +9,3 @@ export interface CBHtmlOnErrorEventHandlerNonNull {
     error?: unknown
   ): unknown;
 }
-
-export type CBHtmlOnErrorEventHandler = CBHtmlOnErrorEventHandlerNonNull | null;

@@ -1,9 +1,9 @@
 import type { IDomEventTarget } from "@/specs/dom/interfaces/IDomEventTarget.mjs";
 import type * as O from "fp-ts/Option";
 import type {
-  CBHtmlEventHandler,
   MissingEventHandler,
-} from "../callbacks/CBHtmlEventHandler.mjs";
+  THtmlEventHandler,
+} from "../types/THtmlEventHandler.mjs";
 import type { IHtmlAudioTrack, MissingAudioTrack } from "./IHtmlAudioTrack.mjs";
 
 export interface MissingAudioTrackList extends EventTarget {
@@ -22,7 +22,7 @@ export interface IHtmlAudioTrackList<N extends MissingAudioTrackList>
   [index: number]: IHtmlAudioTrack<MissingAudioTrack>;
   getTrackById(id: string): O.Option<IHtmlAudioTrack<MissingAudioTrack>>;
 
-  onchange: CBHtmlEventHandler;
-  onaddtrack: CBHtmlEventHandler;
-  onremovetrack: CBHtmlEventHandler;
+  onchange: THtmlEventHandler;
+  onaddtrack: THtmlEventHandler;
+  onremovetrack: THtmlEventHandler;
 }
