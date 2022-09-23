@@ -2,10 +2,10 @@ import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
 
 export interface CBHtmlOnErrorEventHandlerNonNull {
   (
-    event: Event | IDomEvent<Event> | string,
+    event: IDomEvent<Event> | string,
     source?: string,
     lineno?: number,
     colno?: number,
-    error?: unknown
+    error?: Error // TODO: check the specs, IDL said any but TS says Error.
   ): unknown;
 }

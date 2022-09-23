@@ -34,7 +34,6 @@ export interface MHtmlGlobalEventHandlers {
   oninput: THtmlEventHandler;
   oninvalid: THtmlEventHandler;
   onkeydown: THtmlEventHandler;
-  onkeypress: THtmlEventHandler;
   onkeyup: THtmlEventHandler;
   onload: THtmlEventHandler;
   onloadeddata: THtmlEventHandler;
@@ -67,9 +66,5 @@ export interface MHtmlGlobalEventHandlers {
   ontoggle: THtmlEventHandler;
   onvolumechange: THtmlEventHandler;
   onwaiting: THtmlEventHandler;
-  onwebkitanimationend: THtmlEventHandler;
-  onwebkitanimationiteration: THtmlEventHandler;
-  onwebkitanimationstart: THtmlEventHandler;
-  onwebkittransitionend: THtmlEventHandler;
   onwheel: THtmlEventHandler;
 }
