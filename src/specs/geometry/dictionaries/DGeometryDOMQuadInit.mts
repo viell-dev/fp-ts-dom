@@ -1,6 +1,8 @@
+import type { DGeometryDOMPointInit } from "./DGeometryDOMPointInit.mjs";
+
 export interface DGeometryDOMQuadInit {
-  p1?: DOMPointInit;
-  p2?: DOMPointInit;
-  p3?: DOMPointInit;
-  p4?: DOMPointInit;
+  p1?: DGeometryDOMPointInit;
+  p2?: DGeometryDOMPointInit;
+  p3?: DGeometryDOMPointInit;
+  p4?: DGeometryDOMPointInit;
 }
