@@ -41,7 +41,7 @@ export abstract class DomDocumentFragmentBase<N extends DocumentFragment>
 
   prepend(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
+  ): O.Option<HierarchyRequestErrorDomException> {
     return pipe(
       nodes,
       A.map((node) =>
@@ -55,12 +55,13 @@ export abstract class DomDocumentFragmentBase<N extends DocumentFragment>
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   append(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
+  ): O.Option<HierarchyRequestErrorDomException> {
     return pipe(
       nodes,
       A.map((node) =>
@@ -74,12 +75,13 @@ export abstract class DomDocumentFragmentBase<N extends DocumentFragment>
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   replaceChildren(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
+  ): O.Option<HierarchyRequestErrorDomException> {
     return pipe(
       nodes,
       A.map((node) =>
@@ -93,7 +95,8 @@ export abstract class DomDocumentFragmentBase<N extends DocumentFragment>
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
 

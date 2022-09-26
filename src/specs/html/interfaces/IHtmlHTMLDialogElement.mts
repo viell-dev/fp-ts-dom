@@ -1,5 +1,5 @@
 import type { InvalidStateErrorDomException } from "@/exceptions/DomException.mjs";
-import type * as E from "fp-ts/Either";
+import type * as O from "fp-ts/Option";
 import type {
   IHtmlHTMLElement,
   IHtmlHTMLElementConstructorsBase,
@@ -13,6 +13,6 @@ export interface IHtmlHTMLDialogElement<N extends HTMLDialogElement>
   open: boolean;
   returnValue: string;
   show(): void;
-  showModal(): E.Either<InvalidStateErrorDomException, void>;
+  showModal(): O.Option<InvalidStateErrorDomException>;
   close(returnValue?: string): void;
 }

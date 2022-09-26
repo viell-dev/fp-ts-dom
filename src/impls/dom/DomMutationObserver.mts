@@ -11,6 +11,7 @@ import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
+import * as O from "fp-ts/Option";
 import { DomMutationRecord } from "./DomMutationRecord.mjs";
 
 @StaticImplements<IDomMutationObserverConstructors>()
@@ -51,15 +52,18 @@ export class DomMutationObserver
   observe(
     target: Node | IDomNode<Node>,
     options?: DDomMutationObserverInit
-  ): E.Either<TypeError, void> {
-    return E.tryCatch(
-      () => {
-        const nativeTarget = getNative(target);
-        this.native.observe(nativeTarget, options);
-      },
-      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  ): O.Option<TypeError> {
+    return pipe(
+      E.tryCatch(
+        () => {
+          const nativeTarget = getNative(target);
+          this.native.observe(nativeTarget, options);
+        },
+        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       -- According to the spec, this is the only possible error. */
-      (error) => error as TypeError
+        (error) => error as TypeError
+      ),
+      O.getLeft
     );
   }
 

@@ -42,5 +42,5 @@ export interface IHtmlHTMLTableElement<N extends HTMLTableElement>
   insertRow(
     index?: number
   ): E.Either<RangeError, IHtmlHTMLTableRowElement<HTMLTableRowElement>>;
-  deleteRow(): E.Either<RangeError, void>;
+  deleteRow(): O.Option<RangeError>;
 }

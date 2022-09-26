@@ -4,7 +4,7 @@ import type {
 } from "@/exceptions/DomException.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
-import type * as TE from "fp-ts/TaskEither";
+import type * as TO from "fp-ts/TaskOption";
 import type { CHtmlHTMLMediaElementNetworkState } from "../constants/CHtmlHTMLMediaElementNetworkState.mjs";
 import type { CHtmlHTMLMediaElementReadyState } from "../constants/CHtmlHTMLMediaElementReadyState.mjs";
 import type { EHtmlTextTrackKind } from "../enums/EHtmlTextTrackKind.mjs";
@@ -88,9 +88,8 @@ export interface IHtmlHTMLMediaElement<N extends HTMLMediaElement>
   readonly ended: boolean;
   autoplay: boolean;
   loop: boolean;
-  play(): TE.TaskEither<
-    NotAllowedErrorDomException | NotSupportedErrorDomException,
-    void
+  play(): TO.TaskOption<
+    NotAllowedErrorDomException | NotSupportedErrorDomException
   >;
   pause(): void;
 
@@ -104,7 +103,7 @@ export interface IHtmlHTMLMediaElement<N extends HTMLMediaElement>
    * then throw an RangeError.
    */
   volume: number;
-  setVolume(volume: number): E.Either<RangeError, void>;
+  setVolume(volume: number): O.Option<RangeError>;
   muted: boolean;
   defaultMuted: boolean;
 

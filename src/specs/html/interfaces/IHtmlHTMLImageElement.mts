@@ -1,6 +1,6 @@
 import type { EncodingErrorDomException } from "@/exceptions/DomException.mjs";
 import type * as O from "fp-ts/Option";
-import type * as TE from "fp-ts/TaskEither";
+import type * as TO from "fp-ts/TaskOption";
 import type {
   IHtmlHTMLElement,
   IHtmlHTMLElementConstructorsBase,
@@ -28,5 +28,5 @@ export interface IHtmlHTMLImageElement<N extends HTMLImageElement>
   decoding: string;
   loading: string;
 
-  decode(): TE.TaskEither<EncodingErrorDomException, void>;
+  decode(): TO.TaskOption<EncodingErrorDomException>;
 }

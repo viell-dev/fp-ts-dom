@@ -1,16 +1,16 @@
 import type { HierarchyRequestErrorDomException } from "@/exceptions/DomException.mjs";
-import type * as E from "fp-ts/Either";
+import type * as O from "fp-ts/Option";
 import type { IDomNode } from "../interfaces/IDomNode.mjs";
 
 export interface MDomChildNode {
   before(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void>;
+  ): O.Option<HierarchyRequestErrorDomException>;
   after(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void>;
+  ): O.Option<HierarchyRequestErrorDomException>;
   replaceWith(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void>;
+  ): O.Option<HierarchyRequestErrorDomException>;
   remove(): void;
 }

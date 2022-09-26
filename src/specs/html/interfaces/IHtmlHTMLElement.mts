@@ -68,7 +68,7 @@ export interface IHtmlHTMLElement<N extends HTMLElement>
   outerText: string;
   setOuterText(
     outerText: string
-  ): E.Either<NoModificationAllowedErrorDomException, void>;
+  ): O.Option<NoModificationAllowedErrorDomException>;
 
   attachInternals(): IHtmlElementInternals<ElementInternals>;
 }

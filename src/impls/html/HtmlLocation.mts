@@ -5,6 +5,8 @@ import type {
 import { Wrapper } from "@/globals/Wrapper.mjs";
 import type { IHtmlLocation } from "@/specs/html/interfaces/IHtmlLocation.mjs";
 import * as E from "fp-ts/Either";
+import { pipe } from "fp-ts/function";
+import * as O from "fp-ts/Option";
 
 export class HtmlLocation
   extends Wrapper<Location>
@@ -20,24 +22,27 @@ export class HtmlLocation
     );
   }
   setHref(value: string): void;
-  setHref(value: unknown): E.Either<TypeError, void>;
-  setHref(value: unknown): void | E.Either<TypeError, void> {
+  setHref(value: unknown): O.Option<TypeError>;
+  setHref(value: unknown): void | O.Option<TypeError> {
     if (typeof value === "string") {
       this.native.href = value;
       return;
     }
 
-    return E.tryCatch(
-      () => {
-        /* eslint-disable-next-line
+    return pipe(
+      E.tryCatch(
+        () => {
+          /* eslint-disable-next-line
               @typescript-eslint/consistent-type-assertions
           -- Try non-string values anyway. */
-        (this.native.href as unknown) = value;
-      },
-      /* eslint-disable-next-line
+          (this.native.href as unknown) = value;
+        },
+        /* eslint-disable-next-line
             @typescript-eslint/consistent-type-assertions
         -- Spec only lists TypeError. */
-      (error) => error as TypeError
+        (error) => error as TypeError
+      ),
+      O.getLeft
     );
   }
   get origin(): E.Either<SecurityErrorDomException, string> {
@@ -61,30 +66,30 @@ export class HtmlLocation
   setProtocol(value: string): void;
   setProtocol(
     value: unknown
-  ): E.Either<SecurityErrorDomException | SyntaxErrorDomException, void>;
+  ): O.Option<SecurityErrorDomException | SyntaxErrorDomException>;
   setProtocol(
     value: unknown
-  ): void | E.Either<
-    SecurityErrorDomException | SyntaxErrorDomException,
-    void
-  > {
+  ): void | O.Option<SecurityErrorDomException | SyntaxErrorDomException> {
     if (typeof value === "string") {
       this.native.protocol = value;
       return;
     }
 
-    return E.tryCatch(
-      () => {
-        /* eslint-disable-next-line
+    return pipe(
+      E.tryCatch(
+        () => {
+          /* eslint-disable-next-line
               @typescript-eslint/consistent-type-assertions
           -- Try non-string values anyway. */
-        (this.native.protocol as unknown) = value;
-      },
-      /* eslint-disable-next-line
+          (this.native.protocol as unknown) = value;
+        },
+        /* eslint-disable-next-line
             @typescript-eslint/consistent-type-assertions
         -- Spec lists "SecurityError" DOMException and
             "SyntaxError" DOMException. */
-      (error) => error as SecurityErrorDomException | SyntaxErrorDomException
+        (error) => error as SecurityErrorDomException | SyntaxErrorDomException
+      ),
+      O.getLeft
     );
   }
 }

@@ -389,50 +389,65 @@ export class DomDocument
 
   prepend(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
-    return E.tryCatch(
-      () =>
-        pipe(
-          nodes,
-          A.map((node) => (typeof node === "string" ? node : getNative(node))),
-          (nodes) => this.native.prepend(...nodes)
-        ),
-      /* eslint-disable-next-line
+  ): O.Option<HierarchyRequestErrorDomException> {
+    return pipe(
+      E.tryCatch(
+        () =>
+          pipe(
+            nodes,
+            A.map((node) =>
+              typeof node === "string" ? node : getNative(node)
+            ),
+            (nodes) => this.native.prepend(...nodes)
+          ),
+        /* eslint-disable-next-line
           @typescript-eslint/consistent-type-assertions
       -- According to the spec, this is the only possible error. */
-      (error) => error as HierarchyRequestErrorDomException
+        (error) => error as HierarchyRequestErrorDomException
+      ),
+      O.getLeft
     );
   }
   append(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
-    return E.tryCatch(
-      () =>
-        pipe(
-          nodes,
-          A.map((node) => (typeof node === "string" ? node : getNative(node))),
-          (nodes) => this.native.append(...nodes)
-        ),
-      /* eslint-disable-next-line
+  ): O.Option<HierarchyRequestErrorDomException> {
+    return pipe(
+      E.tryCatch(
+        () =>
+          pipe(
+            nodes,
+            A.map((node) =>
+              typeof node === "string" ? node : getNative(node)
+            ),
+            (nodes) => this.native.append(...nodes)
+          ),
+        /* eslint-disable-next-line
           @typescript-eslint/consistent-type-assertions
       -- According to the spec, this is the only possible error. */
-      (error) => error as HierarchyRequestErrorDomException
+        (error) => error as HierarchyRequestErrorDomException
+      ),
+      O.getLeft
     );
   }
   replaceChildren(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
-    return E.tryCatch(
-      () =>
-        pipe(
-          nodes,
-          A.map((node) => (typeof node === "string" ? node : getNative(node))),
-          (nodes) => this.native.replaceChildren(...nodes)
-        ),
-      /* eslint-disable-next-line
+  ): O.Option<HierarchyRequestErrorDomException> {
+    return pipe(
+      E.tryCatch(
+        () =>
+          pipe(
+            nodes,
+            A.map((node) =>
+              typeof node === "string" ? node : getNative(node)
+            ),
+            (nodes) => this.native.replaceChildren(...nodes)
+          ),
+        /* eslint-disable-next-line
           @typescript-eslint/consistent-type-assertions
       -- According to the spec, this is the only possible error. */
-      (error) => error as HierarchyRequestErrorDomException
+        (error) => error as HierarchyRequestErrorDomException
+      ),
+      O.getLeft
     );
   }
 

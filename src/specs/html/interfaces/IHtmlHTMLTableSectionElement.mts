@@ -1,4 +1,5 @@
 import type * as E from "fp-ts/Either";
+import type * as O from "fp-ts/Option";
 import type {
   IHtmlHTMLElement,
   IHtmlHTMLElementConstructorsBase,
@@ -14,5 +15,5 @@ export interface IHtmlHTMLTableSectionElement<N extends HTMLTableSectionElement>
   insertRow(
     index?: number
   ): E.Either<RangeError, IHtmlHTMLTableRowElement<HTMLTableRowElement>>;
-  deleteRow(): E.Either<RangeError, void>;
+  deleteRow(): O.Option<RangeError>;
 }

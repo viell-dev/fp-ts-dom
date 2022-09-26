@@ -3,7 +3,7 @@ import type { NotKeyOf } from "@/helpers/NotKeyOf.mjs";
 import type { IDomDOMTokenList } from "@/specs/dom/interfaces/IDomDOMTokenList.mjs";
 import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
 import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
-import type * as E from "fp-ts/Either";
+import type * as O from "fp-ts/Option";
 import type { IHtmlHTMLElement } from "./IHtmlHTMLElement.mjs";
 
 export interface IHtmlHTMLFormElement<N extends HTMLFormElement>
@@ -30,7 +30,7 @@ export interface IHtmlHTMLFormElement<N extends HTMLFormElement>
   submit(): void;
   requestSubmit(
     submitter?: HTMLElement | IHtmlHTMLElement<HTMLElement> | null
-  ): E.Either<TypeError | NotFoundErrorDomException, void>;
+  ): O.Option<TypeError | NotFoundErrorDomException>;
   reset(): void;
   checkValidity(): boolean;
   reportValidity(): boolean;

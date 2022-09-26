@@ -38,7 +38,7 @@ export abstract class DomCharacterDataBase<N extends CharacterData>
       )
     );
   }
-  appendData(data: string): E.Either<RangeError, void> {
+  appendData(data: string): O.Option<RangeError> {
     return pipe(
       E.tryCatch(
         () => this.native.appendData(data),
@@ -51,10 +51,11 @@ export abstract class DomCharacterDataBase<N extends CharacterData>
           // Replace the "IndexSizeError" DOMException with a RangeError.
           return new RangeError(oldError.message, { cause: oldError });
         }
-      )
+      ),
+      O.getLeft
     );
   }
-  insertData(offset: number, data: string): E.Either<RangeError, void> {
+  insertData(offset: number, data: string): O.Option<RangeError> {
     return pipe(
       [offset, data] as const,
       E.tryCatchK(
@@ -68,10 +69,11 @@ export abstract class DomCharacterDataBase<N extends CharacterData>
           // Replace the "IndexSizeError" DOMException with a RangeError.
           return new RangeError(oldError.message, { cause: oldError });
         }
-      )
+      ),
+      O.getLeft
     );
   }
-  deleteData(offset: number, count: number): E.Either<RangeError, void> {
+  deleteData(offset: number, count: number): O.Option<RangeError> {
     return pipe(
       [offset, count] as const,
       E.tryCatchK(
@@ -85,14 +87,15 @@ export abstract class DomCharacterDataBase<N extends CharacterData>
           // Replace the "IndexSizeError" DOMException with a RangeError.
           return new RangeError(oldError.message, { cause: oldError });
         }
-      )
+      ),
+      O.getLeft
     );
   }
   replaceData(
     offset: number,
     count: number,
     data: string
-  ): E.Either<RangeError, void> {
+  ): O.Option<RangeError> {
     return pipe(
       [offset, count, data] as const,
       E.tryCatchK(
@@ -106,7 +109,8 @@ export abstract class DomCharacterDataBase<N extends CharacterData>
           // Replace the "IndexSizeError" DOMException with a RangeError.
           return new RangeError(oldError.message, { cause: oldError });
         }
-      )
+      ),
+      O.getLeft
     );
   }
 
@@ -125,7 +129,7 @@ export abstract class DomCharacterDataBase<N extends CharacterData>
 
   before(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
+  ): O.Option<HierarchyRequestErrorDomException> {
     return pipe(
       nodes,
       A.map((node) =>
@@ -139,12 +143,13 @@ export abstract class DomCharacterDataBase<N extends CharacterData>
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   after(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
+  ): O.Option<HierarchyRequestErrorDomException> {
     return pipe(
       nodes,
       A.map((node) =>
@@ -158,12 +163,13 @@ export abstract class DomCharacterDataBase<N extends CharacterData>
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   replaceWith(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
+  ): O.Option<HierarchyRequestErrorDomException> {
     return pipe(
       nodes,
       A.map((node) =>
@@ -177,7 +183,8 @@ export abstract class DomCharacterDataBase<N extends CharacterData>
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   remove(): void {

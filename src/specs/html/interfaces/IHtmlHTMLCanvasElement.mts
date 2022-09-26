@@ -46,7 +46,7 @@ export interface IHtmlHTMLCanvasElement<N extends HTMLCanvasElement>
     _callback: CBHtmlBlobCallback,
     type?: string,
     quality?: unknown
-  ): E.Either<SecurityErrorDomException, void>;
+  ): O.Option<SecurityErrorDomException>;
   transferControlToOffscreen(): E.Either<
     InvalidStateErrorDomException,
     IHtmlOffscreenCanvas<MissingOffscreenCanvas>

@@ -4,6 +4,7 @@ import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
+import * as O from "fp-ts/Option";
 import { DomNodeBase } from "./DomNodeBase.mjs";
 
 export class DomDocumentType
@@ -22,7 +23,7 @@ export class DomDocumentType
 
   before(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
+  ): O.Option<HierarchyRequestErrorDomException> {
     return pipe(
       nodes,
       A.map((node) =>
@@ -36,12 +37,13 @@ export class DomDocumentType
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   after(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
+  ): O.Option<HierarchyRequestErrorDomException> {
     return pipe(
       nodes,
       A.map((node) =>
@@ -55,12 +57,13 @@ export class DomDocumentType
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   replaceWith(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
+  ): O.Option<HierarchyRequestErrorDomException> {
     return pipe(
       nodes,
       A.map((node) =>
@@ -74,7 +77,8 @@ export class DomDocumentType
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   remove(): void {

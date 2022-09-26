@@ -35,7 +35,7 @@ export interface ICssomCSSStyleSheet<N extends CSSStyleSheet>
   >;
   deleteRule(
     index: number
-  ): E.Either<SecurityErrorDomException | NotAllowedErrorDomException, void>;
+  ): O.Option<SecurityErrorDomException | NotAllowedErrorDomException>;
 
   replace(
     text: string
@@ -43,5 +43,5 @@ export interface ICssomCSSStyleSheet<N extends CSSStyleSheet>
     NotAllowedErrorDomException,
     ICssomCSSStyleSheet<CSSStyleSheet>
   >;
-  replaceSync(text: string): E.Either<NotAllowedErrorDomException, void>;
+  replaceSync(text: string): O.Option<NotAllowedErrorDomException>;
 }

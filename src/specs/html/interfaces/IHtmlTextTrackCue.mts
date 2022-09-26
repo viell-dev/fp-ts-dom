@@ -1,5 +1,4 @@
 import type { IDomEventTarget } from "@/specs/dom/interfaces/IDomEventTarget.mjs";
-import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
 import type { THtmlEventHandler } from "../types/THtmlEventHandler.mjs";
 import type { IHtmlTextTrack } from "./IHtmlTextTrack.mjs";
@@ -18,7 +17,7 @@ export interface IHtmlTextTrackCue<N extends TextTrackCue>
    * (NaN) value, then throw an TypeError.
    */
   endTime: number;
-  setEndTime(endTime: number): E.Either<TypeError, void>;
+  setEndTime(endTime: number): O.Option<TypeError>;
   pauseOnExit: boolean;
 
   onenter: THtmlEventHandler;

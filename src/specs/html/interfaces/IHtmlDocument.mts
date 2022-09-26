@@ -29,7 +29,7 @@ export interface IHtmlDocument<N extends Document>
   domain: string;
   readonly referrer: string;
   readonly cookie: E.Either<SecurityErrorDomException, string>;
-  setCookie(cookie: string): E.Either<SecurityErrorDomException, void>;
+  setCookie(cookie: string): O.Option<SecurityErrorDomException>;
   readonly lastModified: string;
   readonly readyState: EHtmlDocumentReadyState;
 
@@ -40,7 +40,7 @@ export interface IHtmlDocument<N extends Document>
   readonly body: O.Option<IHtmlHTMLElement<HTMLElement>>;
   setBody(
     body: HTMLElement | IHtmlHTMLElement<HTMLElement>
-  ): E.Either<HierarchyRequestErrorDomException, void>;
+  ): O.Option<HierarchyRequestErrorDomException>;
   readonly head: O.Option<IHtmlHTMLHeadElement<HTMLHeadElement>>;
   readonly images: IDomElement<Element>[];
   readonly embeds: IDomElement<Element>[];

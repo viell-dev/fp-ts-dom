@@ -107,7 +107,7 @@ export abstract class DomElementBase<N extends Element>
   setAttribute(
     qualifiedName: string,
     value: string
-  ): E.Either<InvalidCharacterErrorDomException, void> {
+  ): O.Option<InvalidCharacterErrorDomException> {
     return pipe(
       [qualifiedName, value] as const,
       E.tryCatchK(
@@ -116,7 +116,8 @@ export abstract class DomElementBase<N extends Element>
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as InvalidCharacterErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   setAttributeNS(
@@ -321,7 +322,7 @@ export abstract class DomElementBase<N extends Element>
 
   prepend(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
+  ): O.Option<HierarchyRequestErrorDomException> {
     return pipe(
       nodes,
       A.map((node) =>
@@ -335,12 +336,13 @@ export abstract class DomElementBase<N extends Element>
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   append(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
+  ): O.Option<HierarchyRequestErrorDomException> {
     return pipe(
       nodes,
       A.map((node) =>
@@ -354,12 +356,13 @@ export abstract class DomElementBase<N extends Element>
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   replaceChildren(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
+  ): O.Option<HierarchyRequestErrorDomException> {
     return pipe(
       nodes,
       A.map((node) =>
@@ -373,7 +376,8 @@ export abstract class DomElementBase<N extends Element>
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
 
@@ -407,7 +411,7 @@ export abstract class DomElementBase<N extends Element>
 
   before(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
+  ): O.Option<HierarchyRequestErrorDomException> {
     return pipe(
       nodes,
       A.map((node) =>
@@ -421,12 +425,13 @@ export abstract class DomElementBase<N extends Element>
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   after(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
+  ): O.Option<HierarchyRequestErrorDomException> {
     return pipe(
       nodes,
       A.map((node) =>
@@ -440,12 +445,13 @@ export abstract class DomElementBase<N extends Element>
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   replaceWith(
     ...nodes: (Node | IDomNode<Node> | string)[]
-  ): E.Either<HierarchyRequestErrorDomException, void> {
+  ): O.Option<HierarchyRequestErrorDomException> {
     return pipe(
       nodes,
       A.map((node) =>
@@ -459,7 +465,8 @@ export abstract class DomElementBase<N extends Element>
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   remove(): void {

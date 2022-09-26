@@ -8,6 +8,7 @@ import type {
 import type { IStringifier } from "@/globals/IStringifier.mjs";
 import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
+import type * as O from "fp-ts/Option";
 import type { CDomRangeHow } from "../constants/CDomRangeHow.mjs";
 import type { IDomAbstractRange } from "./IDomAbstractRange.mjs";
 import type { IDomDocumentFragment } from "./IDomDocumentFragment.mjs";
@@ -32,30 +33,30 @@ export interface IDomRange<N extends Range>
   setStart(
     node: Node | IDomNode<Node>,
     offset: number
-  ): E.Either<InvalidNodeTypeErrorDomException | RangeError, void>;
+  ): O.Option<InvalidNodeTypeErrorDomException | RangeError>;
   setEnd(
     node: Node | IDomNode<Node>,
     offset: number
-  ): E.Either<InvalidNodeTypeErrorDomException | RangeError, void>;
+  ): O.Option<InvalidNodeTypeErrorDomException | RangeError>;
   setStartBefore(
     node: Node | IDomNode<Node>
-  ): E.Either<InvalidNodeTypeErrorDomException, void>;
+  ): O.Option<InvalidNodeTypeErrorDomException>;
   setStartAfter(
     node: Node | IDomNode<Node>
-  ): E.Either<InvalidNodeTypeErrorDomException, void>;
+  ): O.Option<InvalidNodeTypeErrorDomException>;
   setEndBefore(
     node: Node | IDomNode<Node>
-  ): E.Either<InvalidNodeTypeErrorDomException, void>;
+  ): O.Option<InvalidNodeTypeErrorDomException>;
   setEndAfter(
     node: Node | IDomNode<Node>
-  ): E.Either<InvalidNodeTypeErrorDomException, void>;
+  ): O.Option<InvalidNodeTypeErrorDomException>;
   collapse(toStart?: boolean): void;
   selectNode(
     node: Node | IDomNode<Node>
-  ): E.Either<InvalidNodeTypeErrorDomException, void>;
+  ): O.Option<InvalidNodeTypeErrorDomException>;
   selectNodeContents(
     node: Node | IDomNode<Node>
-  ): E.Either<InvalidNodeTypeErrorDomException, void>;
+  ): O.Option<InvalidNodeTypeErrorDomException>;
 
   // How class constants are declared in the interface above.
   compareBoundaryPoints(
@@ -77,7 +78,7 @@ export interface IDomRange<N extends Range>
   >;
   insertNode(
     node: Node | IDomNode<Node>
-  ): E.Either<HierarchyRequestErrorDomException, void>;
+  ): O.Option<HierarchyRequestErrorDomException>;
   surroundContents(
     newParent: Node | IDomNode<Node>
   ): E.Either<

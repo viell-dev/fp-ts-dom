@@ -15,6 +15,7 @@ import type {
 } from "@/specs/dom/interfaces/IDomRange.mjs";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
+import * as O from "fp-ts/Option";
 import { DomAbstractRangeBase } from "./DomAbstractRangeBase.mjs";
 import { DomDocumentFragment } from "./DomDocumentFragment.mjs";
 import { DomNode } from "./DomNode.mjs";
@@ -39,7 +40,7 @@ export class DomRange
   setStart(
     node: Node | IDomNode<Node>,
     offset: number
-  ): E.Either<InvalidNodeTypeErrorDomException | RangeError, void> {
+  ): O.Option<InvalidNodeTypeErrorDomException | RangeError> {
     return pipe(
       [node, offset] as const,
       ([node, offset]) =>
@@ -50,13 +51,14 @@ export class DomRange
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, these are the only possible errors. */
         (error) => error as InvalidNodeTypeErrorDomException | RangeError
-      )
+      ),
+      O.getLeft
     );
   }
   setEnd(
     node: Node | IDomNode<Node>,
     offset: number
-  ): E.Either<InvalidNodeTypeErrorDomException | RangeError, void> {
+  ): O.Option<InvalidNodeTypeErrorDomException | RangeError> {
     return pipe(
       [node, offset] as const,
       ([node, offset]) =>
@@ -67,12 +69,13 @@ export class DomRange
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, these are the only possible errors. */
         (error) => error as InvalidNodeTypeErrorDomException | RangeError
-      )
+      ),
+      O.getLeft
     );
   }
   setStartBefore(
     node: Node | IDomNode<Node>
-  ): E.Either<InvalidNodeTypeErrorDomException, void> {
+  ): O.Option<InvalidNodeTypeErrorDomException> {
     return pipe(
       node,
       (node) => (node instanceof Node ? node : node.getNative()),
@@ -82,12 +85,13 @@ export class DomRange
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as InvalidNodeTypeErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   setStartAfter(
     node: Node | IDomNode<Node>
-  ): E.Either<InvalidNodeTypeErrorDomException, void> {
+  ): O.Option<InvalidNodeTypeErrorDomException> {
     return pipe(
       node,
       (node) => (node instanceof Node ? node : node.getNative()),
@@ -97,12 +101,13 @@ export class DomRange
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as InvalidNodeTypeErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   setEndBefore(
     node: Node | IDomNode<Node>
-  ): E.Either<InvalidNodeTypeErrorDomException, void> {
+  ): O.Option<InvalidNodeTypeErrorDomException> {
     return pipe(
       node,
       (node) => (node instanceof Node ? node : node.getNative()),
@@ -112,12 +117,13 @@ export class DomRange
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as InvalidNodeTypeErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   setEndAfter(
     node: Node | IDomNode<Node>
-  ): E.Either<InvalidNodeTypeErrorDomException, void> {
+  ): O.Option<InvalidNodeTypeErrorDomException> {
     return pipe(
       node,
       (node) => (node instanceof Node ? node : node.getNative()),
@@ -127,7 +133,8 @@ export class DomRange
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as InvalidNodeTypeErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   collapse(toStart?: boolean): void {
@@ -135,7 +142,7 @@ export class DomRange
   }
   selectNode(
     node: Node | IDomNode<Node>
-  ): E.Either<InvalidNodeTypeErrorDomException, void> {
+  ): O.Option<InvalidNodeTypeErrorDomException> {
     return pipe(
       node,
       (node) => (node instanceof Node ? node : node.getNative()),
@@ -145,12 +152,13 @@ export class DomRange
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as InvalidNodeTypeErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   selectNodeContents(
     node: Node | IDomNode<Node>
-  ): E.Either<InvalidNodeTypeErrorDomException, void> {
+  ): O.Option<InvalidNodeTypeErrorDomException> {
     return pipe(
       node,
       (node) => (node instanceof Node ? node : node.getNative()),
@@ -160,7 +168,8 @@ export class DomRange
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as InvalidNodeTypeErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
 
@@ -234,7 +243,7 @@ export class DomRange
   }
   insertNode(
     node: Node | IDomNode<Node>
-  ): E.Either<HierarchyRequestErrorDomException, void> {
+  ): O.Option<HierarchyRequestErrorDomException> {
     return pipe(
       node,
       (node) => (node instanceof Node ? node : node.getNative()),
@@ -244,7 +253,8 @@ export class DomRange
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
-      )
+      ),
+      O.getLeft
     );
   }
   surroundContents(

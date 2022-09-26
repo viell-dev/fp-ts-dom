@@ -3,7 +3,6 @@ import type {
   NotFoundErrorDomException,
 } from "@/exceptions/DomException.mjs";
 import type { IWrapper } from "@/globals/IWrapper.mjs";
-import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
 import type { EHtmlTextTrackKind } from "../enums/EHtmlTextTrackKind.mjs";
 import type { EHtmlTextTrackMode } from "../enums/EHtmlTextTrackMode.mjs";
@@ -26,10 +25,10 @@ export interface IHtmlTextTrack<N extends TextTrack> extends IWrapper<N> {
 
   addCue(
     cue: IHtmlTextTrackCue<TextTrackCue>
-  ): E.Either<InvalidStateErrorDomException, void>;
+  ): O.Option<InvalidStateErrorDomException>;
   removeCue(
     cue: IHtmlTextTrackCue<TextTrackCue>
-  ): E.Either<NotFoundErrorDomException, void>;
+  ): O.Option<NotFoundErrorDomException>;
 
   oncuechange: THtmlEventHandler;
 }

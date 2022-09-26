@@ -42,7 +42,7 @@ export interface IDomElement<N extends Element>
   setAttribute(
     qualifiedName: string,
     value: string
-  ): E.Either<InvalidCharacterErrorDomException, void>;
+  ): O.Option<InvalidCharacterErrorDomException>;
   setAttributeNS(
     namespace: string | null,
     localName: string,

@@ -4,6 +4,7 @@ import type {
   SyntaxErrorDomException,
 } from "@/exceptions/DomException.mjs";
 import type * as E from "fp-ts/Either";
+import type * as O from "fp-ts/Option";
 import type { ICssomCSSRule } from "./ICssomCSSRule.mjs";
 import type { ICssomCSSRuleList } from "./ICssomCSSRuleList.mjs";
 
@@ -21,5 +22,5 @@ export interface ICssomCSSGroupingRule<N extends CSSGroupingRule>
   >;
   deleteRule(
     index: number
-  ): E.Either<SecurityErrorDomException | NotAllowedErrorDomException, void>;
+  ): O.Option<SecurityErrorDomException | NotAllowedErrorDomException>;
 }

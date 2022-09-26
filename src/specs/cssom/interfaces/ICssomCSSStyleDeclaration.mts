@@ -14,9 +14,7 @@ export interface ICssomCSSStyleDeclaration<N extends CSSStyleDeclaration>
    * "NoModificationAllowedError" DOMException.
    */
   cssText: string;
-  setCssText(
-    cssText: string
-  ): E.Either<NoModificationAllowedErrorDomException, void>;
+  setCssText(cssText: string): O.Option<NoModificationAllowedErrorDomException>;
   readonly length: number;
   item(index: number): O.Option<string>;
   [index: number]: string;
@@ -26,7 +24,7 @@ export interface ICssomCSSStyleDeclaration<N extends CSSStyleDeclaration>
     property: string,
     value: string,
     priority?: string
-  ): E.Either<NoModificationAllowedErrorDomException, void>;
+  ): O.Option<NoModificationAllowedErrorDomException>;
   removeProperty(
     property: string
   ): E.Either<NoModificationAllowedErrorDomException, string>;
@@ -41,7 +39,7 @@ export interface ICssomCSSStyleDeclaration<N extends CSSStyleDeclaration>
   cssFloat: string;
   setCssFloat(
     cssFloat: string
-  ): E.Either<NoModificationAllowedErrorDomException, void>;
+  ): O.Option<NoModificationAllowedErrorDomException>;
 
   /**
    * Use {@link setProperty} instead, when setting, to get an `Either`.
