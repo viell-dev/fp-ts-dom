@@ -89,7 +89,6 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
     this.native.blur();
   }
 
-  // other browsing contexts
   get frames(): HtmlWindowProxy {
     return new HtmlWindowProxy(this.native.frames);
   }
@@ -137,7 +136,6 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   // [name: string]: object; ???
 
-  // the user agent
   get navigator(): HtmlNavigator {
     return new HtmlNavigator(this.native.navigator);
   }
@@ -148,7 +146,6 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
     return this.native.originAgentCluster;
   }
 
-  // user prompts
   alert(): void {
     this.native.alert();
   }

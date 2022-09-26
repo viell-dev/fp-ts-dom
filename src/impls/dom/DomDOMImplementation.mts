@@ -3,10 +3,11 @@ import type {
   NamespaceErrorDomException,
 } from "@/exceptions/DomException.mjs";
 import { Wrapper } from "@/globals/Wrapper.mjs";
+import { getNativeOrNullable } from "@/helpers/getNative.mjs";
 import type { IDomDocumentType } from "@/specs/dom/interfaces/IDomDocumentType.mjs";
 import type { IDomDOMImplementation } from "@/specs/dom/interfaces/IDomDOMImplementation.mjs";
 import * as E from "fp-ts/Either";
-import { pipe } from "fp-ts/function";
+import { pipe, tuple, tupled } from "fp-ts/function";
 import { DomDocument } from "./DomDocument.mjs";
 import { DomDocumentType } from "./DomDocumentType.mjs";
 import { DomXMLDocument } from "./DomXMLDocument.mjs";
@@ -24,9 +25,9 @@ export class DomDOMImplementation
     DomDocumentType
   > {
     return pipe(
-      [qualifiedName, publicId, systemId] as const,
+      tuple(qualifiedName, publicId, systemId),
       E.tryCatchK(
-        (params) => this.native.createDocumentType(...params),
+        tupled(this.native.createDocumentType),
         (error) =>
           /* eslint-disable-next-line
               @typescript-eslint/consistent-type-assertions
@@ -47,17 +48,9 @@ export class DomDOMImplementation
     DomXMLDocument
   > {
     return pipe(
-      [namespace, qualifiedName, doctype] as const,
-      ([namespace, qualifiedName, doctype]) =>
-        [
-          namespace,
-          qualifiedName,
-          doctype == null || doctype instanceof DocumentType
-            ? doctype
-            : doctype.getNative(),
-        ] as const,
+      tuple(namespace, qualifiedName, getNativeOrNullable(doctype)),
       E.tryCatchK(
-        (params) => this.native.createDocument(...params),
+        tupled(this.native.createDocument),
         (error) =>
           /* eslint-disable-next-line
               @typescript-eslint/consistent-type-assertions

@@ -3,7 +3,7 @@ import type { IDomCharacterData } from "@/specs/dom/interfaces/IDomCharacterData
 import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
-import { pipe } from "fp-ts/function";
+import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import { DomElement } from "./DomElement.mjs";
 import { DomNodeBase } from "./DomNodeBase.mjs";
@@ -23,19 +23,16 @@ export abstract class DomCharacterDataBase<N extends CharacterData>
   }
   substringData(offset: number, count: number): E.Either<RangeError, string> {
     return pipe(
-      [offset, count] as const,
-      E.tryCatchK(
-        (params) => this.native.substringData(...params),
-        (error) => {
-          /* eslint-disable-next-line
+      tuple(offset, count),
+      E.tryCatchK(tupled(this.native.substringData), (error) => {
+        /* eslint-disable-next-line
               @typescript-eslint/consistent-type-assertions
           -- According to the spec, this is the only possible error. */
-          const oldError = error as DOMException; // Legacy "IndexSizeError"
+        const oldError = error as DOMException; // Legacy "IndexSizeError"
 
-          // Replace the "IndexSizeError" DOMException with a RangeError.
-          return new RangeError(oldError.message, { cause: oldError });
-        }
-      )
+        // Replace the "IndexSizeError" DOMException with a RangeError.
+        return new RangeError(oldError.message, { cause: oldError });
+      })
     );
   }
   appendData(data: string): O.Option<RangeError> {
@@ -57,37 +54,31 @@ export abstract class DomCharacterDataBase<N extends CharacterData>
   }
   insertData(offset: number, data: string): O.Option<RangeError> {
     return pipe(
-      [offset, data] as const,
-      E.tryCatchK(
-        (params) => this.native.insertData(...params),
-        (error) => {
-          /* eslint-disable-next-line
+      tuple(offset, data),
+      E.tryCatchK(tupled(this.native.insertData), (error) => {
+        /* eslint-disable-next-line
               @typescript-eslint/consistent-type-assertions
           -- According to the spec, this is the only possible error. */
-          const oldError = error as DOMException; // Legacy "IndexSizeError"
+        const oldError = error as DOMException; // Legacy "IndexSizeError"
 
-          // Replace the "IndexSizeError" DOMException with a RangeError.
-          return new RangeError(oldError.message, { cause: oldError });
-        }
-      ),
+        // Replace the "IndexSizeError" DOMException with a RangeError.
+        return new RangeError(oldError.message, { cause: oldError });
+      }),
       O.getLeft
     );
   }
   deleteData(offset: number, count: number): O.Option<RangeError> {
     return pipe(
-      [offset, count] as const,
-      E.tryCatchK(
-        (params) => this.native.deleteData(...params),
-        (error) => {
-          /* eslint-disable-next-line
+      tuple(offset, count),
+      E.tryCatchK(tupled(this.native.deleteData), (error) => {
+        /* eslint-disable-next-line
               @typescript-eslint/consistent-type-assertions
           -- According to the spec, this is the only possible error. */
-          const oldError = error as DOMException; // Legacy "IndexSizeError"
+        const oldError = error as DOMException; // Legacy "IndexSizeError"
 
-          // Replace the "IndexSizeError" DOMException with a RangeError.
-          return new RangeError(oldError.message, { cause: oldError });
-        }
-      ),
+        // Replace the "IndexSizeError" DOMException with a RangeError.
+        return new RangeError(oldError.message, { cause: oldError });
+      }),
       O.getLeft
     );
   }
@@ -97,19 +88,16 @@ export abstract class DomCharacterDataBase<N extends CharacterData>
     data: string
   ): O.Option<RangeError> {
     return pipe(
-      [offset, count, data] as const,
-      E.tryCatchK(
-        (params) => this.native.replaceData(...params),
-        (error) => {
-          /* eslint-disable-next-line
+      tuple(offset, count, data),
+      E.tryCatchK(tupled(this.native.replaceData), (error) => {
+        /* eslint-disable-next-line
               @typescript-eslint/consistent-type-assertions
           -- According to the spec, this is the only possible error. */
-          const oldError = error as DOMException; // Legacy "IndexSizeError"
+        const oldError = error as DOMException; // Legacy "IndexSizeError"
 
-          // Replace the "IndexSizeError" DOMException with a RangeError.
-          return new RangeError(oldError.message, { cause: oldError });
-        }
-      ),
+        // Replace the "IndexSizeError" DOMException with a RangeError.
+        return new RangeError(oldError.message, { cause: oldError });
+      }),
       O.getLeft
     );
   }
@@ -138,7 +126,7 @@ export abstract class DomCharacterDataBase<N extends CharacterData>
           : node.getNative()
       ),
       E.tryCatchK(
-        (params) => this.native.before(...params),
+        tupled(this.native.before),
         /* eslint-disable-next-line
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
@@ -158,7 +146,7 @@ export abstract class DomCharacterDataBase<N extends CharacterData>
           : node.getNative()
       ),
       E.tryCatchK(
-        (params) => this.native.after(...params),
+        tupled(this.native.after),
         /* eslint-disable-next-line
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
@@ -178,7 +166,7 @@ export abstract class DomCharacterDataBase<N extends CharacterData>
           : node.getNative()
       ),
       E.tryCatchK(
-        (params) => this.native.replaceWith(...params),
+        tupled(this.native.replaceWith),
         /* eslint-disable-next-line
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */

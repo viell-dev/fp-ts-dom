@@ -19,7 +19,7 @@ export interface IHtmlElementInternals<N extends ElementInternals>
   setFormValue(
     value: string | File | FormData | null,
     state?: string | File | FormData | null
-  ): void;
+  ): O.Option<NotSupportedErrorDomException>;
 
   readonly form: E.Either<
     NotSupportedErrorDomException,
@@ -30,13 +30,13 @@ export interface IHtmlElementInternals<N extends ElementInternals>
     flags?: DHtmlValidityStateFlags,
     message?: string,
     anchor?: HTMLElement | IHtmlHTMLElement<HTMLElement>
-  ): void;
+  ): O.Option<NotSupportedErrorDomException>;
   readonly willValidate: E.Either<NotSupportedErrorDomException, boolean>;
   readonly validity: E.Either<
     NotSupportedErrorDomException,
     IHtmlValidityState<ValidityState>
   >;
-  readonly validationMessage: string;
+  readonly validationMessage: E.Either<NotSupportedErrorDomException, string>;
   checkValidity(): E.Either<NotSupportedErrorDomException, boolean>;
   reportValidity(): E.Either<NotSupportedErrorDomException, boolean>;
 

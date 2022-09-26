@@ -48,7 +48,8 @@ export interface IHtmlHTMLElement<N extends HTMLElement>
   dir: string;
 
   // user interaction
-  hidden: O.Option<boolean | number | string>;
+  readonly hidden: "until-found" | boolean;
+  setHidden(hidden: boolean | number | string | null): void;
   inert: boolean;
   click(): void;
   accessKey: string;

@@ -8,7 +8,7 @@ import type {
   IDomAbortSignalConstructors,
 } from "@/specs/dom/interfaces/IDomAbortSignal.mjs";
 import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
-import type { CBHtmlEventHandler } from "@/specs/html/callbacks/CBHtmlEventHandler.mjs";
+import type { THtmlEventHandler } from "@/specs/html/types/THtmlEventHandler.mjs";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import { DomEvent } from "./DomEvent.mjs";
@@ -60,14 +60,13 @@ export class DomAbortSignal<R>
 
   /**
    * @throws
-   * The value of {@link reason} is if {@link aborted} is `true`; otherwise,
-   * does nothing.
+   * The value of {@link reason} is thrown if {@link aborted} is `true`.
    */
   throwIfAborted(): void {
     this.native.throwIfAborted();
   }
 
-  get onabort(): CBHtmlEventHandler {
+  get onabort(): THtmlEventHandler {
     return pipe(
       O.fromNullable(this.native.onabort),
       O.map(
@@ -77,7 +76,7 @@ export class DomAbortSignal<R>
       O.toNullable
     );
   }
-  set onabort(callback: CBHtmlEventHandler) {
+  set onabort(callback: THtmlEventHandler) {
     this.native.onabort = pipe(
       O.fromNullable(callback),
       O.map(
