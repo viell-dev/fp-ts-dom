@@ -101,13 +101,6 @@ export abstract class GeometryDOMMatrixBase<N extends DOMMatrixReadOnly>
       this.native.scale(scaleX, scaleY, scaleZ, originX, originY, originZ)
     ).right;
   }
-  /**
-   * @deprecated Use {@link scale | scale(scaleX, scaleY, 1, 0, 0, 0)} instead.
-   */
-  scaleNonUniform(scaleX?: number, scaleY?: number): GeometryDOMMatrix {
-    return GeometryDOMMatrix.create(this.native.scaleNonUniform(scaleX, scaleY))
-      .right;
-  }
   scale3d(
     scale?: number,
     originX?: number,

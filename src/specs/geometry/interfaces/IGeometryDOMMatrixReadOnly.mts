@@ -86,13 +86,6 @@ export interface IGeometryDOMMatrixReadOnly<N extends DOMMatrixReadOnly>
     originY?: number,
     originZ?: number
   ): IGeometryDOMMatrix<DOMMatrix>;
-  /**
-   * @deprecated Use {@link scale | scale(scaleX, scaleY, 1, 0, 0, 0)} instead.
-   */
-  scaleNonUniform(
-    scaleX?: number,
-    scaleY?: number
-  ): IGeometryDOMMatrix<DOMMatrix>;
   scale3d(
     scale?: number,
     originX?: number,
