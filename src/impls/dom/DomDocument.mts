@@ -1,23 +1,26 @@
-import { StaticImplements } from "@/decorators/StaticImplements.mjs";
 import type {
   HierarchyRequestErrorDomException,
   InvalidCharacterErrorDomException,
   NamespaceErrorDomException,
   NotSupportedErrorDomException,
+  SecurityErrorDomException,
 } from "@/exceptions/DomException.mjs";
 import { getNative } from "@/helpers/getNative.mjs";
+import type { NotKeyOf } from "@/helpers/NotKeyOf.mjs";
+import type { ICssomCSSStyleSheet } from "@/specs/cssom/interfaces/ICssomCSSStyleSheet.mjs";
 import type { CBDomNodeFilter } from "@/specs/dom/callbacks/CBDomNodeFilter.mjs";
 import type { CDomNodeFilterWhatToShow } from "@/specs/dom/constants/CDomNodeFilterWhatToShow.mjs";
 import type { DDomElementCreationOptions } from "@/specs/dom/dictionaries/DDomElementCreationOptions.mjs";
-import type {
-  IDomDocument,
-  IDomDocumentConstructors,
-} from "@/specs/dom/interfaces/IDomDocument.mjs";
+import type { IDomDocument } from "@/specs/dom/interfaces/IDomDocument.mjs";
 import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
+import type { EHtmlDocumentReadyState } from "@/specs/html/enums/EHtmlDocumentReadyState.mjs";
+import type { IHtmlHTMLElement } from "@/specs/html/interfaces/IHtmlHTMLElement.mjs";
+import type { THtmlHTMLOrSVGScriptElement } from "@/specs/html/types/THtmlHTMLOrSVGScriptElement.mjs";
 import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
-import { pipe } from "fp-ts/function";
+import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import { HtmlLocation } from "../html/HtmlLocation.mjs";
 import { DomAttr } from "./DomAttr.mjs";
 import { DomCDATASection } from "./DomCDATASection.mjs";
 import { DomComment } from "./DomComment.mjs";
@@ -38,11 +41,12 @@ type CorrectedCreateElement = (
   options?: string | ElementCreationOptions
 ) => Element;
 
-@StaticImplements<IDomDocumentConstructors>()
+// @StaticImplements<IDomDocumentConstructors>()
 export class DomDocument
   extends DomNodeBase<Document>
   implements IDomDocument<Document>
 {
+  /*
   constructor();
   constructor(document: Document);
   constructor(document?: Document) {
@@ -51,6 +55,7 @@ export class DomDocument
 
     super(nativeDocument);
   }
+  */
 
   private implementationInternal: O.Option<DomDOMImplementation> = O.none;
   get implementation(): DomDOMImplementation {
@@ -364,6 +369,20 @@ export class DomDocument
       O.map((element) => new DomElement(element))
     );
   }
+  get styleSheets(): CssomStyleSheetList {
+    return new CssomStyleSheetList(this.native.styleSheets);
+  }
+  get adoptedStyleSheets(): CssomCSSStyleSheet {
+    return pipe(
+      this.native.adoptedStyleSheets,
+      A.map((styleSheet) => new CssomCSSStyleSheet(styleSheet))
+    );
+  }
+  setAdoptedStyleSheets(
+    styleSheets: (CSSStyleSheet | ICssomCSSStyleSheet<CSSStyleSheet>)[]
+  ): void {
+    this.native.adoptedStyleSheets = pipe(styleSheets, A.map(getNative));
+  }
 
   get children(): DomElement[] {
     return pipe(
@@ -444,7 +463,7 @@ export class DomDocument
           ),
         /* eslint-disable-next-line
           @typescript-eslint/consistent-type-assertions
-      -- According to the spec, this is the only possible error. */
+        -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
       ),
       O.getLeft
@@ -465,4 +484,171 @@ export class DomDocument
       A.map((node) => new DomNode(node))
     );
   }
+
+  get location(): O.Option<HtmlLocation> {
+    return pipe(
+      O.fromNullable(this.native.location),
+      O.map((location) => new HtmlLocation(location))
+    );
+  }
+  get domain(): string {
+    return this.native.domain;
+  }
+  set domain(domain: string) {
+    this.native.domain = domain;
+  }
+  get referrer(): string {
+    return this.native.referrer;
+  }
+  get cookie(): E.Either<SecurityErrorDomException, string> {
+    return E.tryCatch(
+      () => this.native.cookie,
+      /* eslint-disable-next-line
+        @typescript-eslint/consistent-type-assertions
+      -- According to the spec, this is the only possible error. */
+      (error) => error as SecurityErrorDomException
+    );
+  }
+  setCookie(cookie: string): O.Option<SecurityErrorDomException> {
+    return pipe(
+      cookie,
+      E.tryCatchK(
+        (cookie) => {
+          this.native.cookie = cookie;
+        },
+        /* eslint-disable-next-line
+          @typescript-eslint/consistent-type-assertions
+        -- According to the spec, this is the only possible error. */
+        (error) => error as SecurityErrorDomException
+      ),
+      O.getLeft
+    );
+  }
+  get lastModified(): string {
+    return this.native.lastModified;
+  }
+  get readyState(): EHtmlDocumentReadyState {
+    return this.native.readyState;
+  }
+
+  [name: NotKeyOf<DomDocument>]: {};
+  get title(): string {
+    return this.native.title;
+  }
+  set title(title: string) {
+    this.native.title = title;
+  }
+  get dir(): string {
+    return this.native.dir;
+  }
+  set dir(dir: string) {
+    this.native.dir = dir;
+  }
+  get body(): O.Option<HtmlHTMLElement> {
+    return pipe(
+      O.fromNullable(this.native.body),
+      O.map((body) => new HtmlHTMLElement(body))
+    );
+  }
+  setBody(
+    body: HTMLElement | IHtmlHTMLElement<HTMLElement>
+  ): O.Option<HierarchyRequestErrorDomException> {
+    return pipe(
+      getNative(body),
+      E.tryCatchK(
+        (body) => {
+          this.native.body = body;
+        },
+        /* eslint-disable-next-line
+          @typescript-eslint/consistent-type-assertions
+        -- According to the spec, this is the only possible error. */
+        (error) => error as HierarchyRequestErrorDomException
+      ),
+      O.getLeft
+    );
+  }
+  get head(): O.Option<HtmlHTMLHeadElement> {
+    return pipe(
+      O.fromNullable(this.native.head),
+      O.map((head) => new HtmlHTMLHeadElement(head))
+    );
+  }
+  get images(): DomElement[] {
+    return pipe(
+      Array.from(this.native.images),
+      A.map((element) => new DomElement(element))
+    );
+  }
+  get embeds(): DomElement[] {
+    return pipe(
+      Array.from(this.native.embeds),
+      A.map((element) => new DomElement(element))
+    );
+  }
+  get plugins(): DomElement[] {
+    return pipe(
+      Array.from(this.native.plugins),
+      A.map((element) => new DomElement(element))
+    );
+  }
+  get links(): DomElement[] {
+    return pipe(
+      Array.from(this.native.links),
+      A.map((element) => new DomElement(element))
+    );
+  }
+  get forms(): DomElement[] {
+    return pipe(
+      Array.from(this.native.forms),
+      A.map((element) => new DomElement(element))
+    );
+  }
+  get scripts(): DomElement[] {
+    return pipe(
+      Array.from(this.native.scripts),
+      A.map((element) => new DomElement(element))
+    );
+  }
+  getElementsByName(elementName: string): DomNode[] {
+    return pipe(
+      tuple(elementName),
+      tupled(this.native.getElementsByName),
+      (nodeList) => Array.from(nodeList),
+      A.map((node) => new DomNode(node))
+    );
+  }
+  get currentScript(): O.Option<THtmlHTMLOrSVGScriptElement> {
+    return pipe(O.fromNullable(this.native.currentScript));
+  }
+
+  open(unused1?: string, unused2?: string): IDomDocument<Document>;
+  open(
+    url: string,
+    name: string,
+    features: string
+  ): O.Option<IHtmlWindowProxy<WindowProxy>>;
+  close(): void;
+  write(...text: string[]): void;
+  writeln(...text: string[]): void;
+
+  get defaultView(): O.Option<IHtmlWindowProxy<WindowProxy>> {
+    return this.native.defaultView;
+  }
+  hasFocus(): boolean;
+  designMode: string;
+  execCommand(commandId: string, showUI?: boolean, value?: string): boolean;
+  queryCommandEnabled(commandId: string): boolean;
+  queryCommandIndeterm(commandId: string): boolean;
+  queryCommandState(commandId: string): boolean;
+  queryCommandSupported(commandId: string): boolean;
+  queryCommandValue(commandId: string): string;
+  get hidden(): boolean {
+    return this.native.hidden;
+  }
+  get visibilityState(): EHtmlDocumentVisibilityState {
+    return this.native.visibilityState;
+  }
+
+  onreadystatechange: THtmlEventHandler;
+  onvisibilitychange: THtmlEventHandler;
 }
