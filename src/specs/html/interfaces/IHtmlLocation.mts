@@ -5,7 +5,6 @@ import type {
 import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
-import type { IHtmlDOMStringList } from "./IHtmlDOMStringList.mjs";
 
 export interface IHtmlLocation<N extends Location> extends IWrapper<N> {
   readonly href: E.Either<SecurityErrorDomException, string>;
@@ -26,5 +25,5 @@ export interface IHtmlLocation<N extends Location> extends IWrapper<N> {
   replace(url: string): void;
   reload(): void;
 
-  readonly ancestorOrigins: IHtmlDOMStringList<DOMStringList>;
+  readonly ancestorOrigins: string[];
 }

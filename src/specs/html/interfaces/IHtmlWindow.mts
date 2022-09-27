@@ -33,7 +33,6 @@ export interface IHtmlWindow<N extends Window>
   readonly scrollbars: IHtmlBarProp<BarProp>;
   readonly statusbar: IHtmlBarProp<BarProp>;
   readonly toolbar: IHtmlBarProp<BarProp>;
-  status: string;
   close(): void;
   readonly closed: boolean;
   stop(): void;
@@ -43,7 +42,8 @@ export interface IHtmlWindow<N extends Window>
   // other browsing contexts
   readonly frames: IHtmlWindowProxy<WindowProxy>;
   readonly length: number;
-  [index: number]: IHtmlWindowProxy<WindowProxy>;
+  /** @throws "SecurityError" DOMException */
+  [index: number]: IHtmlWindow<Window>;
   readonly top: O.Option<IHtmlWindowProxy<WindowProxy>>;
   opener: unknown;
   readonly parent: O.Option<IHtmlWindowProxy<WindowProxy>>;
@@ -69,7 +69,7 @@ export interface IHtmlWindow<N extends Window>
   postMessage(
     message: unknown,
     targetOrigin: string,
-    transfer?: object[]
+    transfer?: DHtmlWindowPostMessageOptions["transfer"]
   ): void;
   postMessage(message: unknown, options?: DHtmlWindowPostMessageOptions): void;
 }

@@ -1,7 +1,9 @@
 import type { SyntaxErrorDomException } from "@/exceptions/DomException.mjs";
-import { Wrapper } from "@/globals/Wrapper.mjs";
+import { getNative } from "@/helpers/getNative.mjs";
+import type { NotKeyOf } from "@/helpers/NotKeyOf.mjs";
 import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
 import type { DHtmlWindowPostMessageOptions } from "@/specs/html/dictionaries/DHtmlWindowPostMessageOptions.mjs";
+import type { MissingOffscreenCanvas } from "@/specs/html/interfaces/IHtmlOffscreenCanvas.mjs";
 import type { IHtmlWindow } from "@/specs/html/interfaces/IHtmlWindow.mjs";
 import type {
   MissingEventHandler,
@@ -9,11 +11,19 @@ import type {
 } from "@/specs/html/types/THtmlEventHandler.mjs";
 import type { THtmlOnBeforeUnloadEventHandler } from "@/specs/html/types/THtmlOnBeforeUnloadEventHandler.mjs";
 import type { THtmlOnErrorEventHandler } from "@/specs/html/types/THtmlOnErrorEventHandler.mjs";
+import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
-import { pipe } from "fp-ts/function";
+import { flow, pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import { DomDocument } from "../dom/DomDocument.mjs";
+import { DomElement } from "../dom/DomElement.mjs";
 import { DomEvent } from "../dom/DomEvent.mjs";
+import { DomEventTargetBase } from "../dom/DomEventTargetBase.mjs";
+import { HtmlBarProp } from "./HtmlBarProp.mjs";
+import { HtmlCustomElementRegistry } from "./HtmlCustomElementRegistry.mjs";
+import { HtmlHistory } from "./HtmlHistory.mjs";
+import { HtmlLocation } from "./HtmlLocation.mjs";
+import { HtmlNavigator } from "./HtmlNavigator.mjs";
 import { HtmlWindowProxy } from "./HtmlWindowProxy.mjs";
 
 interface MissingEventHandlers {
@@ -24,7 +34,10 @@ interface MissingEventHandlers {
   oncontextrestored: MissingEventHandler;
 }
 
-export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
+export class HtmlWindow
+  extends DomEventTargetBase<Window>
+  implements IHtmlWindow<Window>
+{
   get window(): HtmlWindowProxy {
     return new HtmlWindowProxy(this.native.window);
   }
@@ -67,12 +80,6 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   get toolbar(): HtmlBarProp {
     return new HtmlBarProp(this.native.toolbar);
   }
-  get status(): string {
-    return this.native.status;
-  }
-  set status(status: string) {
-    this.native.status = status;
-  }
   close(): void {
     this.native.close();
   }
@@ -95,6 +102,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   get length(): number {
     return this.native.length;
   }
+  /** @throws "SecurityError" DOMException */
+  [index: number]: HtmlWindow;
   get top(): O.Option<HtmlWindowProxy> {
     return pipe(
       this.native.top,
@@ -123,33 +132,37 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
     features?: string
   ): E.Either<SyntaxErrorDomException, O.Option<HtmlWindowProxy>> {
     return pipe(
-      E.tryCatch(
-        () =>
-          pipe(
-            this.native.open(url, target, features),
-            O.fromNullable,
-            O.map((open) => new HtmlWindowProxy(open))
-          ),
+      tuple(url, target, features),
+      E.tryCatchK(
+        tupled(this.native.open),
+        /* eslint-disable-next-line
+            @typescript-eslint/consistent-type-assertions
+        -- According to the spec, this is the only possible error. */
         (error) => error as SyntaxErrorDomException
+      ),
+      E.map(
+        flow(
+          O.fromNullable,
+          O.map((window) => new HtmlWindowProxy(window))
+        )
       )
     );
   }
-  // [name: string]: object; ???
+  [name: NotKeyOf<HtmlWindow>]: {};
 
   get navigator(): HtmlNavigator {
     return new HtmlNavigator(this.native.navigator);
   }
-  get clientInformation(): HtmlNavigator {
-    return new HtmlNavigator(this.native.clientInformation);
-  }
   get originAgentCluster(): boolean {
-    return this.native.originAgentCluster;
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- originAgentCluster is missing in the TypeScript types. */
+    return (this.native as Window & { originAgentCluster: boolean })
+      .originAgentCluster;
   }
 
-  alert(): void {
-    this.native.alert();
-  }
-  alert(message: string): void {
+  alert(): void;
+  alert(message: string): void;
+  alert(message?: string): void {
     this.native.alert(message);
   }
   confirm(message?: string): boolean {
@@ -162,15 +175,117 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
     this.native.print();
   }
 
-  postMessage(message: unknown, targetOrigin: string, transfer?: {}[]): void {
-    this.native.postMessage(message, targetOrigin, transfer);
-  }
-  postMessage(message: unknown, options?: DHtmlWindowPostMessageOptions): void {
-    this.native.postMessage(message, options);
+  postMessage(
+    message: unknown,
+    targetOrigin: string,
+    transfer?: DHtmlWindowPostMessageOptions["transfer"]
+  ): O.Option<SyntaxErrorDomException>;
+  postMessage(
+    message: unknown,
+    options?: DHtmlWindowPostMessageOptions
+  ): O.Option<SyntaxErrorDomException>;
+  postMessage(
+    message: unknown,
+    targetOriginOrOptions?: string | DHtmlWindowPostMessageOptions,
+    transfer?: DHtmlWindowPostMessageOptions["transfer"]
+  ): O.Option<SyntaxErrorDomException> {
+    return pipe(
+      E.tryCatch(
+        () => {
+          /* eslint-disable @typescript-eslint/consistent-type-assertions
+          -- OffscreenCanvas is missing in the TypeScreen types. */
+          if (typeof targetOriginOrOptions === "string") {
+            const nativeTransfer = pipe(
+              transfer,
+              O.fromNullable,
+              O.map(
+                A.map((transferable) =>
+                  transferable instanceof ArrayBuffer
+                    ? transferable
+                    : getNative(transferable)
+                )
+              ),
+              O.toUndefined
+            );
+
+            (
+              this.native.postMessage as (
+                message: unknown,
+                targetOrigin: string,
+                transfer?: (
+                  | ArrayBuffer
+                  | MessagePort
+                  | ImageBitmap
+                  | MissingOffscreenCanvas
+                )[]
+              ) => void
+            )(message, targetOriginOrOptions, nativeTransfer);
+          } else {
+            const nativeOptions = pipe(
+              targetOriginOrOptions,
+              O.fromNullable,
+              O.map((options) => {
+                const transfer = pipe(
+                  options.transfer,
+                  O.fromNullable,
+                  O.map(
+                    A.map((transferable) =>
+                      transferable instanceof ArrayBuffer
+                        ? transferable
+                        : getNative(transferable)
+                    )
+                  )
+                );
+
+                if (O.isSome(transfer)) {
+                  options.transfer = transfer.value;
+                }
+
+                return options as Omit<
+                  DHtmlWindowPostMessageOptions,
+                  "transfer"
+                > & {
+                  transfer?: (
+                    | ArrayBuffer
+                    | MessagePort
+                    | ImageBitmap
+                    | MissingOffscreenCanvas
+                  )[];
+                };
+              }),
+              O.toUndefined
+            );
+
+            (
+              this.native.postMessage as (
+                message: unknown,
+                options?: Omit<WindowPostMessageOptions, "transfer"> & {
+                  transfer?: (
+                    | ArrayBuffer
+                    | MessagePort
+                    | ImageBitmap
+                    | MissingOffscreenCanvas
+                  )[];
+                }
+              ) => void
+            )(message, nativeOptions);
+          }
+          /* eslint-enable @typescript-eslint/consistent-type-assertions
+          -- Re-enable the rule. */
+        },
+        /* eslint-disable-next-line
+            @typescript-eslint/consistent-type-assertions
+        -- According to the spec; this is the only possible error. */
+        (error) => error as SyntaxErrorDomException
+      ),
+      O.getLeft
+    );
   }
 
   get onabort(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onabort as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -194,6 +309,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onauxclick(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onauxclick as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -217,6 +334,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onbeforeinput(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- onbeforeinput is missing in the TypeScript types. */
       (this.native as Window & MissingEventHandlers).onbeforeinput,
       O.fromNullable,
       O.map(
@@ -227,6 +346,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
     );
   }
   set onbeforeinput(onbeforeinput) {
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- onbeforeinput is missing in the TypeScript types. */
     (this.native as Window & MissingEventHandlers).onbeforeinput = pipe(
       onbeforeinput,
       O.fromNullable,
@@ -240,8 +361,9 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onbeforematch(): THtmlEventHandler {
     return pipe(
-      (this.native as Window & MissingEventHandlers)
-        .onbeforematch as MissingEventHandler,
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- onbeforematch is missing in the TypeScript types. */
+      (this.native as Window & MissingEventHandlers).onbeforematch,
       O.fromNullable,
       O.map(
         (callback) => (event: IDomEvent<Event>) =>
@@ -251,6 +373,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
     );
   }
   set onbeforematch(onbeforematch) {
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- onbeforematch is missing in the TypeScript types. */
     (this.native as Window & MissingEventHandlers).onbeforematch = pipe(
       onbeforematch,
       O.fromNullable,
@@ -264,6 +388,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onblur(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onblur as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -287,8 +413,9 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get oncancel(): THtmlEventHandler {
     return pipe(
-      (this.native as Window & MissingEventHandlers)
-        .oncancel as MissingEventHandler,
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- oncancel is missing in the TypeScript types. */
+      (this.native as Window & MissingEventHandlers).oncancel,
       O.fromNullable,
       O.map(
         (callback) => (event: IDomEvent<Event>) =>
@@ -298,6 +425,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
     );
   }
   set oncancel(oncancel) {
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- oncancel is missing in the TypeScript types. */
     (this.native as Window & MissingEventHandlers).oncancel = pipe(
       oncancel,
       O.fromNullable,
@@ -311,6 +440,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get oncanplay(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.oncanplay as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -334,6 +465,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get oncanplaythrough(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.oncanplaythrough as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -357,6 +490,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onchange(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onchange as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -380,6 +515,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onclick(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onclick as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -403,6 +540,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onclose(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onclose as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -426,8 +565,9 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get oncontextlost(): THtmlEventHandler {
     return pipe(
-      (this.native as Window & MissingEventHandlers)
-        .oncontextlost as MissingEventHandler,
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- oncontextlost is missing in the TypeScript types. */
+      (this.native as Window & MissingEventHandlers).oncontextlost,
       O.fromNullable,
       O.map(
         (callback) => (event: IDomEvent<Event>) =>
@@ -437,6 +577,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
     );
   }
   set oncontextlost(oncontextlost) {
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- oncontextlost is missing in the TypeScript types. */
     (this.native as Window & MissingEventHandlers).oncontextlost = pipe(
       oncontextlost,
       O.fromNullable,
@@ -450,6 +592,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get oncontextmenu(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.oncontextmenu as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -473,8 +617,9 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get oncontextrestored(): THtmlEventHandler {
     return pipe(
-      (this.native as Window & MissingEventHandlers)
-        .oncontextrestored as MissingEventHandler,
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- oncontextrestored is missing in the TypeScript types. */
+      (this.native as Window & MissingEventHandlers).oncontextrestored,
       O.fromNullable,
       O.map(
         (callback) => (event: IDomEvent<Event>) =>
@@ -484,6 +629,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
     );
   }
   set oncontextrestored(oncontextrestored) {
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- oncontextrestored is missing in the TypeScript types. */
     (this.native as Window & MissingEventHandlers).oncontextrestored = pipe(
       oncontextrestored,
       O.fromNullable,
@@ -497,6 +644,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get oncuechange(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.oncuechange as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -520,6 +669,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get ondblclick(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.ondblclick as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -543,6 +694,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get ondrag(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.ondrag as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -566,6 +719,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get ondragend(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.ondragend as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -589,6 +744,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get ondragenter(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.ondragenter as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -612,6 +769,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get ondragleave(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.ondragleave as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -635,6 +794,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get ondragover(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.ondragover as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -658,6 +819,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get ondragstart(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.ondragstart as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -681,6 +844,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get ondrop(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.ondrop as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -704,6 +869,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get ondurationchange(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.ondurationchange as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -727,6 +894,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onemptied(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onemptied as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -750,6 +919,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onended(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onended as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -773,7 +944,7 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onerror(): THtmlOnErrorEventHandler {
     return pipe(
-      this.native.onerror as OnErrorEventHandler,
+      this.native.onerror,
       O.fromNullable,
       O.map(
         (callback) =>
@@ -784,6 +955,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
             colno?: number,
             error?: Error
           ) =>
+            /* eslint-disable-next-line @typescript-eslint/no-explicit-any
+            -- Allow any here */
             callback.bind<Window, any, unknown>(
               this.getNative(),
               typeof event === "string" ? event : event.getNative(),
@@ -823,6 +996,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onfocus(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onfocus as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -846,6 +1021,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onformdata(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onformdata as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -869,6 +1046,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get oninput(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.oninput as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -892,6 +1071,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get oninvalid(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.oninvalid as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -915,6 +1096,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onkeydown(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onkeydown as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -938,6 +1121,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onkeyup(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onkeyup as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -961,6 +1146,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onload(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onload as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -984,6 +1171,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onloadeddata(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onloadeddata as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1007,6 +1196,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onloadedmetadata(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onloadedmetadata as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1030,6 +1221,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onloadstart(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onloadstart as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1053,6 +1246,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onmousedown(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onmousedown as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1076,6 +1271,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onmouseenter(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onmouseenter as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1099,6 +1296,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onmouseleave(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onmouseleave as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1122,6 +1321,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onmousemove(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onmousemove as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1145,6 +1346,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onmouseout(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onmouseout as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1168,6 +1371,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onmouseover(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onmouseover as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1191,6 +1396,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onmouseup(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onmouseup as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1214,6 +1421,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onpause(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onpause as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1237,6 +1446,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onplay(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onplay as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1260,6 +1471,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onplaying(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onplaying as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1283,6 +1496,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onprogress(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onprogress as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1306,6 +1521,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onratechange(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onratechange as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1329,6 +1546,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onreset(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onreset as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1352,6 +1571,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onresize(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onresize as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1375,6 +1596,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onscroll(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onscroll as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1398,6 +1621,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onsecuritypolicyviolation(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onsecuritypolicyviolation as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1421,6 +1646,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onseeked(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onseeked as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1444,6 +1671,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onseeking(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onseeking as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1467,6 +1696,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onselect(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onselect as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1490,6 +1721,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onslotchange(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onslotchange as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1513,6 +1746,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onstalled(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onstalled as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1536,6 +1771,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onsubmit(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onsubmit as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1559,6 +1796,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onsuspend(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onsuspend as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1582,6 +1821,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get ontimeupdate(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.ontimeupdate as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1605,6 +1846,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get ontoggle(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.ontoggle as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1628,6 +1871,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onvolumechange(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onvolumechange as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1651,6 +1896,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onwaiting(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onwaiting as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1674,6 +1921,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onwheel(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onwheel as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1698,6 +1947,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
 
   get onafterprint(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onafterprint as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1721,6 +1972,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onbeforeprint(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onbeforeprint as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1744,7 +1997,7 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onbeforeunload(): THtmlOnBeforeUnloadEventHandler {
     return pipe(
-      this.native.onbeforeunload as OnBeforeUnloadEventHandler,
+      this.native.onbeforeunload,
       O.fromNullable,
       O.map(
         (callback) => (event: IDomEvent<Event>) =>
@@ -1770,6 +2023,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onhashchange(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onhashchange as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1793,6 +2048,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onlanguagechange(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onlanguagechange as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1816,6 +2073,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onmessage(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onmessage as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1839,6 +2098,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onmessageerror(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onmessageerror as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1862,6 +2123,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onoffline(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onoffline as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1885,6 +2148,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get ononline(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.ononline as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1908,6 +2173,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onpagehide(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onpagehide as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1931,6 +2198,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onpageshow(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onpageshow as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1954,6 +2223,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onpopstate(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onpopstate as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -1977,6 +2248,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onrejectionhandled(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onrejectionhandled as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -2000,6 +2273,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onstorage(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onstorage as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -2023,6 +2298,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onunhandledrejection(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onunhandledrejection as MissingEventHandler,
       O.fromNullable,
       O.map(
@@ -2046,6 +2323,8 @@ export class HtmlWindow extends Wrapper<Window> implements IHtmlWindow<Window> {
   }
   get onunload(): THtmlEventHandler {
     return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
       this.native.onunload as MissingEventHandler,
       O.fromNullable,
       O.map(

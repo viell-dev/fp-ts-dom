@@ -1,4 +1,7 @@
-import type { SyntaxErrorDomException } from "@/exceptions/DomException.mjs";
+import type {
+  NotSupportedErrorDomException,
+  SyntaxErrorDomException,
+} from "@/exceptions/DomException.mjs";
 import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import type * as O from "fp-ts/Option";
@@ -12,10 +15,14 @@ export interface IHtmlCustomElementRegistry<N extends CustomElementRegistry>
     name: string,
     constructor: CBHtmlCustomElementConstructor,
     options?: DHtmlElementDefinitionOptions
-  ): void;
+  ): O.Option<
+    NotSupportedErrorDomException | SyntaxErrorDomException | TypeError
+  >;
   get(name: string): O.Option<CBHtmlCustomElementConstructor>;
   whenDefined(
     name: string
   ): TE.TaskEither<SyntaxErrorDomException, CBHtmlCustomElementConstructor>;
-  upgrade(root: Node | IDomNode<Node>): void;
+  upgrade(
+    root: Node | IDomNode<Node>
+  ): O.Option<NotSupportedErrorDomException | TypeError>;
 }

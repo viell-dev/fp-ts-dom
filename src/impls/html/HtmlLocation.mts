@@ -21,14 +21,9 @@ export class HtmlLocation
       (error) => error as SecurityErrorDomException
     );
   }
-  setHref(value: string): void;
+  setHref(value: string): O.None;
   setHref(value: unknown): O.Option<TypeError>;
-  setHref(value: unknown): void | O.Option<TypeError> {
-    if (typeof value === "string") {
-      this.native.href = value;
-      return;
-    }
-
+  setHref(value: unknown): O.Option<TypeError> {
     return pipe(
       E.tryCatch(
         () => {
@@ -63,18 +58,13 @@ export class HtmlLocation
       (error) => error as SecurityErrorDomException
     );
   }
-  setProtocol(value: string): void;
+  setProtocol(value: string): O.None;
   setProtocol(
     value: unknown
   ): O.Option<SecurityErrorDomException | SyntaxErrorDomException>;
   setProtocol(
     value: unknown
-  ): void | O.Option<SecurityErrorDomException | SyntaxErrorDomException> {
-    if (typeof value === "string") {
-      this.native.protocol = value;
-      return;
-    }
-
+  ): O.Option<SecurityErrorDomException | SyntaxErrorDomException> {
     return pipe(
       E.tryCatch(
         () => {
@@ -91,5 +81,55 @@ export class HtmlLocation
       ),
       O.getLeft
     );
+  }
+  get host(): string {
+    return this.native.host;
+  }
+  set host(host: string) {
+    this.native.host = host;
+  }
+  get hostname(): string {
+    return this.native.hostname;
+  }
+  set hostname(hostname: string) {
+    this.native.hostname = hostname;
+  }
+  get port(): string {
+    return this.native.port;
+  }
+  set port(port: string) {
+    this.native.port = port;
+  }
+  get pathname(): string {
+    return this.native.pathname;
+  }
+  set pathname(pathname: string) {
+    this.native.pathname = pathname;
+  }
+  get search(): string {
+    return this.native.search;
+  }
+  set search(search: string) {
+    this.native.search = search;
+  }
+  get hash(): string {
+    return this.native.hash;
+  }
+  set hash(hash: string) {
+    this.native.hash = hash;
+  }
+
+  assign(url: string): void {
+    this.native.assign(url);
+  }
+  replace(url: string): void {
+    this.native.replace(url);
+  }
+  reload(): void {
+    this.native.reload();
+  }
+
+  get ancestorOrigins(): string[] {
+    return Array.from(this.native.ancestorOrigins);
   }
 }
