@@ -12,26 +12,6 @@ export class DomDOMTokenList
   extends Wrapper<DOMTokenList>
   implements IDomDOMTokenList<DOMTokenList>
 {
-  [index: number]: string;
-
-  private static indexHandler: ProxyHandler<DomDOMTokenList> = {
-    get(target, property) {
-      if (typeof property === "string") {
-        const index = parseInt(property);
-        if (index.toString() === property)
-          return pipe(target.native.item(index), O.fromNullable, O.toUndefined);
-      }
-
-      return;
-    },
-  };
-
-  constructor(domTokenList: DOMTokenList) {
-    super(domTokenList);
-
-    return new Proxy(this, DomDOMTokenList.indexHandler);
-  }
-
   get length(): number {
     return this.native.length;
   }

@@ -10,11 +10,9 @@ import type { IDomAttr } from "./IDomAttr.mjs";
 export interface IDomNamedNodeMap<N extends NamedNodeMap> extends IWrapper<N> {
   readonly length: number;
   item(index: number): O.Option<IDomAttr<Attr>>;
-  [test: number]: IDomAttr<Attr>;
+  //[test: number]: IDomAttr<Attr>;
   getNamedItem(qualifiedName: string): O.Option<IDomAttr<Attr>>;
-  [
-    qualifiedName: string extends keyof IDomNamedNodeMap<N> ? never : string
-  ]: IDomAttr<Attr>;
+  //[qualifiedName: NotKeyOf<IDomNamedNodeMap<N>>]: IDomAttr<Attr>;
   getNamedItemNS(
     namespace: string | null,
     localName: string

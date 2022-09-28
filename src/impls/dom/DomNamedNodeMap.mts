@@ -6,7 +6,7 @@ import { Wrapper } from "@/globals/Wrapper.mjs";
 import type { IDomAttr } from "@/specs/dom/interfaces/IDomAttr.mjs";
 import type { IDomNamedNodeMap } from "@/specs/dom/interfaces/IDomNamedNodeMap.mjs";
 import * as E from "fp-ts/Either";
-import { pipe } from "fp-ts/function";
+import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import { DomAttr } from "./DomAttr.mjs";
 
@@ -14,32 +14,6 @@ export class DomNamedNodeMap
   extends Wrapper<NamedNodeMap>
   implements IDomNamedNodeMap<NamedNodeMap>
 {
-  [index: number]: DomAttr;
-  [
-    qualifiedName: string extends keyof typeof DomNamedNodeMap ? never : string
-  ]: DomAttr;
-
-  private static indexHandler: ProxyHandler<DomNamedNodeMap> = {
-    get(target, property) {
-      if (typeof property === "string")
-        return pipe(
-          parseInt(property).toString() === property
-            ? target.native.item(parseInt(property))
-            : target.native.getNamedItem(property),
-          O.fromPredicate((attr): attr is Attr => attr instanceof Attr),
-          O.map((attr) => new DomAttr(attr)),
-          O.toUndefined
-        );
-      return;
-    },
-  };
-
-  constructor(namedNodeMap: NamedNodeMap) {
-    super(namedNodeMap);
-
-    return new Proxy(this, DomNamedNodeMap.indexHandler);
-  }
-
   get length(): number {
     return this.native.length;
   }
@@ -109,13 +83,15 @@ export class DomNamedNodeMap
     qualifiedName: string
   ): E.Either<NotFoundErrorDomException, DomAttr> {
     return pipe(
-      E.tryCatch(
-        () => this.native.removeNamedItem(qualifiedName),
+      tuple(qualifiedName),
+      E.tryCatchK(
+        tupled(this.native.removeNamedItem),
         /* eslint-disable-next-line
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as NotFoundErrorDomException
-      )
+      ),
+      E.map((attr) => new DomAttr(attr))
     );
   }
   removeNamedItemNS(
@@ -123,14 +99,15 @@ export class DomNamedNodeMap
     localName: string
   ): E.Either<NotFoundErrorDomException, DomAttr> {
     return pipe(
-      [namespace, localName] as const,
+      tuple(namespace, localName),
       E.tryCatchK(
-        (params) => this.native.removeNamedItemNS(...params),
+        tupled(this.native.removeNamedItemNS),
         /* eslint-disable-next-line
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
         (error) => error as NotFoundErrorDomException
-      )
+      ),
+      E.map((attr) => new DomAttr(attr))
     );
   }
 }

@@ -6,13 +6,14 @@ import type {
   NotSupportedErrorDomException,
   SyntaxErrorDomException,
 } from "@/exceptions/DomException.mjs";
+import { getNative } from "@/helpers/getNative.mjs";
 import type { DDomShadowRootInit } from "@/specs/dom/dictionaries/DDomShadowRootInit.mjs";
 import type { IDomAttr } from "@/specs/dom/interfaces/IDomAttr.mjs";
 import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
 import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
-import { pipe } from "fp-ts/function";
+import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import { HtmlHTMLSlotElement } from "../html/HtmlHTMLSlotElement.mjs";
 import { DomAttr } from "./DomAttr.mjs";
@@ -75,18 +76,9 @@ export abstract class DomElementBase<N extends Element>
   hasAttributes(): boolean {
     return this.native.hasAttributes();
   }
-  private attributesInternal: O.Option<DomNamedNodeMap> = O.none;
+
   get attributes(): DomNamedNodeMap {
-    return pipe(
-      this.attributesInternal,
-      O.getOrElse(() => {
-        const attributes = new DomNamedNodeMap(this.native.attributes);
-
-        this.attributesInternal = O.some(attributes);
-
-        return attributes;
-      })
-    );
+    return new DomNamedNodeMap(this.native.attributes);
   }
   getAttributeNames(): string[] {
     return this.native.getAttributeNames();
@@ -186,31 +178,35 @@ export abstract class DomElementBase<N extends Element>
     localName: string
   ): O.Option<DomAttr> {
     return pipe(
-      [namespace, localName] as const,
-      O.fromNullableK((params) => this.native.getAttributeNodeNS(...params))
-    );
-  }
-  setAttributeNode(attr: Attr | IDomAttr<Attr>): O.Option<IDomAttr<Attr>> {
-    return pipe(
-      attr instanceof Attr ? attr : attr.getNative(),
-      O.fromNullableK((attr) => this.setAttributeNode(attr)),
+      tuple(namespace, localName),
+      tupled(this.native.getAttributeNodeNS),
+      O.fromNullable,
       O.map((attr) => new DomAttr(attr))
     );
   }
-  setAttributeNodeNS(attr: Attr | IDomAttr<Attr>): O.Option<IDomAttr<Attr>> {
+  setAttributeNode(attr: Attr | IDomAttr<Attr>): O.Option<DomAttr> {
     return pipe(
-      attr instanceof Attr ? attr : attr.getNative(),
-      O.fromNullableK((attr) => this.setAttributeNodeNS(attr)),
+      tuple(getNative(attr)),
+      tupled(this.native.setAttributeNode),
+      O.fromNullable,
+      O.map((attr) => new DomAttr(attr))
+    );
+  }
+  setAttributeNodeNS(attr: Attr | IDomAttr<Attr>): O.Option<DomAttr> {
+    return pipe(
+      tuple(getNative(attr)),
+      tupled(this.native.setAttributeNode),
+      O.fromNullable,
       O.map((attr) => new DomAttr(attr))
     );
   }
   removeAttributeNode(
     attr: Attr | IDomAttr<Attr>
-  ): E.Either<NotFoundErrorDomException, IDomAttr<Attr>> {
+  ): E.Either<NotFoundErrorDomException, DomAttr> {
     return pipe(
-      attr instanceof Attr ? attr : attr.getNative(),
+      tuple(getNative(attr)),
       E.tryCatchK(
-        (attr) => this.native.removeAttributeNode(attr),
+        tupled(this.native.removeAttributeNode),
         /* eslint-disable-next-line
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
@@ -224,8 +220,9 @@ export abstract class DomElementBase<N extends Element>
     init: DDomShadowRootInit
   ): E.Either<NotSupportedErrorDomException, DomShadowRoot> {
     return pipe(
-      E.tryCatch(
-        () => this.native.attachShadow(init),
+      tuple(init),
+      E.tryCatchK(
+        tupled(this.native.attachShadow),
         /* eslint-disable-next-line
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */
@@ -331,7 +328,7 @@ export abstract class DomElementBase<N extends Element>
           : node.getNative()
       ),
       E.tryCatchK(
-        (params) => this.native.prepend(...params),
+        tupled(this.native.prepend),
         /* eslint-disable-next-line
             @typescript-eslint/consistent-type-assertions
         -- According to the spec, this is the only possible error. */

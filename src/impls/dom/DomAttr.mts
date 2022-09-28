@@ -1,7 +1,7 @@
 import type { IDomAttr } from "@/specs/dom/interfaces/IDomAttr.mjs";
-import { pipe } from "fp-ts/function";
+//import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { DomElement } from "./DomElement.mjs";
+//import { DomElement } from "./DomElement.mjs";
 import { DomNodeBase } from "./DomNodeBase.mjs";
 
 export class DomAttr extends DomNodeBase<Attr> implements IDomAttr<Attr> {
@@ -23,11 +23,12 @@ export class DomAttr extends DomNodeBase<Attr> implements IDomAttr<Attr> {
   set value(value: string) {
     this.native.value = value;
   }
-
+  /*
   get ownerElement(): O.Option<DomElement> {
     return pipe(
       O.fromNullable(this.native.ownerElement),
       O.map((element) => new DomElement(element))
     );
   }
+  */
 }

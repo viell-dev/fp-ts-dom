@@ -2,9 +2,12 @@ import type { EDomShadowRootMode } from "@/specs/dom/enums/EDomShadowRootMode.mj
 import type { EDomSlotAssignmentMode } from "@/specs/dom/enums/EDomSlotAssignmentMode.mjs";
 import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
 import type { IDomShadowRoot } from "@/specs/dom/interfaces/IDomShadowRoot.mjs";
-import type { CBHtmlEventHandler } from "@/specs/html/callbacks/CBHtmlEventHandler.mjs";
+import type { THtmlEventHandler } from "@/specs/html/types/THtmlEventHandler.mjs";
+import * as A from "fp-ts/Array";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import { CssomCSSStyleSheet } from "../cssom/CssomCSSStyleSheet.mjs";
+import { CssomStyleSheetList } from "../cssom/CssomStyleSheetList.mjs";
 import { DomDocumentFragmentBase } from "./DomDocumentFragmentBase.mjs";
 import { DomElement } from "./DomElement.mjs";
 import { DomEvent } from "./DomEvent.mjs";
@@ -25,7 +28,7 @@ export class DomShadowRoot
   get host(): DomElement {
     return new DomElement(this.native.host);
   }
-  get onslotchange(): CBHtmlEventHandler {
+  get onslotchange(): THtmlEventHandler {
     return pipe(
       O.fromNullable(this.native.onslotchange),
       O.map(
@@ -35,7 +38,7 @@ export class DomShadowRoot
       O.toNullable
     );
   }
-  set onslotchange(callback: CBHtmlEventHandler) {
+  set onslotchange(callback: THtmlEventHandler) {
     this.native.onslotchange = pipe(
       O.fromNullable(callback),
       O.map(
@@ -51,6 +54,16 @@ export class DomShadowRoot
     return pipe(
       O.fromNullable(this.native.activeElement),
       O.map((element) => new DomElement(element))
+    );
+  }
+
+  get styleSheets(): CssomStyleSheetList {
+    return new CssomStyleSheetList(this.native.styleSheets);
+  }
+  get adoptedStyleSheets(): CssomCSSStyleSheet[] {
+    return pipe(
+      this.native.adoptedStyleSheets,
+      A.map((styleSheet) => new CssomCSSStyleSheet(styleSheet))
     );
   }
 }

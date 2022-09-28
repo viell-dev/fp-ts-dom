@@ -5,6 +5,6 @@ import type { IHtmlTextTrackCue } from "./IHtmlTextTrackCue.mjs";
 export interface IHtmlTextTrackCueList<N extends TextTrackCueList>
   extends IWrapper<N> {
   readonly length: number;
-  [index: number]: IHtmlTextTrackCue<TextTrackCue>;
+  //[index: number]: IHtmlTextTrackCue<TextTrackCue>;
   getCueById(id: string): O.Option<IHtmlTextTrackCue<TextTrackCue>>;
 }

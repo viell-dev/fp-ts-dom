@@ -6,7 +6,7 @@ import type { IHtmlTextTrack } from "./IHtmlTextTrack.mjs";
 export interface IHtmlTextTrackList<N extends TextTrackList>
   extends IDomEventTarget<N> {
   readonly length: number;
-  [index: number]: IHtmlTextTrack<TextTrack>;
+  //[index: number]: IHtmlTextTrack<TextTrack>;
   getTrackById(id: string): O.Option<IHtmlTextTrack<TextTrack>>;
 
   onchange: THtmlEventHandler;

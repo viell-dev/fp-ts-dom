@@ -6,21 +6,30 @@ import type {
   SecurityErrorDomException,
 } from "@/exceptions/DomException.mjs";
 import { getNative } from "@/helpers/getNative.mjs";
-import type { NotKeyOf } from "@/helpers/NotKeyOf.mjs";
 import type { ICssomCSSStyleSheet } from "@/specs/cssom/interfaces/ICssomCSSStyleSheet.mjs";
 import type { CBDomNodeFilter } from "@/specs/dom/callbacks/CBDomNodeFilter.mjs";
 import type { CDomNodeFilterWhatToShow } from "@/specs/dom/constants/CDomNodeFilterWhatToShow.mjs";
 import type { DDomElementCreationOptions } from "@/specs/dom/dictionaries/DDomElementCreationOptions.mjs";
 import type { IDomDocument } from "@/specs/dom/interfaces/IDomDocument.mjs";
+import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
 import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import type { EHtmlDocumentReadyState } from "@/specs/html/enums/EHtmlDocumentReadyState.mjs";
+import type { EHtmlDocumentVisibilityState } from "@/specs/html/enums/EHtmlDocumentVisibilityState.mjs";
 import type { IHtmlHTMLElement } from "@/specs/html/interfaces/IHtmlHTMLElement.mjs";
+import type {
+  MissingEventHandler,
+  THtmlEventHandler,
+} from "@/specs/html/types/THtmlEventHandler.mjs";
 import type { THtmlHTMLOrSVGScriptElement } from "@/specs/html/types/THtmlHTMLOrSVGScriptElement.mjs";
+import type { THtmlOnErrorEventHandler } from "@/specs/html/types/THtmlOnErrorEventHandler.mjs";
 import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
 import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import { CssomCSSStyleSheet } from "../cssom/CssomCSSStyleSheet.mjs";
+import { CssomStyleSheetList } from "../cssom/CssomStyleSheetList.mjs";
 import { HtmlLocation } from "../html/HtmlLocation.mjs";
+import { HtmlWindowProxy } from "../html/HtmlWindowProxy.mjs";
 import { DomAttr } from "./DomAttr.mjs";
 import { DomCDATASection } from "./DomCDATASection.mjs";
 import { DomComment } from "./DomComment.mjs";
@@ -28,6 +37,7 @@ import { DomDocumentFragment } from "./DomDocumentFragment.mjs";
 import { DomDocumentType } from "./DomDocumentType.mjs";
 import { DomDOMImplementation } from "./DomDOMImplementation.mjs";
 import { DomElement } from "./DomElement.mjs";
+import { DomEvent } from "./DomEvent.mjs";
 import { DomNode } from "./DomNode.mjs";
 import { DomNodeBase } from "./DomNodeBase.mjs";
 import { DomNodeIterator } from "./DomNodeIterator.mjs";
@@ -35,6 +45,14 @@ import { DomProcessingInstruction } from "./DomProcessingInstruction.mjs";
 import { DomRange } from "./DomRange.mjs";
 import { DomText } from "./DomText.mjs";
 import { DomTreeWalker } from "./DomTreeWalker.mjs";
+
+interface MissingEventHandlers {
+  onbeforeinput: MissingEventHandler;
+  onbeforematch: MissingEventHandler;
+  oncancel: MissingEventHandler;
+  oncontextlost: MissingEventHandler;
+  oncontextrestored: MissingEventHandler;
+}
 
 type CorrectedCreateElement = (
   localName: string,
@@ -372,7 +390,7 @@ export class DomDocument
   get styleSheets(): CssomStyleSheetList {
     return new CssomStyleSheetList(this.native.styleSheets);
   }
-  get adoptedStyleSheets(): CssomCSSStyleSheet {
+  get adoptedStyleSheets(): CssomCSSStyleSheet[] {
     return pipe(
       this.native.adoptedStyleSheets,
       A.map((styleSheet) => new CssomCSSStyleSheet(styleSheet))
@@ -421,7 +439,7 @@ export class DomDocument
           ),
         /* eslint-disable-next-line
           @typescript-eslint/consistent-type-assertions
-      -- According to the spec, this is the only possible error. */
+        -- According to the spec, this is the only possible error. */
         (error) => error as HierarchyRequestErrorDomException
       ),
       O.getLeft
@@ -531,7 +549,6 @@ export class DomDocument
     return this.native.readyState;
   }
 
-  [name: NotKeyOf<DomDocument>]: {};
   get title(): string {
     return this.native.title;
   }
@@ -618,30 +635,83 @@ export class DomDocument
     );
   }
   get currentScript(): O.Option<THtmlHTMLOrSVGScriptElement> {
-    return pipe(O.fromNullable(this.native.currentScript));
+    return pipe(
+      O.fromNullable(this.native.currentScript),
+      O.map((script) =>
+        script instanceof HTMLScriptElement ? E.left(script) : E.right(script)
+      ),
+      O.map(
+        E.match(
+          (script) => new HtmlHTMLScriptElement(script),
+          (script) => new Svg2SVGScriptElement(script)
+        )
+      )
+    );
   }
 
-  open(unused1?: string, unused2?: string): IDomDocument<Document>;
+  open(unused1?: string, unused2?: string): DomDocument;
+  open(url: string, name: string, features: string): O.Option<HtmlWindowProxy>;
   open(
-    url: string,
-    name: string,
-    features: string
-  ): O.Option<IHtmlWindowProxy<WindowProxy>>;
-  close(): void;
-  write(...text: string[]): void;
-  writeln(...text: string[]): void;
+    url?: string,
+    name?: string,
+    features?: string
+  ): DomDocument | O.Option<HtmlWindowProxy> {
+    return pipe(
+      tuple(url, name, features),
+      ([url, name, features]): Document | WindowProxy | null => {
+        if (
+          typeof url === "string" &&
+          typeof name === "string" &&
+          typeof features === "string"
+        ) {
+          return this.native.open(url, name, features);
+        }
 
-  get defaultView(): O.Option<IHtmlWindowProxy<WindowProxy>> {
-    return this.native.defaultView;
+        return this.native.open();
+      },
+      (documentOrWindow) =>
+        documentOrWindow instanceof Document
+          ? E.left(documentOrWindow)
+          : E.right(documentOrWindow),
+      E.map(O.fromNullable),
+      E.match<
+        Document,
+        O.Option<WindowProxy>,
+        DomDocument | O.Option<HtmlWindowProxy>
+      >(
+        (document) => new DomDocument(document),
+        O.map((window) => new HtmlWindowProxy(window))
+      )
+    );
   }
-  hasFocus(): boolean;
-  designMode: string;
-  execCommand(commandId: string, showUI?: boolean, value?: string): boolean;
-  queryCommandEnabled(commandId: string): boolean;
-  queryCommandIndeterm(commandId: string): boolean;
-  queryCommandState(commandId: string): boolean;
-  queryCommandSupported(commandId: string): boolean;
-  queryCommandValue(commandId: string): string;
+  close(): void {
+    this.native.close();
+  }
+  write(...text: string[]): void {
+    this.native.write(...text);
+  }
+  writeln(...text: string[]): void {
+    this.native.writeln(...text);
+  }
+
+  get defaultView(): O.Option<HtmlWindowProxy> {
+    return pipe(
+      this.native.defaultView,
+      O.fromNullable,
+      O.map((window) => new HtmlWindowProxy(window))
+    );
+  }
+  hasFocus(): boolean {
+    return this.native.hasFocus();
+  }
+  get designMode(): "on" | "off" {
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- According to the spec, this can only be the strings "on" or "off". */
+    return this.native.designMode as "on" | "off";
+  }
+  set designMode(designMode: "on" | "off") {
+    this.native.designMode = designMode;
+  }
   get hidden(): boolean {
     return this.native.hidden;
   }
@@ -649,6 +719,1788 @@ export class DomDocument
     return this.native.visibilityState;
   }
 
-  onreadystatechange: THtmlEventHandler;
-  onvisibilitychange: THtmlEventHandler;
+  get onreadystatechange(): THtmlEventHandler {
+    return pipe(
+      this.native.onreadystatechange,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onreadystatechange(onreadystatechange: THtmlEventHandler) {
+    this.native.onreadystatechange = pipe(
+      onreadystatechange,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onvisibilitychange(): THtmlEventHandler {
+    return pipe(
+      this.native.onvisibilitychange,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onvisibilitychange(onvisibilitychange: THtmlEventHandler) {
+    this.native.onvisibilitychange = pipe(
+      onvisibilitychange,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+
+  get onabort(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onabort as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onabort(onabort) {
+    this.native.onabort = pipe(
+      onabort,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onauxclick(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onauxclick as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onauxclick(onauxclick) {
+    this.native.onauxclick = pipe(
+      onauxclick,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onbeforeinput(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- onbeforeinput is missing in the TypeScript types. */
+      (this.native as Document & MissingEventHandlers).onbeforeinput,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onbeforeinput(onbeforeinput) {
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- onbeforeinput is missing in the TypeScript types. */
+    (this.native as Document & MissingEventHandlers).onbeforeinput = pipe(
+      onbeforeinput,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onbeforematch(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- onbeforematch is missing in the TypeScript types. */
+      (this.native as Document & MissingEventHandlers).onbeforematch,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onbeforematch(onbeforematch) {
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- onbeforematch is missing in the TypeScript types. */
+    (this.native as Document & MissingEventHandlers).onbeforematch = pipe(
+      onbeforematch,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onblur(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onblur as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onblur(onblur) {
+    this.native.onblur = pipe(
+      onblur,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get oncancel(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- oncancel is missing in the TypeScript types. */
+      (this.native as Document & MissingEventHandlers).oncancel,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set oncancel(oncancel) {
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- oncancel is missing in the TypeScript types. */
+    (this.native as Document & MissingEventHandlers).oncancel = pipe(
+      oncancel,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get oncanplay(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.oncanplay as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set oncanplay(oncanplay) {
+    this.native.oncanplay = pipe(
+      oncanplay,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get oncanplaythrough(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.oncanplaythrough as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set oncanplaythrough(oncanplaythrough) {
+    this.native.oncanplaythrough = pipe(
+      oncanplaythrough,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onchange(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onchange as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onchange(onchange) {
+    this.native.onchange = pipe(
+      onchange,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onclick(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onclick as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onclick(onclick) {
+    this.native.onclick = pipe(
+      onclick,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onclose(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onclose as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onclose(onclose) {
+    this.native.onclose = pipe(
+      onclose,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get oncontextlost(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- oncontextlost is missing in the TypeScript types. */
+      (this.native as Document & MissingEventHandlers).oncontextlost,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set oncontextlost(oncontextlost) {
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- oncontextlost is missing in the TypeScript types. */
+    (this.native as Document & MissingEventHandlers).oncontextlost = pipe(
+      oncontextlost,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get oncontextmenu(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.oncontextmenu as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set oncontextmenu(oncontextmenu) {
+    this.native.oncontextmenu = pipe(
+      oncontextmenu,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get oncontextrestored(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- oncontextrestored is missing in the TypeScript types. */
+      (this.native as Document & MissingEventHandlers).oncontextrestored,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set oncontextrestored(oncontextrestored) {
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- oncontextrestored is missing in the TypeScript types. */
+    (this.native as Document & MissingEventHandlers).oncontextrestored = pipe(
+      oncontextrestored,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get oncuechange(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.oncuechange as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set oncuechange(oncuechange) {
+    this.native.oncuechange = pipe(
+      oncuechange,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get ondblclick(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.ondblclick as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set ondblclick(ondblclick) {
+    this.native.ondblclick = pipe(
+      ondblclick,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get ondrag(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.ondrag as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set ondrag(ondrag) {
+    this.native.ondrag = pipe(
+      ondrag,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get ondragend(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.ondragend as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set ondragend(ondragend) {
+    this.native.ondragend = pipe(
+      ondragend,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get ondragenter(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.ondragenter as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set ondragenter(ondragenter) {
+    this.native.ondragenter = pipe(
+      ondragenter,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get ondragleave(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.ondragleave as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set ondragleave(ondragleave) {
+    this.native.ondragleave = pipe(
+      ondragleave,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get ondragover(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.ondragover as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set ondragover(ondragover) {
+    this.native.ondragover = pipe(
+      ondragover,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get ondragstart(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.ondragstart as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set ondragstart(ondragstart) {
+    this.native.ondragstart = pipe(
+      ondragstart,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get ondrop(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.ondrop as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set ondrop(ondrop) {
+    this.native.ondrop = pipe(
+      ondrop,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get ondurationchange(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.ondurationchange as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set ondurationchange(ondurationchange) {
+    this.native.ondurationchange = pipe(
+      ondurationchange,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onemptied(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onemptied as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onemptied(onemptied) {
+    this.native.onemptied = pipe(
+      onemptied,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onended(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onended as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onended(onended) {
+    this.native.onended = pipe(
+      onended,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onerror(): THtmlOnErrorEventHandler {
+    return pipe(
+      this.native.onerror,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (
+            event: IDomEvent<Event> | string,
+            source?: string,
+            lineno?: number,
+            colno?: number,
+            error?: Error
+          ) =>
+            /* eslint-disable-next-line @typescript-eslint/no-explicit-any
+            -- Allow any here */
+            callback.bind<Document, any, unknown>(
+              this.getNative(),
+              typeof event === "string" ? event : event.getNative(),
+              source,
+              lineno,
+              colno,
+              error
+            )()
+      ),
+      O.toNullable
+    );
+  }
+  set onerror(onerror) {
+    this.native.onerror = pipe(
+      onerror,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (
+            event: string | Event,
+            source?: string,
+            lineno?: number,
+            colno?: number,
+            error?: Error
+          ): unknown =>
+            callback.call(
+              this,
+              typeof event === "string" ? event : new DomEvent(event),
+              source,
+              lineno,
+              colno,
+              error
+            )
+      ),
+      O.toNullable
+    );
+  }
+  get onfocus(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onfocus as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onfocus(onfocus) {
+    this.native.onfocus = pipe(
+      onfocus,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onformdata(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onformdata as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onformdata(onformdata) {
+    this.native.onformdata = pipe(
+      onformdata,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get oninput(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.oninput as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set oninput(oninput) {
+    this.native.oninput = pipe(
+      oninput,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get oninvalid(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.oninvalid as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set oninvalid(oninvalid) {
+    this.native.oninvalid = pipe(
+      oninvalid,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onkeydown(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onkeydown as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onkeydown(onkeydown) {
+    this.native.onkeydown = pipe(
+      onkeydown,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onkeyup(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onkeyup as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onkeyup(onkeyup) {
+    this.native.onkeyup = pipe(
+      onkeyup,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onload(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onload as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onload(onload) {
+    this.native.onload = pipe(
+      onload,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onloadeddata(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onloadeddata as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onloadeddata(onloadeddata) {
+    this.native.onloadeddata = pipe(
+      onloadeddata,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onloadedmetadata(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onloadedmetadata as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onloadedmetadata(onloadedmetadata) {
+    this.native.onloadedmetadata = pipe(
+      onloadedmetadata,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onloadstart(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onloadstart as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onloadstart(onloadstart) {
+    this.native.onloadstart = pipe(
+      onloadstart,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onmousedown(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onmousedown as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onmousedown(onmousedown) {
+    this.native.onmousedown = pipe(
+      onmousedown,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onmouseenter(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onmouseenter as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onmouseenter(onmouseenter) {
+    this.native.onmouseenter = pipe(
+      onmouseenter,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onmouseleave(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onmouseleave as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onmouseleave(onmouseleave) {
+    this.native.onmouseleave = pipe(
+      onmouseleave,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onmousemove(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onmousemove as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onmousemove(onmousemove) {
+    this.native.onmousemove = pipe(
+      onmousemove,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onmouseout(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onmouseout as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onmouseout(onmouseout) {
+    this.native.onmouseout = pipe(
+      onmouseout,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onmouseover(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onmouseover as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onmouseover(onmouseover) {
+    this.native.onmouseover = pipe(
+      onmouseover,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onmouseup(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onmouseup as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onmouseup(onmouseup) {
+    this.native.onmouseup = pipe(
+      onmouseup,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onpause(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onpause as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onpause(onpause) {
+    this.native.onpause = pipe(
+      onpause,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onplay(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onplay as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onplay(onplay) {
+    this.native.onplay = pipe(
+      onplay,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onplaying(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onplaying as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onplaying(onplaying) {
+    this.native.onplaying = pipe(
+      onplaying,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onprogress(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onprogress as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onprogress(onprogress) {
+    this.native.onprogress = pipe(
+      onprogress,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onratechange(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onratechange as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onratechange(onratechange) {
+    this.native.onratechange = pipe(
+      onratechange,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onreset(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onreset as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onreset(onreset) {
+    this.native.onreset = pipe(
+      onreset,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onresize(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onresize as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onresize(onresize) {
+    this.native.onresize = pipe(
+      onresize,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onscroll(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onscroll as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onscroll(onscroll) {
+    this.native.onscroll = pipe(
+      onscroll,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onsecuritypolicyviolation(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onsecuritypolicyviolation as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onsecuritypolicyviolation(onsecuritypolicyviolation) {
+    this.native.onsecuritypolicyviolation = pipe(
+      onsecuritypolicyviolation,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onseeked(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onseeked as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onseeked(onseeked) {
+    this.native.onseeked = pipe(
+      onseeked,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onseeking(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onseeking as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onseeking(onseeking) {
+    this.native.onseeking = pipe(
+      onseeking,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onselect(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onselect as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onselect(onselect) {
+    this.native.onselect = pipe(
+      onselect,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onslotchange(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onslotchange as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onslotchange(onslotchange) {
+    this.native.onslotchange = pipe(
+      onslotchange,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onstalled(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onstalled as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onstalled(onstalled) {
+    this.native.onstalled = pipe(
+      onstalled,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onsubmit(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onsubmit as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onsubmit(onsubmit) {
+    this.native.onsubmit = pipe(
+      onsubmit,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onsuspend(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onsuspend as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onsuspend(onsuspend) {
+    this.native.onsuspend = pipe(
+      onsuspend,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get ontimeupdate(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.ontimeupdate as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set ontimeupdate(ontimeupdate) {
+    this.native.ontimeupdate = pipe(
+      ontimeupdate,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get ontoggle(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.ontoggle as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set ontoggle(ontoggle) {
+    this.native.ontoggle = pipe(
+      ontoggle,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onvolumechange(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onvolumechange as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onvolumechange(onvolumechange) {
+    this.native.onvolumechange = pipe(
+      onvolumechange,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onwaiting(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onwaiting as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onwaiting(onwaiting) {
+    this.native.onwaiting = pipe(
+      onwaiting,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onwheel(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onwheel as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onwheel(onwheel) {
+    this.native.onwheel = pipe(
+      onwheel,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get oncopy(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.oncopy as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set oncopy(oncopy: THtmlEventHandler) {
+    this.native.oncopy = pipe(
+      oncopy,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get oncut(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.oncut as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set oncut(oncut: THtmlEventHandler) {
+    this.native.oncut = pipe(
+      oncut,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
+  get onpaste(): THtmlEventHandler {
+    return pipe(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- Widening to Event. */
+      this.native.onpaste as MissingEventHandler,
+      O.fromNullable,
+      O.map(
+        (callback) => (event: IDomEvent<Event>) =>
+          callback.bind(this.getNative(), event.getNative())()
+      ),
+      O.toNullable
+    );
+  }
+  set onpaste(onpaste: THtmlEventHandler) {
+    this.native.onpaste = pipe(
+      onpaste,
+      O.fromNullable,
+      O.map(
+        (callback) =>
+          (event: Event): unknown =>
+            callback.call(this, new DomEvent(event))
+      ),
+      O.toNullable
+    );
+  }
 }

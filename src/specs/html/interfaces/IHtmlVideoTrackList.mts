@@ -20,7 +20,7 @@ export interface MissingVideoTrackList extends EventTarget {
 export interface IHtmlVideoTrackList<N extends MissingVideoTrackList>
   extends IDomEventTarget<N> {
   readonly length: number;
-  [index: number]: IHtmlVideoTrack<MissingVideoTrack>;
+  //[index: number]: IHtmlVideoTrack<MissingVideoTrack>;
   getTrackById(id: string): O.Option<IHtmlVideoTrack<MissingVideoTrack>>;
   readonly selectedIndex: number;
 

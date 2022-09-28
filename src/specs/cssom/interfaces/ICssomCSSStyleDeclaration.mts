@@ -1,6 +1,5 @@
 import type { NoModificationAllowedErrorDomException } from "@/exceptions/DomException.mjs";
 import type { IWrapper } from "@/globals/IWrapper.mjs";
-import type { NotKeyOf } from "@/helpers/NotKeyOf.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
 
@@ -17,7 +16,7 @@ export interface ICssomCSSStyleDeclaration<N extends CSSStyleDeclaration>
   setCssText(cssText: string): O.Option<NoModificationAllowedErrorDomException>;
   readonly length: number;
   item(index: number): O.Option<string>;
-  [index: number]: string;
+  //[index: number]: string;
   getPropertyValue(property: string): string;
   getPropertyPriority(property: string): string;
   setProperty(
@@ -48,5 +47,5 @@ export interface ICssomCSSStyleDeclaration<N extends CSSStyleDeclaration>
    * When setting, if the computed flag is set, then throw a
    * "NoModificationAllowedError" DOMException.
    */
-  [property: NotKeyOf<ICssomCSSStyleDeclaration<N>>]: string;
+  //[property: NotKeyOf<ICssomCSSStyleDeclaration<N>>]: string;
 }

@@ -19,7 +19,7 @@ export interface MissingAudioTrackList extends EventTarget {
 export interface IHtmlAudioTrackList<N extends MissingAudioTrackList>
   extends IDomEventTarget<N> {
   readonly length: number;
-  [index: number]: IHtmlAudioTrack<MissingAudioTrack>;
+  //[index: number]: IHtmlAudioTrack<MissingAudioTrack>;
   getTrackById(id: string): O.Option<IHtmlAudioTrack<MissingAudioTrack>>;
 
   onchange: THtmlEventHandler;

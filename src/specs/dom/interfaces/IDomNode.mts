@@ -1,12 +1,12 @@
 import type { NotSupportedErrorDomException } from "@/exceptions/DomException.mjs";
+import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
 import type { CDomNodeNodeDocumentPosition } from "../constants/CDomNodeNodeDocumentPosition.mjs";
 import type { CDomNodeNodeType } from "../constants/CDomNodeNodeType.mjs";
 import type { DDomGetRootNodeOptions } from "../dictionaries/DDomGetRootNodeOptions.mjs";
-import type { IDomDocument } from "./IDomDocument.mjs";
-import type { IDomElement } from "./IDomElement.mjs";
-import type { IDomEventTarget } from "./IDomEventTarget.mjs";
+/* import type { IDomDocument } from "./IDomDocument.mjs";
+   import type { IDomElement } from "./IDomElement.mjs"; */
 
 export interface IDomNodeConstants {
   // Node Types:
@@ -29,7 +29,7 @@ export interface IDomNodeConstants {
   readonly DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: typeof CDomNodeNodeDocumentPosition.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
 }
 
-export interface IDomNode<N extends Node> extends IDomEventTarget<N> {
+export interface IDomNode<N extends Node> extends IWrapper<N> {
   // Node type class constants are declared in the interface above.
   readonly nodeType: CDomNodeNodeType;
   readonly nodeName: string;
@@ -37,10 +37,10 @@ export interface IDomNode<N extends Node> extends IDomEventTarget<N> {
   readonly baseURI: string;
 
   readonly isConnected: boolean;
-  readonly ownerDocument: O.Option<IDomDocument<Document>>;
+  //readonly ownerDocument: O.Option<IDomDocument<Document>>;
   getRootNode(options?: DDomGetRootNodeOptions): IDomNode<Node>;
   parentNode: O.Option<IDomNode<Node>>;
-  parentElement: O.Option<IDomElement<Element>>;
+  //parentElement: O.Option<IDomElement<Element>>;
   hasChildNodes(): boolean;
   childNodes: IDomNode<Node>[];
   firstChild: O.Option<IDomNode<Node>>;

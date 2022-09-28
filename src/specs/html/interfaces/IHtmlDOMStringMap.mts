@@ -19,7 +19,7 @@ export interface IHtmlDOMStringMap<N extends DOMStringMap> extends IWrapper<N> {
    * not match the XML Name production, throw an "InvalidCharacterError"
    * DOMException
    */
-  [name: NotKeyOf<IHtmlDOMStringMap<N>>]: string;
+  //[name: NotKeyOf<IHtmlDOMStringMap<N>>]: string;
   setName(
     name: NotKeyOf<IHtmlDOMStringMap<N>>,
     value: string

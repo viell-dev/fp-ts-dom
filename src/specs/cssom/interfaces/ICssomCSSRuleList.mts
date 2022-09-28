@@ -4,6 +4,6 @@ import type { ICssomCSSRule } from "./ICssomCSSRule.mjs";
 
 export interface ICssomCSSRuleList<N extends CSSRuleList> extends IWrapper<N> {
   item(index: number): O.Option<ICssomCSSRule<CSSRule>>;
-  [index: number]: ICssomCSSRule<CSSRule>;
+  //[index: number]: ICssomCSSRule<CSSRule>;
   readonly length: number;
 }

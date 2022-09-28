@@ -1,6 +1,5 @@
 import type { SyntaxErrorDomException } from "@/exceptions/DomException.mjs";
 import type { IWrapper } from "@/globals/IWrapper.mjs";
-import type { NotKeyOf } from "@/helpers/NotKeyOf.mjs";
 import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
@@ -43,7 +42,7 @@ export interface IHtmlWindow<N extends Window>
   readonly frames: IHtmlWindowProxy<WindowProxy>;
   readonly length: number;
   /** @throws "SecurityError" DOMException */
-  [index: number]: IHtmlWindow<Window>;
+  //[index: number]: IHtmlWindow<Window>;
   readonly top: O.Option<IHtmlWindowProxy<WindowProxy>>;
   opener: unknown;
   readonly parent: O.Option<IHtmlWindowProxy<WindowProxy>>;
@@ -53,7 +52,7 @@ export interface IHtmlWindow<N extends Window>
     target?: string,
     features?: string
   ): E.Either<SyntaxErrorDomException, O.Option<IHtmlWindowProxy<WindowProxy>>>;
-  [name: NotKeyOf<IHtmlWindow<N>>]: {};
+  //[name: NotKeyOf<IHtmlWindow<N>>]: {};
 
   // the user agent
   readonly navigator: IHtmlNavigator<Navigator>;

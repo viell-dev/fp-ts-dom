@@ -12,8 +12,8 @@ import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import { DomDocument } from "./DomDocument.mjs";
-import { DomElement } from "./DomElement.mjs";
+/* import { DomDocument } from "./DomDocument.mjs";
+   import { DomElement } from "./DomElement.mjs"; */
 import { DomEventTargetBase } from "./DomEventTargetBase.mjs";
 import { DomNode } from "./DomNode.mjs";
 
@@ -53,12 +53,12 @@ export class DomNodeBase<N extends Node>
   get isConnected(): boolean {
     return this.native.isConnected;
   }
-  get ownerDocument(): O.Option<DomDocument> {
+  /* get ownerDocument(): O.Option<DomDocument> {
     return pipe(
       O.fromNullable(this.native.ownerDocument),
       O.map((document) => new DomDocument(document))
     );
-  }
+  } */
   getRootNode(options?: DDomGetRootNodeOptions): DomNode {
     return pipe(this.native.getRootNode(options), (node) => new DomNode(node));
   }
@@ -68,12 +68,12 @@ export class DomNodeBase<N extends Node>
       O.map((node) => new DomNode(node))
     );
   }
-  get parentElement(): O.Option<DomElement> {
+  /*get parentElement(): O.Option<DomElement> {
     return pipe(
       O.fromNullable(this.native.parentElement),
       O.map((element) => new DomElement(element))
     );
-  }
+  }*/
   hasChildNodes(): boolean {
     return this.native.hasChildNodes();
   }

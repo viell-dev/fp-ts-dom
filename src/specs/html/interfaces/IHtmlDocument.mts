@@ -33,8 +33,8 @@ export interface IHtmlDocument<N extends Document>
   readonly lastModified: string;
   readonly readyState: EHtmlDocumentReadyState;
 
-  // DOM tree accessors
-  [name: string extends keyof IHtmlDocument<N> ? never : string]: {};
+  /*  DOM tree accessors
+     [name: string extends keyof IHtmlDocument<N> ? never : string]: {}; */
   title: string;
   dir: string;
   readonly body: O.Option<IHtmlHTMLElement<HTMLElement>>;
@@ -65,13 +65,7 @@ export interface IHtmlDocument<N extends Document>
   // user interaction
   readonly defaultView: O.Option<IHtmlWindowProxy<WindowProxy>>;
   hasFocus(): boolean;
-  designMode: string;
-  execCommand(commandId: string, showUI?: boolean, value?: string): boolean;
-  queryCommandEnabled(commandId: string): boolean;
-  queryCommandIndeterm(commandId: string): boolean;
-  queryCommandState(commandId: string): boolean;
-  queryCommandSupported(commandId: string): boolean;
-  queryCommandValue(commandId: string): string;
+  designMode: "on" | "off";
   readonly hidden: boolean;
   readonly visibilityState: EHtmlDocumentVisibilityState;
 

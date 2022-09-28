@@ -5,7 +5,7 @@ import type { IHtmlDataTransferItem } from "./IHtmlDataTransferItem.mjs";
 export interface IHtmlDataTransferItemList<N extends DataTransferItemList>
   extends IWrapper<N> {
   readonly length: number;
-  [index: number]: IHtmlDataTransferItem<DataTransferItem>;
+  //[index: number]: IHtmlDataTransferItem<DataTransferItem>;
   add(
     data: string,
     type: string

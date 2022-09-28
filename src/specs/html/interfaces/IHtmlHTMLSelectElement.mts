@@ -28,7 +28,7 @@ export interface IHtmlHTMLButtonElement<N extends HTMLButtonElement>
   readonly options: IHtmlHTMLOptionElement<HTMLOptionElement>[];
   length: number;
   item(index: number): O.Option<IHtmlHTMLOptionElement<HTMLOptionElement>>;
-  [index: number]: IHtmlHTMLOptionElement<HTMLOptionElement>;
+  //[index: number]: IHtmlHTMLOptionElement<HTMLOptionElement>;
   namedItem(name: string): O.Option<IHtmlHTMLOptionElement<HTMLOptionElement>>;
   /**
    * @throws

@@ -1,7 +1,5 @@
 import type { NotFoundErrorDomException } from "@/exceptions/DomException.mjs";
-import type { NotKeyOf } from "@/helpers/NotKeyOf.mjs";
 import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
-import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import type * as O from "fp-ts/Option";
 import type {
   IHtmlHTMLElement,
@@ -25,10 +23,8 @@ export interface IHtmlHTMLFormElement<N extends HTMLFormElement>
 
   readonly elements: IDomElement<Element>[];
   readonly length: number;
-  [index: number]: IDomElement<Element>;
-  [name: NotKeyOf<IHtmlHTMLFormElement<N>>]:
-    | IDomNode<Node>[]
-    | IDomElement<Element>;
+  /* [index: number]: IDomElement<Element>;
+     [name: NotKeyOf<IHtmlHTMLFormElement<N>>]: IDomNode<Node>[] | IDomElement<Element>; */
 
   submit(): void;
   requestSubmit(

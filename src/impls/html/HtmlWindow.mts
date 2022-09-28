@@ -1,6 +1,5 @@
 import type { SyntaxErrorDomException } from "@/exceptions/DomException.mjs";
 import { getNative } from "@/helpers/getNative.mjs";
-import type { NotKeyOf } from "@/helpers/NotKeyOf.mjs";
 import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
 import type { DHtmlWindowPostMessageOptions } from "@/specs/html/dictionaries/DHtmlWindowPostMessageOptions.mjs";
 import type { MissingOffscreenCanvas } from "@/specs/html/interfaces/IHtmlOffscreenCanvas.mjs";
@@ -102,8 +101,6 @@ export class HtmlWindow
   get length(): number {
     return this.native.length;
   }
-  /** @throws "SecurityError" DOMException */
-  [index: number]: HtmlWindow;
   get top(): O.Option<HtmlWindowProxy> {
     return pipe(
       this.native.top,
@@ -148,7 +145,6 @@ export class HtmlWindow
       )
     );
   }
-  [name: NotKeyOf<HtmlWindow>]: {};
 
   get navigator(): HtmlNavigator {
     return new HtmlNavigator(this.native.navigator);
