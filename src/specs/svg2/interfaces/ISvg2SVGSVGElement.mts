@@ -1,5 +1,5 @@
 import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
-import type { IDomNodeList } from "@/specs/dom/interfaces/IDomNodeList.mjs";
+import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import type { IGeometryDOMMatrix } from "@/specs/geometry/interfaces/IGeometryDOMMatrix.mjs";
 import type { IGeometryDOMPoint } from "@/specs/geometry/interfaces/IGeometryDOMPoint.mjs";
 import type { IGeometryDOMPointReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMPointReadOnly.mjs";
@@ -37,11 +37,11 @@ export interface ISvg2SVGSVGElement<N extends SVGSVGElement>
   getIntersectionList(
     rect: DOMRectReadOnly | IGeometryDOMRectReadOnly<DOMRectReadOnly>,
     referenceElement: SVGElement | ISvg2SVGElement<SVGElement> | null
-  ): IDomNodeList<NodeList>;
+  ): IDomNode<Node>[];
   getEnclosureList(
     rect: DOMRectReadOnly | IGeometryDOMRectReadOnly<DOMRectReadOnly>,
     referenceElement: SVGElement | ISvg2SVGElement<SVGElement> | null
-  ): IDomNodeList<NodeList>;
+  ): IDomNode<Node>[];
   checkIntersection(
     element: SVGElement | ISvg2SVGElement<SVGElement>,
     rect: DOMRectReadOnly | IGeometryDOMRectReadOnly<DOMRectReadOnly>

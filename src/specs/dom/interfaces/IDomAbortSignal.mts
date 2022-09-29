@@ -3,7 +3,7 @@ import type {
   TimeoutErrorDomException,
 } from "@/exceptions/DomException.mjs";
 import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
-import type { CBHtmlEventHandler } from "@/specs/html/callbacks/CBHtmlEventHandler.mjs";
+import type { THtmlEventHandler } from "@/specs/html/types/THtmlEventHandler.mjs";
 import type { IDomEventTarget } from "./IDomEventTarget.mjs";
 
 /** @sealed */
@@ -31,5 +31,5 @@ export interface IDomAbortSignal<N extends AbortSignal, R>
    */
   throwIfAborted(): void;
 
-  onabort: CBHtmlEventHandler;
+  onabort: THtmlEventHandler;
 }

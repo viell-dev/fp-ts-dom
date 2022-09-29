@@ -1,4 +1,4 @@
-import type { CBHtmlEventHandler } from "@/specs/html/callbacks/CBHtmlEventHandler.mjs";
+import type { THtmlEventHandler } from "@/specs/html/types/THtmlEventHandler.mjs";
 import type { EDomShadowRootMode } from "../enums/EDomShadowRootMode.mjs";
 import type { EDomSlotAssignmentMode } from "../enums/EDomSlotAssignmentMode.mjs";
 import type { MDomDocumentOrShadowRoot } from "../mixins/MDomDocumentOrShadowRoot.mjs";
@@ -12,5 +12,5 @@ export interface IDomShadowRoot<N extends ShadowRoot>
   readonly delegatesFocus: boolean;
   readonly slotAssignment: EDomSlotAssignmentMode;
   readonly host: IDomElement<Element>;
-  onslotchange: CBHtmlEventHandler;
+  onslotchange: THtmlEventHandler;
 }

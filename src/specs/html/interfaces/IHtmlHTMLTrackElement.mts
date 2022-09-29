@@ -1,9 +1,9 @@
 import type { CHtmlHTMLTrackElementReadyState } from "../constants/CHtmlHTMLTrackElementReadyState.mjs";
-import type { IHtmlTextTrack } from "../IHtmlTextTrack.mjs";
 import type {
   IHtmlHTMLElement,
   IHtmlHTMLElementConstructorsBase,
 } from "./IHtmlHTMLElement.mjs";
+import type { IHtmlTextTrack } from "./IHtmlTextTrack.mjs";
 
 export type IHtmlHTMLTrackElementConstructors =
   IHtmlHTMLElementConstructorsBase<HTMLTrackElement>;
