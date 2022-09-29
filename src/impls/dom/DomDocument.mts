@@ -1,3 +1,4 @@
+import { StaticImplements } from "@/decorators/StaticImplements.mjs";
 import type {
   HierarchyRequestErrorDomException,
   InvalidCharacterErrorDomException,
@@ -10,7 +11,10 @@ import type { ICssomCSSStyleSheet } from "@/specs/cssom/interfaces/ICssomCSSStyl
 import type { CBDomNodeFilter } from "@/specs/dom/callbacks/CBDomNodeFilter.mjs";
 import type { CDomNodeFilterWhatToShow } from "@/specs/dom/constants/CDomNodeFilterWhatToShow.mjs";
 import type { DDomElementCreationOptions } from "@/specs/dom/dictionaries/DDomElementCreationOptions.mjs";
-import type { IDomDocument } from "@/specs/dom/interfaces/IDomDocument.mjs";
+import type {
+  IDomDocument,
+  IDomDocumentConstructors,
+} from "@/specs/dom/interfaces/IDomDocument.mjs";
 import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
 import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import type { EHtmlDocumentReadyState } from "@/specs/html/enums/EHtmlDocumentReadyState.mjs";
@@ -63,12 +67,11 @@ type CorrectedCreateElement = (
   options?: string | ElementCreationOptions
 ) => Element;
 
-// @StaticImplements<IDomDocumentConstructors>()
+@StaticImplements<IDomDocumentConstructors>()
 export class DomDocument
   extends DomNodeBase<Document>
   implements IDomDocument<Document>
 {
-  /*
   constructor();
   constructor(document: Document);
   constructor(document?: Document) {
@@ -77,7 +80,6 @@ export class DomDocument
 
     super(nativeDocument);
   }
-  */
 
   private implementationInternal: O.Option<DomDOMImplementation> = O.none;
   get implementation(): DomDOMImplementation {

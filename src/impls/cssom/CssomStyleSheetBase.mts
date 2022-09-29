@@ -2,8 +2,8 @@ import { Wrapper } from "@/globals/Wrapper.mjs";
 import type { ICssomStyleSheet } from "@/specs/cssom/interfaces/ICssomStyleSheet.mjs";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-/*import { DomElement } from "../dom/DomElement.mjs";
-import { DomProcessingInstruction } from "../dom/DomProcessingInstruction.mjs";*/
+import { DomElement } from "../dom/DomElement.mjs";
+import { DomProcessingInstruction } from "../dom/DomProcessingInstruction.mjs";
 import { CssomCSSStyleSheet } from "./CssomCSSStyleSheet.mjs";
 import { CssomMediaList } from "./CssomMediaList.mjs";
 
@@ -19,7 +19,7 @@ export abstract class CssomStyleSheetBase<N extends StyleSheet>
     return O.fromNullable(this.native.href);
   }
 
-  /*get ownerNode(): O.Option<DomElement | DomProcessingInstruction> {
+  get ownerNode(): O.Option<DomElement | DomProcessingInstruction> {
     return pipe(
       O.fromNullable(this.native.ownerNode),
       O.map((node) =>
@@ -28,7 +28,7 @@ export abstract class CssomStyleSheetBase<N extends StyleSheet>
           : new DomProcessingInstruction(node)
       )
     );
-  }*/
+  }
 
   get parentStyleSheet(): O.Option<CssomCSSStyleSheet> {
     return pipe(

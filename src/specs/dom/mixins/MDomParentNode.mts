@@ -1,12 +1,12 @@
 import type { HierarchyRequestErrorDomException } from "@/exceptions/DomException.mjs";
 import type * as O from "fp-ts/Option";
-//import type { IDomElement } from "../interfaces/IDomElement.mjs";
+import type { IDomElement } from "../interfaces/IDomElement.mjs";
 import type { IDomNode } from "../interfaces/IDomNode.mjs";
 
 export interface MDomParentNode {
-  /*readonly children: IDomElement<Element>[];
+  readonly children: IDomElement<Element>[];
   readonly firstElementChild: O.Option<IDomElement<Element>>;
-  readonly lastElementChild: O.Option<IDomElement<Element>>;*/
+  readonly lastElementChild: O.Option<IDomElement<Element>>;
   readonly childElementCount: number;
 
   prepend(

@@ -9,7 +9,7 @@ import * as E from "fp-ts/Either";
 import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import { DomNode } from "../dom/DomNode.mjs";
-//import { DomShadowRoot } from "../dom/DomShadowRoot.mjs";
+import { DomShadowRoot } from "../dom/DomShadowRoot.mjs";
 import { HtmlHTMLFormElement } from "./HtmlHTMLFormElement.mjs";
 import { HtmlValidityState } from "./HtmlValidityState.mjs";
 
@@ -17,13 +17,13 @@ export class HtmlElementInternals
   extends Wrapper<ElementInternals>
   implements IHtmlElementInternals<ElementInternals>
 {
-  /*get shadowRoot(): O.Option<DomShadowRoot> {
+  get shadowRoot(): O.Option<DomShadowRoot> {
     return pipe(
       this.native.shadowRoot,
       O.fromNullable,
       O.map((shadowRoot) => new DomShadowRoot(shadowRoot))
     );
-  }*/
+  }
 
   setFormValue(
     value: File | string | FormData | null,

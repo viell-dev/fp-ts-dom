@@ -2,26 +2,26 @@ import type {
   InvalidCharacterErrorDomException,
   NamespaceErrorDomException,
   NotFoundErrorDomException,
-  /*NotSupportedErrorDomException,*/
+  NotSupportedErrorDomException,
   SyntaxErrorDomException,
 } from "@/exceptions/DomException.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
-//import type { DDomShadowRootInit } from "../dictionaries/DDomShadowRootInit.mjs";
+import type { DDomShadowRootInit } from "../dictionaries/DDomShadowRootInit.mjs";
 import type { MDomChildNode } from "../mixins/MDomChildNode.mjs";
-//import type { MDomNonDocumentTypeChildNode } from "../mixins/MDomNonDocumentTypeChildNode.mjs";
+import type { MDomNonDocumentTypeChildNode } from "../mixins/MDomNonDocumentTypeChildNode.mjs";
 import type { MDomParentNode } from "../mixins/MDomParentNode.mjs";
 import type { MDomSlottable } from "../mixins/MDomSlottable.mjs";
 import type { IDomAttr } from "./IDomAttr.mjs";
 import type { IDomDOMTokenList } from "./IDomDOMTokenList.mjs";
 import type { IDomNamedNodeMap } from "./IDomNamedNodeMap.mjs";
 import type { IDomNode } from "./IDomNode.mjs";
-//import type { IDomShadowRoot } from "./IDomShadowRoot.mjs";
+import type { IDomShadowRoot } from "./IDomShadowRoot.mjs";
 
 export interface IDomElement<N extends Element, CN = string>
   extends IDomNode<N>,
     MDomParentNode,
-    /*MDomNonDocumentTypeChildNode,*/
+    MDomNonDocumentTypeChildNode,
     MDomChildNode,
     MDomSlottable {
   readonly namespaceURI: O.Option<string>;
@@ -71,20 +71,20 @@ export interface IDomElement<N extends Element, CN = string>
     attr: Attr | IDomAttr<Attr>
   ): E.Either<NotFoundErrorDomException, IDomAttr<Attr>>;
 
-  /*attachShadow(
+  attachShadow(
     init: DDomShadowRootInit
   ): E.Either<NotSupportedErrorDomException, IDomShadowRoot<ShadowRoot>>;
-  readonly shadowRoot: O.Option<IDomShadowRoot<ShadowRoot>>;*/
+  readonly shadowRoot: O.Option<IDomShadowRoot<ShadowRoot>>;
 
-  /*closest(
+  closest(
     selectors: string
-  ): E.Either<SyntaxErrorDomException, O.Option<IDomElement<Element>>>;*/
+  ): E.Either<SyntaxErrorDomException, O.Option<IDomElement<Element>>>;
   matches(selectors: string): E.Either<SyntaxErrorDomException, boolean>;
 
-  /*getElementsByTagName(qualifiedName: string): IDomElement<Element>[];
+  getElementsByTagName(qualifiedName: string): IDomElement<Element>[];
   getElementsByTagNameNS(
     namespace: string | null,
     localName: string
   ): IDomElement<Element>[];
-  getElementsByClassName(classNames: string): IDomElement<Element>[];*/
+  getElementsByClassName(classNames: string): IDomElement<Element>[];
 }

@@ -6,6 +6,7 @@ import type {
 import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
+import type * as TE from "fp-ts/TaskEither";
 import type { DCssomCSSStyleSheetInit } from "../dictionaries/DCssomCSSStyleSheetInit.mjs";
 import type { ICssomCSSRule } from "./ICssomCSSRule.mjs";
 import type { ICssomCSSRuleList } from "./ICssomCSSRuleList.mjs";
@@ -36,11 +37,11 @@ export interface ICssomCSSStyleSheet<N extends CSSStyleSheet>
     index: number
   ): O.Option<SecurityErrorDomException | NotAllowedErrorDomException>;
 
-  /*replace(
+  replace(
     text: string
   ): TE.TaskEither<
     NotAllowedErrorDomException,
     ICssomCSSStyleSheet<CSSStyleSheet>
-  >;*/
+  >;
   replaceSync(text: string): O.Option<NotAllowedErrorDomException>;
 }
