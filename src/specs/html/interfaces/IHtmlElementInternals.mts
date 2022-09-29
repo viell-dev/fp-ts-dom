@@ -1,7 +1,7 @@
 import type { NotSupportedErrorDomException } from "@/exceptions/DomException.mjs";
 import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
-import type { IDomShadowRoot } from "@/specs/dom/interfaces/IDomShadowRoot.mjs";
+//import type { IDomShadowRoot } from "@/specs/dom/interfaces/IDomShadowRoot.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
 import type { DHtmlValidityStateFlags } from "../dictionaries/DHtmlValidityStateFlags.mjs";
@@ -13,7 +13,7 @@ import type { IHtmlValidityState } from "./IHtmlValidityState.mjs";
 export interface IHtmlElementInternals<N extends ElementInternals>
   extends IWrapper<N> {
   // Shadow root access
-  shadowRoot: O.Option<IDomShadowRoot<ShadowRoot>>;
+  /*shadowRoot: O.Option<IDomShadowRoot<ShadowRoot>>;*/
 
   // Form-associated custom elements
   setFormValue(

@@ -42,11 +42,11 @@ export interface ISvg2SVGSVGElement<N extends SVGSVGElement>
     rect: DOMRectReadOnly | IGeometryDOMRectReadOnly<DOMRectReadOnly>,
     referenceElement: SVGElement | ISvg2SVGElement<SVGElement> | null
   ): IDomNodeList<NodeList>;
-  checkIntersectionList(
+  checkIntersection(
     element: SVGElement | ISvg2SVGElement<SVGElement>,
     rect: DOMRectReadOnly | IGeometryDOMRectReadOnly<DOMRectReadOnly>
   ): boolean;
-  checkEnclosureList(
+  checkEnclosure(
     element: SVGElement | ISvg2SVGElement<SVGElement>,
     rect: DOMRectReadOnly | IGeometryDOMRectReadOnly<DOMRectReadOnly>
   ): boolean;
@@ -65,13 +65,4 @@ export interface ISvg2SVGSVGElement<N extends SVGSVGElement>
   ): ISvg2SVGTransform<SVGTransform>;
 
   getElementById(elementId: string): IDomElement<Element>;
-
-  /** @deprecated Does nothing anymore. */
-  suspendRedraw(maxWaitMilliseconds: number): number;
-  /** @deprecated Does nothing anymore. */
-  unsuspendRedraw(): void;
-  /** @deprecated Does nothing anymore. */
-  unsuspendRedrawAll(): void;
-  /** @deprecated Does nothing anymore. */
-  forceRedraw(): void;
 }

@@ -1,20 +1,20 @@
-import type { NoModificationAllowedErrorDomException } from "@/exceptions/DomException.mjs";
 import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
 import type { DHtmlFocusOptions } from "@/specs/html/dictionaries/DHtmlFocusOptions.mjs";
-import type { IHtmlHTMLElement } from "@/specs/html/interfaces/IHtmlHTMLElement.mjs";
 import type {
   MissingEventHandler,
   THtmlEventHandler,
 } from "@/specs/html/types/THtmlEventHandler.mjs";
 import type { THtmlOnErrorEventHandler } from "@/specs/html/types/THtmlOnErrorEventHandler.mjs";
-import * as E from "fp-ts/Either";
+import type { ISvg2SVGElement } from "@/specs/svg2/interfaces/ISvg2SVGElement.mjs";
 import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import { CssomCSSStyleDeclaration } from "../cssom/CssomCSSStyleDeclaration.mjs";
 import { DomElementBase } from "../dom/DomElementBase.mjs";
 import { DomEvent } from "../dom/DomEvent.mjs";
-import { HtmlDOMStringMap } from "./HtmlDOMStringMap.mjs";
-import { HtmlElementInternals } from "./HtmlElementInternals.mjs";
+import { HtmlDOMStringMap } from "../html/HtmlDOMStringMap.mjs";
+import { Svg2SVGElement } from "./Svg2SVGElement.mjs";
+import { Svg2SVGSVGElement } from "./Svg2SVGSVGElement.mjs";
+import { Svg2SVGUseElement } from "./Svg2SVGUseElement.mjs";
 
 interface MissingEventHandlers {
   onbeforeinput: MissingEventHandler;
@@ -24,113 +24,25 @@ interface MissingEventHandlers {
   oncontextrestored: MissingEventHandler;
 }
 
-export abstract class HtmlHTMLElementBase<N extends HTMLElement>
-  extends DomElementBase<N>
-  implements IHtmlHTMLElement<N>
+export abstract class Svg2SVGElementBase<N extends SVGElement>
+  extends DomElementBase<N, undefined>
+  implements ISvg2SVGElement<N>
 {
-  get title(): string {
-    return this.native.title;
-  }
-  set title(title: string) {
-    this.native.title = title;
-  }
-  get lang(): string {
-    return this.native.lang;
-  }
-  set lang(lang: string) {
-    this.native.lang = lang;
-  }
-  get translate(): boolean {
-    return this.native.translate;
-  }
-  set translate(translate: boolean) {
-    this.native.translate = translate;
-  }
-  get dir(): string {
-    return this.native.dir;
-  }
-  set dir(dir: string) {
-    this.native.dir = dir;
+  override get className(): undefined {
+    return;
   }
 
-  /** Use {@link setHidden} to set. */
-  get hidden(): "until-found" | boolean {
-    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    -- According to the spec, it returns either the string "until-found" or a
-        boolean. */
-    return this.native.hidden as "until-found" | boolean;
-  }
-  setHidden(hidden: boolean | number | string | null): void {
-    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    -- According to the spec, it accepts either a boolean, number, string or
-        null when setting. */
-    (this.native.hidden as boolean | number | string | null) = hidden;
-  }
-  get inert(): boolean {
-    return this.native.inert;
-  }
-  set inert(inert: boolean) {
-    this.native.inert = inert;
-  }
-  click(): void {
-    this.native.click();
-  }
-  get accessKey(): string {
-    return this.native.accessKey;
-  }
-  set accessKey(accessKey: string) {
-    this.native.accessKey = accessKey;
-  }
-  get accessKeyLabel(): string {
-    return this.native.accessKeyLabel;
-  }
-  get draggable(): boolean {
-    return this.native.draggable;
-  }
-  set draggable(draggable: boolean) {
-    this.native.draggable = draggable;
-  }
-  get spellcheck(): boolean {
-    return this.native.spellcheck;
-  }
-  set spellcheck(spellcheck: boolean) {
-    this.native.spellcheck = spellcheck;
-  }
-  get autocapitalize(): string {
-    return this.native.autocapitalize;
-  }
-  set autocapitalize(autocapitalize: string) {
-    this.native.autocapitalize = autocapitalize;
-  }
-
-  get innerText(): string {
-    return this.native.innerHTML;
-  }
-  set innerText(innerText: string) {
-    this.native.innerText = innerText;
-  }
-  /** Use {@link setOuterText} to set. */
-  get outerText(): string {
-    return this.native.outerText;
-  }
-  setOuterText(
-    outerText: string
-  ): O.Option<NoModificationAllowedErrorDomException> {
+  get ownerSVGElement(): O.Option<Svg2SVGSVGElement> {
     return pipe(
-      tuple(outerText),
-      E.tryCatchK(
-        tupled((outerText) => (this.native.outerText = outerText)),
-        /* eslint-disable-next-line
-            @typescript-eslint/consistent-type-assertions
-        -- According to the spec, this is the only possible error. */
-        (error: unknown) => error as NoModificationAllowedErrorDomException
-      ),
-      O.getLeft
+      O.fromNullable(this.native.ownerSVGElement),
+      O.map((element) => new Svg2SVGSVGElement(element))
     );
   }
-
-  attachInternals(): HtmlElementInternals {
-    return new HtmlElementInternals(this.native.attachInternals());
+  get viewportElement(): O.Option<Svg2SVGElement> {
+    return pipe(
+      O.fromNullable(this.native.viewportElement),
+      O.map((element) => new Svg2SVGElement(element))
+    );
   }
 
   get onabort(): THtmlEventHandler {
@@ -1872,26 +1784,21 @@ export abstract class HtmlHTMLElementBase<N extends HTMLElement>
     );
   }
 
-  get contentEditable(): string {
-    return this.native.contentEditable;
+  get correspondingElement(): Svg2SVGElement {
+    type Corrected = N & { correspondingElement: SVGElement };
+
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- correspondingElement is missing in the TypeScript types. */
+    return new Svg2SVGElement((this.native as Corrected).correspondingElement);
   }
-  set contentEditable(contentEditable: string) {
-    this.native.contentEditable = contentEditable;
-  }
-  get enterKeyHint(): string {
-    return this.native.enterKeyHint;
-  }
-  set enterKeyHint(enterKeyHint: string) {
-    this.native.enterKeyHint = enterKeyHint;
-  }
-  get isContentEditable(): boolean {
-    return this.native.isContentEditable;
-  }
-  get inputMode(): string {
-    return this.native.inputMode;
-  }
-  set inputMode(inputMode: string) {
-    this.native.inputMode = inputMode;
+  get correspondingUseElement(): Svg2SVGUseElement {
+    type Corrected = N & { correspondingUseElement: SVGUseElement };
+
+    return new Svg2SVGUseElement(
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      -- correspondingUseElement is missing in the TypeScript types. */
+      (this.native as Corrected).correspondingUseElement
+    );
   }
 
   get dataset(): HtmlDOMStringMap {

@@ -97,6 +97,9 @@ export class HtmlHTMLFormElement
       O.getLeft
     );
   }
+  reset(): void {
+    this.native.reset();
+  }
   checkValidity(): boolean {
     return this.native.checkValidity();
   }

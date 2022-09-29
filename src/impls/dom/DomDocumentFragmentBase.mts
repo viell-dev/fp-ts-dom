@@ -14,7 +14,11 @@ export abstract class DomDocumentFragmentBase<N extends DocumentFragment>
   implements IDomDocumentFragment<N>
 {
   getElementById(elementId: string): O.Option<DomElement> {
-    return pipe(this.native.getElementById(elementId), O.fromNullable);
+    return pipe(
+      this.native.getElementById(elementId),
+      O.fromNullable,
+      O.map((element) => new DomElement(element))
+    );
   }
 
   get children(): DomElement[] {

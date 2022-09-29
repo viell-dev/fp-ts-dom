@@ -7,7 +7,6 @@ import type { ICssomCSSStyleSheet } from "@/specs/cssom/interfaces/ICssomCSSStyl
 import * as E from "fp-ts/Either";
 import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-import * as TE from "fp-ts/TaskEither";
 import { CssomCSSRule } from "./CssomCSSRule.mjs";
 import { CssomCSSRuleList } from "./CssomCSSRuleList.mjs";
 import { CssomStyleSheetBase } from "./CssomStyleSheetBase.mjs";
@@ -76,7 +75,7 @@ export class CssomCSSStyleSheet
     );
   }
 
-  replace(
+  /*replace(
     text: string
   ): TE.TaskEither<NotAllowedErrorDomException, CssomCSSStyleSheet> {
     return pipe(
@@ -85,12 +84,12 @@ export class CssomCSSStyleSheet
         tupled(this.native.replace),
         /* eslint-disable-next-line
             @typescript-eslint/consistent-type-assertions
-        -- According to the spec, these are the only possible errors. */
+        -- According to the spec, these are the only possible errors. */ /*
         (error) => error as NotAllowedErrorDomException
       ),
       TE.map((sheet) => new CssomCSSStyleSheet(sheet))
     );
-  }
+  }*/
   replaceSync(text: string): O.Option<NotAllowedErrorDomException> {
     return pipe(
       tuple(text),

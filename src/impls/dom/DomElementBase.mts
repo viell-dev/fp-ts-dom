@@ -3,11 +3,9 @@ import type {
   InvalidCharacterErrorDomException,
   NamespaceErrorDomException,
   NotFoundErrorDomException,
-  NotSupportedErrorDomException,
   SyntaxErrorDomException,
 } from "@/exceptions/DomException.mjs";
 import { getNative } from "@/helpers/getNative.mjs";
-import type { DDomShadowRootInit } from "@/specs/dom/dictionaries/DDomShadowRootInit.mjs";
 import type { IDomAttr } from "@/specs/dom/interfaces/IDomAttr.mjs";
 import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
 import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
@@ -18,15 +16,13 @@ import * as O from "fp-ts/Option";
 import { HtmlHTMLSlotElement } from "../html/HtmlHTMLSlotElement.mjs";
 import { DomAttr } from "./DomAttr.mjs";
 import { DomDOMTokenList } from "./DomDOMTokenList.mjs";
-import { DomElement } from "./DomElement.mjs";
 import { DomNamedNodeMap } from "./DomNamedNodeMap.mjs";
 import { DomNode } from "./DomNode.mjs";
 import { DomNodeBase } from "./DomNodeBase.mjs";
-import { DomShadowRoot } from "./DomShadowRoot.mjs";
 
-export abstract class DomElementBase<N extends Element>
+export abstract class DomElementBase<N extends Element, CN = string>
   extends DomNodeBase<N>
-  implements IDomElement<N>
+  implements IDomElement<N, CN>
 {
   get namespaceURI(): O.Option<string> {
     return O.fromNullable(this.native.namespaceURI);
@@ -47,11 +43,15 @@ export abstract class DomElementBase<N extends Element>
   set id(id: string) {
     this.native.id = id;
   }
-  get className(): string {
-    return this.native.className;
+  get className(): CN {
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- The type of class name depends on CN. */
+    return this.native.className as CN;
   }
-  set className(className: string) {
-    this.native.className = className;
+  set className(className: CN) {
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    -- The type of class name depends on CN. */
+    (this.native.className as CN) = className;
   }
   private classListInternal: O.Option<DomDOMTokenList> = O.none;
   get classList(): DomDOMTokenList {
@@ -216,7 +216,7 @@ export abstract class DomElementBase<N extends Element>
     );
   }
 
-  attachShadow(
+  /*attachShadow(
     init: DDomShadowRootInit
   ): E.Either<NotSupportedErrorDomException, DomShadowRoot> {
     return pipe(
@@ -225,7 +225,7 @@ export abstract class DomElementBase<N extends Element>
         tupled(this.native.attachShadow),
         /* eslint-disable-next-line
             @typescript-eslint/consistent-type-assertions
-        -- According to the spec, this is the only possible error. */
+        -- According to the spec, this is the only possible error. */ /*
         (error) => error as NotSupportedErrorDomException
       ),
       E.map((shadowRoot) => new DomShadowRoot(shadowRoot))
@@ -236,9 +236,9 @@ export abstract class DomElementBase<N extends Element>
       O.fromNullable(this.native.shadowRoot),
       O.map((shadowRoot) => new DomShadowRoot(shadowRoot))
     );
-  }
+  }*/
 
-  closest(
+  /*closest(
     selectors: string
   ): E.Either<SyntaxErrorDomException, O.Option<DomElement>> {
     return pipe(
@@ -246,7 +246,7 @@ export abstract class DomElementBase<N extends Element>
         () => this.native.closest(selectors),
         /* eslint-disable-next-line
             @typescript-eslint/consistent-type-assertions
-        -- According to the spec, this is the only possible error. */
+        -- According to the spec, this is the only possible error. */ /*
         (error) => error as SyntaxErrorDomException
       ),
       E.map((element) =>
@@ -256,7 +256,7 @@ export abstract class DomElementBase<N extends Element>
         )
       )
     );
-  }
+  }*/
   matches(selectors: string): E.Either<SyntaxErrorDomException, boolean> {
     return pipe(
       E.tryCatch(
@@ -269,7 +269,7 @@ export abstract class DomElementBase<N extends Element>
     );
   }
 
-  getElementsByTagName(qualifiedName: string): DomElement[] {
+  /*getElementsByTagName(qualifiedName: string): DomElement[] {
     return pipe(
       this.native.getElementsByTagName(qualifiedName),
       (collection) => Array.from(collection),
@@ -293,9 +293,9 @@ export abstract class DomElementBase<N extends Element>
       (collection) => Array.from(collection),
       A.map((element) => new DomElement(element))
     );
-  }
+  }*/
 
-  get children(): DomElement[] {
+  /*get children(): DomElement[] {
     return pipe(
       Array.from(this.native.children),
       A.map((element) => new DomElement(element))
@@ -312,7 +312,7 @@ export abstract class DomElementBase<N extends Element>
       O.fromNullable(this.native.lastElementChild),
       O.map((element) => new DomElement(element))
     );
-  }
+  }*/
   get childElementCount(): number {
     return this.native.childElementCount;
   }
@@ -378,13 +378,13 @@ export abstract class DomElementBase<N extends Element>
     );
   }
 
-  querySelector(selectors: string): O.Option<DomElement> {
+  /*querySelector(selectors: string): O.Option<DomElement> {
     return pipe(
       this.native.querySelector(selectors),
       O.fromNullable,
       O.map((element) => new DomElement(element))
     );
-  }
+  }*/
   querySelectorAll(selectors: string): DomNode[] {
     return pipe(
       this.native.querySelectorAll(selectors),
@@ -393,7 +393,7 @@ export abstract class DomElementBase<N extends Element>
     );
   }
 
-  get previousElementSibling(): O.Option<DomElement> {
+  /*get previousElementSibling(): O.Option<DomElement> {
     return pipe(
       O.fromNullable(this.native.previousElementSibling),
       O.map((element) => new DomElement(element))
@@ -404,7 +404,7 @@ export abstract class DomElementBase<N extends Element>
       O.fromNullable(this.native.nextElementSibling),
       O.map((element) => new DomElement(element))
     );
-  }
+  }*/
 
   before(
     ...nodes: (Node | IDomNode<Node> | string)[]

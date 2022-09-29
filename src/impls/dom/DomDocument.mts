@@ -28,8 +28,12 @@ import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import { CssomCSSStyleSheet } from "../cssom/CssomCSSStyleSheet.mjs";
 import { CssomStyleSheetList } from "../cssom/CssomStyleSheetList.mjs";
+import { HtmlHTMLElement } from "../html/HtmlHTMLElement.mjs";
+import { HtmlHTMLHeadElement } from "../html/HtmlHTMLHeadElement.mjs";
+import { HtmlHTMLScriptElement } from "../html/HtmlHTMLScriptElement.mjs";
 import { HtmlLocation } from "../html/HtmlLocation.mjs";
 import { HtmlWindowProxy } from "../html/HtmlWindowProxy.mjs";
+import { Svg2SVGScriptElement } from "../svg2/Svg2SVGScriptElement.mjs";
 import { DomAttr } from "./DomAttr.mjs";
 import { DomCDATASection } from "./DomCDATASection.mjs";
 import { DomComment } from "./DomComment.mjs";
@@ -638,13 +642,9 @@ export class DomDocument
     return pipe(
       O.fromNullable(this.native.currentScript),
       O.map((script) =>
-        script instanceof HTMLScriptElement ? E.left(script) : E.right(script)
-      ),
-      O.map(
-        E.match(
-          (script) => new HtmlHTMLScriptElement(script),
-          (script) => new Svg2SVGScriptElement(script)
-        )
+        script instanceof HTMLScriptElement
+          ? new HtmlHTMLScriptElement(script)
+          : new Svg2SVGScriptElement(script)
       )
     );
   }
@@ -2428,6 +2428,7 @@ export class DomDocument
       O.toNullable
     );
   }
+
   get oncopy(): THtmlEventHandler {
     return pipe(
       /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions

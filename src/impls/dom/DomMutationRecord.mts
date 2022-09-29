@@ -46,6 +46,9 @@ export class DomMutationRecord
   get attributeName(): O.Option<string> {
     return pipe(this.native.attributeName, O.fromNullable);
   }
+  get attributeNamespace(): O.Option<string> {
+    return pipe(this.native.attributeNamespace, O.fromNullable);
+  }
   get oldValue(): O.Option<string> {
     return pipe(this.native.oldValue, O.fromNullable);
   }

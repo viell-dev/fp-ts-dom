@@ -27,8 +27,8 @@ export interface ISvg2SVGTransformList<N extends SVGTransformList>
     newItem: SVGTransform | ISvg2SVGTransform<SVGTransform>
   ): ISvg2SVGTransform<SVGTransform>;
 
-  createSVGTransformationFromMatrix(
-    matrix: IGeometryDOMMatrixReadOnly<DOMMatrixReadOnly>
+  createSVGTransformFromMatrix(
+    matrix: DOMMatrixReadOnly | IGeometryDOMMatrixReadOnly<DOMMatrixReadOnly>
   ): ISvg2SVGTransform<SVGTransform>;
   consolidate(): O.Option<ISvg2SVGTransform<SVGTransform>>;
 }

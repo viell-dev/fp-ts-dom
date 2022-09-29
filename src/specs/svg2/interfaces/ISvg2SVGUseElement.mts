@@ -12,5 +12,5 @@ export interface ISvg2SVGUseElement<N extends SVGUseElement>
   readonly width: ISvg2SVGAnimatedLength<SVGAnimatedLength>;
   readonly height: ISvg2SVGAnimatedLength<SVGAnimatedLength>;
   readonly instanceRoot: O.Option<ISvg2SVGElement<SVGElement>>;
-  readonly animetedInstanceRoot: O.Option<ISvg2SVGElement<SVGElement>>;
+  readonly animatedInstanceRoot: O.Option<ISvg2SVGElement<SVGElement>>;
 }
