@@ -1,4 +1,4 @@
-import type { Values } from "@/helpers/Values.mjs";
+import type { Values } from "../../../helpers/Values.mjs";
 
 export const CDomNodeFilterFilter = {
   FILTER_ACCEPT: 1,

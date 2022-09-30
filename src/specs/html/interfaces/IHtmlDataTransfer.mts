@@ -1,5 +1,8 @@
-import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.mjs";
-import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
+import type {
+  IWrapper,
+  IWrapperConstructors,
+} from "../../../globals/IWrapper.mjs";
+import type { IDomElement } from "../../dom/interfaces/IDomElement.mjs";
 import type { IHtmlDataTransferItemList } from "./IHtmlDataTransferItemList.mjs";
 
 export interface IHtmlDataTransferConstructors

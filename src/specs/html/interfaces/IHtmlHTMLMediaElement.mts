@@ -1,10 +1,10 @@
-import type {
-  NotAllowedErrorDomException,
-  NotSupportedErrorDomException,
-} from "@/exceptions/DomException.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
 import type * as TO from "fp-ts/TaskOption";
+import type {
+  NotAllowedErrorDomException,
+  NotSupportedErrorDomException,
+} from "../../../exceptions/DomException.mjs";
 import type { CHtmlHTMLMediaElementNetworkState } from "../constants/CHtmlHTMLMediaElementNetworkState.mjs";
 import type { CHtmlHTMLMediaElementReadyState } from "../constants/CHtmlHTMLMediaElementReadyState.mjs";
 import type { EHtmlTextTrackKind } from "../enums/EHtmlTextTrackKind.mjs";

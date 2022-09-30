@@ -1,4 +1,4 @@
-import type { Values } from "@/helpers/Values.mjs";
+import type { Values } from "../../../helpers/Values.mjs";
 
 export const CHtmlHTMLMediaElementNetworkState = {
   NETWORK_EMPTY: 0,

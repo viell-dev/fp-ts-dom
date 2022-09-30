@@ -1,13 +1,13 @@
+import type * as E from "fp-ts/Either";
+import type * as O from "fp-ts/Option";
 import type {
   HierarchyRequestErrorDomException,
   InvalidCharacterErrorDomException,
   NamespaceErrorDomException,
   NotSupportedErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
-import type { IHtmlDocument } from "@/specs/html/interfaces/IHtmlDocument.mjs";
-import type * as E from "fp-ts/Either";
-import type * as O from "fp-ts/Option";
+} from "../../../exceptions/DomException.mjs";
+import type { IWrapperConstructors } from "../../../globals/IWrapper.mjs";
+import type { IHtmlDocument } from "../../html/interfaces/IHtmlDocument.mjs";
 import type { CBDomNodeFilter } from "../callbacks/CBDomNodeFilter.mjs";
 import type { CDomNodeFilterWhatToShow } from "../constants/CDomNodeFilterWhatToShow.mjs";
 import type { DDomElementCreationOptions } from "../dictionaries/DDomElementCreationOptions.mjs";

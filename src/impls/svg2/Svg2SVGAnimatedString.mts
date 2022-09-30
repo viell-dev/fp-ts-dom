@@ -1,5 +1,5 @@
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { ISvg2SVGAnimatedString } from "@/specs/svg2/interfaces/ISvg2SVGAnimatedString.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { ISvg2SVGAnimatedString } from "../../specs/svg2/interfaces/ISvg2SVGAnimatedString.mjs";
 
 export class Svg2SVGAnimatedString
   extends Wrapper<SVGAnimatedString>

@@ -1,8 +1,8 @@
-import { StaticImplements } from "@/decorators/StaticImplements.mjs";
+import { StaticImplements } from "../../decorators/StaticImplements.mjs";
 import type {
   IDomEventTarget,
   IDomEventTargetConstructor,
-} from "@/specs/dom/interfaces/IDomEventTarget.mjs";
+} from "../../specs/dom/interfaces/IDomEventTarget.mjs";
 import { DomEventTargetBase } from "./DomEventTargetBase.mjs";
 
 @StaticImplements<IDomEventTargetConstructor>()

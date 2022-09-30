@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
+import type { IWrapper } from "../globals/IWrapper.mjs";
 
 export const getNative = <N extends {}>(value: N | IWrapper<N>): N =>
   "getNative" in value ? value.getNative() : value;

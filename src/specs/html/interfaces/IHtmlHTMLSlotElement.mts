@@ -1,6 +1,6 @@
-import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
-import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
-import type { IDomText } from "@/specs/dom/interfaces/IDomText.mjs";
+import type { IDomElement } from "../../dom/interfaces/IDomElement.mjs";
+import type { IDomNode } from "../../dom/interfaces/IDomNode.mjs";
+import type { IDomText } from "../../dom/interfaces/IDomText.mjs";
 import type { DHtmlAssignedNodesOptions } from "../dictionaries/DHtmlAssignedNodesOptions.mjs";
 import type {
   IHtmlHTMLElement,

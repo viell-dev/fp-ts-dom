@@ -1,11 +1,11 @@
-import type { EDomShadowRootMode } from "@/specs/dom/enums/EDomShadowRootMode.mjs";
-import type { EDomSlotAssignmentMode } from "@/specs/dom/enums/EDomSlotAssignmentMode.mjs";
-import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
-import type { IDomShadowRoot } from "@/specs/dom/interfaces/IDomShadowRoot.mjs";
-import type { THtmlEventHandler } from "@/specs/html/types/THtmlEventHandler.mjs";
 import * as A from "fp-ts/Array";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import type { EDomShadowRootMode } from "../../specs/dom/enums/EDomShadowRootMode.mjs";
+import type { EDomSlotAssignmentMode } from "../../specs/dom/enums/EDomSlotAssignmentMode.mjs";
+import type { IDomEvent } from "../../specs/dom/interfaces/IDomEvent.mjs";
+import type { IDomShadowRoot } from "../../specs/dom/interfaces/IDomShadowRoot.mjs";
+import type { THtmlEventHandler } from "../../specs/html/types/THtmlEventHandler.mjs";
 import { CssomCSSStyleSheet } from "../cssom/CssomCSSStyleSheet.mjs";
 import { CssomStyleSheetList } from "../cssom/CssomStyleSheetList.mjs";
 import { DomDocumentFragmentBase } from "./DomDocumentFragmentBase.mjs";

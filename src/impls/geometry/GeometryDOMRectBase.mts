@@ -1,5 +1,5 @@
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { IGeometryDOMRectReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMRectReadOnly.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { IGeometryDOMRectReadOnly } from "../../specs/geometry/interfaces/IGeometryDOMRectReadOnly.mjs";
 
 export abstract class GeometryDOMRectBase<N extends DOMRectReadOnly>
   extends Wrapper<N>

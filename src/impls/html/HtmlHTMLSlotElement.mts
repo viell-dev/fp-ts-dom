@@ -1,10 +1,10 @@
-import { getNative } from "@/helpers/getNative.mjs";
-import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
-import type { IDomText } from "@/specs/dom/interfaces/IDomText.mjs";
-import type { DHtmlAssignedNodesOptions } from "@/specs/html/dictionaries/DHtmlAssignedNodesOptions.mjs";
-import type { IHtmlHTMLSlotElement } from "@/specs/html/interfaces/IHtmlHTMLSlotElement.mjs";
 import * as A from "fp-ts/Array";
 import { pipe, tuple, tupled } from "fp-ts/function";
+import { getNative } from "../../helpers/getNative.mjs";
+import type { IDomElement } from "../../specs/dom/interfaces/IDomElement.mjs";
+import type { IDomText } from "../../specs/dom/interfaces/IDomText.mjs";
+import type { DHtmlAssignedNodesOptions } from "../../specs/html/dictionaries/DHtmlAssignedNodesOptions.mjs";
+import type { IHtmlHTMLSlotElement } from "../../specs/html/interfaces/IHtmlHTMLSlotElement.mjs";
 import { DomElement } from "../dom/DomElement.mjs";
 import { DomNode } from "../dom/DomNode.mjs";
 import { HtmlHTMLElementBase } from "./HtmlHTMLElementBase.mjs";

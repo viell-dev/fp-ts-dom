@@ -1,10 +1,10 @@
+import type * as E from "fp-ts/Either";
+import type * as O from "fp-ts/Option";
 import type {
   InUseAttributeErrorDomException,
   NotFoundErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import type { IWrapper } from "@/globals/IWrapper.mjs";
-import type * as E from "fp-ts/Either";
-import type * as O from "fp-ts/Option";
+} from "../../../exceptions/DomException.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 import type { IDomAttr } from "./IDomAttr.mjs";
 
 export interface IDomNamedNodeMap<N extends NamedNodeMap> extends IWrapper<N> {

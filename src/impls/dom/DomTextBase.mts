@@ -1,7 +1,7 @@
-import type { IDomText } from "@/specs/dom/interfaces/IDomText.mjs";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import type { IDomText } from "../../specs/dom/interfaces/IDomText.mjs";
 import { HtmlHTMLSlotElement } from "../html/HtmlHTMLSlotElement.mjs";
 import { DomCharacterDataBase } from "./DomCharacterDataBase.mjs";
 import { DomText } from "./DomText.mjs";

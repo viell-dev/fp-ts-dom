@@ -1,5 +1,5 @@
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { ISvg2SVGAnimatedLength } from "@/specs/svg2/interfaces/ISvg2SVGAnimatedLength.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { ISvg2SVGAnimatedLength } from "../../specs/svg2/interfaces/ISvg2SVGAnimatedLength.mjs";
 import { Svg2SVGLength } from "./Svg2SVGLength.mjs";
 
 export class Svg2SVGAnimatedLength

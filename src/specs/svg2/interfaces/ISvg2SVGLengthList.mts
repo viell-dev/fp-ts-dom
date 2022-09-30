@@ -1,5 +1,5 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 import type { ISvg2SVGLength } from "./ISvg2SVGLength.mjs";
 
 export interface ISvg2SVGLengthList<N extends SVGLengthList>
@@ -13,7 +13,7 @@ export interface ISvg2SVGLengthList<N extends SVGLengthList>
   ): ISvg2SVGLength<SVGLength>;
   getItem(index: number): E.Either<RangeError, ISvg2SVGLength<SVGLength>>;
   // [index: number]: E.Either<RangeError, ISvg2SVGLength<SVGLength>>;
-  inserItemBefore(
+  insertItemBefore(
     newItem: SVGLength | ISvg2SVGLength<SVGLength>,
     index: number
   ): ISvg2SVGLength<SVGLength>;

@@ -1,12 +1,12 @@
-import type {
-  SecurityErrorDomException,
-  SyntaxErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { IHtmlLocation } from "@/specs/html/interfaces/IHtmlLocation.mjs";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import type {
+  SecurityErrorDomException,
+  SyntaxErrorDomException,
+} from "../../exceptions/DomException.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { IHtmlLocation } from "../../specs/html/interfaces/IHtmlLocation.mjs";
 
 export class HtmlLocation
   extends Wrapper<Location>

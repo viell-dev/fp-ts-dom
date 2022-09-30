@@ -1,5 +1,5 @@
-import type { InvalidStateErrorDomException } from "@/exceptions/DomException.mjs";
 import type * as O from "fp-ts/Option";
+import type { InvalidStateErrorDomException } from "../../../exceptions/DomException.mjs";
 import type {
   IHtmlHTMLElement,
   IHtmlHTMLElementConstructorsBase,

@@ -1,5 +1,5 @@
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { ISvg2SVGAnimatedTransformList } from "@/specs/svg2/interfaces/ISvg2SVGAnimatedTransformList.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { ISvg2SVGAnimatedTransformList } from "../../specs/svg2/interfaces/ISvg2SVGAnimatedTransformList.mjs";
 import { Svg2SVGTransformList } from "./Svg2SVGTransformList.mjs";
 
 export class Svg2SVGAnimatedTransformList

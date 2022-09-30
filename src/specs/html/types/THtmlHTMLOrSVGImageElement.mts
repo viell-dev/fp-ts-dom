@@ -1,4 +1,4 @@
-import type { ISvg2SVGImageElement } from "@/specs/svg2/interfaces/ISvg2SVGImageElement.mjs";
+import type { ISvg2SVGImageElement } from "../../svg2/interfaces/ISvg2SVGImageElement.mjs";
 import type { IHtmlHTMLImageElement } from "../interfaces/IHtmlHTMLImageElement.mjs";
 
 export type THtmlHTMLOrSVGImageElement =

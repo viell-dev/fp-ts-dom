@@ -1,10 +1,10 @@
-import type { SecurityErrorDomException } from "@/exceptions/DomException.mjs";
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { EHtmlScrollRestoration } from "@/specs/html/enums/EHtmlScrollRestoration.mjs";
-import type { IHtmlHistory } from "@/specs/html/interfaces/IHtmlHistory.mjs";
 import * as E from "fp-ts/Either";
 import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import type { SecurityErrorDomException } from "../../exceptions/DomException.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { EHtmlScrollRestoration } from "../../specs/html/enums/EHtmlScrollRestoration.mjs";
+import type { IHtmlHistory } from "../../specs/html/interfaces/IHtmlHistory.mjs";
 
 export class HtmlHistory
   extends Wrapper<History>

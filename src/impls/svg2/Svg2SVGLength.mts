@@ -1,7 +1,7 @@
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import { CSvg2SVGLengthLengthUnitType } from "@/specs/svg2/constants/CSvg2SVGLengthLengthUnitType.mjs";
-import type { ISvg2SVGLength } from "@/specs/svg2/interfaces/ISvg2SVGLength.mjs";
 import { pipe, tuple, tupled } from "fp-ts/function";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import { CSvg2SVGLengthLengthUnitType } from "../../specs/svg2/constants/CSvg2SVGLengthLengthUnitType.mjs";
+import type { ISvg2SVGLength } from "../../specs/svg2/interfaces/ISvg2SVGLength.mjs";
 
 export class Svg2SVGLength
   extends Wrapper<SVGLength>

@@ -1,5 +1,5 @@
-import type { IDomEventTarget } from "@/specs/dom/interfaces/IDomEventTarget.mjs";
 import type * as O from "fp-ts/Option";
+import type { IDomEventTarget } from "../../dom/interfaces/IDomEventTarget.mjs";
 import type { THtmlEventHandler } from "../types/THtmlEventHandler.mjs";
 import type { IHtmlTextTrack } from "./IHtmlTextTrack.mjs";
 

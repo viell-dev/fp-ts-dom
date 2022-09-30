@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 import type { IHtmlHTMLCanvasElement } from "./IHtmlHTMLCanvasElement.mjs";
 import type { IHtmlImageBitmap } from "./IHtmlImageBitmap.mjs";
 import type {

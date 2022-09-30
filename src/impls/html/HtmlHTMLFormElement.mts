@@ -1,11 +1,11 @@
-import type { NotFoundErrorDomException } from "@/exceptions/DomException.mjs";
-import { getNativeOrNullable } from "@/helpers/getNative.mjs";
-import type { IHtmlHTMLElement } from "@/specs/html/interfaces/IHtmlHTMLElement.mjs";
-import type { IHtmlHTMLFormElement } from "@/specs/html/interfaces/IHtmlHTMLFormElement.mjs";
 import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
 import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import type { NotFoundErrorDomException } from "../../exceptions/DomException.mjs";
+import { getNativeOrNullable } from "../../helpers/getNative.mjs";
+import type { IHtmlHTMLElement } from "../../specs/html/interfaces/IHtmlHTMLElement.mjs";
+import type { IHtmlHTMLFormElement } from "../../specs/html/interfaces/IHtmlHTMLFormElement.mjs";
 import { DomElement } from "../dom/DomElement.mjs";
 import { HtmlHTMLElementBase } from "./HtmlHTMLElementBase.mjs";
 

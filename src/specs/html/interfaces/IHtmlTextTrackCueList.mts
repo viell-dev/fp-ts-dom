@@ -1,5 +1,5 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type * as O from "fp-ts/Option";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 import type { IHtmlTextTrackCue } from "./IHtmlTextTrackCue.mjs";
 
 export interface IHtmlTextTrackCueList<N extends TextTrackCueList>

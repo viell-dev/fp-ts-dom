@@ -1,6 +1,9 @@
-import type { InvalidStateErrorDomException } from "@/exceptions/DomException.mjs";
-import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/es6/Either";
+import type { InvalidStateErrorDomException } from "../../../exceptions/DomException.mjs";
+import type {
+  IWrapper,
+  IWrapperConstructors,
+} from "../../../globals/IWrapper.mjs";
 import type { CBDomEventListener } from "../callbacks/CBDomEventListener.mjs";
 import type { DDomAddEventListenerOptions } from "../dictionaries/DDomAddEventListenerOptions.mjs";
 import type { DDomEventListenerOptions } from "../dictionaries/DDomEventListenerOptions.mjs";

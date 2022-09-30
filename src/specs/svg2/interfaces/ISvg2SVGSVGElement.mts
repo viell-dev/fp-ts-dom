@@ -1,11 +1,11 @@
-import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
-import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
-import type { IGeometryDOMMatrix } from "@/specs/geometry/interfaces/IGeometryDOMMatrix.mjs";
-import type { IGeometryDOMPoint } from "@/specs/geometry/interfaces/IGeometryDOMPoint.mjs";
-import type { IGeometryDOMPointReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMPointReadOnly.mjs";
-import type { IGeometryDOMRect } from "@/specs/geometry/interfaces/IGeometryDOMRect.mjs";
-import type { IGeometryDOMRectReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMRectReadOnly.mjs";
-import type { MHtmlWindowEventHandlers } from "@/specs/html/mixins/MHtmlWindowEventHandlers.mjs";
+import type { IDomElement } from "../../dom/interfaces/IDomElement.mjs";
+import type { IDomNode } from "../../dom/interfaces/IDomNode.mjs";
+import type { IGeometryDOMMatrix } from "../../geometry/interfaces/IGeometryDOMMatrix.mjs";
+import type { IGeometryDOMPoint } from "../../geometry/interfaces/IGeometryDOMPoint.mjs";
+import type { IGeometryDOMPointReadOnly } from "../../geometry/interfaces/IGeometryDOMPointReadOnly.mjs";
+import type { IGeometryDOMRect } from "../../geometry/interfaces/IGeometryDOMRect.mjs";
+import type { IGeometryDOMRectReadOnly } from "../../geometry/interfaces/IGeometryDOMRectReadOnly.mjs";
+import type { MHtmlWindowEventHandlers } from "../../html/mixins/MHtmlWindowEventHandlers.mjs";
 import type { MSvg2SVGFitToViewBox } from "../mixins/MSvg2SVGFitToViewBox.mjs";
 import type {
   MSvg2SVGZoomAndPan,

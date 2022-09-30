@@ -1,12 +1,12 @@
+import type * as E from "fp-ts/Either";
+import type * as O from "fp-ts/Option";
 import type {
   InvalidStateErrorDomException,
   NoModificationAllowedErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
-import type { MCssomElementCSSInlineStyle } from "@/specs/cssom/mixins/MCssomElementCSSInlineStyle.mjs";
-import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
-import type * as E from "fp-ts/Either";
-import type * as O from "fp-ts/Option";
+} from "../../../exceptions/DomException.mjs";
+import type { IWrapperConstructors } from "../../../globals/IWrapper.mjs";
+import type { MCssomElementCSSInlineStyle } from "../../cssom/mixins/MCssomElementCSSInlineStyle.mjs";
+import type { IDomElement } from "../../dom/interfaces/IDomElement.mjs";
 import type { MHtmlDocumentAndElementEventHandlers } from "../mixins/MHtmlDocumentAndElementEventHandlers.mjs";
 import type { MHtmlElementContentEditable } from "../mixins/MHtmlElementContentEditable.mjs";
 import type { MHtmlGlobalEventHandlers } from "../mixins/MHtmlGlobalEventHandlers.mjs";

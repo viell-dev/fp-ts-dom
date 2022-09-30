@@ -1,6 +1,9 @@
-import type { ISerializable } from "@/globals/ISerializable.mjs";
-import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
+import type { ISerializable } from "../../../globals/ISerializable.mjs";
+import type {
+  IWrapper,
+  IWrapperConstructors,
+} from "../../../globals/IWrapper.mjs";
 import type { DGeometryDOMMatrixInit } from "../dictionaries/DGeometryDOMMatrixInit.mjs";
 import type { DGeometryDOMPointInit } from "../dictionaries/DGeometryDOMPointInit.mjs";
 import type { IGeometryDOMPoint } from "./IGeometryDOMPoint.mjs";

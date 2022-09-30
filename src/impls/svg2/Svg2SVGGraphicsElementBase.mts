@@ -1,7 +1,7 @@
-import type { DSvg2SVGBoundingBoxOptions } from "@/specs/svg2/dictionaries/DSvg2SVGBoundingBoxOptions.mjs";
-import type { ISvg2SVGGraphicsElement } from "@/specs/svg2/interfaces/ISvg2SVGGraphicsElement.mjs";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import type { DSvg2SVGBoundingBoxOptions } from "../../specs/svg2/dictionaries/DSvg2SVGBoundingBoxOptions.mjs";
+import type { ISvg2SVGGraphicsElement } from "../../specs/svg2/interfaces/ISvg2SVGGraphicsElement.mjs";
 import { GeometryDOMMatrix } from "../geometry/GeometryDOMMatrix.mjs";
 import { GeometryDOMRect } from "../geometry/GeometryDOMRect.mjs";
 import { Svg2SVGAnimatedTransformList } from "./Svg2SVGAnimatedTransformList.mjs";

@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 
 export interface IHtmlCanvasGradient<N extends CanvasGradient>
   extends IWrapper<N> {

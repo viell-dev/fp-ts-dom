@@ -1,5 +1,5 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type * as O from "fp-ts/Option";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 import type { CBDomNodeFilter } from "../callbacks/CBDomNodeFilter.mjs";
 import type { CDomNodeFilterWhatToShow } from "../constants/CDomNodeFilterWhatToShow.mjs";
 import type { IDomNode } from "./IDomNode.mjs";

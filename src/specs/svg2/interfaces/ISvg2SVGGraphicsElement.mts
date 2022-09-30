@@ -1,6 +1,6 @@
-import type { IGeometryDOMMatrix } from "@/specs/geometry/interfaces/IGeometryDOMMatrix.mjs";
-import type { IGeometryDOMRect } from "@/specs/geometry/interfaces/IGeometryDOMRect.mjs";
 import type * as O from "fp-ts/Option";
+import type { IGeometryDOMMatrix } from "../../geometry/interfaces/IGeometryDOMMatrix.mjs";
+import type { IGeometryDOMRect } from "../../geometry/interfaces/IGeometryDOMRect.mjs";
 import type { DSvg2SVGBoundingBoxOptions } from "../dictionaries/DSvg2SVGBoundingBoxOptions.mjs";
 import type { MSvg2SVGTests } from "../mixins/MSvg2SVGTests.mjs";
 import type { ISvg2SVGAnimatedTransformList } from "./ISvg2SVGAnimatedTransformList.mjs";

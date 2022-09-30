@@ -1,8 +1,8 @@
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { IDomMutationRecord } from "@/specs/dom/interfaces/IDomMutationRecord.mjs";
 import * as A from "fp-ts/Array";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { IDomMutationRecord } from "../../specs/dom/interfaces/IDomMutationRecord.mjs";
 import { DomNode } from "./DomNode.mjs";
 
 export class DomMutationRecord

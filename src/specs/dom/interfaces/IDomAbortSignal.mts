@@ -1,9 +1,9 @@
 import type {
   AbortErrorDomException,
   TimeoutErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
-import type { THtmlEventHandler } from "@/specs/html/types/THtmlEventHandler.mjs";
+} from "../../../exceptions/DomException.mjs";
+import type { IWrapperConstructors } from "../../../globals/IWrapper.mjs";
+import type { THtmlEventHandler } from "../../html/types/THtmlEventHandler.mjs";
 import type { IDomEventTarget } from "./IDomEventTarget.mjs";
 
 /** @sealed */

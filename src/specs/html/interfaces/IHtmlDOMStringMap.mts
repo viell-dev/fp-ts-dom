@@ -1,10 +1,10 @@
+import type * as E from "fp-ts/Either";
 import type {
   InvalidCharacterErrorDomException,
   SyntaxErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import type { IWrapper } from "@/globals/IWrapper.mjs";
-import type { NotKeyOf } from "@/helpers/NotKeyOf.mjs";
-import type * as E from "fp-ts/Either";
+} from "../../../exceptions/DomException.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
+import type { NotKeyOf } from "../../../helpers/NotKeyOf.mjs";
 
 export interface IHtmlDOMStringMap<N extends DOMStringMap> extends IWrapper<N> {
   /**

@@ -1,12 +1,12 @@
+import type * as E from "fp-ts/Either";
+import type * as O from "fp-ts/Option";
 import type {
   InvalidCharacterErrorDomException,
   NamespaceErrorDomException,
   NotFoundErrorDomException,
   NotSupportedErrorDomException,
   SyntaxErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import type * as E from "fp-ts/Either";
-import type * as O from "fp-ts/Option";
+} from "../../../exceptions/DomException.mjs";
 import type { DDomShadowRootInit } from "../dictionaries/DDomShadowRootInit.mjs";
 import type { MDomChildNode } from "../mixins/MDomChildNode.mjs";
 import type { MDomNonDocumentTypeChildNode } from "../mixins/MDomNonDocumentTypeChildNode.mjs";

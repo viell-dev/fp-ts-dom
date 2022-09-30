@@ -1,4 +1,4 @@
-import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
+import type { IWrapperConstructors } from "../../../globals/IWrapper.mjs";
 import type { DDomCustomEventInit } from "../dictionaries/DDomCustomEventInit.mjs";
 import type { IDomEvent, IDomEventConstants } from "./IDomEvent.mjs";
 

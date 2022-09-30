@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 
 export interface ISvg2SVGAnimatedEnumeration<N extends SVGAnimatedEnumeration>
   extends IWrapper<N> {

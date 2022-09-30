@@ -1,12 +1,12 @@
-import { StaticImplements } from "@/decorators/StaticImplements.mjs";
-import type { SyntaxErrorDomException } from "@/exceptions/DomException.mjs";
-import type { DGeometryDOMMatrixInit } from "@/specs/geometry/dictionaries/DGeometryDOMMatrixInit.mjs";
+import * as E from "fp-ts/Either";
+import { pipe } from "fp-ts/function";
+import { StaticImplements } from "../../decorators/StaticImplements.mjs";
+import type { SyntaxErrorDomException } from "../../exceptions/DomException.mjs";
+import type { DGeometryDOMMatrixInit } from "../../specs/geometry/dictionaries/DGeometryDOMMatrixInit.mjs";
 import type {
   IGeometryDOMMatrix,
   IGeometryDOMMatrixConstructors,
-} from "@/specs/geometry/interfaces/IGeometryDOMMatrix.mjs";
-import * as E from "fp-ts/Either";
-import { pipe } from "fp-ts/function";
+} from "../../specs/geometry/interfaces/IGeometryDOMMatrix.mjs";
 import { GeometryDOMMatrixBase } from "./GeometryDOMMatrixBase.mjs";
 
 @StaticImplements<IGeometryDOMMatrixConstructors>()

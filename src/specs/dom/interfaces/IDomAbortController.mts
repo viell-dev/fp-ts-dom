@@ -1,4 +1,7 @@
-import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.mjs";
+import type {
+  IWrapper,
+  IWrapperConstructors,
+} from "../../../globals/IWrapper.mjs";
 import type { IDomAbortSignal } from "./IDomAbortSignal.mjs";
 
 /** @sealed */

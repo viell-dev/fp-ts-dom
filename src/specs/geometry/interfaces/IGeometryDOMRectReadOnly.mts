@@ -1,5 +1,8 @@
-import type { ISerializable } from "@/globals/ISerializable.mjs";
-import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.mjs";
+import type { ISerializable } from "../../../globals/ISerializable.mjs";
+import type {
+  IWrapper,
+  IWrapperConstructors,
+} from "../../../globals/IWrapper.mjs";
 import type { DGeometryDOMRectInit } from "../dictionaries/DGeometryDOMRectInit.mjs";
 
 export interface IGeometryDOMRectReadOnlyConstructors

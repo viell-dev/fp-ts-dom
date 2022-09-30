@@ -1,13 +1,13 @@
-import type {
-  InUseAttributeErrorDomException,
-  NotFoundErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { IDomAttr } from "@/specs/dom/interfaces/IDomAttr.mjs";
-import type { IDomNamedNodeMap } from "@/specs/dom/interfaces/IDomNamedNodeMap.mjs";
 import * as E from "fp-ts/Either";
 import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import type {
+  InUseAttributeErrorDomException,
+  NotFoundErrorDomException,
+} from "../../exceptions/DomException.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { IDomAttr } from "../../specs/dom/interfaces/IDomAttr.mjs";
+import type { IDomNamedNodeMap } from "../../specs/dom/interfaces/IDomNamedNodeMap.mjs";
 import { DomAttr } from "./DomAttr.mjs";
 
 export class DomNamedNodeMap

@@ -1,19 +1,19 @@
-import type { SyntaxErrorDomException } from "@/exceptions/DomException.mjs";
-import { getNative } from "@/helpers/getNative.mjs";
-import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
-import type { DHtmlWindowPostMessageOptions } from "@/specs/html/dictionaries/DHtmlWindowPostMessageOptions.mjs";
-import type { MissingOffscreenCanvas } from "@/specs/html/interfaces/IHtmlOffscreenCanvas.mjs";
-import type { IHtmlWindow } from "@/specs/html/interfaces/IHtmlWindow.mjs";
-import type {
-  MissingEventHandler,
-  THtmlEventHandler,
-} from "@/specs/html/types/THtmlEventHandler.mjs";
-import type { THtmlOnBeforeUnloadEventHandler } from "@/specs/html/types/THtmlOnBeforeUnloadEventHandler.mjs";
-import type { THtmlOnErrorEventHandler } from "@/specs/html/types/THtmlOnErrorEventHandler.mjs";
 import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
 import { flow, pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import type { SyntaxErrorDomException } from "../../exceptions/DomException.mjs";
+import { getNative } from "../../helpers/getNative.mjs";
+import type { IDomEvent } from "../../specs/dom/interfaces/IDomEvent.mjs";
+import type { DHtmlWindowPostMessageOptions } from "../../specs/html/dictionaries/DHtmlWindowPostMessageOptions.mjs";
+import type { MissingOffscreenCanvas } from "../../specs/html/interfaces/IHtmlOffscreenCanvas.mjs";
+import type { IHtmlWindow } from "../../specs/html/interfaces/IHtmlWindow.mjs";
+import type {
+  MissingEventHandler,
+  THtmlEventHandler,
+} from "../../specs/html/types/THtmlEventHandler.mjs";
+import type { THtmlOnBeforeUnloadEventHandler } from "../../specs/html/types/THtmlOnBeforeUnloadEventHandler.mjs";
+import type { THtmlOnErrorEventHandler } from "../../specs/html/types/THtmlOnErrorEventHandler.mjs";
 import { DomDocument } from "../dom/DomDocument.mjs";
 import { DomElement } from "../dom/DomElement.mjs";
 import { DomEvent } from "../dom/DomEvent.mjs";

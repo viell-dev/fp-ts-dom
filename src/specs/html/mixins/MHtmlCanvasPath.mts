@@ -1,4 +1,4 @@
-import type { DGeometryDOMPointInit } from "@/specs/geometry/dictionaries/DGeometryDOMPointInit.mjs";
+import type { DGeometryDOMPointInit } from "../../geometry/dictionaries/DGeometryDOMPointInit.mjs";
 
 export interface MHtmlCanvasPath {
   // shared path API methods

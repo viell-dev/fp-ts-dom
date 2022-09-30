@@ -1,4 +1,4 @@
-import type { IHtmlHTMLElement } from "@/specs/html/interfaces/IHtmlHTMLElement.mjs";
+import type { IHtmlHTMLElement } from "../../specs/html/interfaces/IHtmlHTMLElement.mjs";
 import { HtmlHTMLElementBase } from "./HtmlHTMLElementBase.mjs";
 
 export class HtmlHTMLElement

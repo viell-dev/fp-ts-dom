@@ -1,4 +1,4 @@
-import type { Values } from "@/helpers/Values.mjs";
+import type { Values } from "../../../helpers/Values.mjs";
 
 export const CDomRangeHow = {
   START_TO_START: 0,

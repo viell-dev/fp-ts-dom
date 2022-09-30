@@ -1,7 +1,7 @@
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import { CSvg2SVGAngleAngleUnitType } from "@/specs/svg2/constants/CSvg2SVGAngleAngleUnitType.mjs";
-import type { ISvg2SVGAngle } from "@/specs/svg2/interfaces/ISvg2SVGAngle.mjs";
 import { pipe, tuple, tupled } from "fp-ts/function";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import { CSvg2SVGAngleAngleUnitType } from "../../specs/svg2/constants/CSvg2SVGAngleAngleUnitType.mjs";
+import type { ISvg2SVGAngle } from "../../specs/svg2/interfaces/ISvg2SVGAngle.mjs";
 
 export class Svg2SVGAngle
   extends Wrapper<SVGAngle>

@@ -1,10 +1,10 @@
+import type * as E from "fp-ts/Either";
+import type * as O from "fp-ts/Option";
 import type {
   InvalidCharacterErrorDomException,
   SyntaxErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import type { IWrapper } from "@/globals/IWrapper.mjs";
-import type * as E from "fp-ts/Either";
-import type * as O from "fp-ts/Option";
+} from "../../../exceptions/DomException.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 
 export interface IDomDOMTokenList<N extends DOMTokenList>
   extends IWrapper<N>,

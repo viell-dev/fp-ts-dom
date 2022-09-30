@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 import type { CSvg2SVGAngleAngleUnitType } from "../constants/CSvg2SVGAngleAngleUnitType.mjs";
 
 export interface ISvg2SVGAngleConstants {

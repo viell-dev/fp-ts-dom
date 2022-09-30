@@ -1,5 +1,5 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type * as O from "fp-ts/Option";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 import type { IHtmlMimeType } from "./IHtmlMimeType.mjs";
 
 export interface IHtmlPlugin<N extends Plugin> extends IWrapper<N> {

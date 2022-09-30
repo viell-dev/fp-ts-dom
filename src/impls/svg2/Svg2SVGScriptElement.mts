@@ -1,5 +1,5 @@
-import type { ISvg2SVGScriptElement } from "@/specs/svg2/interfaces/ISvg2SVGScriptElement.mjs";
 import * as O from "fp-ts/Option";
+import type { ISvg2SVGScriptElement } from "../../specs/svg2/interfaces/ISvg2SVGScriptElement.mjs";
 import { Svg2SVGAnimatedString } from "./Svg2SVGAnimatedString.mjs";
 import { Svg2SVGElementBase } from "./Svg2SVGElementBase.mjs";
 

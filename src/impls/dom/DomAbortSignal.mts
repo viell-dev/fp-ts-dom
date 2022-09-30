@@ -1,16 +1,16 @@
-import { StaticImplements } from "@/decorators/StaticImplements.mjs";
+import { pipe } from "fp-ts/function";
+import * as O from "fp-ts/Option";
+import { StaticImplements } from "../../decorators/StaticImplements.mjs";
 import type {
   AbortErrorDomException,
   TimeoutErrorDomException,
-} from "@/exceptions/DomException.mjs";
+} from "../../exceptions/DomException.mjs";
 import type {
   IDomAbortSignal,
   IDomAbortSignalConstructors,
-} from "@/specs/dom/interfaces/IDomAbortSignal.mjs";
-import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
-import type { THtmlEventHandler } from "@/specs/html/types/THtmlEventHandler.mjs";
-import { pipe } from "fp-ts/function";
-import * as O from "fp-ts/Option";
+} from "../../specs/dom/interfaces/IDomAbortSignal.mjs";
+import type { IDomEvent } from "../../specs/dom/interfaces/IDomEvent.mjs";
+import type { THtmlEventHandler } from "../../specs/html/types/THtmlEventHandler.mjs";
 import { DomEvent } from "./DomEvent.mjs";
 import { DomEventTargetBase } from "./DomEventTargetBase.mjs";
 

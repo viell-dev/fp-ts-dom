@@ -1,3 +1,7 @@
+import * as A from "fp-ts/Array";
+import * as E from "fp-ts/Either";
+import { pipe, tuple, tupled } from "fp-ts/function";
+import * as O from "fp-ts/Option";
 import type {
   HierarchyRequestErrorDomException,
   InvalidCharacterErrorDomException,
@@ -5,16 +9,12 @@ import type {
   NotFoundErrorDomException,
   NotSupportedErrorDomException,
   SyntaxErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import { getNative } from "@/helpers/getNative.mjs";
-import type { DDomShadowRootInit } from "@/specs/dom/dictionaries/DDomShadowRootInit.mjs";
-import type { IDomAttr } from "@/specs/dom/interfaces/IDomAttr.mjs";
-import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
-import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
-import * as A from "fp-ts/Array";
-import * as E from "fp-ts/Either";
-import { pipe, tuple, tupled } from "fp-ts/function";
-import * as O from "fp-ts/Option";
+} from "../../exceptions/DomException.mjs";
+import { getNative } from "../../helpers/getNative.mjs";
+import type { DDomShadowRootInit } from "../../specs/dom/dictionaries/DDomShadowRootInit.mjs";
+import type { IDomAttr } from "../../specs/dom/interfaces/IDomAttr.mjs";
+import type { IDomElement } from "../../specs/dom/interfaces/IDomElement.mjs";
+import type { IDomNode } from "../../specs/dom/interfaces/IDomNode.mjs";
 import { HtmlHTMLSlotElement } from "../html/HtmlHTMLSlotElement.mjs";
 import { DomAttr } from "./DomAttr.mjs";
 import { DomDOMTokenList } from "./DomDOMTokenList.mjs";

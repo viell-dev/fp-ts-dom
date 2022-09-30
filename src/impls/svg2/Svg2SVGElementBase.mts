@@ -1,13 +1,13 @@
-import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
-import type { DHtmlFocusOptions } from "@/specs/html/dictionaries/DHtmlFocusOptions.mjs";
+import { pipe, tuple, tupled } from "fp-ts/function";
+import * as O from "fp-ts/Option";
+import type { IDomEvent } from "../../specs/dom/interfaces/IDomEvent.mjs";
+import type { DHtmlFocusOptions } from "../../specs/html/dictionaries/DHtmlFocusOptions.mjs";
 import type {
   MissingEventHandler,
   THtmlEventHandler,
-} from "@/specs/html/types/THtmlEventHandler.mjs";
-import type { THtmlOnErrorEventHandler } from "@/specs/html/types/THtmlOnErrorEventHandler.mjs";
-import type { ISvg2SVGElement } from "@/specs/svg2/interfaces/ISvg2SVGElement.mjs";
-import { pipe, tuple, tupled } from "fp-ts/function";
-import * as O from "fp-ts/Option";
+} from "../../specs/html/types/THtmlEventHandler.mjs";
+import type { THtmlOnErrorEventHandler } from "../../specs/html/types/THtmlOnErrorEventHandler.mjs";
+import type { ISvg2SVGElement } from "../../specs/svg2/interfaces/ISvg2SVGElement.mjs";
 import { CssomCSSStyleDeclaration } from "../cssom/CssomCSSStyleDeclaration.mjs";
 import { DomElementBase } from "../dom/DomElementBase.mjs";
 import { DomEvent } from "../dom/DomEvent.mjs";

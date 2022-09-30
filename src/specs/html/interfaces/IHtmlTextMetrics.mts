@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 
 export interface IHtmlTextMetrics<N extends TextMetrics> extends IWrapper<N> {
   // x-direction

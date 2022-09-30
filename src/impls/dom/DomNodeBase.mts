@@ -1,19 +1,19 @@
-import { StaticImplements } from "@/decorators/StaticImplements.mjs";
-import type { NotSupportedErrorDomException } from "@/exceptions/DomException.mjs";
-import { getNative, getNativeOrNull } from "@/helpers/getNative.mjs";
-import { CDomNodeNodeDocumentPosition } from "@/specs/dom/constants/CDomNodeNodeDocumentPosition.mjs";
-import { CDomNodeNodeType } from "@/specs/dom/constants/CDomNodeNodeType.mjs";
-import type { DDomGetRootNodeOptions } from "@/specs/dom/dictionaries/DDomGetRootNodeOptions.mjs";
-import type {
-  IDomNode,
-  IDomNodeConstants,
-} from "@/specs/dom/interfaces/IDomNode.mjs";
 import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
-/* import { DomDocument } from "./DomDocument.mjs";
-   import { DomElement } from "./DomElement.mjs"; */
+import { StaticImplements } from "../../decorators/StaticImplements.mjs";
+import type { NotSupportedErrorDomException } from "../../exceptions/DomException.mjs";
+import { getNative, getNativeOrNull } from "../../helpers/getNative.mjs";
+import { CDomNodeNodeDocumentPosition } from "../../specs/dom/constants/CDomNodeNodeDocumentPosition.mjs";
+import { CDomNodeNodeType } from "../../specs/dom/constants/CDomNodeNodeType.mjs";
+import type { DDomGetRootNodeOptions } from "../../specs/dom/dictionaries/DDomGetRootNodeOptions.mjs";
+import type {
+  IDomNode,
+  IDomNodeConstants,
+} from "../../specs/dom/interfaces/IDomNode.mjs";
+import { DomDocument } from "./DomDocument.mjs";
+import { DomElement } from "./DomElement.mjs";
 import { DomEventTargetBase } from "./DomEventTargetBase.mjs";
 import { DomNode } from "./DomNode.mjs";
 
@@ -53,12 +53,12 @@ export class DomNodeBase<N extends Node>
   get isConnected(): boolean {
     return this.native.isConnected;
   }
-  /* get ownerDocument(): O.Option<DomDocument> {
+  get ownerDocument(): O.Option<DomDocument> {
     return pipe(
       O.fromNullable(this.native.ownerDocument),
       O.map((document) => new DomDocument(document))
     );
-  } */
+  }
   getRootNode(options?: DDomGetRootNodeOptions): DomNode {
     return pipe(this.native.getRootNode(options), (node) => new DomNode(node));
   }
@@ -68,12 +68,12 @@ export class DomNodeBase<N extends Node>
       O.map((node) => new DomNode(node))
     );
   }
-  /*get parentElement(): O.Option<DomElement> {
+  get parentElement(): O.Option<DomElement> {
     return pipe(
       O.fromNullable(this.native.parentElement),
       O.map((element) => new DomElement(element))
     );
-  }*/
+  }
   hasChildNodes(): boolean {
     return this.native.hasChildNodes();
   }

@@ -1,18 +1,18 @@
-import { getNative, getNativeOrNull } from "@/helpers/getNative.mjs";
-import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
-import type { IGeometryDOMMatrixReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMMatrixReadOnly.mjs";
-import type { IGeometryDOMRectReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMRectReadOnly.mjs";
-import type {
-  MissingEventHandler,
-  THtmlEventHandler,
-} from "@/specs/html/types/THtmlEventHandler.mjs";
-import type { THtmlOnBeforeUnloadEventHandler } from "@/specs/html/types/THtmlOnBeforeUnloadEventHandler.mjs";
-import { CSvg2SVGZoomAndPanZoomAndPanType } from "@/specs/svg2/constants/CSvg2SVGZoomAndPanZoomAndPanType.mjs";
-import type { ISvg2SVGElement } from "@/specs/svg2/interfaces/ISvg2SVGElement.mjs";
-import type { ISvg2SVGSVGElement } from "@/specs/svg2/interfaces/ISvg2SVGSVGElement.mjs";
 import * as A from "fp-ts/Array";
 import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import { getNative, getNativeOrNull } from "../../helpers/getNative.mjs";
+import type { IDomEvent } from "../../specs/dom/interfaces/IDomEvent.mjs";
+import type { IGeometryDOMMatrixReadOnly } from "../../specs/geometry/interfaces/IGeometryDOMMatrixReadOnly.mjs";
+import type { IGeometryDOMRectReadOnly } from "../../specs/geometry/interfaces/IGeometryDOMRectReadOnly.mjs";
+import type {
+  MissingEventHandler,
+  THtmlEventHandler,
+} from "../../specs/html/types/THtmlEventHandler.mjs";
+import type { THtmlOnBeforeUnloadEventHandler } from "../../specs/html/types/THtmlOnBeforeUnloadEventHandler.mjs";
+import { CSvg2SVGZoomAndPanZoomAndPanType } from "../../specs/svg2/constants/CSvg2SVGZoomAndPanZoomAndPanType.mjs";
+import type { ISvg2SVGElement } from "../../specs/svg2/interfaces/ISvg2SVGElement.mjs";
+import type { ISvg2SVGSVGElement } from "../../specs/svg2/interfaces/ISvg2SVGSVGElement.mjs";
 import { DomElement } from "../dom/DomElement.mjs";
 import { DomEvent } from "../dom/DomEvent.mjs";
 import { DomNode } from "../dom/DomNode.mjs";

@@ -1,4 +1,4 @@
-import type { IDomEventTarget } from "@/specs/dom/interfaces/IDomEventTarget.mjs";
+import type { IDomEventTarget } from "../../dom/interfaces/IDomEventTarget.mjs";
 import type { DHtmlStructuredSerializeOptions } from "../dictionaries/DHtmlStructuredSerializeOptions.mjs";
 import type { THtmlEventHandler } from "../types/THtmlEventHandler.mjs";
 

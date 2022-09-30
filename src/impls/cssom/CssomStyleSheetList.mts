@@ -1,7 +1,7 @@
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { ICssomStyleSheetList } from "@/specs/cssom/interfaces/ICssomStyleSheetList.mjs";
 import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { ICssomStyleSheetList } from "../../specs/cssom/interfaces/ICssomStyleSheetList.mjs";
 import { CssomCSSStyleSheet } from "./CssomCSSStyleSheet.mjs";
 
 export class CssomStyleSheetList

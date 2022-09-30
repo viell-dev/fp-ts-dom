@@ -1,12 +1,12 @@
+import type * as E from "fp-ts/Either";
+import type * as O from "fp-ts/Option";
+import type * as TE from "fp-ts/TaskEither";
 import type {
   NotAllowedErrorDomException,
   SecurityErrorDomException,
   SyntaxErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
-import type * as E from "fp-ts/Either";
-import type * as O from "fp-ts/Option";
-import type * as TE from "fp-ts/TaskEither";
+} from "../../../exceptions/DomException.mjs";
+import type { IWrapperConstructors } from "../../../globals/IWrapper.mjs";
 import type { DCssomCSSStyleSheetInit } from "../dictionaries/DCssomCSSStyleSheetInit.mjs";
 import type { ICssomCSSRule } from "./ICssomCSSRule.mjs";
 import type { ICssomCSSRuleList } from "./ICssomCSSRuleList.mjs";

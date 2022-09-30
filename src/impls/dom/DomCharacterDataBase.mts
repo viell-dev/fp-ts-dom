@@ -1,10 +1,10 @@
-import type { HierarchyRequestErrorDomException } from "@/exceptions/DomException.mjs";
-import type { IDomCharacterData } from "@/specs/dom/interfaces/IDomCharacterData.mjs";
-import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import * as A from "fp-ts/Array";
 import * as E from "fp-ts/Either";
 import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import type { HierarchyRequestErrorDomException } from "../../exceptions/DomException.mjs";
+import type { IDomCharacterData } from "../../specs/dom/interfaces/IDomCharacterData.mjs";
+import type { IDomNode } from "../../specs/dom/interfaces/IDomNode.mjs";
 import { DomElement } from "./DomElement.mjs";
 import { DomNodeBase } from "./DomNodeBase.mjs";
 

@@ -1,7 +1,7 @@
-import type { NoModificationAllowedErrorDomException } from "@/exceptions/DomException.mjs";
-import type { IWrapper } from "@/globals/IWrapper.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
+import type { NoModificationAllowedErrorDomException } from "../../../exceptions/DomException.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 import type { ICssomCSSRule } from "./ICssomCSSRule.mjs";
 
 export interface ICssomCSSStyleDeclaration<N extends CSSStyleDeclaration>

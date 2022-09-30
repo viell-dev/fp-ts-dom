@@ -1,8 +1,8 @@
-import { StaticImplements } from "@/decorators/StaticImplements.mjs";
+import { StaticImplements } from "../../decorators/StaticImplements.mjs";
 import type {
   IDomText,
   IDomTextConstructors,
-} from "@/specs/dom/interfaces/IDomText.mjs";
+} from "../../specs/dom/interfaces/IDomText.mjs";
 import { DomTextBase } from "./DomTextBase.mjs";
 
 @StaticImplements<IDomTextConstructors>()

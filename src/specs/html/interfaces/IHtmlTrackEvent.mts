@@ -1,6 +1,6 @@
-import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
-import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
 import type * as O from "fp-ts/Option";
+import type { IWrapperConstructors } from "../../../globals/IWrapper.mjs";
+import type { IDomEvent } from "../../dom/interfaces/IDomEvent.mjs";
 import type { DHtmlTrackEventInit } from "../dictionaries/DHtmlTrackEventInit.mjs";
 import type { IHtmlAudioTrack, MissingAudioTrack } from "./IHtmlAudioTrack.mjs";
 import type { IHtmlTextTrack } from "./IHtmlTextTrack.mjs";

@@ -1,6 +1,6 @@
-import type { MCssomLinkStyle } from "@/specs/cssom/mixins/MCssomLinkStyle.mjs";
-import type { IDomDOMTokenList } from "@/specs/dom/interfaces/IDomDOMTokenList.mjs";
 import type * as O from "fp-ts/Option";
+import type { MCssomLinkStyle } from "../../cssom/mixins/MCssomLinkStyle.mjs";
+import type { IDomDOMTokenList } from "../../dom/interfaces/IDomDOMTokenList.mjs";
 import type {
   IHtmlHTMLElement,
   IHtmlHTMLElementConstructorsBase,

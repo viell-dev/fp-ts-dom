@@ -1,5 +1,5 @@
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { IHtmlValidityState } from "@/specs/html/interfaces/IHtmlValidityState.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { IHtmlValidityState } from "../../specs/html/interfaces/IHtmlValidityState.mjs";
 
 export class HtmlValidityState
   extends Wrapper<ValidityState>

@@ -1,9 +1,9 @@
+import type * as E from "fp-ts/Either";
 import type {
   InvalidCharacterErrorDomException,
   NamespaceErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import type { IWrapper } from "@/globals/IWrapper.mjs";
-import type * as E from "fp-ts/Either";
+} from "../../../exceptions/DomException.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 import type { IDomDocument } from "./IDomDocument.mjs";
 import type { IDomDocumentType } from "./IDomDocumentType.mjs";
 import type { IDomXMLDocument } from "./IDomXMLDocument.mjs";

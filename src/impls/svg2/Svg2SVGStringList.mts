@@ -1,6 +1,6 @@
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { ISvg2SVGStringList } from "@/specs/svg2/interfaces/ISvg2SVGStringList.mjs";
 import { pipe, tuple, tupled } from "fp-ts/function";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { ISvg2SVGStringList } from "../../specs/svg2/interfaces/ISvg2SVGStringList.mjs";
 
 export class Svg2SVGStringList
   extends Wrapper<SVGStringList>

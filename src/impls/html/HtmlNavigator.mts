@@ -1,12 +1,12 @@
-import type {
-  SecurityErrorDomException,
-  SyntaxErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { IHtmlNavigator } from "@/specs/html/interfaces/IHtmlNavigator.mjs";
 import * as E from "fp-ts/Either";
 import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import type {
+  SecurityErrorDomException,
+  SyntaxErrorDomException,
+} from "../../exceptions/DomException.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { IHtmlNavigator } from "../../specs/html/interfaces/IHtmlNavigator.mjs";
 
 export class HtmlNavigator
   extends Wrapper<Navigator>

@@ -1,5 +1,5 @@
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { ISvg2SVGNumber } from "@/specs/svg2/interfaces/ISvg2SVGNumber.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { ISvg2SVGNumber } from "../../specs/svg2/interfaces/ISvg2SVGNumber.mjs";
 
 export class Svg2SVGNumber
   extends Wrapper<SVGNumber>

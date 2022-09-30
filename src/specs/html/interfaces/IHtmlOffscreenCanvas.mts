@@ -1,10 +1,10 @@
+import type * as TE from "fp-ts/TaskEither";
 import type {
   EncodingErrorDomException,
   InvalidStateErrorDomException,
   SecurityErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import type { IDomEventTarget } from "@/specs/dom/interfaces/IDomEventTarget.mjs";
-import type * as TE from "fp-ts/TaskEither";
+} from "../../../exceptions/DomException.mjs";
+import type { IDomEventTarget } from "../../dom/interfaces/IDomEventTarget.mjs";
 import type {
   DHtmlImageEncodingOptions,
   MissingImageEncodingOptions,

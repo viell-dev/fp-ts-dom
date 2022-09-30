@@ -1,4 +1,4 @@
-import type { Values } from "@/helpers/Values.mjs";
+import type { Values } from "../../../helpers/Values.mjs";
 
 export const CHtmlHTMLMediaErrorCode = {
   MEDIA_ERR_ABORTED: 1,

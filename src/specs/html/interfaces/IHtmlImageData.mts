@@ -1,4 +1,7 @@
-import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.mjs";
+import type {
+  IWrapper,
+  IWrapperConstructors,
+} from "../../../globals/IWrapper.mjs";
 import type { DHtmlImageDataSettings } from "../dictionaries/DHtmlImageDataSettings.mjs";
 import type { EHtmlPredefinedColorSpace } from "../enums/EHtmlPredefinedColorSpace.mjs";
 

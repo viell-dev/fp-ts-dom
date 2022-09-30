@@ -1,6 +1,6 @@
-import type { IDomProcessingInstruction } from "@/specs/dom/interfaces/IDomProcessingInstruction.mjs";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import type { IDomProcessingInstruction } from "../../specs/dom/interfaces/IDomProcessingInstruction.mjs";
 import { CssomCSSStyleSheet } from "../cssom/CssomCSSStyleSheet.mjs";
 import { DomCharacterDataBase } from "./DomCharacterDataBase.mjs";
 

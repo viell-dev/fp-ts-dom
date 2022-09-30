@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 import type { IDomNode } from "./IDomNode.mjs";
 
 export interface IDomAbstractRange<N extends AbstractRange>

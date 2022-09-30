@@ -1,9 +1,9 @@
-import type { MCssomElementCSSInlineStyle } from "@/specs/cssom/mixins/MCssomElementCSSInlineStyle.mjs";
-import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
-import type { MHtmlDocumentAndElementEventHandlers } from "@/specs/html/mixins/MHtmlDocumentAndElementEventHandlers.mjs";
-import type { MHtmlGlobalEventHandlers } from "@/specs/html/mixins/MHtmlGlobalEventHandlers.mjs";
-import type { MHtmlHTMLOrSVGElement } from "@/specs/html/mixins/MHtmlHTMLOrSVGElement.mjs";
 import type * as O from "fp-ts/Option";
+import type { MCssomElementCSSInlineStyle } from "../../cssom/mixins/MCssomElementCSSInlineStyle.mjs";
+import type { IDomElement } from "../../dom/interfaces/IDomElement.mjs";
+import type { MHtmlDocumentAndElementEventHandlers } from "../../html/mixins/MHtmlDocumentAndElementEventHandlers.mjs";
+import type { MHtmlGlobalEventHandlers } from "../../html/mixins/MHtmlGlobalEventHandlers.mjs";
+import type { MHtmlHTMLOrSVGElement } from "../../html/mixins/MHtmlHTMLOrSVGElement.mjs";
 import type { MSvg2SVGElementInstance } from "../mixins/MSvg2SVGElementInstance.mjs";
 import type { ISvg2SVGSVGElement } from "./ISvg2SVGSVGElement.mjs";
 

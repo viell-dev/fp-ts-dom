@@ -1,7 +1,7 @@
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { ICssomStyleSheet } from "@/specs/cssom/interfaces/ICssomStyleSheet.mjs";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { ICssomStyleSheet } from "../../specs/cssom/interfaces/ICssomStyleSheet.mjs";
 import { DomElement } from "../dom/DomElement.mjs";
 import { DomProcessingInstruction } from "../dom/DomProcessingInstruction.mjs";
 import { CssomCSSStyleSheet } from "./CssomCSSStyleSheet.mjs";

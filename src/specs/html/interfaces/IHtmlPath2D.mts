@@ -1,5 +1,8 @@
-import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.mjs";
-import type { DGeometryDOMMatrix2DInit } from "@/specs/geometry/dictionaries/DGeometryDOMMatrix2DInit.mjs";
+import type {
+  IWrapper,
+  IWrapperConstructors,
+} from "../../../globals/IWrapper.mjs";
+import type { DGeometryDOMMatrix2DInit } from "../../geometry/dictionaries/DGeometryDOMMatrix2DInit.mjs";
 import type { MHtmlCanvasPath } from "../mixins/MHtmlCanvasPath.mjs";
 
 export interface IHtmlPath2DConstructors extends IWrapperConstructors<Path2D> {

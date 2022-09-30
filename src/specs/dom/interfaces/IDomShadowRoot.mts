@@ -1,4 +1,4 @@
-import type { THtmlEventHandler } from "@/specs/html/types/THtmlEventHandler.mjs";
+import type { THtmlEventHandler } from "../../html/types/THtmlEventHandler.mjs";
 import type { EDomShadowRootMode } from "../enums/EDomShadowRootMode.mjs";
 import type { EDomSlotAssignmentMode } from "../enums/EDomSlotAssignmentMode.mjs";
 import type { MDomDocumentOrShadowRoot } from "../mixins/MDomDocumentOrShadowRoot.mjs";

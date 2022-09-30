@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 import type { CBHtmlFunctionStringCallback } from "../callbacks/CBHtmlFunctionStringCallback.mjs";
 
 export interface IHtmlDataTransferItem<N extends DataTransferItem>

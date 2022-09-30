@@ -1,4 +1,5 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
+
 import type { ISvg2SVGPreserveAspectRatio } from "./ISvg2SVGPreserveAspectRatio.mjs";
 
 export interface ISvg2SVGAnimatedPreserveAspectRatio<

@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 import type { DHtmlCanvasRenderingContext2DSettings } from "../dictionaries/DHtmlCanvasRenderingContext2DSettings.mjs";
 import type { MHtmlCanvasCompositing } from "../mixins/MHtmlCanvasCompositing.mjs";
 import type { MHtmlCanvasDrawImage } from "../mixins/MHtmlCanvasDrawImage.mjs";

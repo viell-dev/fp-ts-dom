@@ -19,9 +19,6 @@
     "baseUrl": "./src",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "paths": {
-      "@/*": ["./*"]
-    },
     "rootDir": "./src",
 
     // Emit

@@ -1,4 +1,4 @@
-import type { DDomEventInit } from "@/specs/dom/dictionaries/DDomEventInit.mjs";
+import type { DDomEventInit } from "../../dom/dictionaries/DDomEventInit.mjs";
 import type {
   IHtmlAudioTrack,
   MissingAudioTrack,

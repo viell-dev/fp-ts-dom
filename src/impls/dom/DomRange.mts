@@ -1,21 +1,21 @@
-import { StaticImplements } from "@/decorators/StaticImplements.mjs";
+import * as E from "fp-ts/Either";
+import { pipe } from "fp-ts/function";
+import * as O from "fp-ts/Option";
+import { StaticImplements } from "../../decorators/StaticImplements.mjs";
 import type {
   HierarchyRequestErrorDomException,
   InvalidNodeTypeErrorDomException,
   InvalidStateErrorDomException,
   NotSupportedErrorDomException,
   WrongDocumentErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import { CDomRangeHow } from "@/specs/dom/constants/CDomRangeHow.mjs";
-import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
+} from "../../exceptions/DomException.mjs";
+import { CDomRangeHow } from "../../specs/dom/constants/CDomRangeHow.mjs";
+import type { IDomNode } from "../../specs/dom/interfaces/IDomNode.mjs";
 import type {
   IDomRange,
   IDomRangeConstants,
   IDomRangeConstructors,
-} from "@/specs/dom/interfaces/IDomRange.mjs";
-import * as E from "fp-ts/Either";
-import { pipe } from "fp-ts/function";
-import * as O from "fp-ts/Option";
+} from "../../specs/dom/interfaces/IDomRange.mjs";
 import { DomAbstractRangeBase } from "./DomAbstractRangeBase.mjs";
 import { DomDocumentFragment } from "./DomDocumentFragment.mjs";
 import { DomNode } from "./DomNode.mjs";

@@ -1,7 +1,7 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
-import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
-import type { IDomProcessingInstruction } from "@/specs/dom/interfaces/IDomProcessingInstruction.mjs";
 import type * as O from "fp-ts/Option";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
+import type { IDomElement } from "../../dom/interfaces/IDomElement.mjs";
+import type { IDomProcessingInstruction } from "../../dom/interfaces/IDomProcessingInstruction.mjs";
 import type { ICssomCSSStyleSheet } from "./ICssomCSSStyleSheet.mjs";
 import type { ICssomMediaList } from "./ICssomMediaList.mjs";
 

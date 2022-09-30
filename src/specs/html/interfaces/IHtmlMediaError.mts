@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 import type { CHtmlHTMLMediaErrorCode } from "../constants/CHtmlHTMLMediaErrorCode.mjs";
 
 export interface IHtmlMediaErrorConstants {

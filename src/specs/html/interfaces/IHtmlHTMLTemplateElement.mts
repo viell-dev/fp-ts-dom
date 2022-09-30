@@ -1,4 +1,4 @@
-import type { IDomDocumentFragment } from "@/specs/dom/interfaces/IDomDocumentFragment.mjs";
+import type { IDomDocumentFragment } from "../../dom/interfaces/IDomDocumentFragment.mjs";
 import type {
   IHtmlHTMLElement,
   IHtmlHTMLElementConstructorsBase,

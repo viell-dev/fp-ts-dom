@@ -1,4 +1,4 @@
-import type { Values } from "@/helpers/Values.mjs";
+import type { Values } from "../../../helpers/Values.mjs";
 
 export const CDomNodeNodeDocumentPosition = {
   DOCUMENT_POSITION_DISCONNECTED: 0x01,

@@ -1,4 +1,4 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 
 export interface IHtmlStorage<N extends Storage> extends IWrapper<N> {
   readonly length: number;

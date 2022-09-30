@@ -1,6 +1,6 @@
-import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
-import type { IDomDOMTokenList } from "@/specs/dom/interfaces/IDomDOMTokenList.mjs";
 import type * as O from "fp-ts/Option";
+import type { IWrapperConstructors } from "../../../globals/IWrapper.mjs";
+import type { IDomDOMTokenList } from "../../dom/interfaces/IDomDOMTokenList.mjs";
 import type { IHtmlHTMLElement } from "./IHtmlHTMLElement.mjs";
 
 export interface IHTmlHTMLScriptElementConstructors

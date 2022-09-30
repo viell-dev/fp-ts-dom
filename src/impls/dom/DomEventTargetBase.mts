@@ -1,12 +1,12 @@
-import type { InvalidStateErrorDomException } from "@/exceptions/DomException.mjs";
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { CBDomEventListener } from "@/specs/dom/callbacks/CBDomEventListener.mjs";
-import type { DDomAddEventListenerOptions } from "@/specs/dom/dictionaries/DDomAddEventListenerOptions.mjs";
-import type { DDomEventListenerOptions } from "@/specs/dom/dictionaries/DDomEventListenerOptions.mjs";
-import type { IDomEventTarget } from "@/specs/dom/interfaces/IDomEventTarget.mjs";
 import * as E from "fp-ts/es6/Either";
 import { pipe } from "fp-ts/es6/function";
 import * as O from "fp-ts/es6/Option";
+import type { InvalidStateErrorDomException } from "../../exceptions/DomException.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { CBDomEventListener } from "../../specs/dom/callbacks/CBDomEventListener.mjs";
+import type { DDomAddEventListenerOptions } from "../../specs/dom/dictionaries/DDomAddEventListenerOptions.mjs";
+import type { DDomEventListenerOptions } from "../../specs/dom/dictionaries/DDomEventListenerOptions.mjs";
+import type { IDomEventTarget } from "../../specs/dom/interfaces/IDomEventTarget.mjs";
 import { DomEvent } from "./DomEvent.mjs";
 
 export abstract class DomEventTargetBase<N extends EventTarget>

@@ -1,4 +1,4 @@
-import type { DDomEventInit } from "@/specs/dom/dictionaries/DDomEventInit.mjs";
+import type { DDomEventInit } from "../../dom/dictionaries/DDomEventInit.mjs";
 import type { IHtmlStorage } from "../interfaces/IHtmlStorage.mjs";
 
 export interface DHtmlStorageEventInit extends DDomEventInit {

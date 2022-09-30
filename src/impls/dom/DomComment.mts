@@ -1,8 +1,8 @@
-import { StaticImplements } from "@/decorators/StaticImplements.mjs";
+import { StaticImplements } from "../../decorators/StaticImplements.mjs";
 import type {
   IDomComment,
   IDomCommentConstructors,
-} from "@/specs/dom/interfaces/IDomComment.mjs";
+} from "../../specs/dom/interfaces/IDomComment.mjs";
 import { DomCharacterDataBase } from "./DomCharacterDataBase.mjs";
 
 @StaticImplements<IDomCommentConstructors>()

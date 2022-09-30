@@ -1,9 +1,9 @@
-import type { InvalidStateErrorDomException } from "@/exceptions/DomException.mjs";
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { DGeometryDOMMatrixInit } from "@/specs/geometry/dictionaries/DGeometryDOMMatrixInit.mjs";
-import type { DGeometryDOMPointInit } from "@/specs/geometry/dictionaries/DGeometryDOMPointInit.mjs";
-import type { IGeometryDOMMatrixReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMMatrixReadOnly.mjs";
 import * as E from "fp-ts/Either";
+import type { InvalidStateErrorDomException } from "../../exceptions/DomException.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { DGeometryDOMMatrixInit } from "../../specs/geometry/dictionaries/DGeometryDOMMatrixInit.mjs";
+import type { DGeometryDOMPointInit } from "../../specs/geometry/dictionaries/DGeometryDOMPointInit.mjs";
+import type { IGeometryDOMMatrixReadOnly } from "../../specs/geometry/interfaces/IGeometryDOMMatrixReadOnly.mjs";
 import { GeometryDOMMatrix } from "./GeometryDOMMatrix.mjs";
 import { GeometryDOMPoint } from "./GeometryDOMPoint.mjs";
 

@@ -1,4 +1,4 @@
-import type { DDomEventInit } from "@/specs/dom/dictionaries/DDomEventInit.mjs";
+import type { DDomEventInit } from "../../dom/dictionaries/DDomEventInit.mjs";
 import type { IHtmlMessagePort } from "../interfaces/IHtmlMessagePort.mjs";
 import type { THtmlMessageEventSource } from "../types/THtmlMessageEventSource.mjs";
 

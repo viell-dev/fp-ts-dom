@@ -1,9 +1,9 @@
+import type * as O from "fp-ts/Option";
 import type {
   InvalidStateErrorDomException,
   NotFoundErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import type { IWrapper } from "@/globals/IWrapper.mjs";
-import type * as O from "fp-ts/Option";
+} from "../../../exceptions/DomException.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
 import type { EHtmlTextTrackKind } from "../enums/EHtmlTextTrackKind.mjs";
 import type { EHtmlTextTrackMode } from "../enums/EHtmlTextTrackMode.mjs";
 import type { THtmlEventHandler } from "../types/THtmlEventHandler.mjs";

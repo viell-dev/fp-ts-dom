@@ -1,6 +1,6 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
-import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
 import type * as E from "fp-ts/Either";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
+import type { IDomElement } from "../../dom/interfaces/IDomElement.mjs";
 import type { ICssomCSSStyleDeclaration } from "./ICssomCSSStyleDeclaration.mjs";
 
 /** @sealed */

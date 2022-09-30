@@ -1,9 +1,9 @@
-import type { NoModificationAllowedErrorDomException } from "@/exceptions/DomException.mjs";
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { ICssomCSSStyleDeclaration } from "@/specs/cssom/interfaces/ICssomCSSStyleDeclaration.mjs";
 import * as E from "fp-ts/Either";
 import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import type { NoModificationAllowedErrorDomException } from "../../exceptions/DomException.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { ICssomCSSStyleDeclaration } from "../../specs/cssom/interfaces/ICssomCSSStyleDeclaration.mjs";
 import { CssomCSSRule } from "./CssomCSSRule.mjs";
 
 export class CssomCSSStyleDeclaration

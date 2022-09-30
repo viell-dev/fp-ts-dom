@@ -1,8 +1,8 @@
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import { getNative } from "@/helpers/getNative.mjs";
-import type { IGeometryDOMMatrixReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMMatrixReadOnly.mjs";
-import type { ISvg2SVGTransform } from "@/specs/svg2/interfaces/ISvg2SVGTransform.mjs";
 import { pipe, tuple, tupled } from "fp-ts/function";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import { getNative } from "../../helpers/getNative.mjs";
+import type { IGeometryDOMMatrixReadOnly } from "../../specs/geometry/interfaces/IGeometryDOMMatrixReadOnly.mjs";
+import type { ISvg2SVGTransform } from "../../specs/svg2/interfaces/ISvg2SVGTransform.mjs";
 import { GeometryDOMMatrix } from "../geometry/GeometryDOMMatrix.mjs";
 
 export class Svg2SVGTransform

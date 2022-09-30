@@ -1,5 +1,5 @@
-import type { IHtmlHTMLScriptElement } from "@/specs/html/interfaces/IHtmlHTMLScriptElement.mjs";
 import * as O from "fp-ts/Option";
+import type { IHtmlHTMLScriptElement } from "../../specs/html/interfaces/IHtmlHTMLScriptElement.mjs";
 import { DomDOMTokenList } from "../dom/DomDOMTokenList.mjs";
 import { HtmlHTMLElementBase } from "./HtmlHTMLElementBase.mjs";
 

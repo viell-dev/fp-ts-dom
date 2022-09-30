@@ -1,5 +1,5 @@
-import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
 import type * as O from "fp-ts/Option";
+import type { IDomNode } from "../../dom/interfaces/IDomNode.mjs";
 import type {
   IHtmlHTMLElement,
   IHtmlHTMLElementConstructorsBase,

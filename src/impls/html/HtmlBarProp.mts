@@ -1,5 +1,5 @@
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { IHtmlBarProp } from "@/specs/html/interfaces/IHtmlBarProp.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { IHtmlBarProp } from "../../specs/html/interfaces/IHtmlBarProp.mjs";
 
 export class HtmlBarProp
   extends Wrapper<BarProp>

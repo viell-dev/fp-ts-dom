@@ -1,5 +1,8 @@
-import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.mjs";
 import type * as O from "fp-ts/Option";
+import type {
+  IWrapper,
+  IWrapperConstructors,
+} from "../../../globals/IWrapper.mjs";
 import type { CBDomMutationCallback } from "../callbacks/CBDomMutationCallback.mjs";
 import type { DDomMutationObserverInit } from "../dictionaries/DDomMutationObserverInit.mjs";
 import type { IDomMutationRecord } from "./IDomMutationRecord.mjs";

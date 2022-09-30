@@ -1,12 +1,12 @@
+import * as E from "fp-ts/Either";
+import { pipe, tuple, tupled } from "fp-ts/function";
 import type {
   InvalidCharacterErrorDomException,
   SyntaxErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { NotKeyOf } from "@/helpers/NotKeyOf.mjs";
-import type { IHtmlDOMStringMap } from "@/specs/html/interfaces/IHtmlDOMStringMap.mjs";
-import * as E from "fp-ts/Either";
-import { pipe, tuple, tupled } from "fp-ts/function";
+} from "../../exceptions/DomException.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { NotKeyOf } from "../../helpers/NotKeyOf.mjs";
+import type { IHtmlDOMStringMap } from "../../specs/html/interfaces/IHtmlDOMStringMap.mjs";
 
 export class HtmlDOMStringMap
   extends Wrapper<DOMStringMap>

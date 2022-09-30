@@ -1,5 +1,5 @@
-import type { DGeometryDOMMatrix2DInit } from "@/specs/geometry/dictionaries/DGeometryDOMMatrix2DInit.mjs";
-import type { IGeometryDOMMatrix } from "@/specs/geometry/interfaces/IGeometryDOMMatrix.mjs";
+import type { DGeometryDOMMatrix2DInit } from "../../geometry/dictionaries/DGeometryDOMMatrix2DInit.mjs";
+import type { IGeometryDOMMatrix } from "../../geometry/interfaces/IGeometryDOMMatrix.mjs";
 
 export interface MHtmlCanvasTransform {
   // transformations (default transform is the identity matrix)

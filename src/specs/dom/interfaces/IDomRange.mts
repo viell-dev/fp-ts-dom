@@ -1,14 +1,14 @@
+import type * as E from "fp-ts/Either";
+import type * as O from "fp-ts/Option";
 import type {
   HierarchyRequestErrorDomException,
   InvalidNodeTypeErrorDomException,
   InvalidStateErrorDomException,
   NotSupportedErrorDomException,
   WrongDocumentErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import type { IStringifier } from "@/globals/IStringifier.mjs";
-import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
-import type * as E from "fp-ts/Either";
-import type * as O from "fp-ts/Option";
+} from "../../../exceptions/DomException.mjs";
+import type { IStringifier } from "../../../globals/IStringifier.mjs";
+import type { IWrapperConstructors } from "../../../globals/IWrapper.mjs";
 import type { CDomRangeHow } from "../constants/CDomRangeHow.mjs";
 import type { IDomAbstractRange } from "./IDomAbstractRange.mjs";
 import type { IDomDocumentFragment } from "./IDomDocumentFragment.mjs";

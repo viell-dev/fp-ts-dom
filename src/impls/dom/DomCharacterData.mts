@@ -1,4 +1,4 @@
-import type { IDomCharacterData } from "@/specs/dom/interfaces/IDomCharacterData.mjs";
+import type { IDomCharacterData } from "../../specs/dom/interfaces/IDomCharacterData.mjs";
 import { DomCharacterDataBase } from "./DomCharacterDataBase.mjs";
 
 export class DomCharacterData

@@ -1,5 +1,5 @@
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { ISvg2SVGAnimatedRect } from "@/specs/svg2/interfaces/ISvg2SVGAnimatedRect.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { ISvg2SVGAnimatedRect } from "../../specs/svg2/interfaces/ISvg2SVGAnimatedRect.mjs";
 import { GeometryDOMRect } from "../geometry/GeometryDOMRect.mjs";
 import { GeometryDOMRectReadOnly } from "../geometry/GeometryDOMRectReadOnly.mjs";
 

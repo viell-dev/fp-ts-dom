@@ -1,6 +1,6 @@
-import type { IDomAttr } from "@/specs/dom/interfaces/IDomAttr.mjs";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import type { IDomAttr } from "../../specs/dom/interfaces/IDomAttr.mjs";
 import { DomElement } from "./DomElement.mjs";
 import { DomNodeBase } from "./DomNodeBase.mjs";
 

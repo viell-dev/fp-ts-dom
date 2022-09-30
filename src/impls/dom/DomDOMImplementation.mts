@@ -1,13 +1,13 @@
+import * as E from "fp-ts/Either";
+import { pipe, tuple, tupled } from "fp-ts/function";
 import type {
   InvalidCharacterErrorDomException,
   NamespaceErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import { getNativeOrNullable } from "@/helpers/getNative.mjs";
-import type { IDomDocumentType } from "@/specs/dom/interfaces/IDomDocumentType.mjs";
-import type { IDomDOMImplementation } from "@/specs/dom/interfaces/IDomDOMImplementation.mjs";
-import * as E from "fp-ts/Either";
-import { pipe, tuple, tupled } from "fp-ts/function";
+} from "../../exceptions/DomException.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import { getNativeOrNullable } from "../../helpers/getNative.mjs";
+import type { IDomDocumentType } from "../../specs/dom/interfaces/IDomDocumentType.mjs";
+import type { IDomDOMImplementation } from "../../specs/dom/interfaces/IDomDOMImplementation.mjs";
 import { DomDocument } from "./DomDocument.mjs";
 import { DomDocumentType } from "./DomDocumentType.mjs";
 import { DomXMLDocument } from "./DomXMLDocument.mjs";

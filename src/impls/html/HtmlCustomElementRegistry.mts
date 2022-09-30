@@ -1,17 +1,17 @@
-import type {
-  NotSupportedErrorDomException,
-  SyntaxErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import { getNative } from "@/helpers/getNative.mjs";
-import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
-import type { CBHtmlCustomElementConstructor } from "@/specs/html/callbacks/CBHtmlCustomElementConstructor.mjs";
-import type { DHtmlElementDefinitionOptions } from "@/specs/html/dictionaries/DHtmlElementDefinitionOptions.mjs";
-import type { IHtmlCustomElementRegistry } from "@/specs/html/interfaces/IHtmlCustomElementRegistry.mjs";
 import * as E from "fp-ts/Either";
 import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import * as TE from "fp-ts/TaskEither";
+import type {
+  NotSupportedErrorDomException,
+  SyntaxErrorDomException,
+} from "../../exceptions/DomException.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import { getNative } from "../../helpers/getNative.mjs";
+import type { IDomNode } from "../../specs/dom/interfaces/IDomNode.mjs";
+import type { CBHtmlCustomElementConstructor } from "../../specs/html/callbacks/CBHtmlCustomElementConstructor.mjs";
+import type { DHtmlElementDefinitionOptions } from "../../specs/html/dictionaries/DHtmlElementDefinitionOptions.mjs";
+import type { IHtmlCustomElementRegistry } from "../../specs/html/interfaces/IHtmlCustomElementRegistry.mjs";
 
 export class HtmlCustomElementRegistry
   extends Wrapper<CustomElementRegistry>

@@ -1,4 +1,4 @@
-import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
+import type { IDomEvent } from "../../dom/interfaces/IDomEvent.mjs";
 
 export interface CBHtmlOnErrorEventHandlerNonNull {
   (

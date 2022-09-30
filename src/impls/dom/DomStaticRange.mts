@@ -1,12 +1,12 @@
-import { StaticImplements } from "@/decorators/StaticImplements.mjs";
-import type { InvalidNodeTypeErrorDomException } from "@/exceptions/DomException.mjs";
-import type { DDomStaticRangeInit } from "@/specs/dom/dictionaries/DDomStaticRangeInit.mjs";
+import * as E from "fp-ts/Either";
+import { pipe } from "fp-ts/function";
+import { StaticImplements } from "../../decorators/StaticImplements.mjs";
+import type { InvalidNodeTypeErrorDomException } from "../../exceptions/DomException.mjs";
+import type { DDomStaticRangeInit } from "../../specs/dom/dictionaries/DDomStaticRangeInit.mjs";
 import type {
   IDomStaticRange,
   IDomStaticRangeConstructors,
-} from "@/specs/dom/interfaces/IDomStaticRange.mjs";
-import * as E from "fp-ts/Either";
-import { pipe } from "fp-ts/function";
+} from "../../specs/dom/interfaces/IDomStaticRange.mjs";
 import { DomAbstractRangeBase } from "./DomAbstractRangeBase.mjs";
 
 @StaticImplements<IDomStaticRangeConstructors>()

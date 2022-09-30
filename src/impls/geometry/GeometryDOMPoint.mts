@@ -1,9 +1,9 @@
-import { StaticImplements } from "@/decorators/StaticImplements.mjs";
-import type { DGeometryDOMPointInit } from "@/specs/geometry/dictionaries/DGeometryDOMPointInit.mjs";
+import { StaticImplements } from "../../decorators/StaticImplements.mjs";
+import type { DGeometryDOMPointInit } from "../../specs/geometry/dictionaries/DGeometryDOMPointInit.mjs";
 import type {
   IGeometryDOMPoint,
   IGeometryDOMPointConstructors,
-} from "@/specs/geometry/interfaces/IGeometryDOMPoint.mjs";
+} from "../../specs/geometry/interfaces/IGeometryDOMPoint.mjs";
 import { GeometryDOMPointBase } from "./GeometryDOMPointBase.mjs";
 
 @StaticImplements<IGeometryDOMPointConstructors>()

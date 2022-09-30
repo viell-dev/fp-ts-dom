@@ -1,13 +1,13 @@
+import type * as E from "fp-ts/Either";
+import type * as O from "fp-ts/Option";
 import type {
   HierarchyRequestErrorDomException,
   SecurityErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import type { IWrapper } from "@/globals/IWrapper.mjs";
-import type { IDomDocument } from "@/specs/dom/interfaces/IDomDocument.mjs";
-import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
-import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
-import type * as E from "fp-ts/Either";
-import type * as O from "fp-ts/Option";
+} from "../../../exceptions/DomException.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
+import type { IDomDocument } from "../../dom/interfaces/IDomDocument.mjs";
+import type { IDomElement } from "../../dom/interfaces/IDomElement.mjs";
+import type { IDomNode } from "../../dom/interfaces/IDomNode.mjs";
 import type { EHtmlDocumentReadyState } from "../enums/EHtmlDocumentReadyState.mjs";
 import type { EHtmlDocumentVisibilityState } from "../enums/EHtmlDocumentVisibilityState.mjs";
 import type { MHtmlDocumentAndElementEventHandlers } from "../mixins/MHtmlDocumentAndElementEventHandlers.mjs";

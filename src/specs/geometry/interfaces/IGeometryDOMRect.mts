@@ -1,4 +1,4 @@
-import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
+import type { IWrapperConstructors } from "../../../globals/IWrapper.mjs";
 import type { DGeometryDOMRectInit } from "../dictionaries/DGeometryDOMRectInit.mjs";
 import type { IGeometryDOMRectReadOnly } from "./IGeometryDOMRectReadOnly.mjs";
 

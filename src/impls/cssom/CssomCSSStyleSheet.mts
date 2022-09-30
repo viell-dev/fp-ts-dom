@@ -1,13 +1,13 @@
-import type {
-  NotAllowedErrorDomException,
-  SecurityErrorDomException,
-  SyntaxErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import type { ICssomCSSStyleSheet } from "@/specs/cssom/interfaces/ICssomCSSStyleSheet.mjs";
 import * as E from "fp-ts/Either";
 import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import * as TE from "fp-ts/TaskEither";
+import type {
+  NotAllowedErrorDomException,
+  SecurityErrorDomException,
+  SyntaxErrorDomException,
+} from "../../exceptions/DomException.mjs";
+import type { ICssomCSSStyleSheet } from "../../specs/cssom/interfaces/ICssomCSSStyleSheet.mjs";
 import { CssomCSSRule } from "./CssomCSSRule.mjs";
 import { CssomCSSRuleList } from "./CssomCSSRuleList.mjs";
 import { CssomStyleSheetBase } from "./CssomStyleSheetBase.mjs";

@@ -1,5 +1,5 @@
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { IDomAbstractRange } from "@/specs/dom/interfaces/IDomAbstractRange.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { IDomAbstractRange } from "../../specs/dom/interfaces/IDomAbstractRange.mjs";
 import { DomNode } from "./DomNode.mjs";
 
 export abstract class DomAbstractRangeBase<N extends AbstractRange>

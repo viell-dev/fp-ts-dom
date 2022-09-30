@@ -1,6 +1,6 @@
-import type { NotFoundErrorDomException } from "@/exceptions/DomException.mjs";
-import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
 import type * as O from "fp-ts/Option";
+import type { NotFoundErrorDomException } from "../../../exceptions/DomException.mjs";
+import type { IDomElement } from "../../dom/interfaces/IDomElement.mjs";
 import type {
   IHtmlHTMLElement,
   IHtmlHTMLElementConstructorsBase,

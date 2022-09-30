@@ -7,7 +7,8 @@
   },
   "search.exclude": {
     "**/.yarn": true,
-    "**/.pnp.*": true
+    "**/.pnp.*": true,
+    "yarn.lock": true
   },
   // Yarn SDKs
   "typescript.enablePromptUseWorkspaceTsdk": true,
@@ -22,6 +23,8 @@
     "source.organizeImports": true,
     "source.fixAll.eslint": true
   },
+  // TypeScript
+  "typescript.preferences.importModuleSpecifier": "relative",
   // Custom icons
   "material-icon-theme.folders.associations": {
     ".lift": "github",
@@ -68,6 +71,7 @@
     "tsdoc",
     "tupled",
     "unicase",
-    "webgpu"
+    "webgpu",
+    "yarnpkg"
   ]
 }

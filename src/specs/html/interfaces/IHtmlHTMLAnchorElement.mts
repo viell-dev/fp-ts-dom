@@ -1,4 +1,4 @@
-import type { IDomDOMTokenList } from "@/specs/dom/interfaces/IDomDOMTokenList.mjs";
+import type { IDomDOMTokenList } from "../../dom/interfaces/IDomDOMTokenList.mjs";
 import type { MHtmlHTMLHyperlinkElementUtils } from "../mixins/MHtmlHTMLHyperlinkElementUtils.mjs";
 import type {
   IHtmlHTMLElement,

@@ -1,6 +1,6 @@
-import type { EncodingErrorDomException } from "@/exceptions/DomException.mjs";
 import type * as O from "fp-ts/Option";
 import type * as TO from "fp-ts/TaskOption";
+import type { EncodingErrorDomException } from "../../../exceptions/DomException.mjs";
 import type {
   IHtmlHTMLElement,
   IHtmlHTMLElementConstructorsBase,

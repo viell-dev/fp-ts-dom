@@ -1,8 +1,8 @@
-import type { SyntaxErrorDomException } from "@/exceptions/DomException.mjs";
-import type { IWrapper } from "@/globals/IWrapper.mjs";
-import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
 import type * as E from "fp-ts/Either";
 import type * as O from "fp-ts/Option";
+import type { SyntaxErrorDomException } from "../../../exceptions/DomException.mjs";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
+import type { IDomElement } from "../../dom/interfaces/IDomElement.mjs";
 import type { DHtmlWindowPostMessageOptions } from "../dictionaries/DHtmlWindowPostMessageOptions.mjs";
 import type { MHtmlGlobalEventHandlers } from "../mixins/MHtmlGlobalEventHandlers.mjs";
 import type { MHtmlWindowEventHandlers } from "../mixins/MHtmlWindowEventHandlers.mjs";

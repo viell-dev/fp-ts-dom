@@ -1,4 +1,4 @@
-import type { IDomElement } from "@/specs/dom/interfaces/IDomElement.mjs";
+import type { IDomElement } from "../../dom/interfaces/IDomElement.mjs";
 import type {
   IHtmlHTMLElement,
   IHtmlHTMLElementConstructorsBase,

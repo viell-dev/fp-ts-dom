@@ -1,5 +1,5 @@
-import type { IWrapperConstructors } from "@/globals/IWrapper.mjs";
-import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
+import type { IWrapperConstructors } from "../../../globals/IWrapper.mjs";
+import type { IDomEvent } from "../../dom/interfaces/IDomEvent.mjs";
 import type { DHtmlFormDataEventInit } from "../dictionaries/DHtmlFormDataEventInit.mjs";
 
 export interface IHtmlFormDataEventConstructors

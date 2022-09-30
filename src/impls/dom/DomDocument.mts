@@ -1,35 +1,35 @@
-import { StaticImplements } from "@/decorators/StaticImplements.mjs";
+import * as A from "fp-ts/Array";
+import * as E from "fp-ts/Either";
+import { pipe, tuple, tupled } from "fp-ts/function";
+import * as O from "fp-ts/Option";
+import { StaticImplements } from "../../decorators/StaticImplements.mjs";
 import type {
   HierarchyRequestErrorDomException,
   InvalidCharacterErrorDomException,
   NamespaceErrorDomException,
   NotSupportedErrorDomException,
   SecurityErrorDomException,
-} from "@/exceptions/DomException.mjs";
-import { getNative } from "@/helpers/getNative.mjs";
-import type { ICssomCSSStyleSheet } from "@/specs/cssom/interfaces/ICssomCSSStyleSheet.mjs";
-import type { CBDomNodeFilter } from "@/specs/dom/callbacks/CBDomNodeFilter.mjs";
-import type { CDomNodeFilterWhatToShow } from "@/specs/dom/constants/CDomNodeFilterWhatToShow.mjs";
-import type { DDomElementCreationOptions } from "@/specs/dom/dictionaries/DDomElementCreationOptions.mjs";
+} from "../../exceptions/DomException.mjs";
+import { getNative } from "../../helpers/getNative.mjs";
+import type { ICssomCSSStyleSheet } from "../../specs/cssom/interfaces/ICssomCSSStyleSheet.mjs";
+import type { CBDomNodeFilter } from "../../specs/dom/callbacks/CBDomNodeFilter.mjs";
+import type { CDomNodeFilterWhatToShow } from "../../specs/dom/constants/CDomNodeFilterWhatToShow.mjs";
+import type { DDomElementCreationOptions } from "../../specs/dom/dictionaries/DDomElementCreationOptions.mjs";
 import type {
   IDomDocument,
   IDomDocumentConstructors,
-} from "@/specs/dom/interfaces/IDomDocument.mjs";
-import type { IDomEvent } from "@/specs/dom/interfaces/IDomEvent.mjs";
-import type { IDomNode } from "@/specs/dom/interfaces/IDomNode.mjs";
-import type { EHtmlDocumentReadyState } from "@/specs/html/enums/EHtmlDocumentReadyState.mjs";
-import type { EHtmlDocumentVisibilityState } from "@/specs/html/enums/EHtmlDocumentVisibilityState.mjs";
-import type { IHtmlHTMLElement } from "@/specs/html/interfaces/IHtmlHTMLElement.mjs";
+} from "../../specs/dom/interfaces/IDomDocument.mjs";
+import type { IDomEvent } from "../../specs/dom/interfaces/IDomEvent.mjs";
+import type { IDomNode } from "../../specs/dom/interfaces/IDomNode.mjs";
+import type { EHtmlDocumentReadyState } from "../../specs/html/enums/EHtmlDocumentReadyState.mjs";
+import type { EHtmlDocumentVisibilityState } from "../../specs/html/enums/EHtmlDocumentVisibilityState.mjs";
+import type { IHtmlHTMLElement } from "../../specs/html/interfaces/IHtmlHTMLElement.mjs";
 import type {
   MissingEventHandler,
   THtmlEventHandler,
-} from "@/specs/html/types/THtmlEventHandler.mjs";
-import type { THtmlHTMLOrSVGScriptElement } from "@/specs/html/types/THtmlHTMLOrSVGScriptElement.mjs";
-import type { THtmlOnErrorEventHandler } from "@/specs/html/types/THtmlOnErrorEventHandler.mjs";
-import * as A from "fp-ts/Array";
-import * as E from "fp-ts/Either";
-import { pipe, tuple, tupled } from "fp-ts/function";
-import * as O from "fp-ts/Option";
+} from "../../specs/html/types/THtmlEventHandler.mjs";
+import type { THtmlHTMLOrSVGScriptElement } from "../../specs/html/types/THtmlHTMLOrSVGScriptElement.mjs";
+import type { THtmlOnErrorEventHandler } from "../../specs/html/types/THtmlOnErrorEventHandler.mjs";
 import { CssomCSSStyleSheet } from "../cssom/CssomCSSStyleSheet.mjs";
 import { CssomStyleSheetList } from "../cssom/CssomStyleSheetList.mjs";
 import { HtmlHTMLElement } from "../html/HtmlHTMLElement.mjs";

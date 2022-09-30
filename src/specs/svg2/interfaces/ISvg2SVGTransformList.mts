@@ -1,6 +1,6 @@
-import type { IWrapper } from "@/globals/IWrapper.mjs";
-import type { IGeometryDOMMatrixReadOnly } from "@/specs/geometry/interfaces/IGeometryDOMMatrixReadOnly.mjs";
 import type * as O from "fp-ts/Option";
+import type { IWrapper } from "../../../globals/IWrapper.mjs";
+import type { IGeometryDOMMatrixReadOnly } from "../../geometry/interfaces/IGeometryDOMMatrixReadOnly.mjs";
 import type { ISvg2SVGTransform } from "./ISvg2SVGTransform.mjs";
 
 export interface ISvg2SVGTransformList<N extends SVGTransformList>

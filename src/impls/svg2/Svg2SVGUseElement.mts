@@ -1,6 +1,6 @@
-import type { ISvg2SVGUseElement } from "@/specs/svg2/interfaces/ISvg2SVGUseElement.mjs";
 import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import type { ISvg2SVGUseElement } from "../../specs/svg2/interfaces/ISvg2SVGUseElement.mjs";
 import { Svg2SVGAnimatedLength } from "./Svg2SVGAnimatedLength.mjs";
 import { Svg2SVGAnimatedString } from "./Svg2SVGAnimatedString.mjs";
 import { Svg2SVGElement } from "./Svg2SVGElement.mjs";

@@ -1,6 +1,9 @@
-import type { IWrapper, IWrapperConstructors } from "@/globals/IWrapper.mjs";
-import type { THrTimeDOMHighResTimeStamp } from "@/specs/hr-time/types/THrTimeDOMHighResTimeStamp.mjs";
 import type * as O from "fp-ts/Option";
+import type {
+  IWrapper,
+  IWrapperConstructors,
+} from "../../../globals/IWrapper.mjs";
+import type { THrTimeDOMHighResTimeStamp } from "../../hr-time/types/THrTimeDOMHighResTimeStamp.mjs";
 import type { CDomEventEventPhase } from "../constants/CDomEventEventPhase.mjs";
 import type { DDomEventInit } from "../dictionaries/DDomEventInit.mjs";
 import type { IDomEventTarget } from "./IDomEventTarget.mjs";

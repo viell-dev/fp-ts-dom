@@ -1,9 +1,9 @@
-import type { NotFoundErrorDomException } from "@/exceptions/DomException.mjs";
-import { Wrapper } from "@/globals/Wrapper.mjs";
-import type { ICssomMediaList } from "@/specs/cssom/interfaces/ICssomMediaList.mjs";
 import * as E from "fp-ts/Either";
 import { pipe, tuple, tupled } from "fp-ts/function";
 import * as O from "fp-ts/Option";
+import type { NotFoundErrorDomException } from "../../exceptions/DomException.mjs";
+import { Wrapper } from "../../globals/Wrapper.mjs";
+import type { ICssomMediaList } from "../../specs/cssom/interfaces/ICssomMediaList.mjs";
 
 export class CssomMediaList
   extends Wrapper<MediaList>
