@@ -1,6 +1,5 @@
 # Build folders
-dist/
-lib/
+/lib
 
 # Typescript
 *.tsbuildinfo

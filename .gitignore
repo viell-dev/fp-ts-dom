@@ -1,8 +1,8 @@
 # Build
-/mjs
-/cjs
-/types
-/tsconfig.tsbuildinfo
+/lib
+
+# Typescript
+*.tsbuildinfo
 
 # Yarn
 .yarn/*

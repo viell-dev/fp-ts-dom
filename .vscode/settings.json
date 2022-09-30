@@ -68,6 +68,7 @@
     "onwebkitanimationiteration",
     "onwebkitanimationstart",
     "onwebkittransitionend",
+    "tsbuildinfo",
     "tsdoc",
     "tupled",
     "unicase",

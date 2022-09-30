@@ -17,16 +17,16 @@
 
     // Modules
     "baseUrl": "./src",
-    "module": "NodeNext",
+    "module": "ESNext",
     "moduleResolution": "NodeNext",
     "rootDir": "./src",
 
     // Emit
-    "declarationDir": "./types",
+    //"declarationDir": "./types",
     "declarationMap": false,
     "importsNotUsedAsValues": "error",
     "newLine": "lf",
-    "outDir": "./mjs",
+    "outDir": "./lib",
     "removeComments": true,
     "sourceMap": false,
     "stripInternal": true,
