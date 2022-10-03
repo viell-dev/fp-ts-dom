@@ -27,7 +27,7 @@
     "build:clean": "rimraf ./lib tsconfig.tsbuildinfo",
     "build:tsc": "tsc",
     "dcd": "ts-prune",
-    "madge": "madge --extensions mjs lib -c -s"
+    "madge": "madge --extensions mjs lib -c"
   },
   "peerDependencies": {
     "fp-ts": "^2.13.0-rc.6"
