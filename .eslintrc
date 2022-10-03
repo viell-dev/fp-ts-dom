@@ -33,7 +33,8 @@
           { "assertionStyle": "never" }
         ],
         "@typescript-eslint/explicit-function-return-type": "warn",
-        "tsdoc/syntax": "warn"
+        "tsdoc/syntax": "warn",
+        "@typescript-eslint/no-unnecessary-type-constraint": "off"
       }
     }
   ]
