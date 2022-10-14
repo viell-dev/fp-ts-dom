@@ -3,7 +3,7 @@ import * as R from "fp-ts/Reader";
 import type * as RIOE from "../extensions/ReaderIOEither.mjs";
 import { unsafeAssert } from "./unsafeAssert.mjs";
 
-export const getPropertyReaderTaskEither = /*#__PURE__*/ <
+export const getPropertyReaderIOEither = /*#__PURE__*/ <
   R,
   K extends keyof R,
   E

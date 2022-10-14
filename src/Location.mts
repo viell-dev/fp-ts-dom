@@ -1,68 +1,77 @@
-import { flow, pipe } from "fp-ts/function";
+import * as E from "fp-ts/Either";
+import { pipe } from "fp-ts/function";
 import * as IO from "fp-ts/IO";
-import * as RIO from "fp-ts/ReaderIO";
+import type * as IOE from "fp-ts/IOEither";
+import * as O from "fp-ts/Option";
+import type * as RIO from "fp-ts/ReaderIO";
+import type * as RIOE from "./extensions/ReaderIOEither.mjs";
+import { getPropertyReaderIO } from "./helpers/getPropertyReaderIO.mjs";
+import { getPropertyReaderIOEither } from "./helpers/getPropertyReaderIOEither.mjs";
+import { unsafeAssert } from "./helpers/unsafeAssert.mjs";
 
-const genericReader = <T, K extends keyof T>(key: K): RIO.ReaderIO<T, T[K]> =>
-  RIO.asks((unsafe) => unsafe[key]);
+export const href: RIOE.ReaderIOEither<
+  Location,
+  /*SecurityError*/ DOMException,
+  string
+> = getPropertyReaderIOEither("href");
 
-export const href2: RIO.ReaderIO<Location, string> = genericReader("href");
+export const origin: RIO.ReaderIO<Location, string> =
+  getPropertyReaderIO("origin");
 
-export const href: RIO.ReaderIO<Location, string> = flow(
-  IO.of,
-  IO.map((location) => location.href)
-);
+export const protocol: RIO.ReaderIO<Location, string> =
+  getPropertyReaderIO("protocol");
 
-export const origin: RIO.ReaderIO<Location, string> = flow(
-  IO.of,
-  IO.map((location) => location.origin)
-);
+export const host: RIO.ReaderIO<Location, string> = getPropertyReaderIO("host");
 
-export const protocol: RIO.ReaderIO<Location, string> = flow(
-  IO.of,
-  IO.map((location) => location.protocol)
-);
+export const hostname: RIO.ReaderIO<Location, string> =
+  getPropertyReaderIO("hostname");
 
-export const host: RIO.ReaderIO<Location, string> = flow(
-  IO.of,
-  IO.map((location) => location.host)
-);
+export const port: RIO.ReaderIO<Location, string> = getPropertyReaderIO("port");
 
-export const hostname: RIO.ReaderIO<Location, string> = flow(
-  IO.of,
-  IO.map((location) => location.hostname)
-);
+export const pathname: RIO.ReaderIO<Location, string> =
+  getPropertyReaderIO("pathname");
 
-export const port: RIO.ReaderIO<Location, string> = flow(
-  IO.of,
-  IO.map((location) => location.port)
-);
+export const search: RIO.ReaderIO<Location, string> =
+  getPropertyReaderIO("search");
 
-export const pathname: RIO.ReaderIO<Location, string> = flow(
-  IO.of,
-  IO.map((location) => location.pathname)
-);
-
-export const search: RIO.ReaderIO<Location, string> = flow(
-  IO.of,
-  IO.map((location) => location.search)
-);
-
-export const hash: RIO.ReaderIO<Location, string> = flow(
-  IO.of,
-  IO.map((location) => location.hash)
-);
+export const hash: RIO.ReaderIO<Location, string> = getPropertyReaderIO("hash");
 
 export const safeLocation = (location: Location) => () => ({
-  href2: pipe(location, genericReader("href")),
-  href: pipe(location, href),
-  origin: pipe(location, origin),
-  protocol: pipe(location, protocol),
-  host: pipe(location, host),
-  hostname: pipe(location, hostname),
-  port: pipe(location, port),
-  pathname: pipe(location, pathname),
-  search: pipe(location, search),
-  hash: pipe(location, hash),
+  get href(): IOE.IOEither</*SecurityError*/ DOMException, string> {
+    return pipe(location, href);
+  },
+  setHref(value: string): O.Option<TypeError> {
+    return pipe(
+      E.tryCatch(() => {
+        location.href = value;
+      }, unsafeAssert<TypeError>),
+      O.getLeft
+    );
+  },
+  get origin() {
+    return pipe(location, origin);
+  },
+  get protocol() {
+    return pipe(location, protocol);
+  },
+  get host() {
+    return pipe(location, host);
+  },
+  get hostname() {
+    return pipe(location, hostname);
+  },
+  get port() {
+    return pipe(location, port);
+  },
+  get pathname() {
+    return pipe(location, pathname);
+  },
+  get search() {
+    return pipe(location, search);
+  },
+  get hash() {
+    return pipe(location, hash);
+  },
 });
 
 const test = pipe(
