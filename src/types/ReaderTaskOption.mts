@@ -6,9 +6,13 @@ export interface ReaderTaskOption<R, A> {
   (r: R): TO.TaskOption<A>;
 }
 
+export const URI = "ReaderTaskOption";
+
+export type URI = typeof URI;
+
 declare module "fp-ts/HKT" {
   interface URItoKind1<R, A> {
-    readonly ReaderTaskOption: ReaderTaskOption<R, A>;
+    readonly [URI]: ReaderTaskOption<R, A>;
   }
 }
 

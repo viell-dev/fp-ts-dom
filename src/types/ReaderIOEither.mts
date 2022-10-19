@@ -6,9 +6,13 @@ export interface ReaderIOEither<R, E, A> {
   (r: R): IOE.IOEither<E, A>;
 }
 
+export const URI = "ReaderIOEither";
+
+export type URI = typeof URI;
+
 declare module "fp-ts/HKT" {
   interface URItoKind3<R, E, A> {
-    readonly ReaderIOEither: ReaderIOEither<R, E, A>;
+    readonly [URI]: ReaderIOEither<R, E, A>;
   }
 }
 

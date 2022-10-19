@@ -6,9 +6,13 @@ export interface ReaderIOOption<R, A> {
   (r: R): IOO.IOOption<A>;
 }
 
+export const URI = "ReaderIOOption";
+
+export type URI = typeof URI;
+
 declare module "fp-ts/HKT" {
   interface URItoKind1<R, A> {
-    readonly ReaderIOOption: ReaderIOOption<R, A>;
+    readonly [URI]: ReaderIOOption<R, A>;
   }
 }
 
