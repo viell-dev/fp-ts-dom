@@ -76,5 +76,6 @@
     "unicase",
     "webgpu",
     "yarnpkg"
-  ]
+  ],
+  "javascript.preferences.importModuleSpecifier": "non-relative"
 }
