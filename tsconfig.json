@@ -17,7 +17,7 @@
 
     // Modules
     "baseUrl": "./src",
-    "module": "ESNext",
+    "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "paths": {
       "@/*": ["./*"]
@@ -25,11 +25,10 @@
     "rootDir": "./src",
 
     // Emit
-    "declaration": true,
     "declarationMap": true,
     "importsNotUsedAsValues": "error",
     "newLine": "lf",
-    "outDir": "./lib",
+    "outDir": "./esm",
     "removeComments": true,
     "sourceMap": true,
     "stripInternal": true,
@@ -41,6 +40,9 @@
     // Language and Environment
     "experimentalDecorators": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "target": "ESNext"
+    "target": "ESNext",
+
+    // Projects
+    "composite": true
   }
 }

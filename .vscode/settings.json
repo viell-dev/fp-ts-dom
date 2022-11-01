@@ -10,21 +10,22 @@
     "**/.pnp.*": true,
     "yarn.lock": true
   },
+
   // Yarn SDKs
-  "typescript.enablePromptUseWorkspaceTsdk": true,
-  "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "eslint.nodePath": ".yarn/sdks",
   "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+
   // Linting and Formatting
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "eslint.format.enable": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": true,
     "source.fixAll.eslint": true
   },
-  // TypeScript
-  "typescript.preferences.importModuleSpecifier": "relative",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.format.enable": true,
+
   // Custom icons
   "material-icon-theme.folders.associations": {
     ".lift": "github",
@@ -50,6 +51,7 @@
     "mixins": "plugin",
     "enums": "mappings"
   },
+
   // Spell checker
   "cSpell.enabled": true,
   "cSpell.caseSensitive": true,
@@ -76,6 +78,5 @@
     "unicase",
     "webgpu",
     "yarnpkg"
-  ],
-  "javascript.preferences.importModuleSpecifier": "non-relative"
+  ]
 }
