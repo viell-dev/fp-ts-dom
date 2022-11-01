@@ -1,11 +1,11 @@
 import { unsafeCoerce } from "@/helpers/unsafeCoerce.mjs";
 import type { SecurityErrorDomException } from "@/types/DomException.mjs";
-import * as E from "fp-ts/Either";
-import * as R from "fp-ts/Reader";
+import * as R from "@/types/Reader.mjs";
+import * as E from "@fp-ts/data/Either";
 
 export const originGetter = () =>
   R.asks(
-    E.tryCatchK(
+    E.liftThrowable(
       (r: Location) => r.origin,
       unsafeCoerce<SecurityErrorDomException>
     )

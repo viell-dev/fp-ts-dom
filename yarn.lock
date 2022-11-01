@@ -76,6 +76,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fp-ts/core@npm:^0.0.7":
+  version: 0.0.7
+  resolution: "@fp-ts/core@npm:0.0.7"
+  checksum: 39dea5bec3b819876b0c45bc0cf39b258cbfeb12067e5f3298eda4df4e7484e2d8acdf52ea55dc6eb2873b7718a1f5da623808f7a1a6309e94d918967d6c4872
+  languageName: node
+  linkType: hard
+
+"@fp-ts/data@npm:*":
+  version: 0.0.9
+  resolution: "@fp-ts/data@npm:0.0.9"
+  dependencies:
+    "@fp-ts/core": ^0.0.7
+  checksum: 787c2139e981c80e2cb8ea49f38ea34dcaecac527ba2c56086976cfab974068c142e5e91467b5f5ca39156ae7958a38bb25af5c694fda430672e6c55561a5cec
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.10.4":
   version: 0.10.4
   resolution: "@humanwhocodes/config-array@npm:0.10.4"
@@ -1313,6 +1329,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fp-ts-dom@workspace:."
   dependencies:
+    "@fp-ts/data": "*"
     "@types/eslint": ^8.4.6
     "@types/prettier": ^2.7.0
     "@types/rimraf": ^3
@@ -1322,7 +1339,6 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-eslint-comments: ^3.2.0
     eslint-plugin-tsdoc: ^0.2.17
-    fp-ts: ^2.13.0-rc.6
     madge: ^5.0.1
     npm-run-all: ^4.1.5
     prettier: ^2.7.1
@@ -1330,16 +1346,9 @@ __metadata:
     ts-prune: ^0.10.3
     typescript: ^4.8.3
   peerDependencies:
-    fp-ts: ^2.13.0-rc.6
+    "@fp-ts/data": "*"
   languageName: unknown
   linkType: soft
-
-"fp-ts@npm:^2.13.0-rc.6":
-  version: 2.13.0-rc.6
-  resolution: "fp-ts@npm:2.13.0-rc.6"
-  checksum: 4fc077a1c7fb45ab8003c4a99040b814fbbb2dcc57d387a596645f2416cc18d02b28d765d8285df43f48164b3ec4e5b8fdf95569c7015ce712c42b042db4fae0
-  languageName: node
-  linkType: hard
 
 "fs.realpath@npm:^1.0.0":
   version: 1.0.0

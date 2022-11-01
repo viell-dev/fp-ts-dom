@@ -33,6 +33,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@fp-ts/data", "npm:0.0.9"],\
             ["@types/eslint", "npm:8.4.6"],\
             ["@types/prettier", "npm:2.7.0"],\
             ["@types/rimraf", "npm:3.0.2"],\
@@ -42,7 +43,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:2c3de6b6e0f02d870bb0ab095ff944cbb7b86ce03a16bf0d8ff5439fe0d2cc062fb7d55fb03190b88d383d33c72f90c6705faae921d0243a6e910edc52eccb93#npm:8.5.0"],\
             ["eslint-plugin-eslint-comments", "virtual:2c3de6b6e0f02d870bb0ab095ff944cbb7b86ce03a16bf0d8ff5439fe0d2cc062fb7d55fb03190b88d383d33c72f90c6705faae921d0243a6e910edc52eccb93#npm:3.2.0"],\
             ["eslint-plugin-tsdoc", "npm:0.2.17"],\
-            ["fp-ts", "npm:2.13.0-rc.6"],\
             ["madge", "npm:5.0.1"],\
             ["npm-run-all", "npm:4.1.5"],\
             ["prettier", "npm:2.7.1"],\
@@ -129,6 +129,25 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["js-yaml", "npm:4.1.0"],\
             ["minimatch", "npm:3.1.2"],\
             ["strip-json-comments", "npm:3.1.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@fp-ts/core", [\
+        ["npm:0.0.7", {\
+          "packageLocation": "./.yarn/cache/@fp-ts-core-npm-0.0.7-3369878654-39dea5bec3.zip/node_modules/@fp-ts/core/",\
+          "packageDependencies": [\
+            ["@fp-ts/core", "npm:0.0.7"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@fp-ts/data", [\
+        ["npm:0.0.9", {\
+          "packageLocation": "./.yarn/cache/@fp-ts-data-npm-0.0.9-97e18e5b15-787c2139e9.zip/node_modules/@fp-ts/data/",\
+          "packageDependencies": [\
+            ["@fp-ts/data", "npm:0.0.9"],\
+            ["@fp-ts/core", "npm:0.0.7"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -1643,20 +1662,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["fp-ts", [\
-        ["npm:2.13.0-rc.6", {\
-          "packageLocation": "./.yarn/cache/fp-ts-npm-2.13.0-rc.6-fe2385cb7e-4fc077a1c7.zip/node_modules/fp-ts/",\
-          "packageDependencies": [\
-            ["fp-ts", "npm:2.13.0-rc.6"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["fp-ts-dom", [\
         ["workspace:.", {\
           "packageLocation": "./",\
           "packageDependencies": [\
             ["fp-ts-dom", "workspace:."],\
+            ["@fp-ts/data", "npm:0.0.9"],\
             ["@types/eslint", "npm:8.4.6"],\
             ["@types/prettier", "npm:2.7.0"],\
             ["@types/rimraf", "npm:3.0.2"],\
@@ -1666,7 +1677,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:2c3de6b6e0f02d870bb0ab095ff944cbb7b86ce03a16bf0d8ff5439fe0d2cc062fb7d55fb03190b88d383d33c72f90c6705faae921d0243a6e910edc52eccb93#npm:8.5.0"],\
             ["eslint-plugin-eslint-comments", "virtual:2c3de6b6e0f02d870bb0ab095ff944cbb7b86ce03a16bf0d8ff5439fe0d2cc062fb7d55fb03190b88d383d33c72f90c6705faae921d0243a6e910edc52eccb93#npm:3.2.0"],\
             ["eslint-plugin-tsdoc", "npm:0.2.17"],\
-            ["fp-ts", "npm:2.13.0-rc.6"],\
             ["madge", "npm:5.0.1"],\
             ["npm-run-all", "npm:4.1.5"],\
             ["prettier", "npm:2.7.1"],\

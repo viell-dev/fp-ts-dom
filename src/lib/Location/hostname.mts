@@ -1,5 +1,5 @@
-import * as R from "fp-ts/Reader";
-import * as S from "fp-ts/State";
+import * as R from "@/types/Reader.mjs";
+import * as S from "@/types/State.mjs";
 
 export const hostnameGetter = () => R.asks((r: Location) => r.hostname);
 
